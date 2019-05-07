@@ -1,0 +1,27 @@
+package org.brapi_igpas.api.calls;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/brapi/v1")
+public class CallController {
+    private CallDao callDao;
+
+    public CallController(CallDao callDao){
+        this.callDao = callDao;
+    }
+
+    @GetMapping("/calls")
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody
+    List<Call> getAll(
+            @RequestParam(value = "dataType", required=false) final String dataType,
+            @RequestParam(value = "page", defaultValue = "0") final int page,
+            @RequestParam(value = "pageSize", defaultValue = "1000") final int pageSize){
+        return callDao.getAll(dataType, page, pageSize);
+    }
+}
