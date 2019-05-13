@@ -16,6 +16,11 @@ nav .logotype {
   justify-content: left;
   margin-left: 5%;
 }
+
+nav .logotype:hover{
+  cursor: pointer;
+}
+
 nav .container {
   max-width: 100%;
   margin: 0 5% 0 0;
