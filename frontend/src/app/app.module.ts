@@ -8,6 +8,7 @@ import {routing} from './app-routing';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import {CommonModule} from '@angular/common';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {CommonModule} from '@angular/common';
     NavbarComponent,
     SidebarComponent,
     HomePageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    RegistrationPageComponent
   ],
   imports: [
     CommonModule,
