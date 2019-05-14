@@ -21,6 +21,11 @@ a {
   color: inherit;
 }
 
+.sidebar {
+  position: relative;
+  z-index: -1;
+}
+
 /* Layout */
 .s-layout {
   display: flex;
