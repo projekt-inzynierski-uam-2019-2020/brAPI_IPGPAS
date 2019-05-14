@@ -96,4 +96,26 @@ section .image .loginBox button:hover span:after {
   right: 0;
 }
 
+@media only screen and (max-width: 400px) {
+  section .image .loginBox {
+    padding: 25px 40px;
+    margin-top: 70px;
+    width: 280px;
+    height: 380px;
+  }
+  section .image .loginBox h2 {
+    font-size: 25px;
+  }
+  section .image .loginBox p {
+    font-size: 18px;
+  }
+  section .image .loginBox input {
+    width: 200px;
+  }
+  section .image .loginBox button {
+    width: 180px;
+    margin: 45px -89px;
+  }
+}
+
 /*# sourceMappingURL=login-page.component.css.map */
