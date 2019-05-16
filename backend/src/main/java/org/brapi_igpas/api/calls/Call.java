@@ -2,6 +2,7 @@ package org.brapi_igpas.api.calls;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Call {
     public static final String DATATYPE_JSON = "application/json";
@@ -123,5 +124,21 @@ public class Call {
         return "Call{" +
                 "call='" + call + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Call call1 = (Call) o;
+        return Objects.equals(call, call1.call) &&
+                Objects.equals(dataTypes, call1.dataTypes) &&
+                Objects.equals(methods, call1.methods) &&
+                Objects.equals(versions, call1.versions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(call, dataTypes, methods, versions);
     }
 }
