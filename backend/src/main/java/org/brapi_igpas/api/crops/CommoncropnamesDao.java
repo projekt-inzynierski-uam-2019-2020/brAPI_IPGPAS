@@ -1,6 +1,8 @@
 package org.brapi_igpas.api.crops;
 
+import org.brapi_igpas.api.BrApiDetailPayloadResponse;
 import org.brapi_igpas.api.PaginationUtils;
+import org.brapi_igpas.api.metadata.Pagination;
 import org.brapi_igpas.igpas.entity.Attribute;
 import org.brapi_igpas.igpas.entity.Value;
 import org.springframework.stereotype.Repository;
@@ -17,6 +19,7 @@ public class CommoncropnamesDao {
     @PersistenceContext
     private EntityManager em;
 
+    /*
     public List<String> getAll(int page, int pageSize){
         TypedQuery<Attribute> organismAttributeQuery = em.createQuery("select a from Attribute a where a.displayedName = 'Organism'", Attribute.class);
         int organismAttributeId = organismAttributeQuery.getSingleResult().getId();
@@ -36,5 +39,30 @@ public class CommoncropnamesDao {
                 .collect(Collectors.toCollection(ArrayList::new));
 
         return commonCropNames;
+    }
+    */
+
+    public BrApiDetailPayloadResponse getAll(int page, int pageSize){
+        TypedQuery<Attribute> organismAttributeQuery = em.createQuery("select a from Attribute a where a.displayedName = 'Organism'", Attribute.class);
+        int organismAttributeId = organismAttributeQuery.getSingleResult().getId();
+
+        TypedQuery<Value> valuesQuery = em.createQuery("select v from Value v where v.attributeId = :id", Value.class);
+        valuesQuery.setParameter("id", organismAttributeId);
+        List<Value> values = valuesQuery.getResultList();
+
+        List<String> commonCropNames = values.stream().map(Value::getValue).distinct().collect(Collectors.toCollection(ArrayList::new));
+
+        Pagination paginationInfo = PaginationUtils.getPaginationInfo(commonCropNames.size(), page, pageSize);
+
+        int fromIndex = PaginationUtils.getFromIndex(commonCropNames.size(), page, pageSize);
+        int numberOfCommonCropNames = PaginationUtils.getNumberOfElementsOnCurrentPage(commonCropNames.size(), page, pageSize);
+
+        commonCropNames = commonCropNames
+                .subList(fromIndex, commonCropNames.size())
+                .stream()
+                .limit(numberOfCommonCropNames)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        return new BrApiDetailPayloadResponse(commonCropNames, paginationInfo);
     }
 }
