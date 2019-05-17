@@ -91,32 +91,16 @@ public class Call {
         return call;
     }
 
-    public void setCall(String call) {
-        this.call = call;
-    }
-
     public List<String> getDataTypes() {
         return dataTypes;
-    }
-
-    public void setDataTypes(List<String> dataTypes) {
-        this.dataTypes = dataTypes;
     }
 
     public List<String> getMethods() {
         return methods;
     }
 
-    public void setMethods(List<String> methods) {
-        this.methods = methods;
-    }
-
     public List<String> getVersions() {
         return versions;
-    }
-
-    public void setVersions(List<String> versions) {
-        this.versions = versions;
     }
 
     @Override
