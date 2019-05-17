@@ -1,0 +1,45 @@
+<section>
+  <button type="button" routerLink="chart">STATISTIC</button>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">CurrentPage</th>
+    <th scope="col">PageSize</th>
+    <th scope="col">TotalCount</th>
+    <th scope="col">TotalPages</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <th scope="row">{{1}}</th>
+    <td>{{calls.metadata.pagination.currentPage}}</td>
+    <td>{{calls.metadata.pagination.pageSize}}</td>
+    <td>{{calls.metadata.pagination.totalCount}}</td>
+    <td>{{calls.metadata.pagination.totalPages}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Call</th>
+    <th scope="col">DataTypes</th>
+    <th scope="col">Methods</th>
+    <th scope="col">Versions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let in of counter(40); let i = index">
+    <th scope="row">{{i+1}}</th>
+    <td>{{calls.result.data[i].call}}</td>
+    <td>{{calls.result.data[i].dataTypes}}</td>
+    <td>{{calls.result.data[i].methods}}</td>
+    <td>{{calls.result.data[i].versions}}</td>
+  </tr>
+  </tbody>
+</table>
+</section>
