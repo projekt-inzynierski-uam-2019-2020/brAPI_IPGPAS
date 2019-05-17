@@ -21,6 +21,7 @@ section {
     background-size: cover;
 
     .loginBox {
+      border-radius: 3px;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -132,16 +133,12 @@ section {
           width: 200px;
         }
 
-        button {
-          width: 180px;
-          margin: 20px -89px;
-        }
       }
     }
   }
 }
 
-@media only screen and (max-height: 850px) {
+@media only screen and (max-height: 850px) and (max-width: 550px) {
   section {
     overflow-y: auto;
     .image {
@@ -162,11 +159,6 @@ section {
 
         input {
           width: 200px;
-        }
-
-        button {
-          width: 180px;
-          margin: 35px -89px;
         }
       }
     }
