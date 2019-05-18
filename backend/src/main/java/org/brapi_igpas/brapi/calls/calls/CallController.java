@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class CallController {
     private CallDao callDao;
 
-    public CallController(CallDao callDao){
+    public CallController(CallDao callDao) {
         this.callDao = callDao;
     }
 
@@ -20,11 +20,15 @@ public class CallController {
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
     BrApiDetailPayloadResponse getAll(
-            @RequestParam(value = "dataType", required=false) final String dataType,
+            @RequestParam(value = "dataType", required = false) final String dataType,
             @RequestParam(value = "page", defaultValue = "0") final int page,
-            @RequestParam(value = "pageSize", defaultValue = "1000") final int pageSize){
-        if (page < 0){ throw new InvalidPageValueException(); }
-        if (pageSize < 0){ throw new InvalidPageSizeValueException(); }
+            @RequestParam(value = "pageSize", defaultValue = "1000") final int pageSize) {
+        if (page < 0) {
+            throw new InvalidPageValueException();
+        }
+        if (pageSize <= 0) {
+            throw new InvalidPageSizeValueException();
+        }
         return callDao.getAll(dataType, page, pageSize);
     }
 }
