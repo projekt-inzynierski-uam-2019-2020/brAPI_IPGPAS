@@ -29,27 +29,27 @@ public class CallDao {
                 .withVersionOneThree());
     }
 
-    public BrApiDetailPayloadResponse getAll(String dataType, int page, int pageSize){
+    public BrApiDetailPayloadResponse getAll(String dataType, int page, int pageSize) {
         List<Call> calls = CALLS;
         Pagination paginationInfo = PaginationUtils.getPaginationInfo(calls.size(), page, pageSize);
 
-        if(dataType != null && !dataType.isEmpty()){
-            calls = calls.stream()
-                    .filter(c -> c.getDataTypes().contains(dataType))
-                    .collect(Collectors.toCollection(ArrayList::new));
+        if (dataType != null && !dataType.isEmpty()) {
+            calls = getCallsWithDataType(calls, dataType);
         }
 
         int fromIndex = PaginationUtils.getFromIndex(calls.size(), page, pageSize);
-        int numberOfCalls = PaginationUtils.getNumberOfElementsOnCurrentPage(calls.size(), page, pageSize);
+        int toIndex = PaginationUtils.getToIndex(calls.size(), page, pageSize);
 
-        calls = calls
-                .subList(fromIndex, calls.size())
-                .stream()
-                .limit(numberOfCalls)
-                .collect(Collectors.toCollection(ArrayList::new));
-
+        calls = calls.subList(fromIndex, toIndex);
 
         return new BrApiDetailPayloadResponse(calls, paginationInfo);
     }
 
+    private List<Call> getCallsWithDataType(List<Call> calls, String dataType) {
+        calls = calls.stream()
+                .filter(c -> c.getDataTypes().contains(dataType))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        return calls;
+    }
 }
