@@ -23,7 +23,7 @@ public class Call {
     private List<String> methods;
     private List<String> versions;
 
-    public Call(){
+    public Call() {
         dataTypes = new ArrayList<>();
         methods = new ArrayList<>();
         versions = new ArrayList<>();
@@ -80,7 +80,9 @@ public class Call {
         return addVersion(VERSION_ONE_TWO);
     }
 
-    public Call withVersionOneThree() { return addVersion(VERSION_ONE_THREE); }
+    public Call withVersionOneThree() {
+        return addVersion(VERSION_ONE_THREE);
+    }
 
     private Call addVersion(String version) {
         versions.add(version);
