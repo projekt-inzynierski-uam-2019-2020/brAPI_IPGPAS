@@ -21,9 +21,13 @@ public class CommoncropnamesController {
     public @ResponseBody
     BrApiDetailPayloadResponse getAll(
             @RequestParam(value = "page", defaultValue = "0") final int page,
-            @RequestParam(value = "pageSize", defaultValue = "1000") final int pageSize){
-        if (page < 0){ throw new InvalidPageValueException(); }
-        if (pageSize < 0){ throw new InvalidPageSizeValueException(); }
+            @RequestParam(value = "pageSize", defaultValue = "1000") final int pageSize) {
+        if (page < 0) {
+            throw new InvalidPageValueException();
+        }
+        if (pageSize <= 0) {
+            throw new InvalidPageSizeValueException();
+        }
         return commoncropnamesDao.getAll(page, pageSize);
     }
 }
