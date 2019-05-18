@@ -1,5 +1,7 @@
 package org.brapi_igpas.igpas.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,6 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "values")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Value {
     @Id
     private long id;
