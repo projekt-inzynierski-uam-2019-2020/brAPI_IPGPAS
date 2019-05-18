@@ -19,27 +19,38 @@ public class CommoncropnamesDao {
     @PersistenceContext
     private EntityManager em;
 
-    public BrApiDetailPayloadResponse getAll(int page, int pageSize){
-        TypedQuery<Attribute> organismAttributeQuery = em.createQuery("select a from Attribute a where a.displayedName = 'Organism'", Attribute.class);
-        int organismAttributeId = organismAttributeQuery.getSingleResult().getId();
+    public BrApiDetailPayloadResponse getAll(int page, int pageSize) {
+        int organismAttributeId = getOrganismAttributeId();
+        List<Value> values = getValuesWithOrganismAttributeId(organismAttributeId);
 
-        TypedQuery<Value> valuesQuery = em.createQuery("select v from Value v where v.attributeId = :id", Value.class);
-        valuesQuery.setParameter("id", organismAttributeId);
-        List<Value> values = valuesQuery.getResultList();
-
-        List<String> commonCropNames = values.stream().map(Value::getValue).distinct().collect(Collectors.toCollection(ArrayList::new));
+        List<String> commonCropNames = getValuesNames(values);
 
         Pagination paginationInfo = PaginationUtils.getPaginationInfo(commonCropNames.size(), page, pageSize);
 
         int fromIndex = PaginationUtils.getFromIndex(commonCropNames.size(), page, pageSize);
-        int numberOfCommonCropNames = PaginationUtils.getNumberOfElementsOnCurrentPage(commonCropNames.size(), page, pageSize);
+        int toIndex = PaginationUtils.getToIndex(commonCropNames.size(), page, pageSize);
 
-        commonCropNames = commonCropNames
-                .subList(fromIndex, commonCropNames.size())
-                .stream()
-                .limit(numberOfCommonCropNames)
-                .collect(Collectors.toCollection(ArrayList::new));
+        commonCropNames = commonCropNames.subList(fromIndex, toIndex);
 
         return new BrApiDetailPayloadResponse(commonCropNames, paginationInfo);
+    }
+
+    private int getOrganismAttributeId() {
+        TypedQuery<Attribute> organismAttributeQuery = em.createQuery("select a from Attribute a where a.displayedName = 'Organism'", Attribute.class);
+        return organismAttributeQuery.getSingleResult().getId();
+    }
+
+    private List<Value> getValuesWithOrganismAttributeId(int organismAttributeId) {
+        TypedQuery<Value> valuesQuery = em.createQuery("select v from Value v where v.attributeId = :id", Value.class);
+        valuesQuery.setParameter("id", organismAttributeId);
+
+        return valuesQuery.getResultList();
+    }
+
+    private List<String> getValuesNames(List<Value> values) {
+        return values.stream()
+                .map(Value::getValue)
+                .distinct()
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
