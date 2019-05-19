@@ -1,6 +1,5 @@
 package org.brapi_igpas.brapi.calls.calls;
 
-import org.brapi_igpas.brapi.calls.calls.Call;
 import org.junit.Before;
 import org.junit.Test;
 

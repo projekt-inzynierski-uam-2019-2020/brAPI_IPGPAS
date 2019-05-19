@@ -2,7 +2,6 @@ package org.brapi_igpas.brapi.calls.calls;
 
 import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
 import org.brapi_igpas.brapi.PaginationUtils;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,23 +25,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(CallController.class)
 public class CallControllerTest {
     // parameters
-    private String dataType;
-    private int page;
-    private int pageSize;
+    private String dataType = null;
+    private int page = 0;
+    private int pageSize = 1000;
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private CallDao callDao;
-
-    @Before
-    public void init() {
-        // default parameters
-        dataType = null;
-        page = 0;
-        pageSize = 1000;
-    }
 
     @Test
     public void getAllShouldReturnBrApiDetailPayloadResponseWithCallsFromDao() throws Exception {
