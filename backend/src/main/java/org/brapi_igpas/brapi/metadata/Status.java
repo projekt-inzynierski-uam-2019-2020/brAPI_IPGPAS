@@ -7,6 +7,11 @@ public class Status {
     public Status() {
     }
 
+    public Status(String message, String messageType) {
+        this.message = message;
+        this.messageType = messageType;
+    }
+
     public String getMessage() {
         return message;
     }
