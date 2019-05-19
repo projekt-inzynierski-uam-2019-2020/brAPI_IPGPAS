@@ -11,10 +11,25 @@ import java.util.stream.Collectors;
 
 @Repository
 public class CallDao {
-    private static final List<Call> CALLS = new ArrayList<>();
+    private final List<Call> CALLS = new ArrayList<>();
 
-    static {
-        CALLS.add(new Call("calls")
+    public CallDao(){
+        initCalls(createActualApplicationCallList());
+    }
+
+    // tests purpose only
+    protected CallDao(List<Call> calls){
+        initCalls(calls);
+    }
+
+    private void initCalls(List<Call> calls) {
+        CALLS.addAll(calls);
+    }
+
+    private static List<Call> createActualApplicationCallList() {
+        List<Call> calls = new ArrayList<>();
+
+        calls.add(new Call("calls")
                 .withDataTypeJson()
                 .withMethodGet()
                 .withVersionOneZero()
@@ -22,11 +37,13 @@ public class CallDao {
                 .withVersionOneTwo()
                 .withVersionOneThree());
 
-        CALLS.add(new Call("commoncropnames")
+        calls.add(new Call("commoncropnames")
                 .withDataTypeJson()
                 .withMethodGet()
                 .withVersionOneTwo()
                 .withVersionOneThree());
+
+        return calls;
     }
 
     public BrApiDetailPayloadResponse getAll(String dataType, int page, int pageSize) {
