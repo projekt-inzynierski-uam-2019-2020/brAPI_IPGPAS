@@ -69,31 +69,14 @@ public class SeasonDao {
     }
 
     private List<Season> getSeasonWithSeasonDbId(List<Season> seasons, String seasonDbId) {
-        for (Season season : seasons) {
-            if (season.getSeasonDbId().equals(seasonDbId)) {
-                return new ArrayList<>(Collections.singletonList(season));
-            }
-        }
-        return Collections.emptyList();
+        return seasons.stream().filter(s -> s.getSeasonDbId().equals(seasonDbId)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Season> getSeasonWithSeasonName(List<Season> seasons, String seasonName) {
-        List<Season> result = new ArrayList<>();
-        for (Season season : seasons) {
-            if (season.getSeason().equals(seasonName)) {
-                result.add(season);
-            }
-        }
-        return result;
+        return seasons.stream().filter(s -> s.getSeason().equals(seasonName)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Season> getSeasonWithYear(List<Season> seasons, String year) {
-        List<Season> result = new ArrayList<>();
-        for (Season season : seasons) {
-            if (season.getYear().equals(year)) {
-                result.add(season);
-            }
-        }
-        return result;
+        return seasons.stream().filter(s -> s.getYear().equals(year)).collect(Collectors.toCollection(ArrayList::new));
     }
 }
