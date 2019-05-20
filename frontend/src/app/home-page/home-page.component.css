@@ -23,25 +23,76 @@ section .image h1 {
   display: flex;
   justify-content: center;
   text-align: center;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-left: 120px;
   font-family: Roboto;
   font-size: 50px;
   color: white;
+  font-family: "Playfair Display SC", serif;
+}
+section .image button {
+  width: 160px;
+  height: 42px;
+  border-radius: 20px;
+  position: relative;
+  left: 50%;
+  top: 53%;
+  margin-left: -80px;
+  border: none;
+  background: rgba(79, 160, 151, 0.8);
+  color: white;
+  outline: none;
+  filter: opacity(90%);
+  font-family: "Questrial", sans-serif;
+  font-size: 19px;
+}
+section .image button:hover {
+  transition: 0.7s;
+  background: #336e65;
+}
+section .image .tracking-in-expand {
+  -webkit-animation: tracking-in-expand 1.4s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+  animation: tracking-in-expand 1.4s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+}
+@-webkit-keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @media only screen and (max-width: 1087px) {
   section .image h1 {
     font-size: 40px;
-    margin-left: 32px;
   }
 }
 @media only screen and (max-width: 671px) {
   section .image h1 {
     font-size: 30px;
-    margin-left: 0px;
+  }
+  section .image button {
+    margin-top: 20px;
+    width: 160px;
+    height: 35px;
   }
 }
 

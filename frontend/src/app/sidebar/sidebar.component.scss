@@ -21,7 +21,7 @@ a {
   color: inherit;
 }
 
-.sidebar{
+.sidebar {
   position: relative;
   z-index: -1;
 }
@@ -57,7 +57,7 @@ a {
   color: #ffffff;
 }
 
-.searching{
+.searching {
   display: inline-block;
   margin: 20px;
   color: #ffffff;
@@ -70,15 +70,15 @@ a {
   border: none;
 }
 
-.searching:focus{
+.searching:focus {
   outline: none;
 }
 
-.searching::placeholder{
+.searching::placeholder {
   color: #ffffff;
 }
 
-.fa-search{
+.fa-search {
   position: relative;
   left: -50px;
   width: 0;
@@ -174,12 +174,12 @@ a {
     width: 15em;
   }
 
-  .searching{
+  .searching {
     margin-left: 80px;
     width: 130px;
   }
 
-  .fa-search{
+  .fa-search {
     left: -205px;
   }
 }
@@ -202,7 +202,7 @@ a {
     top: 70px;
   }
 
-  .searching{
+  .searching {
     width: 150px;
     margin-left: 60px;
   }
