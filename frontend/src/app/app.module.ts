@@ -9,10 +9,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import {CommonModule} from '@angular/common';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
-import { ServerPageComponent } from './server-page/server-page.component';
-import { ServerDataComponent } from './server-data-page/server-data.component';
-import {HttpClientModule} from '@angular/common/http';
-import { ChartPageComponent } from './chart-page/chart-page.component';
+import { DatabasesPageComponent } from './databases-page/databases-page.component';
 
 @NgModule({
   declarations: [
@@ -22,12 +19,9 @@ import { ChartPageComponent } from './chart-page/chart-page.component';
     HomePageComponent,
     LoginPageComponent,
     RegistrationPageComponent,
-    ServerPageComponent,
-    ServerDataComponent,
-    ChartPageComponent
+    DatabasesPageComponent
   ],
   imports: [
-    HttpClientModule,
     CommonModule,
     routing,
     BrowserModule,
