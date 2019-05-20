@@ -1,11 +1,8 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BrApiDetailPayloadResponse} from './BrApiDetailPayloadResponse';
-import {Calls} from './calls';
+import {BrApiDetailPayloadResponse} from '../BrApiDetailPayloadResponse';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+
 
 @Injectable({
   providedIn: 'root'  // <- ADD THIS

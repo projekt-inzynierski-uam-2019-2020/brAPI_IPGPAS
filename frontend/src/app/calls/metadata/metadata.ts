@@ -1,9 +1,7 @@
-import {Pagination} from './metadata/pagination';
-import {Status} from './metadata/status';
-import {Datafiles} from './datafiles';
+import {Pagination} from './pagination';
+import {Status} from './status';
 
 export class Metadata {
   pagination: Pagination;
-  datafiles: Datafiles;
-  status: Status;
+  status: Status[];
 }

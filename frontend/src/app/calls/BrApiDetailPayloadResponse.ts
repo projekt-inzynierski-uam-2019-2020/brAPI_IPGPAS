@@ -1,7 +1,7 @@
-import {Metadata} from './metadata';
-import {Result} from './result';
+import {Metadata} from './metadata/metadata';
+import {Result} from './result/result';
 
-export class Calls {
+export class BrApiDetailPayloadResponse {
   metadata: Metadata;
   result: Result;
 }
