@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Calls} from '../calls/calls';
-import {CallsService} from '../calls/calls.service';
+import {BrApiDetailPayloadResponse} from '../calls/BrApiDetailPayloadResponse';
+import {CallsService} from '../calls/calls/calls.service';
 
 @Component({
   selector: 'app-chart-page',
@@ -8,8 +8,8 @@ import {CallsService} from '../calls/calls.service';
   styleUrls: ['./server-data.component.css']
 })
 export class ServerDataComponent implements OnInit {
-  calls: Calls;
-
+  brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
+  length: number;
 
   constructor(private callsService: CallsService) {
   }
@@ -22,13 +22,19 @@ export class ServerDataComponent implements OnInit {
     return this.callsService.getCalls()
       .subscribe(
         calls => {
-          this.calls = calls;
+          this.brApiDetailPayloadResponse = calls;
         }
       );
+  }
+
+  getCallsLength() {
+    length = this.brApiDetailPayloadResponse.result.data.length;
+    return length;
   }
 
   counter(i: number) {
     return new Array(i);
   }
+
 
 }
