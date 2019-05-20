@@ -1,0 +1,105 @@
+section{
+  padding:30px 0px;
+
+  .container{
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .row{
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      margin-left: 240px;
+
+      .item{
+        position: relative;
+        padding: 20px;
+        height: 300px;
+        margin: 15px 20px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        box-shadow: 2px 3px 10px #ddd;
+
+        .header{
+          i{
+            margin-top: 20px;
+          }
+
+          div{
+            margin-left: 15px;
+            font-size: 35px;
+            font-family: Roboto;
+            color: #444;
+          }
+        }
+
+        h5{
+          margin-top: 15px;
+          font-family: "Segoe UI";
+          font-weight: 100;
+          font-size: 15px;
+          color: #444;
+        }
+
+        a{
+          position: absolute;
+          bottom: 20px;
+          left: 30px;
+          color: #347a70;
+          transition: all .3s ease-in-out;
+
+          i{
+            margin-right: 10px;
+          }
+
+          &:hover{
+            transform: scale(1.15);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+@media only screen and (max-width: 1087px){
+  section{
+    .container{
+      .row{
+        margin-left: 64px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 992px){
+  section{
+    .container{
+      .row{
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 820px){
+  section{
+    .container{
+      .row{
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 671px){
+  section{
+    .container{
+      .row{
+        margin-left: 0px;
+        margin-top: 50px;
+      }
+    }
+  }
+}
