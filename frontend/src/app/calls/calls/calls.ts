@@ -1,4 +1,4 @@
-export class Data {
+export class Calls {
   call: string;
   dataTypes: string[];
   methods: string[];
