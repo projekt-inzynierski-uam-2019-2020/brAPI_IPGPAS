@@ -17,6 +17,10 @@ nav{
     display: flex;
     justify-content: left;
     margin-left: 5%;
+
+    &:hover{
+      cursor: pointer;
+    }
   }
 
   .container{
