@@ -5,6 +5,8 @@ nav {
   padding: 0;
   background-color: #fff;
   position: sticky;
+  top: 0;
+  z-index: 999;
   display: flex;
   align-items: center;
   border-bottom: 2px solid #999;
@@ -16,11 +18,9 @@ nav .logotype {
   justify-content: left;
   margin-left: 5%;
 }
-
-nav .logotype:hover{
+nav .logotype:hover {
   cursor: pointer;
 }
-
 nav .container {
   max-width: 100%;
   margin: 0 5% 0 0;
