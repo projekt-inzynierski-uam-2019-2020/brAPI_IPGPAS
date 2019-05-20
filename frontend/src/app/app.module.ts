@@ -9,6 +9,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import {CommonModule} from '@angular/common';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
+import { DatabasesPageComponent } from './databases-page/databases-page.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RegistrationPageComponent } from './registration-page/registration-page
     SidebarComponent,
     HomePageComponent,
     LoginPageComponent,
-    RegistrationPageComponent
+    RegistrationPageComponent,
+    DatabasesPageComponent
   ],
   imports: [
     CommonModule,
