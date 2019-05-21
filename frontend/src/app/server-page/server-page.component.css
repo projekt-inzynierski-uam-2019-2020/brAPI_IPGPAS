@@ -9,6 +9,8 @@ section {
   height: 100%;
   left: 0;
   top: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 section .image {
   padding-top: 100px;

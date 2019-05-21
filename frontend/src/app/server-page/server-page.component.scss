@@ -8,6 +8,8 @@ section {
   height: 100%;
   left: 0;
   top: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
 
   .image {
     padding-top: 100px;

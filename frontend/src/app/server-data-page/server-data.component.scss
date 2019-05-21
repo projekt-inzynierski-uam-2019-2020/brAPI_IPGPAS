@@ -10,11 +10,20 @@ section {
   left: 0;
   top: 0;
 
+
+  select{
+    margin-top: 20px;
+    width: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   button {
     width: 120px;
     height: 40px;
     outline: none;
-    margin-top: 120px;
+    margin-top: 30px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -24,6 +33,35 @@ section {
     filter: opacity(90%);
     color: white;
   }
+
+  .row{
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+
+    label{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }
+
+  .btn-filter{
+    width: 120px;
+    height: 40px;
+    outline: none;
+    margin-top: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    border-radius: 18px;
+    background: #4fa097;
+    filter: opacity(90%);
+    color: white;
+  }
+
+
 
   .table-wrapper {
     border-radius: 5px;
@@ -45,9 +83,21 @@ section {
 
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (min-width: 1200px) {
   section {
+    .row {
+      width: 1000px;
+      text-align: center;
+    }
+  }
+}
 
+@media only screen and (max-width: 1200px) {
+  section {
+    .row {
+      width: 160px;
+      text-align: center;
+    }
     .table-wrapper {
       width: 600px;
     }
@@ -56,9 +106,6 @@ section {
 
 @media only screen and (max-width: 670px) {
   section {
-    button {
-      margin-top: 180px;
-    }
     .table-wrapper {
       width: 400px;
     }

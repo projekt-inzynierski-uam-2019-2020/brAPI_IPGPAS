@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BrApiDetailPayloadResponse} from '../BrApiDetailPayloadResponse';
+import {BrApiDetailPayloadResponse} from './BrApiDetailPayloadResponse';
 
 
 
@@ -13,9 +13,15 @@ export class CallsService {
   }
 
   private callsUrl = 'https://test-server.brapi.org/brapi/v1/calls';
+  private url = 'https://test-server.brapi.org/brapi/v1';
+
 
   public getCalls() {
     return this.http.get<BrApiDetailPayloadResponse>(this.callsUrl);
+  }
+
+  public getSelectedCall(selectedItem: string) {
+    return this.http.get<BrApiDetailPayloadResponse>(this.url + '/' + selectedItem);
   }
 
 
