@@ -17,6 +17,7 @@ nav .logotype {
   display: flex;
   justify-content: left;
   margin-left: 5%;
+  outline: none;
 }
 nav .logotype:hover {
   cursor: pointer;
@@ -34,9 +35,9 @@ nav .container .link {
   text-align: center;
   color: #999;
   text-decoration: none;
-  font-family: "Roboto", sans-serif;
+  font-family: "Questrial", sans-serif;
   font-weight: 300;
-  font-size: 15px;
+  font-size: 17px;
 }
 nav .container .link:after {
   display: block;

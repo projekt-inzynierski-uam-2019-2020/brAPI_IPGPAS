@@ -17,6 +17,7 @@ nav{
     display: flex;
     justify-content: left;
     margin-left: 5%;
+    outline: none;
 
     &:hover{
       cursor: pointer;
@@ -36,9 +37,9 @@ nav{
       text-align: center;
       color: #999;
       text-decoration: none;
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Questrial', sans-serif;
       font-weight: 300;
-      font-size: 15px;
+      font-size: 17px;
     }
 
     .link:after{
