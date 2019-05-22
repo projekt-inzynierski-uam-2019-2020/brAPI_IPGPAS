@@ -1,7 +1,11 @@
 section {
   padding: 30px 0px;
   position: absolute;
-  z-index: -10; }
+  z-index: -10;
+  background: linear-gradient(rgba(247, 247, 247, 0.5), rgba(247, 247, 247, 0.5)), url("../../assets/background-servers.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; }
   section .container {
     max-width: 100%;
     display: flex;

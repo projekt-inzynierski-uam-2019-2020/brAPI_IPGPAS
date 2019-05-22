@@ -3,6 +3,15 @@ section{
   position: absolute;
   z-index: -10;
 
+  background: linear-gradient(
+      rgba(247, 247, 247, .5),
+      rgba(247, 247, 247, 0.5)
+  ),
+  url("../../assets/background-servers.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
   .container{
     max-width: 100%;
     display: flex;
