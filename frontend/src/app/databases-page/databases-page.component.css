@@ -43,9 +43,9 @@ section {
           section .container .row .item a:hover {
             transform: scale(1.15); }
 
-@media only screen and (max-width: 1087px) {
+@media only screen and (max-width: 1400px) {
   section .container .row {
-    margin-left: 64px; } }
+    margin-left: 65px; } }
 @media only screen and (max-width: 992px) {
   section .container .row {
     margin-right: 5px; } }
