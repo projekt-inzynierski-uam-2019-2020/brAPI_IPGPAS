@@ -1,11 +1,12 @@
-<button style="border-radius: 20px; border: none; outline: none; width: 200px; height: 40px; color: white; background: #4fa097; margin-left: auto; margin-right: auto; display: block; margin-top: 50px" (click)="columnChart()">SHOW COLUMN CHART</button>
-<button style="border-radius: 20px; border: none; width: 200px; outline: none; height: 40px; color: white; background: #4fa097; margin-left: auto; margin-right: auto; display: block; margin-top: 50px" (click)="lineChart()">SHOW LINE CHART</button>
-<table style="margin-left: auto; margin-right: auto; display: block; margin-top: 40px">
-  <td style="width: 700px; height: 50%; margin-left: auto; margin-right: auto; display: block;">
-    <canvas id="barChart"></canvas>
-  </td>
-  <td style="width: 700px; height: 50%; margin-left: auto; margin-right: auto; display: block">
-    <canvas id="lineChart"></canvas>
-  </td>
-</table>
-
+<div class="container">
+  <button class="showColumn" (click)="columnChart()">SHOW COLUMN CHART</button>
+  <button class="showLine" (click)="lineChart()">SHOW LINE CHART</button>
+  <table>
+    <td>
+      <canvas id="barChart"></canvas>
+    </td>
+    <td>
+      <canvas id="lineChart"></canvas>
+    </td>
+  </table>
+</div>
