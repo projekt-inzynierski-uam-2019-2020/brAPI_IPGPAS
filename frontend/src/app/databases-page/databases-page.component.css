@@ -1,71 +1,57 @@
 section {
   padding: 30px 0px;
-}
-section .container {
-  max-width: 100%;
-  display: flex;
-  justify-content: center;
-}
-section .container .row {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  margin-left: 240px;
-}
-section .container .row .item {
-  position: relative;
-  padding: 20px;
-  height: 300px;
-  margin: 15px 20px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  box-shadow: 2px 3px 10px #ddd;
-}
-section .container .row .item .header i {
-  margin-top: 20px;
-}
-section .container .row .item .header div {
-  margin-left: 15px;
-  font-size: 35px;
-  font-family: Roboto;
-  color: #444;
-}
-section .container .row .item h5 {
-  margin-top: 15px;
-  font-family: "Segoe UI";
-  font-weight: 100;
-  font-size: 15px;
-  color: #444;
-}
-section .container .row .item a {
   position: absolute;
-  bottom: 20px;
-  left: 30px;
-  color: #347a70;
-  transition: all 0.3s ease-in-out;
-}
-section .container .row .item a i {
-  margin-right: 10px;
-}
-section .container .row .item a:hover {
-  transform: scale(1.15);
-}
+  z-index: -10; }
+  section .container {
+    max-width: 100%;
+    display: flex;
+    justify-content: center; }
+    section .container .row {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      margin-left: 240px; }
+      section .container .row .item {
+        position: relative;
+        padding: 20px;
+        height: 300px;
+        margin: 15px 20px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        box-shadow: 2px 3px 10px #ddd; }
+        section .container .row .item .header i {
+          margin-top: 20px; }
+        section .container .row .item .header div {
+          margin-left: 15px;
+          font-size: 35px;
+          font-family: Roboto;
+          color: #444; }
+        section .container .row .item h5 {
+          margin-top: 15px;
+          font-family: "Segoe UI";
+          font-weight: 100;
+          font-size: 15px;
+          color: #444; }
+        section .container .row .item a {
+          position: absolute;
+          bottom: 20px;
+          left: 30px;
+          color: #347a70;
+          transition: all .3s ease-in-out; }
+          section .container .row .item a i {
+            margin-right: 10px; }
+          section .container .row .item a:hover {
+            transform: scale(1.15); }
 
 @media only screen and (max-width: 1087px) {
   section .container .row {
-    margin-left: 64px;
-  }
-}
+    margin-left: 64px; } }
 @media only screen and (max-width: 992px) {
   section .container .row {
-    margin-right: 5px;
-  }
-}
+    margin-right: 5px; } }
 @media only screen and (max-width: 671px) {
   section .container .row {
     margin-left: 0px;
-    margin-top: 50px;
-  }
-}
+    margin-top: 50px; } }
 
 /*# sourceMappingURL=databases-page.component.css.map */
