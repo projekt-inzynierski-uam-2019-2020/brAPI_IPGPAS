@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/brapi/v1")
 public class SeasonController {
-    private SeasonDao seasonDao;
+    private final SeasonDao seasonDao;
 
     public SeasonController(SeasonDao seasonDao) {
         this.seasonDao = seasonDao;
