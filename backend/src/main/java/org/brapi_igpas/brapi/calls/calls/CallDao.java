@@ -13,17 +13,13 @@ import java.util.stream.Collectors;
 public class CallDao {
     private final List<Call> CALLS = new ArrayList<>();
 
-    public CallDao(){
+    public CallDao() {
         initCalls(createActualApplicationCallList());
     }
 
     // tests purpose only
-    protected CallDao(List<Call> calls){
+    protected CallDao(List<Call> calls) {
         initCalls(calls);
-    }
-
-    private void initCalls(List<Call> calls) {
-        CALLS.addAll(calls);
     }
 
     private static List<Call> createActualApplicationCallList() {
@@ -46,27 +42,30 @@ public class CallDao {
         return calls;
     }
 
+    private void initCalls(List<Call> calls) {
+        CALLS.addAll(calls);
+    }
+
     public BrApiDetailPayloadResponse getAll(String dataType, int page, int pageSize) {
         List<Call> calls = CALLS;
-        Pagination paginationInfo = PaginationUtils.getPaginationInfo(calls.size(), page, pageSize);
 
-        if (dataType != null && !dataType.isEmpty()) {
+        if (isParameterPresent(dataType)) {
             calls = getCallsWithDataType(calls, dataType);
         }
 
+        Pagination paginationInfo = PaginationUtils.getPaginationInfo(calls.size(), page, pageSize);
         int fromIndex = PaginationUtils.getFromIndex(calls.size(), page, pageSize);
         int toIndex = PaginationUtils.getToIndex(calls.size(), page, pageSize);
-
         calls = calls.subList(fromIndex, toIndex);
 
         return new BrApiDetailPayloadResponse(calls, paginationInfo);
     }
 
-    private List<Call> getCallsWithDataType(List<Call> calls, String dataType) {
-        calls = calls.stream()
-                .filter(c -> c.getDataTypes().contains(dataType))
-                .collect(Collectors.toCollection(ArrayList::new));
+    private boolean isParameterPresent(String parameter) {
+        return parameter != null && !parameter.isEmpty();
+    }
 
-        return calls;
+    private List<Call> getCallsWithDataType(List<Call> calls, String dataType) {
+        return calls.stream().filter(c -> c.getDataTypes().contains(dataType)).collect(Collectors.toCollection(ArrayList::new));
     }
 }

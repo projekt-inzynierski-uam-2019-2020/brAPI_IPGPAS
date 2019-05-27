@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/brapi/v1")
 public class CallController {
-    private CallDao callDao;
+    private final CallDao callDao;
 
     public CallController(CallDao callDao) {
         this.callDao = callDao;
