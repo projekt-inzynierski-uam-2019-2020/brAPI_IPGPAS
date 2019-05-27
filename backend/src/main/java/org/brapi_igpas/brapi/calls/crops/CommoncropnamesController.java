@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/brapi/v1")
 public class CommoncropnamesController {
-    private CommoncropnamesDao commoncropnamesDao;
+    private final CommoncropnamesDao commoncropnamesDao;
 
     public CommoncropnamesController(CommoncropnamesDao commoncropnamesDao) {
         this.commoncropnamesDao = commoncropnamesDao;
