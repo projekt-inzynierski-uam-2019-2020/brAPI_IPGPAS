@@ -73,6 +73,12 @@ export class ServerDataComponent implements OnInit {
                 this.checkedCalls = false;
                 this.checkedCropNames = false;
                 this.checkedStudies = true;
+              } else{
+                if(this.selectedItem === 'trials'){
+                  this.checkedCalls = false;
+                  this.checkedCropNames = false;
+                  this.checkedStudies = true;
+                }
               }
             }
           }
