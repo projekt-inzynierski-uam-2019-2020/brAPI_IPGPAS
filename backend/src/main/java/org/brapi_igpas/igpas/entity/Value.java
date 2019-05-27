@@ -15,7 +15,7 @@ public class Value {
     private long id;
     private String value;
     @Column(name = "study_id")
-    private int studyId;
+    private long studyId;
     @Column(name = "attribute_id")
     private int attributeId;
 
@@ -38,11 +38,11 @@ public class Value {
         this.value = value;
     }
 
-    public int getStudyId() {
+    public long getStudyId() {
         return studyId;
     }
 
-    public void setStudyId(int studyId) {
+    public void setStudyId(long studyId) {
         this.studyId = studyId;
     }
 
