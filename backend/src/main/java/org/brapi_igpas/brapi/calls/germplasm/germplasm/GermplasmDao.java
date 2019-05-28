@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.brapi_igpas.brapi.FilterUtils.isParameterPresent;
+
 @Repository
 public class GermplasmDao {
     private final DbValuesFacade dbValuesFacade;
@@ -59,10 +61,6 @@ public class GermplasmDao {
             germplasm.setGermplasmName(temp.getValue());
             return germplasm;
         }).collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    private boolean isParameterPresent(String parameter) {
-        return parameter != null && !parameter.isEmpty();
     }
 
     private List<Germplasm> getGermplasmsWithGermplasmPUI(List<Germplasm> germplasms, String germplasmPUI) {

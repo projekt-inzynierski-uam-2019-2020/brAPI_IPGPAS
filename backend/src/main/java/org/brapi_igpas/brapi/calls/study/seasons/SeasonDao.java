@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.brapi_igpas.brapi.FilterUtils.isParameterPresent;
+
 @Repository
 public class SeasonDao {
     private final DbValuesFacade dbValuesFacade;
@@ -59,10 +61,6 @@ public class SeasonDao {
             season.setSeasonDbId(String.valueOf(temp.getId()));
             return season;
         }).collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    private boolean isParameterPresent(String parameter) {
-        return parameter != null && !parameter.isEmpty();
     }
 
     private List<Season> getSeasonWithSeasonDbId(List<Season> seasons, String seasonDbId) {

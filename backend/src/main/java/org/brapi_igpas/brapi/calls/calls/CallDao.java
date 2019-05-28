@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.brapi_igpas.brapi.FilterUtils.isParameterPresent;
+
 @Repository
 public class CallDao {
     private final List<Call> CALLS = new ArrayList<>();
@@ -59,10 +61,6 @@ public class CallDao {
         calls = calls.subList(fromIndex, toIndex);
 
         return new BrApiDetailPayloadResponse(calls, paginationInfo);
-    }
-
-    private boolean isParameterPresent(String parameter) {
-        return parameter != null && !parameter.isEmpty();
     }
 
     private List<Call> getCallsWithDataType(List<Call> calls, String dataType) {
