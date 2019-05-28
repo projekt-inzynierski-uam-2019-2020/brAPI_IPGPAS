@@ -1,0 +1,27 @@
+<section>
+  <h1 class="title">Study</h1>
+  <div class="row">
+    <div class="col-md"></div>
+    <div class="col-md">
+      <label class="checkbox-inline"><input type="checkbox" data-md-icheck (change)="toggleVisibility($event)"
+                                            (click)="getUniqCommonCropNames()  &&  getSumOfEachCropName()"/>CommonCropName</label>
+    </div>
+    <div class="col-md"></div>
+  </div>
+  <div class="list">
+    <h2 style="text-align: center; margin-top: 80px" *ngIf="marked">CommonCropNames</h2>
+    <ul class="list-group" *ngIf="marked">
+      <li class="list-group-item" *ngFor="let in of counter(cropNames.length); let i = index ">{{cropNames[i]}}</li>
+    </ul>
+  </div>
+  <div class="charts">
+    <table>
+      <td>
+        <canvas id="barChart"></canvas>
+      </td>
+      <td>
+        <canvas id="lineChart"></canvas>
+      </td>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,54 @@
+section {
+  background: rgba(251, 249, 241, 0.65);
+  position: absolute;
+  z-index: -10;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+section .title {
+  margin-top: 100px;
+  color: #444444;
+  text-align: center;
+  font-family: "Questrial", sans-serif;
+}
+section .checkbox-inline {
+  margin-left: auto;
+  margin-right: auto;
+  background: #4fa097;
+  padding-top: 10px;
+  color: white;
+  width: 200px;
+  height: 50px;
+  margin-top: 50px;
+  display: block;
+  text-align: center;
+}
+section .checkbox-inline input {
+  color: white;
+}
+section .list-group {
+  margin-top: 50px;
+  text-align: center;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+section .charts {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+section .charts td {
+  width: 700px;
+  height: 50%;
+  margin-left: 50%;
+  display: block;
+}
+
+/*# sourceMappingURL=study.component.css.map */
