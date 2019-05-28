@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DbValuesFacade {
@@ -22,9 +23,9 @@ public class DbValuesFacade {
     }
 
     public List<Value> getAllValuesByAttributeDisplayedName(String attributeDisplayedName) {
-        Attribute attribute = attributeRepository.getAttributeByDisplayedName(attributeDisplayedName);
-        if (attribute != null) {
-            final int attributeId = attributeRepository.getAttributeByDisplayedName(attributeDisplayedName).getId();
+        Optional<Attribute> attribute = attributeRepository.getAttributeByDisplayedName(attributeDisplayedName);
+        if (attribute.isPresent()) {
+            final int attributeId = attribute.get().getId();
             return valueRepository.getAllValuesByAttributeId(attributeId);
         }
         return Collections.emptyList();
