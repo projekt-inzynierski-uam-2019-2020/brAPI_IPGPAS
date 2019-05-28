@@ -1,5 +1,4 @@
 section {
-  background: rgba(251, 249, 241, 0.65);
   position: absolute;
   z-index: -10;
   border: 0;
@@ -9,14 +8,35 @@ section {
   height: 100%;
   left: 0;
   top: 0;
+  background: linear-gradient(rgba(247, 247, 247, 0.5), rgba(247, 247, 247, 0.5)), url("../../../assets/background-servers.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-section .title {
-  margin-top: 100px;
-  color: #444444;
+section .container {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+}
+section .container .title {
+  display: flex;
+  justify-content: center;
   text-align: center;
-  font-family: "Questrial", sans-serif;
+  margin-left: 240px;
+  margin-top: 70px;
+  font-size: 35px;
+  font-family: Roboto, sans-serif;
+  color: #444;
 }
-section .checkbox-inline {
+section .container .row {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-left: 240px;
+}
+section .container .row .checkbox-inline {
   margin-left: auto;
   margin-right: auto;
   background: #4fa097;
@@ -28,27 +48,48 @@ section .checkbox-inline {
   display: block;
   text-align: center;
 }
-section .checkbox-inline input {
+section .container .row .checkbox-inline input {
   color: white;
 }
-section .list-group {
+section .container .row .list-group {
   margin-top: 50px;
   text-align: center;
   width: 300px;
   margin-left: auto;
   margin-right: auto;
 }
-section .charts {
+section .container .row .charts {
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
-section .charts td {
+section .container .row .charts td {
   width: 700px;
   height: 50%;
   margin-left: 50%;
   display: block;
+}
+
+@media only screen and (max-width: 1400px) {
+  section .container .title, section .container .row {
+    margin-left: 65px;
+  }
+}
+@media only screen and (max-width: 992px) {
+  section .container .title, section .container .row {
+    margin-right: 5px;
+  }
+}
+@media only screen and (max-width: 671px) {
+  section .container .title {
+    margin-left: 0px;
+    margin-top: 100px;
+  }
+  section .container .row {
+    margin-left: 0px;
+    margin-top: 50px;
+  }
 }
 
 /*# sourceMappingURL=study.component.css.map */

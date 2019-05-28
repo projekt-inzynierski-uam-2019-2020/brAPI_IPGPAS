@@ -1,27 +1,29 @@
 <section>
-  <h1 class="title">Study</h1>
-  <div class="row">
-    <div class="col-md"></div>
-    <div class="col-md">
-      <label class="checkbox-inline"><input type="checkbox" data-md-icheck (change)="toggleVisibility($event)"
-                                            (click)="getUniqCommonCropNames()  &&  getSumOfEachCropName()"/>CommonCropName</label>
+  <div class="container">
+    <h1 class="title">Study</h1>
+    <div class="row">
+      <div class="col-md-12 col-lg-3 item"></div>
+      <div class="col-md-12 col-lg-3 item">
+        <input id="cbx" class="checkbox" type="checkbox" data-md-icheck (change)="toggleVisibility($event)" (click)="getUniqCommonCropNames()  &&  getSumOfEachCropName()"/>
+        <label class="checkbox-inline" for="cbx"><span><svg width="12px" height="10px" viewbox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span><span>CommonCropNames</span></label>
+      </div>
+      <div class="col-md-12 col-lg-3 item"></div>
     </div>
-    <div class="col-md"></div>
-  </div>
-  <div class="list">
-    <h2 style="text-align: center; margin-top: 80px" *ngIf="marked">CommonCropNames</h2>
-    <ul class="list-group" *ngIf="marked">
-      <li class="list-group-item" *ngFor="let in of counter(cropNames.length); let i = index ">{{cropNames[i]}}</li>
-    </ul>
-  </div>
-  <div class="charts">
-    <table>
-      <td>
-        <canvas id="barChart"></canvas>
-      </td>
-      <td>
-        <canvas id="lineChart"></canvas>
-      </td>
-    </table>
+    <div class="list">
+      <h2 style="text-align: center; margin-top: 80px" *ngIf="marked">CommonCropNames</h2>
+      <ul class="list-group" *ngIf="marked">
+        <li class="list-group-item" *ngFor="let in of counter(cropNames.length); let i = index ">{{cropNames[i]}}</li>
+      </ul>
+    </div>
+    <div class="charts">
+      <table>
+        <td>
+          <canvas id="barChart"></canvas>
+        </td>
+        <td>
+          <canvas id="lineChart"></canvas>
+        </td>
+      </table>
+    </div>
   </div>
 </section>
