@@ -1,6 +1,7 @@
 package org.brapi_igpas.brapi.exceptions;
 
 import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
+import org.brapi_igpas.brapi.metadata.Metadata;
 import org.brapi_igpas.brapi.metadata.Pagination;
 import org.brapi_igpas.brapi.metadata.Status;
 import org.springframework.http.HttpStatus;
@@ -14,25 +15,24 @@ import java.util.Collections;
 
 @ControllerAdvice
 public class BrApiExceptionHandler {
-
-    public static final String LOG_INFO = "INFO";
-
-    @ExceptionHandler(InvalidPageValueException.class)
+    @ExceptionHandler(InvalidNumericalParameterValueException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody
-    BrApiDetailPayloadResponse invalidPageValue(){
+    BrApiDetailPayloadResponse invalidNumericalParameterException(InvalidNumericalParameterValueException exc) {
+        String parameter = exc.getParameter();
         BrApiDetailPayloadResponse brApiDetailPayloadResponse = new BrApiDetailPayloadResponse(new ArrayList<>(), new Pagination());
-        brApiDetailPayloadResponse.getMetadata().setStatus(Collections.singletonList(new Status("'page' value is invalid", LOG_INFO)));
-
+        Metadata metadata = brApiDetailPayloadResponse.getMetadata();
+        metadata.setStatus(Collections.singletonList(new Status("'" + parameter + "' value is invalid", Status.MESSAGETYPE_LOG_ERROR)));
         return brApiDetailPayloadResponse;
     }
 
-    @ExceptionHandler(InvalidPageSizeValueException.class)
+    @ExceptionHandler(NumberFormatException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public @ResponseBody BrApiDetailPayloadResponse invalidPageSizeValue(){
+    public @ResponseBody
+    BrApiDetailPayloadResponse invalidNumericalParameterFormatException() {
         BrApiDetailPayloadResponse brApiDetailPayloadResponse = new BrApiDetailPayloadResponse(new ArrayList<>(), new Pagination());
-        brApiDetailPayloadResponse.getMetadata().setStatus(Collections.singletonList(new Status("'pageSize' value is invalid", LOG_INFO)));
-
+        Metadata metadata = brApiDetailPayloadResponse.getMetadata();
+        metadata.setStatus(Collections.singletonList(new Status("Invalid query parameter", Status.MESSAGETYPE_LOG_ERROR)));
         return brApiDetailPayloadResponse;
     }
 }
