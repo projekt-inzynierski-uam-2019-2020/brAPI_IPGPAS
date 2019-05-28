@@ -1,6 +1,10 @@
 package org.brapi_igpas.brapi.metadata;
 
 public class Status {
+    public static final String MESSAGETYPE_LOG_INFO = "INFO";
+    public static final String MESSAGETYPE_LOG_WARNING = "WARNING";
+    public static final String MESSAGETYPE_LOG_ERROR = "ERROR";
+
     private String message;
     private String messageType;
 
