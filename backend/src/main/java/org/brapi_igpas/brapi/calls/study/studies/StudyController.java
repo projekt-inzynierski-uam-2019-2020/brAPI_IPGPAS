@@ -1,8 +1,7 @@
 package org.brapi_igpas.brapi.calls.study.studies;
 
 import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
-import org.brapi_igpas.brapi.exceptions.InvalidPageSizeValueException;
-import org.brapi_igpas.brapi.exceptions.InvalidPageValueException;
+import org.brapi_igpas.brapi.exceptions.InvalidNumericalParameterValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -33,10 +32,10 @@ public class StudyController {
             @RequestParam(value = "page", defaultValue = "0") final int page,
             @RequestParam(value = "pageSize", defaultValue = "1000") final int pageSize) {
         if (page < 0) {
-            throw new InvalidPageValueException();
+            throw new InvalidNumericalParameterValueException("page");
         }
         if (pageSize <= 0) {
-            throw new InvalidPageSizeValueException();
+            throw new InvalidNumericalParameterValueException("pageSize");
         }
         return studyDao.getAll(commonCropName, studyTypeDbId, programDbId, locationDbId, seasonDbId, trialDbId,
                 studyDbId, active, sortBy, sortOrder, page, pageSize);
