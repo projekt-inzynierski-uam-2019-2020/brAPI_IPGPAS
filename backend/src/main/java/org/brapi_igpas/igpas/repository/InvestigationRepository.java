@@ -4,7 +4,9 @@ import org.brapi_igpas.igpas.entity.Investigation;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface InvestigationRepository extends CrudRepository<Investigation, Long> {
-    Investigation getInvestigationById(long id);
+    Optional<Investigation> getInvestigationById(long id);
 }
