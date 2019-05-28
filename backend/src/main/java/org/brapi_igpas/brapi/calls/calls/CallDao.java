@@ -30,16 +30,25 @@ public class CallDao {
         calls.add(new Call("calls")
                 .withDataTypeJson()
                 .withMethodGet()
-                .withVersionOneZero()
-                .withVersionOneOne()
-                .withVersionOneTwo()
                 .withVersionOneThree());
 
         calls.add(new Call("commoncropnames")
                 .withDataTypeJson()
                 .withMethodGet()
+                .withVersionOneThree());
+
+        calls.add(new Call("seasons")
+                .withDataTypeJson()
+                .withMethodGet()
                 .withVersionOneTwo()
                 .withVersionOneThree());
+
+        calls.add(new Call("germplasm")
+                .withDataTypeJson()
+                .withMethodGet()
+                .withVersionOneTwo()
+                .withVersionOneThree());
+
 
         return calls;
     }
