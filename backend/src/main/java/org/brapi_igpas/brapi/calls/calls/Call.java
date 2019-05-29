@@ -2,43 +2,42 @@ package org.brapi_igpas.brapi.calls.calls;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Call {
-    public static final String DATATYPE_JSON = "application/json";
-    public static final String DATATYPE_CSV = "text/csv";
+    static final String DATATYPE_JSON = "application/json";
+    static final String DATATYPE_CSV = "text/csv";
 
-    public static final String METHOD_GET = "GET";
-    public static final String METHOD_POST = "POST";
-    public static final String METHOD_PUT = "PUT";
-    public static final String METHOD_DELETE = "DELETE";
+    static final String METHOD_GET = "GET";
+    static final String METHOD_POST = "POST";
+    static final String METHOD_PUT = "PUT";
+    static final String METHOD_DELETE = "DELETE";
 
-    public static final String VERSION_ONE_ZERO = "1.0";
-    public static final String VERSION_ONE_ONE = "1.1";
-    public static final String VERSION_ONE_TWO = "1.2";
-    public static final String VERSION_ONE_THREE = "1.3";
+    static final String VERSION_ONE_ZERO = "1.0";
+    static final String VERSION_ONE_ONE = "1.1";
+    static final String VERSION_ONE_TWO = "1.2";
+    static final String VERSION_ONE_THREE = "1.3";
 
     private String call;
     private List<String> dataTypes;
     private List<String> methods;
     private List<String> versions;
 
-    public Call() {
+    Call() {
         dataTypes = new ArrayList<>();
         methods = new ArrayList<>();
         versions = new ArrayList<>();
     }
 
-    public Call(String call) {
+    Call(String call) {
         this();
         this.call = call;
     }
 
-    public Call withDataTypeJson() {
+    Call withDataTypeJson() {
         return addDataType(DATATYPE_JSON);
     }
 
-    public Call withDataTypeCsv() {
+    Call withDataTypeCsv() {
         return addDataType(DATATYPE_CSV);
     }
 
@@ -47,19 +46,19 @@ public class Call {
         return this;
     }
 
-    public Call withMethodGet() {
+    Call withMethodGet() {
         return addMethod(METHOD_GET);
     }
 
-    public Call withMethodPost() {
+    Call withMethodPost() {
         return addMethod(METHOD_POST);
     }
 
-    public Call withMethodPut() {
+    Call withMethodPut() {
         return addMethod(METHOD_PUT);
     }
 
-    public Call withMethodDelete() {
+    Call withMethodDelete() {
         return addMethod(METHOD_DELETE);
     }
 
@@ -68,19 +67,19 @@ public class Call {
         return this;
     }
 
-    public Call withVersionOneZero() {
+    Call withVersionOneZero() {
         return addVersion(VERSION_ONE_ZERO);
     }
 
-    public Call withVersionOneOne() {
+    Call withVersionOneOne() {
         return addVersion(VERSION_ONE_ONE);
     }
 
-    public Call withVersionOneTwo() {
+    Call withVersionOneTwo() {
         return addVersion(VERSION_ONE_TWO);
     }
 
-    public Call withVersionOneThree() {
+    Call withVersionOneThree() {
         return addVersion(VERSION_ONE_THREE);
     }
 
@@ -103,28 +102,5 @@ public class Call {
 
     public List<String> getVersions() {
         return versions;
-    }
-
-    @Override
-    public String toString() {
-        return "Call{" +
-                "call='" + call + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Call call1 = (Call) o;
-        return Objects.equals(call, call1.call) &&
-                Objects.equals(dataTypes, call1.dataTypes) &&
-                Objects.equals(methods, call1.methods) &&
-                Objects.equals(versions, call1.versions);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(call, dataTypes, methods, versions);
     }
 }
