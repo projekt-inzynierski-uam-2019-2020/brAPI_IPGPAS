@@ -13,48 +13,36 @@ import static org.brapi_igpas.brapi.FilterUtils.isParameterPresent;
 
 @Repository
 public class CallDao {
-    private final List<Call> CALLS = new ArrayList<>();
+    List<Call> CALLS = new ArrayList<>();
 
     public CallDao() {
-        initCalls(createActualApplicationCallList());
-    }
-
-    // tests purpose only
-    protected CallDao(List<Call> calls) {
-        initCalls(calls);
-    }
-
-    private static List<Call> createActualApplicationCallList() {
-        List<Call> calls = new ArrayList<>();
-
-        calls.add(new Call("calls")
+        CALLS.add(new Call("calls")
                 .withDataTypeJson()
                 .withMethodGet()
                 .withVersionOneThree());
 
-        calls.add(new Call("commoncropnames")
+        CALLS.add(new Call("commoncropnames")
                 .withDataTypeJson()
                 .withMethodGet()
                 .withVersionOneThree());
 
-        calls.add(new Call("seasons")
+        CALLS.add(new Call("seasons")
                 .withDataTypeJson()
                 .withMethodGet()
                 .withVersionOneTwo()
                 .withVersionOneThree());
 
-        calls.add(new Call("germplasm")
+        CALLS.add(new Call("germplasm")
                 .withDataTypeJson()
                 .withMethodGet()
                 .withVersionOneTwo()
                 .withVersionOneThree());
 
-
-        return calls;
-    }
-
-    private void initCalls(List<Call> calls) {
-        CALLS.addAll(calls);
+        CALLS.add(new Call("studies")
+                .withDataTypeJson()
+                .withMethodGet()
+                .withVersionOneTwo()
+                .withVersionOneThree());
     }
 
     public BrApiDetailPayloadResponse getAll(String dataType, int page, int pageSize) {
@@ -73,6 +61,6 @@ public class CallDao {
     }
 
     private List<Call> getCallsWithDataType(List<Call> calls, String dataType) {
-        return calls.stream().filter(c -> c.getDataTypes().contains(dataType)).collect(Collectors.toCollection(ArrayList::new));
+        return calls.stream().filter(call -> call.getDataTypes().contains(dataType)).collect(Collectors.toCollection(ArrayList::new));
     }
 }
