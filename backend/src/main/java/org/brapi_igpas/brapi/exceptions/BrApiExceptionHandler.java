@@ -29,7 +29,7 @@ public class BrApiExceptionHandler {
     @ExceptionHandler(NumberFormatException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody
-    BrApiDetailPayloadResponse invalidNumericalParameterFormatException() {
+    BrApiDetailPayloadResponse invalidQueryParameterException() {
         BrApiDetailPayloadResponse brApiDetailPayloadResponse = new BrApiDetailPayloadResponse(new ArrayList<>(), new Pagination());
         Metadata metadata = brApiDetailPayloadResponse.getMetadata();
         metadata.setStatus(Collections.singletonList(new Status("Invalid query parameter", Status.MESSAGETYPE_LOG_ERROR)));

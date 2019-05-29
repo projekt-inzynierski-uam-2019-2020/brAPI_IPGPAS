@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface ValueRepository extends CrudRepository<Value, Long> {
     List<Value> getAllValuesByAttributeId(int attributeId);
-    List<Value> getAllValuesByStudyId(long studyId);
 }
