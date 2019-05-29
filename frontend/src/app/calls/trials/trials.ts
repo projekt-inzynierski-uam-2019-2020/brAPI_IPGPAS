@@ -2,7 +2,6 @@ import {AdditionalInfo} from '../studies/additionalInfo';
 import {Studies} from '../studies/studies';
 
 export class Trials {
-  data: any[];
   active: boolean;
   additionalInfo: AdditionalInfo;
   commonCropName: string;

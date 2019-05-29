@@ -14,6 +14,7 @@ import {ServerDataComponent} from './server-data-page/server-data.component';
 import {ServerPageComponent} from './server-page/server-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import { StudyComponent } from './calls-components/study/study.component';
+import { TrialsComponent} from './calls-components/trials/trials.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { StudyComponent } from './calls-components/study/study.component';
     ServerPageComponent,
     ServerDataComponent,
     DatabasesPageComponent,
-    StudyComponent
+    StudyComponent,
+    TrialsComponent,
   ],
   imports: [
     HttpClientModule,

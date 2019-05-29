@@ -141,6 +141,5 @@ export class StudyComponent implements OnInit {
     if (!this.marked) {
       window.location.reload();
     }
-
   }
 }
