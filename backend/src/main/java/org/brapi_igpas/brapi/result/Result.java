@@ -10,6 +10,10 @@ public class Result {
         data = new ArrayList<>();
     }
 
+    public Result(List<?> data) {
+        this.data = data;
+    }
+
     public List<?> getData() {
         return data;
     }
