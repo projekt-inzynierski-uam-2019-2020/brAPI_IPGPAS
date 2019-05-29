@@ -9,7 +9,20 @@ section {
   left: 0;
   top: 0;
 }
-section .title {
+section .container {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+  background: linear-gradient(rgba(247, 247, 247, 0.5), rgba(247, 247, 247, 0.5)), url("../../../assets/background-servers.jpeg");
+  min-height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+section .container .title {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -19,20 +32,210 @@ section .title {
   font-family: Roboto, sans-serif;
   color: #444;
 }
-section .row {
+section .container .row {
   display: flex;
   justify-content: center;
   text-align: center;
   margin-left: 240px;
 }
-section .row .item {
-  width: 200px;
+section .container .row .item {
+  width: 250px;
+  line-height: 32px;
+  height: 40px;
+  outline: none;
+  margin-top: 30px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  border-radius: 18px;
   background: #4fa097;
   filter: opacity(90%);
   color: white;
 }
-section td {
-  width: 1000px;
+section .container .list h2 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-left: 240px;
+  margin-top: 80px;
+  font-size: 25px;
+  font-family: Roboto, sans-serif;
+  color: #444;
+}
+section .container .list .list-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  margin-left: 240px;
+  height: auto;
+}
+section .container .list .list-group .list-group-item {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+section .container .charts {
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+section .container .charts table {
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  margin-left: 240px;
+}
+section .container .charts table td {
+  margin: auto 10px;
+  padding: 20px;
+  width: 50vw;
+  height: auto;
+  display: block;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 50px;
+}
+
+.cbx {
+  margin: auto;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.cbx span {
+  display: inline-block;
+  vertical-align: middle;
+  transform: translate3d(0, 0, 0);
+  line-height: 35px;
+}
+
+.cbx span:first-child {
+  margin-top: 3px;
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  transform: scale(1);
+  vertical-align: middle;
+  border: 1px solid white;
+  transition: all 0.2s ease;
+  margin-right: 10px;
+}
+
+.cbx span:first-child svg {
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  fill: none;
+  stroke: #FFFFFF;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 16px;
+  stroke-dashoffset: 16px;
+  transition: all 0.3s ease;
+  transition-delay: 0.1s;
+  transform: translate3d(0, 0, 0);
+}
+
+.cbx span:first-child:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: block;
+  transform: scale(0);
+  opacity: 1;
+  border-radius: 50%;
+}
+
+.cbx span:last-child {
+  padding-left: 8px;
+}
+
+.cbx:hover span:first-child {
+  border: 1px solid white;
+}
+
+.inp-cbx:checked + .cbx span:first-child {
+  background: #4fa097;
+  border-color: #4fa097;
+  animation: wave 0.4s ease;
+}
+
+.inp-cbx:checked + .cbx span:first-child svg {
+  stroke-dashoffset: 0;
+}
+
+.inp-cbx:checked + .cbx span:first-child:before {
+  transform: scale(3.5);
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+@keyframes wave {
+  50% {
+    transform: scale(0.9);
+  }
+}
+@media only screen and (max-width: 1400px) {
+  section .container .title, section .container .row {
+    margin-left: 65px;
+  }
+  section .container .list h2 {
+    margin-left: 65px;
+  }
+  section .container .list .list-group {
+    margin-left: 65px;
+  }
+  section .container .charts table {
+    margin-left: 65px;
+  }
+  section .container .charts table td {
+    width: 70vw;
+  }
+}
+@media only screen and (max-width: 992px) {
+  section .container .title, section .container .row {
+    margin-right: 5px;
+  }
+}
+@media only screen and (max-width: 671px) {
+  section .container .title {
+    margin-left: 0px;
+    margin-top: 100px;
+  }
+  section .container .row {
+    margin-left: 0px;
+    margin-top: 50px;
+  }
+  section .container .list h2 {
+    margin-left: 0px;
+  }
+  section .container .list .list-group {
+    margin-left: 0px;
+  }
+  section .container .charts table {
+    margin-left: 0px;
+  }
+  section .container .charts table td {
+    width: 90vw;
+  }
 }
 
 /*# sourceMappingURL=trials.component.css.map */

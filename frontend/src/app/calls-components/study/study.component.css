@@ -90,20 +90,18 @@ section .container .charts table {
   display: flex;
   justify-content: center;
   text-align: center;
-  flex-direction: row;
+  flex-direction: column;
+  margin-left: 240px;
 }
 section .container .charts table td {
   margin: auto 10px;
   padding: 20px;
-  width: 500px;
-  height: 50%;
+  width: 50vw;
+  height: auto;
   display: block;
   background-color: white;
   border-radius: 5px;
   margin-bottom: 50px;
-}
-section .container .charts table td:first-child {
-  margin-left: 240px;
 }
 
 .cbx {
@@ -200,11 +198,10 @@ section .container .charts table td:first-child {
     margin-left: 65px;
   }
   section .container .charts table {
-    flex-direction: column;
     margin-left: 65px;
   }
-  section .container .charts table td:first-child {
-    margin: 10px auto;
+  section .container .charts table td {
+    width: 70vw;
   }
 }
 @media only screen and (max-width: 992px) {
@@ -229,9 +226,6 @@ section .container .charts table td:first-child {
   }
   section .container .charts table {
     margin-left: 0px;
-  }
-  section .container .charts table td:first-child {
-    margin: 10px auto;
   }
   section .container .charts table td {
     width: 90vw;
