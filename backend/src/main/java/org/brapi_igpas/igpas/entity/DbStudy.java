@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "studies")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Studies {
+public class DbStudy {
     @Id
     private long id;
     private String title;
@@ -18,7 +18,7 @@ public class Studies {
     @Column(name = "investigation_id")
     private int investigationId;
 
-    public Studies() {
+    public DbStudy() {
     }
 
     public long getId() {
