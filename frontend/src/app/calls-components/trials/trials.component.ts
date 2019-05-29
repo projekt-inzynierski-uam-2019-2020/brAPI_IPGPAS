@@ -16,6 +16,7 @@ export class TrialsComponent implements OnInit {
   marked: false;
   LineChart = [];
   BarChart = [];
+  canvasShow = false;
 
   constructor(private callService: CallsService) {
   }
@@ -23,6 +24,7 @@ export class TrialsComponent implements OnInit {
   ngOnInit() {
     this.getSelectedCall();
   }
+
 
   getSelectedCall() {
     return this.callService.getSelectedCall('trials')
@@ -55,7 +57,7 @@ export class TrialsComponent implements OnInit {
         }
       }
     }
-    console.log(this.sumOfTrialNames);
+    this.canvasShow = true;
     return this.sumOfTrialNames;
   }
 
@@ -152,7 +154,7 @@ export class TrialsComponent implements OnInit {
     this.lineChart();
     this.columnChart();
     if (!this.marked) {
-      window.location.reload();
+      this.canvasShow = false;
     }
   }
 

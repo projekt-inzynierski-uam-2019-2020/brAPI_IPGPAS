@@ -16,6 +16,7 @@ export class StudyComponent implements OnInit {
   marked: false;
   LineChart = [];
   BarChart = [];
+  canvasShow = false;
 
   constructor(private callsService: CallsService) {
   }
@@ -54,6 +55,7 @@ export class StudyComponent implements OnInit {
         }
       }
     }
+    this.canvasShow = true;
   }
 
   columnChart() {
@@ -63,7 +65,7 @@ export class StudyComponent implements OnInit {
         labels: this.cropNames,
         datasets: [{
           label: '# of Votes',
-          data: [this.sumOfCropNames],
+          data: this.sumOfCropNames,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -102,7 +104,7 @@ export class StudyComponent implements OnInit {
         labels: this.cropNames,
         datasets: [{
           label: 'Number of Items',
-          data: [this.sumOfCropNames],
+          data: this.sumOfCropNames,
           fill: false,
           lineTension: 0.2,
           borderColor: 'red',
@@ -139,7 +141,7 @@ export class StudyComponent implements OnInit {
     this.lineChart();
     this.columnChart();
     if (!this.marked) {
-      window.location.reload();
+      this.canvasShow = false;
     }
   }
 }

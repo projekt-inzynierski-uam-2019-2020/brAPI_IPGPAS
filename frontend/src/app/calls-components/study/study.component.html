@@ -17,7 +17,7 @@
         <li class="list-group-item" *ngFor="let in of counter(cropNames.length); let i = index ">{{cropNames[i]}}</li>
       </ul>
     </div>
-    <div class="charts">
+    <div class="charts" *ngIf="canvasShow">
       <table>
         <td>
           <canvas id="barChart"></canvas>
