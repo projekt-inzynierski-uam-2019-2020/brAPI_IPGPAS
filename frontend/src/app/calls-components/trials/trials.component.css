@@ -1,0 +1,38 @@
+section {
+  position: absolute;
+  z-index: -10;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+section .title {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-left: 240px;
+  margin-top: 70px;
+  font-size: 35px;
+  font-family: Roboto, sans-serif;
+  color: #444;
+}
+section .row {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-left: 240px;
+}
+section .row .item {
+  width: 200px;
+  background: #4fa097;
+  filter: opacity(90%);
+  color: white;
+}
+section td {
+  width: 1000px;
+}
+
+/*# sourceMappingURL=trials.component.css.map */
