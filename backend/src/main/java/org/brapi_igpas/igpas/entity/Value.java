@@ -22,6 +22,17 @@ public class Value {
     public Value() {
     }
 
+    public Value(long id, String value) {
+        this();
+        this.id = id;
+        this.value = value;
+    }
+
+    public Value(long id, String value, long studyId) {
+        this(id, value);
+        this.studyId = studyId;
+    }
+
     public long getId() {
         return id;
     }
