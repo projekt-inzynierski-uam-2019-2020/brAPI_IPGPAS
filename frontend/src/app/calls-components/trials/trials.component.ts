@@ -91,7 +91,7 @@ export class TrialsComponent implements OnInit {
       },
       options: {
         title: {
-          text: '# of Trials Name in Trials',
+          text: '# of TrialName in Trials',
           display: true
         },
         scales: {
@@ -121,7 +121,7 @@ export class TrialsComponent implements OnInit {
       },
       options: {
         title: {
-          text: '# of Trials Name in Trials',
+          text: '# of TrialName in Trials',
           display: true
         },
         scales: {

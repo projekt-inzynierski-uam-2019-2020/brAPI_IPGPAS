@@ -6,7 +6,8 @@ import {Chart} from 'chart.js';
 @Component({
   selector: 'app-study',
   templateUrl: './study.component.html',
-  styleUrls: ['./study.component.css']
+  styleUrls: ['./study.component.css'],
+
 })
 export class StudyComponent implements OnInit {
   brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
@@ -88,7 +89,7 @@ export class StudyComponent implements OnInit {
       },
       options: {
         title: {
-          text: '# of Study Type Name in CommonCropNames',
+          text: '# of CommonCropName in Studies',
           display: true
         },
         scales: {
@@ -118,7 +119,7 @@ export class StudyComponent implements OnInit {
       },
       options: {
         title: {
-          text: '# of Study Type Name in CommonCropNames',
+          text: '# of CommonCropName in Studies',
           display: true
         },
         scales: {
