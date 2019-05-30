@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/brapi/v1")
+@CrossOrigin(origins = "http://localhost:4200")
 public class GermplasmController {
     private final GermplasmDao germplasmDao;
 
