@@ -25,66 +25,92 @@ section {
     background-size: cover;
     background-attachment: scroll;
 
-    .card {
-      margin-left: auto;
-      margin-right: auto;
-      width: 330px;
+    .row {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
       margin-top: 50px;
-      height: 280px;
-      color: rgba(78, 78, 78, 0.92);
+      margin-left: 240px;
 
-      .card-body {
-        margin-top: 5px;
-        text-align: center;
+      .card {
+        margin-left: auto;
+        margin-right: auto;
+        width: 330px;
+        margin-top: 50px;
+        height: 280px;
+        color: rgba(78, 78, 78, 0.92);
 
-        button {
-          margin-top: 40px;
-          width: 134px;
-          border-radius: 18px;
-          border: none;
-          background: #4fa097;
-          color: white;
-          height: 39px;
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-          outline: none;
-          font-size: 16px;
-          font-family: 'Questrial', sans-serif;
-        }
+        .card-body {
+          margin-top: 5px;
+          text-align: center;
 
-        span {
-          cursor: pointer;
-          display: inline-block;
-          position: relative;
-          transition: 0.5s;
-        }
-
-        span:after {
-          content: '\00bb';
-          position: absolute;
-          opacity: 0;
-          top: 0;
-          right: -20px;
-          transition: 0.5s;
-        }
-
-        button:hover {
-          background-color: rgba(16, 83, 73, 0.76);
-          transition: 0.8s;
+          button {
+            margin-top: 40px;
+            width: 134px;
+            border-radius: 18px;
+            border: none;
+            background: #4fa097;
+            color: white;
+            height: 39px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            outline: none;
+            font-size: 16px;
+            font-family: 'Questrial', sans-serif;
+          }
 
           span {
-            padding-right: 25px;
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
           }
 
           span:after {
-            opacity: 1;
-            right: 0;
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+          }
+
+          button:hover {
+            background-color: rgba(16, 83, 73, 0.76);
+            transition: 0.8s;
+
+            span {
+              padding-right: 25px;
+            }
+
+            span:after {
+              opacity: 1;
+              right: 0;
+            }
           }
         }
       }
     }
-
   }
+}
 
+@media only screen and (max-width: 1400px) {
+  section {
+    .image {
+      .row {
+        margin-left: 65px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 671px) {
+  section {
+    .image {
+      .row {
+        margin-left: 0px;
+      }
+    }
+  }
 }

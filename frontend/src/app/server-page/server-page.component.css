@@ -22,7 +22,14 @@ section .image {
   background-size: cover;
   background-attachment: scroll;
 }
-section .image .card {
+section .image .row {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-left: 240px;
+}
+section .image .row .card {
   margin-left: auto;
   margin-right: auto;
   width: 330px;
@@ -30,11 +37,11 @@ section .image .card {
   height: 280px;
   color: rgba(78, 78, 78, 0.92);
 }
-section .image .card .card-body {
+section .image .row .card .card-body {
   margin-top: 5px;
   text-align: center;
 }
-section .image .card .card-body button {
+section .image .row .card .card-body button {
   margin-top: 40px;
   width: 134px;
   border-radius: 18px;
@@ -49,13 +56,13 @@ section .image .card .card-body button {
   font-size: 16px;
   font-family: "Questrial", sans-serif;
 }
-section .image .card .card-body span {
+section .image .row .card .card-body span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
-section .image .card .card-body span:after {
+section .image .row .card .card-body span:after {
   content: "»";
   position: absolute;
   opacity: 0;
@@ -63,16 +70,27 @@ section .image .card .card-body span:after {
   right: -20px;
   transition: 0.5s;
 }
-section .image .card .card-body button:hover {
+section .image .row .card .card-body button:hover {
   background-color: rgba(16, 83, 73, 0.76);
   transition: 0.8s;
 }
-section .image .card .card-body button:hover span {
+section .image .row .card .card-body button:hover span {
   padding-right: 25px;
 }
-section .image .card .card-body button:hover span:after {
+section .image .row .card .card-body button:hover span:after {
   opacity: 1;
   right: 0;
+}
+
+@media only screen and (max-width: 1400px) {
+  section .image .row {
+    margin-left: 65px;
+  }
+}
+@media only screen and (max-width: 671px) {
+  section .image .row {
+    margin-left: 0px;
+  }
 }
 
 /*# sourceMappingURL=server-page.component.css.map */

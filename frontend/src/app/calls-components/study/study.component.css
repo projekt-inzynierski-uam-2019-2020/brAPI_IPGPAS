@@ -9,11 +9,37 @@ section {
   left: 0;
   top: 0;
 }
+section .back {
+  display: inline-block;
+  width: 120px;
+  position: relative;
+  top: 100px;
+  left: 300px;
+  background-color: transparent;
+  border: 2px solid #2e5d54;
+  border-radius: 40px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 20px;
+  color: #2e5d54;
+  padding-left: 50px;
+}
+section .back:hover .fas {
+  animation: back 0.8s infinite;
+}
+section .back .fas {
+  position: absolute;
+  top: 8px;
+  left: 30px;
+  margin-right: 10px;
+}
+section .back:active, section .back:focus {
+  outline: none;
+}
 section .container {
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 20px;
   background: linear-gradient(rgba(247, 247, 247, 0.5), rgba(247, 247, 247, 0.5)), url("../../../assets/background-servers.jpeg");
   min-height: 100%;
   background-repeat: no-repeat;
@@ -186,7 +212,21 @@ section .container .charts table td {
     transform: scale(0.9);
   }
 }
+@keyframes back {
+  0% {
+    left: 30px;
+  }
+  50% {
+    left: 10px;
+  }
+  100% {
+    left: 30px;
+  }
+}
 @media only screen and (max-width: 1400px) {
+  section .back {
+    left: 80px;
+  }
   section .container .title, section .container .row {
     margin-left: 65px;
   }
@@ -209,9 +249,13 @@ section .container .charts table td {
   }
 }
 @media only screen and (max-width: 671px) {
+  section .back {
+    left: 10px;
+    top: 150px;
+  }
   section .container .title {
     margin-left: 0px;
-    margin-top: 100px;
+    margin-top: 150px;
   }
   section .container .row {
     margin-left: 0px;
