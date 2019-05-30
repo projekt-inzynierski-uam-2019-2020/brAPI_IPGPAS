@@ -64,6 +64,22 @@ public class CallControllerTest {
     }
 
     @Test
+    public void getAllShouldReturnInvalidParameterFormatStatusWhenPageIsString() throws Exception {
+        this.mockMvc.perform(get("/brapi/v1/calls").param("page", "Lorem ipsum"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().string(containsString("\"message\":\"Invalid query parameter\"")));
+    }
+
+    @Test
+    public void getAllShouldReturnInvalidParameterFormatStatusWhenPageSizeIsString() throws Exception {
+        this.mockMvc.perform(get("/brapi/v1/calls").param("page", "Lorem ipsum"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().string(containsString("\"message\":\"Invalid query parameter\"")));
+    }
+
+    @Test
     public void getAllShouldReturnInvalidPageParameterStatusWhenPageIsNegative() throws Exception {
         this.mockMvc.perform(get("/brapi/v1/calls").param("page", "-1"))
                 .andExpect(status().isBadRequest())
