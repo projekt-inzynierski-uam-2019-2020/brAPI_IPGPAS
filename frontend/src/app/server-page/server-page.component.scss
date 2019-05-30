@@ -25,10 +25,21 @@ section {
     background-size: cover;
     background-attachment: scroll;
 
+    .title{
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      margin-left: 240px;
+      margin-top: 20px;
+      font-size: 35px;
+      font-family: Roboto, sans-serif;
+      color: #444;
+    }
+
     .row {
       display: flex;
       justify-content: center;
-      flex-direction: column;
+      text-align: center;
       margin-top: 50px;
       margin-left: 240px;
 
@@ -36,7 +47,7 @@ section {
         margin-left: auto;
         margin-right: auto;
         width: 330px;
-        margin-top: 50px;
+        margin-top: 20px;
         height: 280px;
         color: rgba(78, 78, 78, 0.92);
 
@@ -98,6 +109,10 @@ section {
 @media only screen and (max-width: 1400px) {
   section {
     .image {
+      .title{
+        margin-left: 40px;
+        margin-top: 40px;
+      }
       .row {
         margin-left: 65px;
       }
@@ -110,7 +125,15 @@ section {
     .image {
       .row {
         margin-left: 0px;
+        margin-top: 40px;
+      }
+
+      .title{
+       margin-left: 0px;
+        margin-top: 80px;
       }
     }
   }
 }
+
+
