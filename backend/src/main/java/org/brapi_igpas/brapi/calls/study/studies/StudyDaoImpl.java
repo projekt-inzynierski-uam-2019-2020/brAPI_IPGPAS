@@ -125,16 +125,16 @@ public class StudyDaoImpl implements StudyDao {
     }
 
     private void setAvailableStudiesVariables(List<Study> studies) {
-        setTrialNames(studies);
-        setStudyTypes(studies);
-        setStudyTypesDbNames(studies);
-        setLocationNames(studies);
-        setStartDates(studies);
-        setCommonCropNames(studies);
-        setSeasons(studies);
+        setTrialNamesForStudies(studies);
+        setStudyTypesForStudies(studies);
+        setStudyTypesDbNamesForStudies(studies);
+        setLocationNamesForStudies(studies);
+        setStartDatesForStudies(studies);
+        setCommonCropNamesForStudies(studies);
+        setSeasonsForStudies(studies);
     }
 
-    private void setTrialNames(List<Study> studies) {
+    private void setTrialNamesForStudies(List<Study> studies) {
         studies.forEach(study -> {
             long investigationId = Long.parseLong(study.getTrialDbId());
             Optional<Investigation> investigation = investigationRepository.getInvestigationById(investigationId);
@@ -142,7 +142,7 @@ public class StudyDaoImpl implements StudyDao {
         });
     }
 
-    private void setStudyTypes(List<Study> studies) {
+    private void setStudyTypesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Growth facility");
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
@@ -151,7 +151,7 @@ public class StudyDaoImpl implements StudyDao {
         });
     }
 
-    private void setStudyTypesDbNames(List<Study> studies) {
+    private void setStudyTypesDbNamesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Growth facility");
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
@@ -160,7 +160,7 @@ public class StudyDaoImpl implements StudyDao {
         });
     }
 
-    private void setLocationNames(List<Study> studies) {
+    private void setLocationNamesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Geographic location");
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
@@ -169,7 +169,7 @@ public class StudyDaoImpl implements StudyDao {
         });
     }
 
-    private void setStartDates(List<Study> studies) {
+    private void setStartDatesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Study start");
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
@@ -178,14 +178,14 @@ public class StudyDaoImpl implements StudyDao {
         });
     }
 
-    private void setCommonCropNames(List<Study> studies) {
+    private void setCommonCropNamesForStudies(List<Study> studies) {
         studies.forEach(s -> {
             long studyId = Long.parseLong(s.getStudyDbId());
             s.setCommonCropName(commoncropnamesDao.getCommonCropNameForStudyWithStudyId(studyId));
         });
     }
 
-    private void setSeasons(List<Study> studies) {
+    private void setSeasonsForStudies(List<Study> studies) {
         studies.forEach(s -> {
             long studyId = Long.parseLong(s.getStudyDbId());
             s.setSeasons(seasonDao.getSeasonsForStudyWithStudyId(studyId));

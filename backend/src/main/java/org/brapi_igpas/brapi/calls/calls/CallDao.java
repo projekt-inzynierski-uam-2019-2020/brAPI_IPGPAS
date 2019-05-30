@@ -13,40 +13,39 @@ import static org.brapi_igpas.brapi.FilterUtils.isParameterPresent;
 
 @Repository
 public class CallDao {
-    List<Call> CALLS = new ArrayList<>();
+    List<Call> calls = new ArrayList<>();
 
     public CallDao() {
-        CALLS.add(new Call("calls")
+        calls.add(new Call("calls")
                 .withDataTypeJson()
                 .withMethodGet()
                 .withVersionOneThree());
 
-        CALLS.add(new Call("commoncropnames")
+        calls.add(new Call("commoncropnames")
                 .withDataTypeJson()
                 .withMethodGet()
                 .withVersionOneThree());
 
-        CALLS.add(new Call("seasons")
+        calls.add(new Call("seasons")
                 .withDataTypeJson()
                 .withMethodGet()
                 .withVersionOneTwo()
                 .withVersionOneThree());
 
-        CALLS.add(new Call("germplasm")
+        calls.add(new Call("germplasm")
                 .withDataTypeJson()
                 .withMethodGet()
                 .withVersionOneTwo()
                 .withVersionOneThree());
 
-        CALLS.add(new Call("studies")
+        calls.add(new Call("studies")
                 .withDataTypeJson()
                 .withMethodGet()
-                .withVersionOneTwo()
                 .withVersionOneThree());
     }
 
     public BrApiDetailPayloadResponse getAll(String dataType, int page, int pageSize) {
-        List<Call> calls = CALLS;
+        List<Call> calls = this.calls;
 
         if (isParameterPresent(dataType)) {
             calls = getCallsWithDataType(calls, dataType);

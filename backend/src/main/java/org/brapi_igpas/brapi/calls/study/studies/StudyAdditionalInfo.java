@@ -1,29 +1,29 @@
 package org.brapi_igpas.brapi.calls.study.studies;
 
 public class StudyAdditionalInfo {
-    private String description;
-    private String volume;
-    private String typeOfFertiliser;
-    private String sowingDensity;
-    private String plotSize;
-    private String pH;
-    private String numberOfPlantsPerContainer;
-    private String nightTemperature;
-    private String nBeforeFertilisation;
-    private String lengthOfLightPeriod;
-    private String irrigationType;
-    private String frequency;
-    private String factor;
-    private String experimentalUnit;
-    private String dayTemperature;
-    private String dailyPhotonFlux;
-    private String containerVolume;
-    private String containerType;
-    private String containerDimension;
-    private String characteristics;
-    private String assayType;
-    private String amountOfFertiliser;
-    private String airHumidity;
+    private String description = "";
+    private String volume = "";
+    private String typeOfFertiliser = "";
+    private String sowingDensity = "";
+    private String plotSize = "";
+    private String pH = "";
+    private String numberOfPlantsPerContainer = "";
+    private String nightTemperature = "";
+    private String nBeforeFertilisation = "";
+    private String lengthOfLightPeriod = "";
+    private String irrigationType = "";
+    private String frequency = "";
+    private String factor = "";
+    private String experimentalUnit = "";
+    private String dayTemperature = "";
+    private String dailyPhotonFlux = "";
+    private String containerVolume = "";
+    private String containerType = "";
+    private String containerDimension = "";
+    private String characteristics = "";
+    private String assayType = "";
+    private String amountOfFertiliser = "";
+    private String airHumidity = "";
 
     public StudyAdditionalInfo() {
     }
