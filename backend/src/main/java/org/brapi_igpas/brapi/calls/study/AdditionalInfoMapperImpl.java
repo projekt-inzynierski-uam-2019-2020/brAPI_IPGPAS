@@ -4,9 +4,11 @@ import org.brapi_igpas.brapi.calls.study.studies.Study;
 import org.brapi_igpas.brapi.calls.study.studies.StudyAdditionalInfo;
 import org.brapi_igpas.igpas.entity.Value;
 import org.brapi_igpas.igpas.service.DbValuesFacade;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
     private final DbValuesFacade dbValuesFacade;
 

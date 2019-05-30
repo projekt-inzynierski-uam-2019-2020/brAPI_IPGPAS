@@ -53,26 +53,31 @@ public class SeasonDaoImpl implements SeasonDao{
     }
 
     private List<Season> getSeasonsFromValues(List<Value> values) {
-        return values.stream().map(value -> {
+        List<Season> seasons = new ArrayList<>();
+        for (Value value : values) {
             Season season = new Season();
             season.setSeasonDbId(String.valueOf(value.getId()));
             if (value.getValue() != null) {
                 season.setSeason(value.getValue());
                 season.setYear(value.getValue());
             }
-            return season;
-        }).collect(Collectors.toCollection(ArrayList::new));
+            seasons.add(season);
+        }
+        return seasons;
     }
 
     private List<Season> getSeasonWithSeasonDbId(List<Season> seasons, String seasonDbId) {
-        return seasons.stream().filter(s -> s.getSeasonDbId() != null && s.getSeasonDbId().equals(seasonDbId)).collect(Collectors.toCollection(ArrayList::new));
+        return seasons.stream().filter(s -> s.getSeasonDbId() != null && s.getSeasonDbId().equals(seasonDbId))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Season> getSeasonWithSeasonName(List<Season> seasons, String seasonName) {
-        return seasons.stream().filter(s -> s.getSeason() != null && s.getSeason().equals(seasonName)).collect(Collectors.toCollection(ArrayList::new));
+        return seasons.stream().filter(s -> s.getSeason() != null && s.getSeason().equals(seasonName))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Season> getSeasonWithYear(List<Season> seasons, String year) {
-        return seasons.stream().filter(s -> s.getYear() != null && s.getYear().equals(year)).collect(Collectors.toCollection(ArrayList::new));
+        return seasons.stream().filter(s -> s.getYear() != null && s.getYear().equals(year))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

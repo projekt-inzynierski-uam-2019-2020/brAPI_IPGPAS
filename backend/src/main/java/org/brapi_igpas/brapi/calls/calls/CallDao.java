@@ -60,6 +60,7 @@ public class CallDao {
     }
 
     private List<Call> getCallsWithDataType(List<Call> calls, String dataType) {
-        return calls.stream().filter(call -> call.getDataTypes().contains(dataType)).collect(Collectors.toCollection(ArrayList::new));
+        return calls.stream().filter(call -> call.getDataTypes().contains(dataType))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

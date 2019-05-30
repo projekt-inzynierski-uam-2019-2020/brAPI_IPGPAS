@@ -23,7 +23,8 @@ public class GermplasmDaoImpl implements GermplasmDao {
         this.values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Infraspecific name");
     }
 
-    public BrApiDetailPayloadResponse getAll(String germplasmPUI, String germplasmDbId, String germplasmName, String commonCropName, int page, int pageSize) {
+    public BrApiDetailPayloadResponse getAll(String germplasmPUI, String germplasmDbId, String germplasmName,
+                                             String commonCropName, int page, int pageSize) {
         List<Germplasm> germplasms = getGermplasmFromValues(values);
 
         if (isParameterPresent(germplasmPUI)) {
@@ -51,7 +52,8 @@ public class GermplasmDaoImpl implements GermplasmDao {
     }
 
     private List<Germplasm> getGermplasmFromValues(List<Value> values) {
-        return values.stream().map(value -> {
+        List<Germplasm> germplasms = new ArrayList<>();
+        for (Value value : values) {
             Germplasm germplasm = new Germplasm();
             germplasm.setGermplasmDbId(String.valueOf(value.getId()));
             if (value.getValue() != null) {
@@ -59,23 +61,28 @@ public class GermplasmDaoImpl implements GermplasmDao {
                 germplasm.setDefaultDisplayName(value.getValue());
                 germplasm.setGermplasmName(value.getValue());
             }
-            return germplasm;
-        }).collect(Collectors.toCollection(ArrayList::new));
+            germplasms.add(germplasm);
+        }
+        return germplasms;
     }
 
     private List<Germplasm> getGermplasmsWithGermplasmPUI(List<Germplasm> germplasms, String germplasmPUI) {
-        return germplasms.stream().filter(g -> g.getGermplasmPUI() != null && g.getGermplasmPUI().equals(germplasmPUI)).collect(Collectors.toCollection(ArrayList::new));
+        return germplasms.stream().filter(g -> g.getGermplasmPUI() != null && g.getGermplasmPUI().equals(germplasmPUI))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Germplasm> getGermplasmsWithGermplasmDbId(List<Germplasm> germplasms, String germplasmDbId) {
-        return germplasms.stream().filter(g -> g.getGermplasmDbId() != null && g.getGermplasmDbId().equals(germplasmDbId)).collect(Collectors.toCollection(ArrayList::new));
+        return germplasms.stream().filter(g -> g.getGermplasmDbId() != null && g.getGermplasmDbId().equals(germplasmDbId))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Germplasm> getGermplasmsWithGermplasmName(List<Germplasm> germplasms, String germplasmName) {
-        return germplasms.stream().filter(g -> g.getGermplasmName() != null && g.getGermplasmName().equals(germplasmName)).collect(Collectors.toCollection(ArrayList::new));
+        return germplasms.stream().filter(g -> g.getGermplasmName() != null && g.getGermplasmName().equals(germplasmName))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Germplasm> getGermplasmsWithCommonCropName(List<Germplasm> germplasms, String commonCropName) {
-        return germplasms.stream().filter(g -> g.getCommonCropName() != null && g.getCommonCropName().equals(commonCropName)).collect(Collectors.toCollection(ArrayList::new));
+        return germplasms.stream().filter(g -> g.getCommonCropName() != null && g.getCommonCropName().equals(commonCropName))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

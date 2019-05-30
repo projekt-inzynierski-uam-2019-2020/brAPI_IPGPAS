@@ -4,7 +4,6 @@ import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
 import org.brapi_igpas.brapi.PaginationUtils;
 import org.brapi_igpas.brapi.calls.crops.CommoncropnamesDao;
 import org.brapi_igpas.brapi.calls.study.AdditionalInfoMapper;
-import org.brapi_igpas.brapi.calls.study.AdditionalInfoMapperImpl;
 import org.brapi_igpas.brapi.calls.study.seasons.SeasonDao;
 import org.brapi_igpas.brapi.metadata.Pagination;
 import org.brapi_igpas.igpas.entity.Value;
@@ -38,13 +37,14 @@ public class StudyDaoImpl implements StudyDao {
 
     @Autowired
     public StudyDaoImpl(DbValuesFacade dbValuesFacade, StudiesRepository studiesRepository,
-                        InvestigationRepository investigationRepository, SeasonDao seasonDao, CommoncropnamesDao commoncropnamesDao) {
+                        InvestigationRepository investigationRepository, SeasonDao seasonDao,
+                        CommoncropnamesDao commoncropnamesDao, AdditionalInfoMapper additionalInfoMapper) {
         this.dbValuesFacade = dbValuesFacade;
         this.studiesRepository = studiesRepository;
         this.investigationRepository = investigationRepository;
         this.commoncropnamesDao = commoncropnamesDao;
         this.seasonDao = seasonDao;
-        this.additionalInfoMapper = new AdditionalInfoMapperImpl(dbValuesFacade);
+        this.additionalInfoMapper = additionalInfoMapper;
     }
 
     public BrApiDetailPayloadResponse getAll(String commonCropName, String studyTypeDbId, String programDbId,
@@ -106,7 +106,8 @@ public class StudyDaoImpl implements StudyDao {
     }
 
     private List<Study> getStudiesFromDbStudies(List<DbStudy> dbStudies) {
-        return dbStudies.stream().map(dbStudy -> {
+        List<Study> studies = new ArrayList<>();
+        for (DbStudy dbStudy : dbStudies) {
             Study study = new Study();
             study.setActive("true");
             study.setStudyDbId(String.valueOf(dbStudy.getId()));
@@ -120,8 +121,9 @@ public class StudyDaoImpl implements StudyDao {
             if (dbStudy.getDescription() != null) {
                 ((StudyAdditionalInfo) additionalInfo).setDescription(dbStudy.getDescription());
             }
-            return study;
-        }).collect(Collectors.toCollection(ArrayList::new));
+            studies.add(study);
+        }
+        return studies;
     }
 
     private void setAvailableStudiesVariables(List<Study> studies) {
@@ -193,35 +195,43 @@ public class StudyDaoImpl implements StudyDao {
     }
 
     private List<Study> getStudiesWithCommonCropName(List<Study> studies, String commonCropName) {
-        return studies.stream().filter(s -> s.getCommonCropName() != null && s.getCommonCropName().equals(commonCropName)).collect(Collectors.toCollection(ArrayList::new));
+        return studies.stream().filter(s -> s.getCommonCropName() != null && s.getCommonCropName().equals(commonCropName))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Study> getStudiesWithStudyTypeDbId(List<Study> studies, String studyTypeDbId) {
-        return studies.stream().filter(s -> s.getStudyTypeDbId() != null && s.getStudyTypeDbId().equals(studyTypeDbId)).collect(Collectors.toCollection(ArrayList::new));
+        return studies.stream().filter(s -> s.getStudyTypeDbId() != null && s.getStudyTypeDbId().equals(studyTypeDbId))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Study> getStudiesWithProgramDbId(List<Study> studies, String programDbId) {
-        return studies.stream().filter(s -> s.getProgramDbId() != null && s.getProgramDbId().equals(programDbId)).collect(Collectors.toCollection(ArrayList::new));
+        return studies.stream().filter(s -> s.getProgramDbId() != null && s.getProgramDbId().equals(programDbId))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Study> getStudiesWithLocationDbId(List<Study> studies, String locationDbId) {
-        return studies.stream().filter(s -> s.getLocationDbId() != null && s.getLocationDbId().equals(locationDbId)).collect(Collectors.toCollection(ArrayList::new));
+        return studies.stream().filter(s -> s.getLocationDbId() != null && s.getLocationDbId().equals(locationDbId))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Study> getStudiesWithSeasonDbId(List<Study> studies, String seasonDbId) {
-        return studies.stream().filter(study -> study.getSeasons().stream().anyMatch(season -> season.getSeasonDbId().equals(seasonDbId))).collect(Collectors.toCollection(ArrayList::new));
+        return studies.stream().filter(study -> study.getSeasons().stream().anyMatch(season -> season.getSeasonDbId().equals(seasonDbId)))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Study> getStudiesWithTrialDbId(List<Study> studies, String trialDbId) {
-        return studies.stream().filter(s -> s.getTrialDbId() != null && s.getTrialDbId().equals(trialDbId)).collect(Collectors.toCollection(ArrayList::new));
+        return studies.stream().filter(s -> s.getTrialDbId() != null && s.getTrialDbId().equals(trialDbId))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Study> getStudiesWithStudyDbId(List<Study> studies, String studyDbId) {
-        return studies.stream().filter(s -> s.getStudyDbId() != null && s.getStudyDbId().equals(studyDbId)).collect(Collectors.toCollection(ArrayList::new));
+        return studies.stream().filter(s -> s.getStudyDbId() != null && s.getStudyDbId().equals(studyDbId))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Study> getStudiesWithActive(List<Study> studies, String active) {
-        return studies.stream().filter(s -> s.getActive() != null && s.getActive().equals(active)).collect(Collectors.toCollection(ArrayList::new));
+        return studies.stream().filter(s -> s.getActive() != null && s.getActive().equals(active))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private List<Study> getSortedStudies(List<Study> studies, String sortBy) {

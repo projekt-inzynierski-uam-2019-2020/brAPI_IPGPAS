@@ -29,7 +29,7 @@ public class CommoncropnamesDaoImpl implements CommoncropnamesDao {
         if (value.isPresent()) {
             return value.get().getValue();
         }
-        return ""; // should have never happen
+        return ""; // should never happen
     }
 
     public BrApiDetailPayloadResponse getAll(int page, int pageSize) {
@@ -44,6 +44,7 @@ public class CommoncropnamesDaoImpl implements CommoncropnamesDao {
     }
 
     private List<String> getValuesNames(List<Value> values) {
-        return values.stream().filter(v -> v.getValue() != null).map(Value::getValue).distinct().collect(Collectors.toCollection(ArrayList::new));
+        return values.stream().filter(v -> v.getValue() != null).map(Value::getValue).distinct()
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
