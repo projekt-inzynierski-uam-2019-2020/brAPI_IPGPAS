@@ -7,12 +7,12 @@
                (click)="getUniqCommonCropNames()  &&  getSumOfEachCropName()"/>
         <label class="cbx" for="cbx">
           <span><svg width="12px" height="10px" viewbox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span>
-          <span>CommonCropNames</span>
+          <span>Crop Names</span>
         </label>
       </div>
     </div>
     <div class="list">
-      <h2 *ngIf="marked">CommonCropNames</h2>
+      <h2 *ngIf="marked">Crop Name</h2>
       <ul class="list-group" *ngIf="marked">
         <li class="list-group-item" *ngFor="let in of counter(cropNames.length); let i = index ">{{cropNames[i]}}</li>
       </ul>

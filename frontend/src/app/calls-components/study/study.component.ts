@@ -17,6 +17,10 @@ export class StudyComponent implements OnInit {
   LineChart = [];
   BarChart = [];
   canvasShow = false;
+  backgroundChartColor = [];
+  backgroundBorderChartColor = [];
+  arrayOfRgba: string[] = [];
+  arrayOfRgbaBorder: string[] = [];
 
   constructor(private callsService: CallsService) {
   }
@@ -59,6 +63,17 @@ export class StudyComponent implements OnInit {
   }
 
   columnChart() {
+    this.backgroundChartColor = ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)', 'rgba(255, 206, 86, 0.3)', 'rgba(29, 255, 140, 0.3)', 'rgba(215, 117, 44, 0.3)', 'rgba(7, 19, 157, 0.3)', 'rgba(239, 5, 0, 0.3)', 'rgba(243, 216, 31, 0.3)', 'rgba(200, 145, 31, 0.3)', 'rgba(215, 117, 44, 0.3)'];
+    this.backgroundBorderChartColor = [' rgba(255, 99, 132, 1)', 'rgba(54, 162, 235,1)', 'rgba(255, 206, 86, 1)', 'rgba(29, 255, 140, 1)', 'rgba(215, 117, 44, 1)', 'rgba(7, 19, 157, 1)', 'rgba(239, 5, 0, 1)', 'rgba(243, 216, 31, 1)', 'gba(200, 145, 31, 1)', 'rgba(215, 117, 44, 1)'];
+    for (let i = 0; i < this.cropNames.length; i++) {
+      if (i > this.backgroundChartColor.length) {
+        this.arrayOfRgba[i] = this.backgroundChartColor[i % 10];
+        this.arrayOfRgbaBorder[i] = this.backgroundBorderChartColor[i % 10];
+      } else {
+        this.arrayOfRgba[i] = this.backgroundChartColor[i];
+        this.arrayOfRgbaBorder[i] = this.backgroundBorderChartColor[this.arrayOfRgba[i]];
+      }
+    }
     this.BarChart = new Chart('barChart', {
       type: 'bar',
       data: {
@@ -66,18 +81,8 @@ export class StudyComponent implements OnInit {
         datasets: [{
           label: '# of Votes',
           data: this.sumOfCropNames,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235,1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)'
-          ],
+          backgroundColor: this.arrayOfRgba,
+          borderColor: this.arrayOfRgbaBorder,
           borderWidth: 1
         }]
       },
@@ -113,7 +118,7 @@ export class StudyComponent implements OnInit {
       },
       options: {
         title: {
-          text: 'BrApi Example 1',
+          text: '# of Study Type Name in CommonCropNames',
           display: true
         },
         scales: {
