@@ -1,7 +1,5 @@
 package org.brapi_igpas.brapi.calls.calls;
 
-import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
-import org.brapi_igpas.brapi.metadata.Pagination;
 import org.brapi_igpas.brapi.result.Result;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +38,7 @@ public class CallDaoTest {
                 .withVersionOneThree());
 
         callDao = new CallDao();
-        callDao.CALLS = calls;
+        callDao.calls = calls;
     }
 
     @Test
