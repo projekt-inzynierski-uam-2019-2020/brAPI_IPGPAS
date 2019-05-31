@@ -1,6 +1,6 @@
 package org.brapi_igpas.brapi.calls.crops;
 
-import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
+import org.brapi_igpas.brapi.BrApiDetailResponse;
 import org.brapi_igpas.brapi.PaginationUtils;
 import org.brapi_igpas.brapi.metadata.Pagination;
 import org.brapi_igpas.igpas.entity.Value;
@@ -32,7 +32,7 @@ public class CommoncropnamesDaoImpl implements CommoncropnamesDao {
         return ""; // should never happen
     }
 
-    public BrApiDetailPayloadResponse getAll(int page, int pageSize) {
+    public BrApiDetailResponse getAll(int page, int pageSize) {
         List<String> commonCropNames = getValuesNames(values);
 
         Pagination paginationInfo = PaginationUtils.getPaginationInfo(commonCropNames.size(), page, pageSize);
@@ -40,7 +40,7 @@ public class CommoncropnamesDaoImpl implements CommoncropnamesDao {
         int toIndex = PaginationUtils.getToIndex(commonCropNames.size(), page, pageSize);
         commonCropNames = commonCropNames.subList(fromIndex, toIndex);
 
-        return new BrApiDetailPayloadResponse(commonCropNames, paginationInfo);
+        return new BrApiDetailResponse(commonCropNames, paginationInfo);
     }
 
     private List<String> getValuesNames(List<Value> values) {

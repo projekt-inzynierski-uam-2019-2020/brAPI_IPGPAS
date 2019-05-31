@@ -1,6 +1,6 @@
 package org.brapi_igpas.brapi.calls.calls;
 
-import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
+import org.brapi_igpas.brapi.BrApiDetailResponse;
 import org.brapi_igpas.brapi.PaginationUtils;
 import org.brapi_igpas.brapi.metadata.Pagination;
 import org.springframework.stereotype.Repository;
@@ -44,7 +44,7 @@ public class CallDao {
                 .withVersionOneThree());
     }
 
-    public BrApiDetailPayloadResponse getAll(String dataType, int page, int pageSize) {
+    public BrApiDetailResponse getAll(String dataType, int page, int pageSize) {
         List<Call> calls = this.calls;
 
         if (isParameterPresent(dataType)) {
@@ -56,7 +56,7 @@ public class CallDao {
         int toIndex = PaginationUtils.getToIndex(calls.size(), page, pageSize);
         calls = calls.subList(fromIndex, toIndex);
 
-        return new BrApiDetailPayloadResponse(calls, paginationInfo);
+        return new BrApiDetailResponse(calls, paginationInfo);
     }
 
     private List<Call> getCallsWithDataType(List<Call> calls, String dataType) {

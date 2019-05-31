@@ -1,6 +1,6 @@
 package org.brapi_igpas.brapi.calls.calls;
 
-import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
+import org.brapi_igpas.brapi.BrApiDetailResponse;
 import org.brapi_igpas.brapi.PaginationUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,7 +52,7 @@ public class CallControllerTest {
                         .withVersionOneThree()));
 
         when(callDao.getAll(dataType, page, pageSize))
-                .thenReturn(new BrApiDetailPayloadResponse(calls, PaginationUtils.getPaginationInfo(calls.size(), page, pageSize)));
+                .thenReturn(new BrApiDetailResponse(calls, PaginationUtils.getPaginationInfo(calls.size(), page, pageSize)));
 
         this.mockMvc.perform(get("/brapi/v1/calls"))
                 .andExpect(status().isOk())

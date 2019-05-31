@@ -1,6 +1,6 @@
 package org.brapi_igpas.brapi.calls.germplasm.germplasm;
 
-import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
+import org.brapi_igpas.brapi.BrApiDetailResponse;
 import org.brapi_igpas.brapi.PaginationUtils;
 import org.brapi_igpas.brapi.metadata.Pagination;
 import org.brapi_igpas.igpas.entity.Value;
@@ -23,8 +23,8 @@ public class GermplasmDaoImpl implements GermplasmDao {
         this.values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Infraspecific name");
     }
 
-    public BrApiDetailPayloadResponse getAll(String germplasmPUI, String germplasmDbId, String germplasmName,
-                                             String commonCropName, int page, int pageSize) {
+    public BrApiDetailResponse getAll(String germplasmPUI, String germplasmDbId, String germplasmName,
+                                      String commonCropName, int page, int pageSize) {
         List<Germplasm> germplasms = getGermplasmFromValues(values);
 
         if (isParameterPresent(germplasmPUI)) {
@@ -48,7 +48,7 @@ public class GermplasmDaoImpl implements GermplasmDao {
         int toIndex = PaginationUtils.getToIndex(germplasms.size(), page, pageSize);
         germplasms = germplasms.subList(fromIndex, toIndex);
 
-        return new BrApiDetailPayloadResponse(germplasms, paginationInfo);
+        return new BrApiDetailResponse(germplasms, paginationInfo);
     }
 
     private List<Germplasm> getGermplasmFromValues(List<Value> values) {

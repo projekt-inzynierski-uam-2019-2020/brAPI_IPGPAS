@@ -1,6 +1,6 @@
 package org.brapi_igpas.brapi.calls.study.studies;
 
-import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
+import org.brapi_igpas.brapi.BrApiDetailResponse;
 import org.brapi_igpas.brapi.exceptions.InvalidNumericalParameterValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class StudyController {
     @GetMapping("/studies")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    BrApiDetailPayloadResponse getAll(
+    BrApiDetailResponse getAll(
             @RequestParam(value = "commonCropName", required = false) final String commonCropName,
             @RequestParam(value = "studyTypeDbId", required = false) final String studyTypeDbId,
             @RequestParam(value = "programDbId", required = false) final String programDbId,

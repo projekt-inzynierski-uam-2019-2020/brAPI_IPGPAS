@@ -1,6 +1,6 @@
 package org.brapi_igpas.brapi.calls.study.studies;
 
-import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
+import org.brapi_igpas.brapi.BrApiDetailResponse;
 import org.brapi_igpas.brapi.PaginationUtils;
 import org.brapi_igpas.brapi.calls.crops.CommoncropnamesDao;
 import org.brapi_igpas.brapi.calls.study.AdditionalInfoMapper;
@@ -47,10 +47,10 @@ public class StudyDaoImpl implements StudyDao {
         this.additionalInfoMapper = additionalInfoMapper;
     }
 
-    public BrApiDetailPayloadResponse getAll(String commonCropName, String studyTypeDbId, String programDbId,
-                                             String locationDbId, String seasonDbId, String trialDbId,
-                                             String studyDbId, String active, String sortBy,
-                                             String sortOrder, int page, int pageSize) {
+    public BrApiDetailResponse getAll(String commonCropName, String studyTypeDbId, String programDbId,
+                                      String locationDbId, String seasonDbId, String trialDbId,
+                                      String studyDbId, String active, String sortBy,
+                                      String sortOrder, int page, int pageSize) {
         List<DbStudy> dbStudies = (List<DbStudy>) studiesRepository.findAll();
 
         List<Study> studies = getStudiesFromDbStudies(dbStudies);
@@ -102,7 +102,7 @@ public class StudyDaoImpl implements StudyDao {
         int toIndex = PaginationUtils.getToIndex(studies.size(), page, pageSize);
         studies = studies.subList(fromIndex, toIndex);
 
-        return new BrApiDetailPayloadResponse(studies, paginationInfo);
+        return new BrApiDetailResponse(studies, paginationInfo);
     }
 
     private List<Study> getStudiesFromDbStudies(List<DbStudy> dbStudies) {

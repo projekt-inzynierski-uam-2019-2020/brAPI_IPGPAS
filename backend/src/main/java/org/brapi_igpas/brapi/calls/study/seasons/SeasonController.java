@@ -1,6 +1,6 @@
 package org.brapi_igpas.brapi.calls.study.seasons;
 
-import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
+import org.brapi_igpas.brapi.BrApiDetailResponse;
 import org.brapi_igpas.brapi.exceptions.InvalidNumericalParameterValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class SeasonController {
     @GetMapping("/seasons")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    BrApiDetailPayloadResponse getAll(
+    BrApiDetailResponse getAll(
             @RequestParam(value = "seasonDbId", required = false) final String seasonDbId,
             @RequestParam(value = "season", required = false) final String season,
             @RequestParam(value = "year", required = false) final String year,

@@ -1,6 +1,6 @@
 package org.brapi_igpas.brapi.calls.crops;
 
-import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
+import org.brapi_igpas.brapi.BrApiDetailResponse;
 import org.brapi_igpas.brapi.PaginationUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +41,7 @@ public class CommoncropnamesControllerTest {
         List<String> commoncropnames = new ArrayList<>(Arrays.asList("Lorem", "Ipsum"));
 
         when(commoncropnamesDao.getAll(page, pageSize))
-                .thenReturn(new BrApiDetailPayloadResponse(commoncropnames, PaginationUtils.getPaginationInfo(commoncropnames.size(), page, pageSize)));
+                .thenReturn(new BrApiDetailResponse(commoncropnames, PaginationUtils.getPaginationInfo(commoncropnames.size(), page, pageSize)));
 
         this.mockMvc.perform(get("/brapi/v1/commoncropnames"))
                 .andExpect(status().isOk())

@@ -1,6 +1,6 @@
 package org.brapi_igpas.brapi.calls.germplasm.germplasm;
 
-import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
+import org.brapi_igpas.brapi.BrApiDetailResponse;
 import org.brapi_igpas.brapi.exceptions.InvalidNumericalParameterValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class GermplasmController {
     @GetMapping("/germplasm")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    BrApiDetailPayloadResponse getAll(
+    BrApiDetailResponse getAll(
             @RequestParam(value = "germplasmPUI", required = false) final String germplasmPUI,
             @RequestParam(value = "germplasmDbId", required = false) final String germplasmDbId,
             @RequestParam(value = "germplasmName", required = false) final String germplasmName,

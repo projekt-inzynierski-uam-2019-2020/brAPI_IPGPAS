@@ -1,6 +1,6 @@
 package org.brapi_igpas.brapi.calls.calls;
 
-import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
+import org.brapi_igpas.brapi.BrApiDetailResponse;
 import org.brapi_igpas.brapi.exceptions.InvalidNumericalParameterValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ public class CallController {
     @GetMapping("/calls")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    BrApiDetailPayloadResponse getAll(
+    BrApiDetailResponse getAll(
             @RequestParam(value = "dataType", required = false) final String dataType,
             @RequestParam(value = "page", defaultValue = "0") final int page,
             @RequestParam(value = "pageSize", defaultValue = "1000") final int pageSize) {

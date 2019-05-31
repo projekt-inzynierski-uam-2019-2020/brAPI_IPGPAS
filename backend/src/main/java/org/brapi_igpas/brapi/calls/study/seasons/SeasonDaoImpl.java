@@ -1,6 +1,6 @@
 package org.brapi_igpas.brapi.calls.study.seasons;
 
-import org.brapi_igpas.brapi.BrApiDetailPayloadResponse;
+import org.brapi_igpas.brapi.BrApiDetailResponse;
 import org.brapi_igpas.brapi.PaginationUtils;
 import org.brapi_igpas.brapi.metadata.Pagination;
 import org.brapi_igpas.igpas.entity.Value;
@@ -29,19 +29,19 @@ public class SeasonDaoImpl implements SeasonDao{
         return getSeasonsFromValues(valuesWithStudyId);
     }
 
-    public BrApiDetailPayloadResponse getAll(String seasonDbId, String season, String year, int page, int pageSize) {
+    public BrApiDetailResponse getAll(String seasonDbId, String season, String year, int page, int pageSize) {
         List<Season> seasons = getSeasonsFromValues(values);
 
         if (isParameterPresent(seasonDbId)) {
-            seasons = getSeasonWithSeasonDbId(seasons, seasonDbId);
+            seasons = getSeasonsWithSeasonDbId(seasons, seasonDbId);
         }
 
         if (isParameterPresent(season)) {
-            seasons = getSeasonWithSeasonName(seasons, season);
+            seasons = getSeasonsWithSeasonName(seasons, season);
         }
 
         if (isParameterPresent(year)) {
-            seasons = getSeasonWithYear(seasons, year);
+            seasons = getSeasonsWithYear(seasons, year);
         }
 
         Pagination paginationInfo = PaginationUtils.getPaginationInfo(seasons.size(), page, pageSize);
@@ -49,7 +49,7 @@ public class SeasonDaoImpl implements SeasonDao{
         int toIndex = PaginationUtils.getToIndex(seasons.size(), page, pageSize);
         seasons = seasons.subList(fromIndex, toIndex);
 
-        return new BrApiDetailPayloadResponse(seasons, paginationInfo);
+        return new BrApiDetailResponse(seasons, paginationInfo);
     }
 
     private List<Season> getSeasonsFromValues(List<Value> values) {
@@ -66,17 +66,17 @@ public class SeasonDaoImpl implements SeasonDao{
         return seasons;
     }
 
-    private List<Season> getSeasonWithSeasonDbId(List<Season> seasons, String seasonDbId) {
+    private List<Season> getSeasonsWithSeasonDbId(List<Season> seasons, String seasonDbId) {
         return seasons.stream().filter(s -> s.getSeasonDbId() != null && s.getSeasonDbId().equals(seasonDbId))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private List<Season> getSeasonWithSeasonName(List<Season> seasons, String seasonName) {
+    private List<Season> getSeasonsWithSeasonName(List<Season> seasons, String seasonName) {
         return seasons.stream().filter(s -> s.getSeason() != null && s.getSeason().equals(seasonName))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private List<Season> getSeasonWithYear(List<Season> seasons, String year) {
+    private List<Season> getSeasonsWithYear(List<Season> seasons, String year) {
         return seasons.stream().filter(s -> s.getYear() != null && s.getYear().equals(year))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
