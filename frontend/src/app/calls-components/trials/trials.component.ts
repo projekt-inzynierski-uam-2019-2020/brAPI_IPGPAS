@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BrApiDetailPayloadResponse} from '../../calls/BrApiDetailPayloadResponse';
 import {CallsService} from '../../calls/calls.service';
 import {Chart} from 'chart.js';
+import {Server} from '../../calls/server';
 
 @Component({
   selector: 'app-trials',
@@ -22,7 +23,7 @@ export class TrialsComponent implements OnInit {
   arrayOfRgbaBorder: string[] = [];
   canvasShow = false;
 
-  constructor(private callService: CallsService) {
+  constructor(private callService: CallsService,  private server: Server) {
   }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class TrialsComponent implements OnInit {
 
 
   getSelectedCall() {
-    return this.callService.getSelectedCall('trials')
+    return this.callService.getSelectedCall(this.server.serverName + 'studies')
       .subscribe(
         call => {
           this.brApiDetailPayloadResponse = call;

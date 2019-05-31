@@ -2,11 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {CallsService} from '../../calls/calls.service';
 import {BrApiDetailPayloadResponse} from '../../calls/BrApiDetailPayloadResponse';
 import {Chart} from 'chart.js';
+import {Server} from '../../calls/server';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-study',
   templateUrl: './study.component.html',
-  styleUrls: ['./study.component.css'],
+  styleUrls: ['./study.component.css']
 
 })
 export class StudyComponent implements OnInit {
@@ -22,8 +24,9 @@ export class StudyComponent implements OnInit {
   backgroundBorderChartColor = [];
   arrayOfRgba: string[] = [];
   arrayOfRgbaBorder: string[] = [];
+  private messageSubscription: Subscription;;
 
-  constructor(private callsService: CallsService) {
+  constructor(private callsService: CallsService, private server: Server) {
   }
 
   ngOnInit() {
@@ -31,7 +34,7 @@ export class StudyComponent implements OnInit {
   }
 
   getSelectedCall() {
-    return this.callsService.getSelectedCall('studies')
+    return this.callsService.getSelectedCall(this.server.serverName + 'studies')
       .subscribe(
         calls => {
           this.brApiDetailPayloadResponse = calls;
