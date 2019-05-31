@@ -15,6 +15,7 @@ import {ServerPageComponent} from './server-page/server-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import { StudyComponent } from './calls-components/study/study.component';
 import { TrialsComponent} from './calls-components/trials/trials.component';
+import {Server} from './calls/server';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { TrialsComponent} from './calls-components/trials/trials.component';
     BrowserModule,
 
   ],
-  providers: [],
+  providers: [Server],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
