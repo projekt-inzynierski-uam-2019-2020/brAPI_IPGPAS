@@ -12,10 +12,9 @@ export class CallsService {
   constructor(private http: HttpClient) {
   }
 
-  private url = 'https://test-server.brapi.org/brapi/v1';
 
   public getSelectedCall(selectedItem: string) {
-    return this.http.get<BrApiDetailPayloadResponse>(this.url + '/' + selectedItem);
+    return this.http.get<BrApiDetailPayloadResponse>(selectedItem);
   }
 
 

@@ -26,6 +26,7 @@ section .container {
 section .container h1 {
   display: flex;
   justify-content: center;
+  padding-bottom: 50px;
   text-align: center;
   margin-left: 240px;
   font-family: "Roboto", sans-serif;
@@ -37,10 +38,10 @@ section .container button {
   justify-content: center;
   text-align: center;
   width: 160px;
+  margin-bottom: 115px;
   height: 42px;
   border-radius: 20px;
   margin-left: 240px;
-  margin-top: 50px;
   border: none;
   background: rgba(79, 160, 151, 0.8);
   color: white;
@@ -98,7 +99,6 @@ section .container .tracking-in-expand {
     margin-left: 0px;
   }
   section .container button {
-    margin-top: 20px;
     margin-left: 0px;
   }
 }
