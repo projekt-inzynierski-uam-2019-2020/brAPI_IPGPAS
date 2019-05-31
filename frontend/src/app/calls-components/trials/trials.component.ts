@@ -83,7 +83,7 @@ export class TrialsComponent implements OnInit {
       data: {
         labels: this.trialName,
         datasets: [{
-          label: '# of Trials',
+          label: '# of Items',
           data: this.sumOfTrialNames,
           backgroundColor: this.arrayOfRgba,
           borderColor: this.arrayOfRgbaBorder,
@@ -93,6 +93,9 @@ export class TrialsComponent implements OnInit {
       options: {
         title: {
           text: '# of TrialName in Trials',
+          fontFamily: 'Verdana',
+          fontSize: 15,
+          fontStyle: 'normal',
           display: true
         },
         scales: {
@@ -112,7 +115,7 @@ export class TrialsComponent implements OnInit {
       data: {
         labels: this.trialName,
         datasets: [{
-          label: 'Number of Trials',
+          label: '# of Items',
           data: this.sumOfTrialNames,
           fill: false,
           lineTension: 0.2,
@@ -123,6 +126,9 @@ export class TrialsComponent implements OnInit {
       options: {
         title: {
           text: '# of TrialName in Trials',
+          fontFamily: 'Verdana',
+          fontSize: 15,
+          fontStyle: 'normal',
           display: true
         },
         scales: {

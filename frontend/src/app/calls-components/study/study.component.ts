@@ -83,7 +83,7 @@ export class StudyComponent implements OnInit {
       data: {
         labels: this.cropNames,
         datasets: [{
-          label: '# of Votes',
+          label: '# of Items',
           data: this.sumOfCropNames,
           backgroundColor: this.arrayOfRgba,
           borderColor: this.arrayOfRgbaBorder,
@@ -93,6 +93,9 @@ export class StudyComponent implements OnInit {
       options: {
         title: {
           text: '# of CommonCropName in Studies',
+          fontFamily: 'Verdana',
+          fontSize: 15,
+          fontStyle: 'normal',
           display: true
         },
         scales: {
@@ -112,7 +115,7 @@ export class StudyComponent implements OnInit {
       data: {
         labels: this.cropNames,
         datasets: [{
-          label: 'Number of Items',
+          label: '# of Items',
           data: this.sumOfCropNames,
           fill: false,
           lineTension: 0.2,
@@ -123,6 +126,9 @@ export class StudyComponent implements OnInit {
       options: {
         title: {
           text: '# of CommonCropName in Studies',
+          fontFamily: 'Verdana',
+          fontSize: 15,
+          fontStyle: 'normal',
           display: true
         },
         scales: {
