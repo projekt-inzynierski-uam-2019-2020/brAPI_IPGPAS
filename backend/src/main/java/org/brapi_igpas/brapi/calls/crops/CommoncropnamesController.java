@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/brapi/v1")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CommoncropnamesController {
-    private final CommoncropnamesDao commoncropnamesDao;
+    private final CommoncropnamesService commoncropnamesService;
 
-    public CommoncropnamesController(CommoncropnamesDao commoncropnamesDao) {
-        this.commoncropnamesDao = commoncropnamesDao;
+    public CommoncropnamesController(CommoncropnamesService commoncropnamesService) {
+        this.commoncropnamesService = commoncropnamesService;
     }
 
     @GetMapping("/commoncropnames")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    BrApiDetailResponse getAll(
+    BrApiDetailResponse getBrApiDetailResponse(
             @RequestParam(value = "page", defaultValue = "0") final int page,
             @RequestParam(value = "pageSize", defaultValue = "1000") final int pageSize) {
         if (page < 0) {
@@ -28,6 +28,6 @@ public class CommoncropnamesController {
         if (pageSize <= 0) {
             throw new InvalidNumericalParameterValueException("pageSize");
         }
-        return commoncropnamesDao.getAll(page, pageSize);
+        return commoncropnamesService.getBrApiDetailResponse(page, pageSize);
     }
 }
