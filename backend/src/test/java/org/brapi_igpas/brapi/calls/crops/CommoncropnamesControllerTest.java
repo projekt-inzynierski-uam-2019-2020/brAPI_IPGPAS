@@ -32,7 +32,7 @@ public class CommoncropnamesControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private CommoncropnamesDao commoncropnamesDao;
+    private CommoncropnamesService commoncropnamesService;
 
     @Test
     public void getAllShouldReturnBrApiDetailPayloadResponseWithCommoncropnamesFromDao() throws Exception {
@@ -40,7 +40,7 @@ public class CommoncropnamesControllerTest {
 
         List<String> commoncropnames = new ArrayList<>(Arrays.asList("Lorem", "Ipsum"));
 
-        when(commoncropnamesDao.getAll(page, pageSize))
+        when(commoncropnamesService.getBrApiDetailResponse(page, pageSize))
                 .thenReturn(new BrApiDetailResponse(commoncropnames, PaginationUtils.getPaginationInfo(commoncropnames.size(), page, pageSize)));
 
         this.mockMvc.perform(get("/brapi/v1/commoncropnames"))
@@ -48,8 +48,8 @@ public class CommoncropnamesControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().string(containsString(expectedResultData)));
 
-        verify(commoncropnamesDao, times(1)).getAll(page, pageSize);
-        verifyNoMoreInteractions(commoncropnamesDao);
+        verify(commoncropnamesService, times(1)).getBrApiDetailResponse(page, pageSize);
+        verifyNoMoreInteractions(commoncropnamesService);
     }
 
     @Test
