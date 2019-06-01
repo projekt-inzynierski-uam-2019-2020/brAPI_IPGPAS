@@ -1,4 +1,4 @@
-package org.brapi_igpas.brapi;
+package org.brapi_igpas.brapi.utils;
 
 public class FilterUtils {
     public static boolean isParameterPresent(String parameter){

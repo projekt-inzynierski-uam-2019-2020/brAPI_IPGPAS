@@ -1,7 +1,7 @@
 package org.brapi_igpas.brapi.calls.study.studies;
 
 import org.brapi_igpas.brapi.BrApiDetailResponse;
-import org.brapi_igpas.brapi.PaginationUtils;
+import org.brapi_igpas.brapi.utils.PaginationUtils;
 import org.brapi_igpas.brapi.calls.crops.CommoncropnamesDao;
 import org.brapi_igpas.brapi.calls.study.AdditionalInfoMapper;
 import org.brapi_igpas.brapi.calls.study.seasons.SeasonDao;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.naturalOrder;
 import static java.util.Comparator.nullsFirst;
-import static org.brapi_igpas.brapi.FilterUtils.isParameterPresent;
+import static org.brapi_igpas.brapi.utils.FilterUtils.isParameterPresent;
 
 @Repository
 public class StudyDaoImpl implements StudyDao {

@@ -1,7 +1,7 @@
 package org.brapi_igpas.brapi.calls.crops;
 
 import org.brapi_igpas.brapi.BrApiDetailResponse;
-import org.brapi_igpas.brapi.PaginationUtils;
+import org.brapi_igpas.brapi.utils.PaginationUtils;
 import org.brapi_igpas.brapi.metadata.Pagination;
 import org.brapi_igpas.igpas.entity.Value;
 import org.brapi_igpas.igpas.service.DbValuesFacade;

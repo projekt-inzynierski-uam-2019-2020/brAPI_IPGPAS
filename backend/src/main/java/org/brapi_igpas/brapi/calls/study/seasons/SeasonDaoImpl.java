@@ -1,7 +1,7 @@
 package org.brapi_igpas.brapi.calls.study.seasons;
 
 import org.brapi_igpas.brapi.BrApiDetailResponse;
-import org.brapi_igpas.brapi.PaginationUtils;
+import org.brapi_igpas.brapi.utils.PaginationUtils;
 import org.brapi_igpas.brapi.metadata.Pagination;
 import org.brapi_igpas.igpas.entity.Value;
 import org.brapi_igpas.igpas.service.DbValuesFacade;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.brapi_igpas.brapi.FilterUtils.isParameterPresent;
+import static org.brapi_igpas.brapi.utils.FilterUtils.isParameterPresent;
 
 @Repository
 public class SeasonDaoImpl implements SeasonDao{

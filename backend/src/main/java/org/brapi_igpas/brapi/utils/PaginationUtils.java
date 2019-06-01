@@ -1,4 +1,4 @@
-package org.brapi_igpas.brapi;
+package org.brapi_igpas.brapi.utils;
 
 import org.brapi_igpas.brapi.metadata.Pagination;
 
@@ -31,6 +31,9 @@ public class PaginationUtils {
 
     private static int getTotalPages(int elementsSize, int pageSize) {
         final int remainderPage = 1;
+        if (elementsSize == 0) {
+            return remainderPage;
+        }
         return elementsSize / pageSize + ((elementsSize % pageSize == 0) ? 0 : remainderPage);
     }
 }

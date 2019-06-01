@@ -1,7 +1,7 @@
 package org.brapi_igpas.brapi.calls.calls;
 
 import org.brapi_igpas.brapi.BrApiDetailResponse;
-import org.brapi_igpas.brapi.PaginationUtils;
+import org.brapi_igpas.brapi.utils.PaginationUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
