@@ -57,6 +57,38 @@ export class ChartService {
       }
     });
   }
-  
+
+  lineChart(labels: string[], data: number[]) {
+    this.LineChart = new Chart('lineChart', {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: '# of Items',
+          data: data,
+          fill: false,
+          lineTension: 0.2,
+          borderColor: 'red',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        title: {
+          text: '# of CommonCropName in Studies',
+          fontFamily: 'Verdana',
+          fontSize: 15,
+          fontStyle: 'normal',
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }
 
 }
