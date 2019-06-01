@@ -148,7 +148,7 @@ public class StudyDaoImpl implements StudyDao {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Growth facility");
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> study.setStudyType(v.getValue()));
         });
     }
@@ -157,7 +157,7 @@ public class StudyDaoImpl implements StudyDao {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Growth facility");
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> study.setStudyTypeDbName(v.getValue()));
         });
     }
@@ -166,7 +166,7 @@ public class StudyDaoImpl implements StudyDao {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Geographic location");
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> study.setLocationName(v.getValue()));
         });
     }
@@ -175,7 +175,7 @@ public class StudyDaoImpl implements StudyDao {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Study start");
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> study.setStartDate(v.getValue()));
         });
     }
@@ -183,7 +183,7 @@ public class StudyDaoImpl implements StudyDao {
     private void setCommonCropNamesForStudies(List<Study> studies) {
         studies.forEach(s -> {
             long studyId = Long.parseLong(s.getStudyDbId());
-            s.setCommonCropName(commoncropnamesDao.getCommonCropNameForStudyWithStudyId(studyId));
+            s.setCommonCropName(commoncropnamesDao.getCommonCropNameWithStudyId(studyId));
         });
     }
 

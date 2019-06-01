@@ -33,7 +33,7 @@ public class DbValuesFacade {
         return Collections.emptyList();
     }
 
-    public Optional<Value> getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(long studyId, List<Value> valuesWithAttributeDisplayedName) {
+    public Optional<Value> getValueWithStudyIdFromValuesWithAttributeDisplayedName(long studyId, List<Value> valuesWithAttributeDisplayedName) {
         return valuesWithAttributeDisplayedName.stream().filter(v -> v.getStudyId() == studyId).findFirst();
     }
 

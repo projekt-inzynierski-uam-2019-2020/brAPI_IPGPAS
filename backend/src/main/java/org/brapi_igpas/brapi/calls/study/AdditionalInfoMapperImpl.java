@@ -47,7 +47,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setpH(v.getValue()));
         });
     }
@@ -57,7 +57,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setVolume(v.getValue()));
         });
     }
@@ -67,7 +67,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setPlotSize(v.getValue()));
         });
     }
@@ -77,7 +77,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setAirHumidity(v.getValue()));
         });
     }
@@ -87,7 +87,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setSowingDensity(v.getValue()));
         });
     }
@@ -97,7 +97,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setFactor(v.getValue()));
         });
     }
@@ -107,7 +107,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setTypeOfFertiliser(v.getValue()));
         });
     }
@@ -117,7 +117,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setAmountOfFertiliser(v.getValue()));
         });
     }
@@ -127,7 +127,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setFrequency(v.getValue()));
         });
     }
@@ -137,7 +137,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setAssayType(v.getValue()));
         });
     }
@@ -147,7 +147,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setContainerType(v.getValue()));
         });
     }
@@ -157,7 +157,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setDayTemperature(v.getValue()));
         });
     }
@@ -167,7 +167,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setIrrigationType(v.getValue()));
         });
     }
@@ -177,7 +177,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setCharacteristics(v.getValue()));
         });
     }
@@ -187,7 +187,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setContainerVolume(v.getValue()));
         });
     }
@@ -197,7 +197,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setDailyPhotonFlux(v.getValue()));
         });
     }
@@ -207,7 +207,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setNightTemperature(v.getValue()));
         });
     }
@@ -217,7 +217,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setExperimentalUnit(v.getValue()));
         });
     }
@@ -227,7 +227,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setContainerDimension(v.getValue()));
         });
     }
@@ -237,7 +237,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setLengthOfLightPeriod(v.getValue()));
         });
     }
@@ -247,7 +247,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setnBeforeFertilisation(v.getValue()));
         });
     }
@@ -257,7 +257,7 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
         studies.forEach(study -> {
             long studyId = Long.parseLong(study.getStudyDbId());
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getFirstValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
+            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
                     .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setNumberOfPlantsPerContainer(v.getValue()));
         });
     }
