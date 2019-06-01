@@ -3,11 +3,13 @@ import {BrApiDetailPayloadResponse} from '../../calls/BrApiDetailPayloadResponse
 import {CallsService} from '../../calls/calls.service';
 import {Chart} from 'chart.js';
 import {Server} from '../../calls/server';
+import {ChartService} from '../../services/chart-service/chart-service';
 
 @Component({
   selector: 'app-trials',
   templateUrl: './trials.component.html',
-  styleUrls: ['./trials.component.css']
+  styleUrls: ['./trials.component.css'],
+  providers: [ChartService]
 })
 export class TrialsComponent implements OnInit {
   brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
@@ -15,15 +17,9 @@ export class TrialsComponent implements OnInit {
   trialName: string[] = [];
   sumOfTrialNames: number[] = [];
   marked: false;
-  LineChart = [];
-  BarChart = [];
-  backgroundChartColor = [];
-  backgroundBorderChartColor = [];
-  arrayOfRgba: string[] = [];
-  arrayOfRgbaBorder: string[] = [];
   canvasShow = false;
 
-  constructor(private callService: CallsService,  private server: Server) {
+  constructor(private callService: CallsService,  private server: Server, private chartService: ChartService) {
   }
 
   ngOnInit() {
@@ -66,80 +62,13 @@ export class TrialsComponent implements OnInit {
     return this.sumOfTrialNames;
   }
 
-  columnChart() {
-    this.backgroundChartColor = ['rgba(255, 99, 132, 0.3)', 'rgba(54, 162, 235, 0.3)', 'rgba(255, 206, 86, 0.3)', 'rgba(29, 255, 140, 0.3)', 'rgba(215, 117, 44, 0.3)', 'rgba(7, 19, 157, 0.3)', 'rgba(239, 5, 0, 0.3)', 'rgba(243, 216, 31, 0.3)', 'rgba(200, 145, 31, 0.3)', 'rgba(215, 117, 44, 0.3)'];
-    this.backgroundBorderChartColor = [' rgba(255, 99, 132, 1)', 'rgba(54, 162, 235,1)', 'rgba(255, 206, 86, 1)', 'rgba(29, 255, 140, 1)', 'rgba(215, 117, 44, 1)', 'rgba(7, 19, 157, 1)', 'rgba(239, 5, 0, 1)', 'rgba(243, 216, 31, 1)', 'gba(200, 145, 31, 1)', 'rgba(215, 117, 44, 1)'];
-    for (let i = 0; i < this.trialName.length; i++) {
-      if (i > this.backgroundChartColor.length) {
-        this.arrayOfRgba[i] = this.backgroundChartColor[i % 10];
-        this.arrayOfRgbaBorder[i] = this.backgroundBorderChartColor[i % 10];
-      } else {
-        this.arrayOfRgba[i] = this.backgroundChartColor[i];
-        this.arrayOfRgbaBorder[i] = this.backgroundBorderChartColor[this.arrayOfRgba[i]];
-      }
-    }
-    this.BarChart = new Chart('barChart', {
-      type: 'bar',
-      data: {
-        labels: this.trialName,
-        datasets: [{
-          label: '# of Items',
-          data: this.sumOfTrialNames,
-          backgroundColor: this.arrayOfRgba,
-          borderColor: this.arrayOfRgbaBorder,
-          borderWidth: 2
-        }]
-      },
-      options: {
-        title: {
-          text: '# of TrialName in Trials',
-          fontFamily: 'Verdana',
-          fontSize: 15,
-          fontStyle: 'normal',
-          display: true
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-    });
+  showColumnChart() {
+    this.chartService.chartColumnStyle(this.trialName);
+    this.chartService.columnChart(this.trialName, this.sumOfTrialNames, '# of TrialName in Trials');
   }
 
-  lineChart() {
-    this.LineChart = new Chart('lineChart', {
-      type: 'line',
-      data: {
-        labels: this.trialName,
-        datasets: [{
-          label: '# of Items',
-          data: this.sumOfTrialNames,
-          fill: false,
-          lineTension: 0.2,
-          borderColor: 'red',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        title: {
-          text: '# of TrialName in Trials',
-          fontFamily: 'Verdana',
-          fontSize: 15,
-          fontStyle: 'normal',
-          display: true
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-    });
+  showLineChart() {
+    this.chartService.lineChart(this.trialName, this.sumOfTrialNames, '# of TrialName in Trials');
   }
 
   getCallLength() {
@@ -153,8 +82,8 @@ export class TrialsComponent implements OnInit {
 
   toggleVisibility(e) {
     this.marked = e.target.checked;
-    this.lineChart();
-    this.columnChart();
+    this.showLineChart()
+    this.showColumnChart()
     if (!this.marked) {
       this.canvasShow = false;
     }
