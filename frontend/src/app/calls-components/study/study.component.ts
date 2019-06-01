@@ -64,11 +64,11 @@ export class StudyComponent implements OnInit {
 
   showColumnChart() {
     this.chartService.chartColumnStyle(this.cropNames);
-    this.chartService.columnChart(this.cropNames, this.sumOfCropNames);
+    this.chartService.columnChart(this.cropNames, this.sumOfCropNames, '# of CommonCropName in Studies');
   }
 
   showLineChart() {
-    this.chartService.lineChart(this.cropNames, this.sumOfCropNames);
+    this.chartService.lineChart(this.cropNames, this.sumOfCropNames, '# of CommonCropName in Studies');
   }
 
   getCallsLength() {

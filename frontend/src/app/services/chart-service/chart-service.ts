@@ -25,7 +25,7 @@ export class ChartService {
     }
   }
 
-  columnChart(labels: string[], data: number[]) {
+  columnChart(labels: string[], data: number[], text: string) {
 
     this.BarChart = new Chart('barChart', {
       type: 'bar',
@@ -41,7 +41,7 @@ export class ChartService {
       },
       options: {
         title: {
-          text: '# of CommonCropName in Studies',
+          text: text,
           fontFamily: 'Verdana',
           fontSize: 15,
           fontStyle: 'normal',
@@ -58,7 +58,7 @@ export class ChartService {
     });
   }
 
-  lineChart(labels: string[], data: number[]) {
+  lineChart(labels: string[], data: number[], text: string) {
     this.LineChart = new Chart('lineChart', {
       type: 'line',
       data: {
@@ -74,7 +74,7 @@ export class ChartService {
       },
       options: {
         title: {
-          text: '# of CommonCropName in Studies',
+          text: text,
           fontFamily: 'Verdana',
           fontSize: 15,
           fontStyle: 'normal',
