@@ -2,6 +2,7 @@ package org.brapi_igpas.brapi.metadata;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Metadata {
     private List<String> datafiles;
@@ -14,7 +15,9 @@ public class Metadata {
         status = new ArrayList<>();
     }
 
-    public List<String> getDatafiles() { return datafiles; }
+    public List<String> getDatafiles() {
+        return datafiles;
+    }
 
     public void setDatafiles(List<String> datafiles) {
         this.datafiles = datafiles;
@@ -34,5 +37,21 @@ public class Metadata {
 
     public void setStatus(List<Status> status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Metadata metadata = (Metadata) o;
+        return Objects.equals(datafiles, metadata.datafiles) &&
+                Objects.equals(pagination, metadata.pagination) &&
+                Objects.equals(status, metadata.status);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(datafiles, pagination, status);
     }
 }
