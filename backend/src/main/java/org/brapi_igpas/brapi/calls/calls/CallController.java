@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/brapi/v1")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CallController {
-    private final CallDao callDao;
+    private final CallService callService;
 
-    public CallController(CallDao callDao) {
-        this.callDao = callDao;
+    public CallController(CallService callService) {
+        this.callService = callService;
     }
 
     @GetMapping("/calls")
@@ -29,6 +29,6 @@ public class CallController {
         if (pageSize <= 0) {
             throw new InvalidNumericalParameterValueException("pageSize");
         }
-        return callDao.getAll(dataType, page, pageSize);
+        return callService.getBrApiDetailResponse(dataType, page, pageSize);
     }
 }
