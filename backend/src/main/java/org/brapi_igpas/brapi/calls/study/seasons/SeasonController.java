@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/brapi/v1")
 @CrossOrigin(origins = "http://localhost:4200")
 public class SeasonController {
-    private final SeasonDao seasonDao;
+    private final SeasonService seasonService;
 
-    public SeasonController(SeasonDao seasonDao) {
-        this.seasonDao = seasonDao;
+    public SeasonController(SeasonService seasonService) {
+        this.seasonService = seasonService;
     }
 
     @GetMapping("/seasons")
@@ -31,6 +31,6 @@ public class SeasonController {
         if (pageSize <= 0) {
             throw new InvalidNumericalParameterValueException("pageSize");
         }
-        return seasonDao.getAll(seasonDbId, season, year, page, pageSize);
+        return seasonService.getBrApiDetailResponse(seasonDbId, season, year, page, pageSize);
     }
 }
