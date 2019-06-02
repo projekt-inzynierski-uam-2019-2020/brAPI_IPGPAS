@@ -19,7 +19,7 @@ public class StudyController {
     @GetMapping("/studies")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    BrApiDetailResponse getAll(
+    BrApiDetailResponse getBrApiDetailResponse(
             @RequestParam(value = "commonCropName", required = false) final String commonCropName,
             @RequestParam(value = "studyTypeDbId", required = false) final String studyTypeDbId,
             @RequestParam(value = "programDbId", required = false) final String programDbId,

@@ -19,7 +19,7 @@ public class CallController {
     @GetMapping("/calls")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    BrApiDetailResponse getAll(
+    BrApiDetailResponse getBrApiDetailResponse(
             @RequestParam(value = "dataType", required = false) final String dataType,
             @RequestParam(value = "page", defaultValue = "0") final int page,
             @RequestParam(value = "pageSize", defaultValue = "1000") final int pageSize) {

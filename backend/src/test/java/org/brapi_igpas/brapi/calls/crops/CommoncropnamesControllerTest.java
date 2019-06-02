@@ -35,8 +35,8 @@ public class CommoncropnamesControllerTest {
     private CommoncropnamesService commoncropnamesService;
 
     @Test
-    public void getAllShouldReturnBrApiDetailPayloadResponseWithCommoncropnamesFromDao() throws Exception {
-        final String expectedResultData = "\"data\":[\"Lorem\",\"Ipsum\"]}}";
+    public void getBrApiDetailResponseShouldReturnBrApiDetailPayloadResponseWithCommoncropnamesFromService() throws Exception {
+        final String expectedResultData = "\"data\":[\"Lorem\",\"Ipsum\"]";
 
         List<String> commoncropnames = new ArrayList<>(Arrays.asList("Lorem", "Ipsum"));
 
@@ -53,7 +53,7 @@ public class CommoncropnamesControllerTest {
     }
 
     @Test
-    public void getAllShouldReturnInvalidParameterFormatStatusWhenPageIsString() throws Exception {
+    public void getBrApiDetailResponseShouldReturnInvalidParameterFormatStatusWhenPageIsString() throws Exception {
         this.mockMvc.perform(get("/brapi/v1/commoncropnames").param("page", "Lorem ipsum"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -61,7 +61,7 @@ public class CommoncropnamesControllerTest {
     }
 
     @Test
-    public void getAllShouldReturnInvalidParameterFormatStatusWhenPageSizeIsString() throws Exception {
+    public void getBrApiDetailResponseShouldReturnInvalidParameterFormatStatusWhenPageSizeIsString() throws Exception {
         this.mockMvc.perform(get("/brapi/v1/commoncropnames").param("page", "Lorem ipsum"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -69,7 +69,7 @@ public class CommoncropnamesControllerTest {
     }
 
     @Test
-    public void getAllShouldReturnInvalidPageParameterStatusWhenPageIsNegative() throws Exception {
+    public void getBrApiDetailResponseShouldReturnInvalidPageParameterStatusWhenPageIsNegative() throws Exception {
         this.mockMvc.perform(get("/brapi/v1/commoncropnames").param("page", "-1"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -77,7 +77,7 @@ public class CommoncropnamesControllerTest {
     }
 
     @Test
-    public void getAllShouldReturnInvalidPageSizeParameterStatusWhenPageSizeIsZero() throws Exception {
+    public void getBrApiDetailResponseShouldReturnInvalidPageSizeParameterStatusWhenPageSizeIsZero() throws Exception {
         this.mockMvc.perform(get("/brapi/v1/commoncropnames").param("pageSize", "0"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -85,7 +85,7 @@ public class CommoncropnamesControllerTest {
     }
 
     @Test
-    public void getAllShouldReturnInvalidPageSizeParameterStatusWhenPageSizeIsNegative() throws Exception {
+    public void getBrApiDetailResponseShouldReturnInvalidPageSizeParameterStatusWhenPageSizeIsNegative() throws Exception {
         this.mockMvc.perform(get("/brapi/v1/commoncropnames").param("pageSize", "-1"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))

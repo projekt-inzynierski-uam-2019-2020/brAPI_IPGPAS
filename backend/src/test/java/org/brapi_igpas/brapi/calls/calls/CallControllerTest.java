@@ -36,10 +36,10 @@ public class CallControllerTest {
     private CallService callService;
 
     @Test
-    public void getAllShouldReturnBrApiDetailPayloadResponseWithCallsFromDao() throws Exception {
+    public void getBrApiDetailResponseShouldReturnBrApiDetailPayloadResponseWithCallsFromService() throws Exception {
         final String expectedResultData = "\"data\":[" +
                 "{\"call\":\"calls\",\"dataTypes\":[\"application/json\"],\"methods\":[\"GET\"],\"versions\":[\"1.3\"]}," +
-                "{\"call\":\"commoncropnames\",\"dataTypes\":[\"application/json\"],\"methods\":[\"GET\"],\"versions\":[\"1.3\"]}]}}";
+                "{\"call\":\"commoncropnames\",\"dataTypes\":[\"application/json\"],\"methods\":[\"GET\"],\"versions\":[\"1.3\"]}]";
 
         List<Call> calls = new ArrayList<>(Arrays.asList(
                 new Call("calls")
@@ -64,7 +64,7 @@ public class CallControllerTest {
     }
 
     @Test
-    public void getAllShouldReturnInvalidParameterFormatStatusWhenPageIsString() throws Exception {
+    public void getBrApiDetailResponseShouldReturnInvalidParameterFormatStatusWhenPageIsString() throws Exception {
         this.mockMvc.perform(get("/brapi/v1/calls").param("page", "Lorem ipsum"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -72,7 +72,7 @@ public class CallControllerTest {
     }
 
     @Test
-    public void getAllShouldReturnInvalidParameterFormatStatusWhenPageSizeIsString() throws Exception {
+    public void getBrApiDetailResponseShouldReturnInvalidParameterFormatStatusWhenPageSizeIsString() throws Exception {
         this.mockMvc.perform(get("/brapi/v1/calls").param("page", "Lorem ipsum"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -80,7 +80,7 @@ public class CallControllerTest {
     }
 
     @Test
-    public void getAllShouldReturnInvalidPageParameterStatusWhenPageIsNegative() throws Exception {
+    public void getBrApiDetailResponseShouldReturnInvalidPageParameterStatusWhenPageIsNegative() throws Exception {
         this.mockMvc.perform(get("/brapi/v1/calls").param("page", "-1"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -88,7 +88,7 @@ public class CallControllerTest {
     }
 
     @Test
-    public void getAllShouldReturnInvalidPageSizeParameterStatusWhenPageSizeIsZero() throws Exception {
+    public void getBrApiDetailResponseShouldReturnInvalidPageSizeParameterStatusWhenPageSizeIsZero() throws Exception {
         this.mockMvc.perform(get("/brapi/v1/calls").param("pageSize", "0"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -96,7 +96,7 @@ public class CallControllerTest {
     }
 
     @Test
-    public void getAllShouldReturnInvalidPageSizeParameterStatusWhenPageSizeIsNegative() throws Exception {
+    public void getBrApiDetailResponseShouldReturnInvalidPageSizeParameterStatusWhenPageSizeIsNegative() throws Exception {
         this.mockMvc.perform(get("/brapi/v1/calls").param("pageSize", "-1"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))

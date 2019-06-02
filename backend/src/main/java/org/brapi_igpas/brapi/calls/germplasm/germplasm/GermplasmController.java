@@ -19,7 +19,7 @@ public class GermplasmController {
     @GetMapping("/germplasm")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    BrApiDetailResponse getAll(
+    BrApiDetailResponse getBrApiDetailResponse(
             @RequestParam(value = "germplasmPUI", required = false) final String germplasmPUI,
             @RequestParam(value = "germplasmDbId", required = false) final String germplasmDbId,
             @RequestParam(value = "germplasmName", required = false) final String germplasmName,

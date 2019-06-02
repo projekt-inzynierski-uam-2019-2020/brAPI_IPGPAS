@@ -19,7 +19,7 @@ public class SeasonController {
     @GetMapping("/seasons")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody
-    BrApiDetailResponse getAll(
+    BrApiDetailResponse getBrApiDetailResponse(
             @RequestParam(value = "seasonDbId", required = false) final String seasonDbId,
             @RequestParam(value = "season", required = false) final String season,
             @RequestParam(value = "year", required = false) final String year,
