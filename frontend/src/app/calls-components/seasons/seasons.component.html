@@ -1,19 +1,19 @@
 <section>
   <button class="back" type="button" href="#" routerLink="/servers/data"><i class="fas fa-long-arrow-alt-left"></i>Back</button>
   <div class="container">
-    <h1 class="title">Study</h1>
+    <h1 class="title">Seasons</h1>
     <div class="row">
       <div class="item">
         <input class="inp-cbx" id="cbx" type="checkbox" style="display: none;" data-md-icheck (change)="toggleVisibility($event)"
                (click)="getUniqCommonCropNames()  &&  getSumOfEachCropName()"/>
         <label class="cbx" for="cbx">
           <span><svg width="12px" height="10px" viewbox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span>
-          <span>Examined Crops</span>
+          <span>Examined Years</span>
         </label>
       </div>
     </div>
     <div class="list">
-      <h2 *ngIf="marked">Crop Name</h2>
+      <h2 *ngIf="marked">Year</h2>
       <ul class="list-group" *ngIf="marked">
         <li class="list-group-item" *ngFor="let in of counter(year.length); let i = index ">{{year[i]}}</li>
       </ul>
@@ -25,6 +25,14 @@
         </td>
         <td>
           <canvas id="lineChart"></canvas>
+        </td>
+        <td>
+          <canvas baseChart
+                  [data]="pieChartData"
+                  [labels]="pieChartLabels"
+                  [chartType]="pieChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
         </td>
       </table>
     </div>
