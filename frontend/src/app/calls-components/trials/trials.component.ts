@@ -18,6 +18,9 @@ export class TrialsComponent implements OnInit {
   sumOfTrialNames: number[] = [];
   marked: false;
   canvasShow = false;
+  public pieChartLabels: string[];
+  public pieChartData: number[];
+  public pieChartType: string = 'pie';
 
   constructor(private callService: CallsService,  private server: Server, private chartService: ChartService) {
   }
@@ -71,10 +74,16 @@ export class TrialsComponent implements OnInit {
     this.chartService.lineChart(this.trialName, this.sumOfTrialNames, '# of TrialName in Trials');
   }
 
+  showPieChart() {
+    this.pieChartLabels = this.trialName;
+    this.pieChartData = this.sumOfTrialNames;
+  }
+
   getCallLength() {
     this.lengthCall = this.brApiDetailPayloadResponse.result.data.length;
     return this.lengthCall;
   }
+
 
   counter(i: number) {
     return new Array(i);
@@ -84,6 +93,7 @@ export class TrialsComponent implements OnInit {
     this.marked = e.target.checked;
     this.showLineChart()
     this.showColumnChart()
+    this.showPieChart()
     if (!this.marked) {
       this.canvasShow = false;
     }

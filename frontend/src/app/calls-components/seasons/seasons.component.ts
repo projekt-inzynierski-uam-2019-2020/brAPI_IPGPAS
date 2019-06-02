@@ -18,7 +18,6 @@ export class SeasonsComponent implements OnInit {
   sumOfYears: number[] = [];
   marked: false;
   canvasShow = false;
-
   public pieChartLabels: number[];
   public pieChartData: number[];
   public pieChartType: string = 'pie';
