@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/brapi/v1")
 @CrossOrigin(origins = "http://localhost:4200")
 public class StudyController {
-    private final StudyDao studyDao;
+    private final StudyService studyService;
 
-    public StudyController(StudyDao studyDao) {
-        this.studyDao = studyDao;
+    public StudyController(StudyService studyService) {
+        this.studyService = studyService;
     }
 
     @GetMapping("/studies")
@@ -38,7 +38,7 @@ public class StudyController {
         if (pageSize <= 0) {
             throw new InvalidNumericalParameterValueException("pageSize");
         }
-        return studyDao.getAll(commonCropName, studyTypeDbId, programDbId, locationDbId, seasonDbId, trialDbId,
+        return studyService.getBrApiDetailResponse(commonCropName, studyTypeDbId, programDbId, locationDbId, seasonDbId, trialDbId,
                 studyDbId, active, sortBy, sortOrder, page, pageSize);
     }
 }
