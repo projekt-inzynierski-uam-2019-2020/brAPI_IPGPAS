@@ -21,6 +21,9 @@ export class StudyComponent implements OnInit {
   sumOfCropNames: number[] = [];
   marked: false;
   canvasShow = false;
+  public pieChartLabels: string[];
+  public pieChartData: number[];
+  public pieChartType: string = 'pie';
 
   constructor(private callsService: CallsService, private server: Server, private chartService: ChartService) {
   }
@@ -76,6 +79,11 @@ export class StudyComponent implements OnInit {
     return this.lengthCalls;
   }
 
+  showPieChart() {
+    this.pieChartLabels = this.cropNames;
+    this.pieChartData = this.sumOfCropNames;
+  }
+
   counter(i: number) {
     return new Array(i);
   }
@@ -84,6 +92,7 @@ export class StudyComponent implements OnInit {
     this.marked = e.target.checked;
     this.showLineChart()
     this.showColumnChart()
+    this.showPieChart();
     if (!this.marked) {
       this.canvasShow = false;
     }
