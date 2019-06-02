@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/brapi/v1")
 @CrossOrigin(origins = "http://localhost:4200")
 public class GermplasmController {
-    private final GermplasmDao germplasmDao;
+    private final GermplasmService germplasmService;
 
-    public GermplasmController(GermplasmDao germplasmDao) {
-        this.germplasmDao = germplasmDao;
+    public GermplasmController(GermplasmService germplasmService) {
+        this.germplasmService = germplasmService;
     }
 
     @GetMapping("/germplasm")
@@ -32,6 +32,6 @@ public class GermplasmController {
         if (pageSize <= 0) {
             throw new InvalidNumericalParameterValueException("pageSize");
         }
-        return germplasmDao.getAll(germplasmPUI, germplasmDbId, germplasmName, commonCropName, page, pageSize);
+        return germplasmService.getBrApiDetailResponse(germplasmPUI, germplasmDbId, germplasmName, commonCropName, page, pageSize);
     }
 }

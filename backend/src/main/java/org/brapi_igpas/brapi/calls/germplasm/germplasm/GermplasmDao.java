@@ -1,8 +1,7 @@
 package org.brapi_igpas.brapi.calls.germplasm.germplasm;
 
-import org.brapi_igpas.brapi.BrApiDetailResponse;
+import java.util.List;
 
 public interface GermplasmDao {
-    BrApiDetailResponse getAll(String germplasmPUI, String germplasmDbId, String germplasmName,
-                               String commonCropName, int page, int pageSize);
+    List<Germplasm> getAll();
 }
