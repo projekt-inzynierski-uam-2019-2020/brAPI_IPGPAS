@@ -7,6 +7,7 @@ import {ServerDataComponent} from './server-data-page/server-data.component';
 import {ServerPageComponent} from './server-page/server-page.component';
 import {StudyComponent} from './calls-components/study/study.component';
 import {TrialsComponent} from './calls-components/trials/trials.component';
+import {SeasonsComponent} from './calls-components/seasons/seasons.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'databases', component: DatabasesPageComponent},
   {path: 'servers/study', component: StudyComponent},
   {path: 'servers/trials', component: TrialsComponent},
+  {path: 'servers/seasons', component: SeasonsComponent},
   {path: '', component: HomePageComponent},
 
   {path: '**', component: HomePageComponent}
