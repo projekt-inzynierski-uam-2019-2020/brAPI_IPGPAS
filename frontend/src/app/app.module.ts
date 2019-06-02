@@ -17,6 +17,7 @@ import { StudyComponent } from './calls-components/study/study.component';
 import { TrialsComponent} from './calls-components/trials/trials.component';
 import {Server} from './calls/server';
 import { SeasonsComponent } from './calls-components/seasons/seasons.component';
+import { ChartsModule } from 'ng2-charts-x';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SeasonsComponent } from './calls-components/seasons/seasons.component';
     CommonModule,
     routing,
     BrowserModule,
+    ChartsModule
 
   ],
   providers: [Server],

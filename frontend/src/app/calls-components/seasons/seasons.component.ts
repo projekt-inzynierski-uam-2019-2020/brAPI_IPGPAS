@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BrApiDetailPayloadResponse} from '../../calls/BrApiDetailPayloadResponse';
 import {CallsService} from '../../calls/calls.service';
 import {Server} from '../../calls/server';
@@ -18,6 +18,11 @@ export class SeasonsComponent implements OnInit {
   sumOfYears: number[] = [];
   marked: false;
   canvasShow = false;
+
+  public pieChartLabels: number[];
+  public pieChartData: number[];
+  public pieChartType: string = 'pie';
+
 
   constructor(private callsService: CallsService, private server: Server, private chartService: ChartService) {
   }
@@ -61,17 +66,31 @@ export class SeasonsComponent implements OnInit {
 
   showColumnChart() {
     this.chartService.chartColumnStyle(this.year);
-    this.chartService.columnChart(this.year, this.sumOfYears, '# of CommonCropName in Studies');
+    this.chartService.columnChart(this.year, this.sumOfYears, '# of Years in Seasons');
   }
 
   showLineChart() {
-    this.chartService.lineChart(this.year, this.sumOfYears, '# of CommonCropName in Studies');
+    this.chartService.lineChart(this.year, this.sumOfYears, '# of Years in Seasons');
+  }
+
+  showPieChart() {
+    this.pieChartLabels = this.year;
+    this.pieChartData = this.sumOfYears;
   }
 
   getCallsLength() {
     this.lengthCalls = this.brApiDetailPayloadResponse.result.data.length;
     return this.lengthCalls;
   }
+
+  public chartClicked(e: any): void {
+    console.log(e);
+  }
+
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
+
 
   counter(i: number) {
     return new Array(i);
@@ -81,6 +100,7 @@ export class SeasonsComponent implements OnInit {
     this.marked = e.target.checked;
     this.showLineChart();
     this.showColumnChart();
+    this.showPieChart();
     if (!this.marked) {
       this.canvasShow = false;
     }
