@@ -26,6 +26,14 @@
         <td>
           <canvas id="lineChart"></canvas>
         </td>
+        <td>
+          <canvas baseChart
+                  [data]="pieChartData"
+                  [labels]="pieChartLabels"
+                  [chartType]="pieChartType"
+                  (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+        </td>
       </table>
     </div>
   </div>
