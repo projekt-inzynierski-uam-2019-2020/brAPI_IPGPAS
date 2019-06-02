@@ -33,7 +33,7 @@ public class CallControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private CallDao callDao;
+    private CallService callService;
 
     @Test
     public void getAllShouldReturnBrApiDetailPayloadResponseWithCallsFromDao() throws Exception {
@@ -51,7 +51,7 @@ public class CallControllerTest {
                         .withMethodGet()
                         .withVersionOneThree()));
 
-        when(callDao.getAll(dataType, page, pageSize))
+        when(callService.getBrApiDetailResponse(dataType, page, pageSize))
                 .thenReturn(new BrApiDetailResponse(calls, PaginationUtils.getPaginationInfo(calls.size(), page, pageSize)));
 
         this.mockMvc.perform(get("/brapi/v1/calls"))
@@ -59,8 +59,8 @@ public class CallControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().string(containsString(expectedResultData)));
 
-        verify(callDao, times(1)).getAll(dataType, page, pageSize);
-        verifyNoMoreInteractions(callDao);
+        verify(callService, times(1)).getBrApiDetailResponse(dataType, page, pageSize);
+        verifyNoMoreInteractions(callService);
     }
 
     @Test
