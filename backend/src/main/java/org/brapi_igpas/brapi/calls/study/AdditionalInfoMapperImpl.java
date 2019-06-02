@@ -6,6 +6,7 @@ import org.brapi_igpas.igpas.entity.Value;
 import org.brapi_igpas.igpas.service.DbValuesFacade;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -19,246 +20,237 @@ public class AdditionalInfoMapperImpl implements AdditionalInfoMapper {
     @Override
     public void setAdditionalInfoForStudies(List<Study> studies) {
         setAdditionalInfoPHForStudies(studies);
-        setAdditionalInfoVolumeForStudies(studies);
-        setAdditionalInfoPlotSizeForStudies(studies);
+        setAdditionalInfoVolumesForStudies(studies);
+        setAdditionalInfoPlotSizesForStudies(studies);
         setAdditionalInfoAirHumidityForStudies(studies);
-        setAdditionalInfoSowingDensityForStudies(studies);
-        setAdditionalInfoFactorForStudies(studies);
-        setAdditionalInfoTypeOfFertiliserForStudies(studies);
+        setAdditionalInfoSowingDensitiesForStudies(studies);
+        setAdditionalInfoFactorsForStudies(studies);
+        setAdditionalInfoTypesOfFertiliserForStudies(studies);
         setAdditionalInfoAmountOfFertiliserForStudies(studies);
-        setAdditionalInfoFrequencyForStudies(studies);
-        setAdditionalInfoAssayTypeForStudies(studies);
-        setAdditionalInfoContainerTypeForStudies(studies);
-        setAdditionalInfoDayTemperatureForStudies(studies);
-        setAdditionalInfoIrrigationTypeForStudies(studies);
+        setAdditionalInfoFrequenciesForStudies(studies);
+        setAdditionalInfoAssayTypesForStudies(studies);
+        setAdditionalInfoContainerTypesForStudies(studies);
+        setAdditionalInfoDayTemperaturesForStudies(studies);
+        setAdditionalInfoIrrigationTypesForStudies(studies);
         setAdditionalInfoCharacteristicsForStudies(studies);
-        setAdditionalInfoContainerVolumeForStudies(studies);
-        setAdditionalInfoDailyPhotonFluxForStudies(studies);
-        setAdditionalInfoNightTemperatureForStudies(studies);
-        setAdditionalInfoExperimentalUnitForStudies(studies);
-        setAdditionalInfoContainerDimensionForStudies(studies);
-        setAdditionalInfoLengthOfLightPeriodForStudies(studies);
+        setAdditionalInfoContainerVolumesForStudies(studies);
+        setAdditionalInfoDailyPhotonFluxesForStudies(studies);
+        setAdditionalInfoNightTemperaturesForStudies(studies);
+        setAdditionalInfoExperimentalUnitsForStudies(studies);
+        setAdditionalInfoContainerDimensionsForStudies(studies);
+        setAdditionalInfoLengthOfLightPeriodsForStudies(studies);
         setAdditionalInfoNBeforeFertilisationForStudies(studies);
         setAdditionalInfoNumberOfPlantsPerContainerForStudies(studies);
     }
 
     private void setAdditionalInfoPHForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("pH");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setpH(v.getValue()));
-        });
+            List<String> ph = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setpH(ph);
+        }
     }
 
-    private void setAdditionalInfoVolumeForStudies(List<Study> studies) {
-        List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Volume");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+    private void setAdditionalInfoVolumesForStudies(List<Study> studies) {
+        List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Volumes");
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setVolume(v.getValue()));
-        });
+            List<String> volumes = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setVolumes(volumes);
+        }
     }
 
-    private void setAdditionalInfoPlotSizeForStudies(List<Study> studies) {
+    private void setAdditionalInfoPlotSizesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Plot size");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setPlotSize(v.getValue()));
-        });
+            List<String> plotSizes = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setPlotSizes(plotSizes);
+        }
     }
 
     private void setAdditionalInfoAirHumidityForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Air humidity");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setAirHumidity(v.getValue()));
-        });
+            List<String> airHumidity = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setAirHumidity(airHumidity);
+        }
     }
 
-    private void setAdditionalInfoSowingDensityForStudies(List<Study> studies) {
+    private void setAdditionalInfoSowingDensitiesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Sowing density");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setSowingDensity(v.getValue()));
-        });
+            List<String> sowingDensities = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setSowingDensities(sowingDensities);
+        }
     }
 
-    private void setAdditionalInfoFactorForStudies(List<Study> studies) {
+    private void setAdditionalInfoFactorsForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Factor");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setFactor(v.getValue()));
-        });
+            List<String> factors = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setFactors(factors);
+        }
     }
 
-    private void setAdditionalInfoTypeOfFertiliserForStudies(List<Study> studies) {
+    private void setAdditionalInfoTypesOfFertiliserForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Type of fertiliser");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setTypeOfFertiliser(v.getValue()));
-        });
+            List<String> typesOfFertiliser = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setTypesOfFertiliser(typesOfFertiliser);
+        }
     }
 
     private void setAdditionalInfoAmountOfFertiliserForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Amount of fertiliser");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setAmountOfFertiliser(v.getValue()));
-        });
+            List<String> amountOfFertiliser = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setAmountOfFertiliser(amountOfFertiliser);
+        }
     }
 
-    private void setAdditionalInfoFrequencyForStudies(List<Study> studies) {
+    private void setAdditionalInfoFrequenciesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Frequency");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setFrequency(v.getValue()));
-        });
+            List<String> frequencies = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setFrequencies(frequencies);
+        }
     }
 
-    private void setAdditionalInfoAssayTypeForStudies(List<Study> studies) {
-        List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Assay type");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+    private void setAdditionalInfoAssayTypesForStudies(List<Study> studies) {
+        List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Assay Type");
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setAssayType(v.getValue()));
-        });
+            List<String> assayTypes = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setAssayTypes(assayTypes);
+        }
     }
 
-    private void setAdditionalInfoContainerTypeForStudies(List<Study> studies) {
+    private void setAdditionalInfoContainerTypesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Container type");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setContainerType(v.getValue()));
-        });
+            List<String> containerTypes = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setContainerTypes(containerTypes);
+        }
     }
 
-    private void setAdditionalInfoDayTemperatureForStudies(List<Study> studies) {
+    private void setAdditionalInfoDayTemperaturesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Day temperature");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setDayTemperature(v.getValue()));
-        });
+            List<String> dayTemperatures = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setDayTemperatures(dayTemperatures);
+        }
     }
 
-    private void setAdditionalInfoIrrigationTypeForStudies(List<Study> studies) {
+    private void setAdditionalInfoIrrigationTypesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Irrigation type");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setIrrigationType(v.getValue()));
-        });
+            List<String> irrigationTypes = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setIrrigationTypes(irrigationTypes);
+        }
     }
 
     private void setAdditionalInfoCharacteristicsForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Characteristics");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setCharacteristics(v.getValue()));
-        });
+            List<String> characteristics = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setCharacteristics(characteristics);
+        }
     }
 
-    private void setAdditionalInfoContainerVolumeForStudies(List<Study> studies) {
+    private void setAdditionalInfoContainerVolumesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Container volume");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setContainerVolume(v.getValue()));
-        });
+            List<String> containerVolumes = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setContainerVolumes(containerVolumes);
+        }
     }
 
-    private void setAdditionalInfoDailyPhotonFluxForStudies(List<Study> studies) {
+    private void setAdditionalInfoDailyPhotonFluxesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Daily photon flux");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setDailyPhotonFlux(v.getValue()));
-        });
+            List<String> dailyPhotonFluxes = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setDailyPhotonFluxes(dailyPhotonFluxes);
+        }
     }
 
-    private void setAdditionalInfoNightTemperatureForStudies(List<Study> studies) {
+    private void setAdditionalInfoNightTemperaturesForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Night temperature");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setNightTemperature(v.getValue()));
-        });
+            List<String> nightTemperatures = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setNightTemperatures(nightTemperatures);
+        }
     }
 
-    private void setAdditionalInfoExperimentalUnitForStudies(List<Study> studies) {
+    private void setAdditionalInfoExperimentalUnitsForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Experimental unit");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setExperimentalUnit(v.getValue()));
-        });
+            List<String> experimentalUnits = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setExperimentalUnits(experimentalUnits);
+        }
     }
 
-    private void setAdditionalInfoContainerDimensionForStudies(List<Study> studies) {
+    private void setAdditionalInfoContainerDimensionsForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Container dimension");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setContainerDimension(v.getValue()));
-        });
+            List<String> containerDimensions = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setContainerDimensions(containerDimensions);
+        }
     }
 
-    private void setAdditionalInfoLengthOfLightPeriodForStudies(List<Study> studies) {
+    private void setAdditionalInfoLengthOfLightPeriodsForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Length of light period");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setLengthOfLightPeriod(v.getValue()));
-        });
+            List<String> lengthOfLightPeriods = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setLengthOfLightPeriods(lengthOfLightPeriods);
+        }
     }
 
     private void setAdditionalInfoNBeforeFertilisationForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("N before fertilisation");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setnBeforeFertilisation(v.getValue()));
-        });
+            List<String> nBeforeFertilisation = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setnBeforeFertilisation(nBeforeFertilisation);
+        }
     }
 
     private void setAdditionalInfoNumberOfPlantsPerContainerForStudies(List<Study> studies) {
         List<Value> values = dbValuesFacade.getAllValuesWithAttributeDisplayedName("Number of plants per container");
-        studies.forEach(study -> {
-            long studyId = Long.parseLong(study.getStudyDbId());
+        for (Study study : studies) {
             Object additionalInfo = study.getAdditionalInfo();
-            dbValuesFacade.getValueWithStudyIdFromValuesWithAttributeDisplayedName(studyId, values)
-                    .ifPresent(v -> ((StudyAdditionalInfo) additionalInfo).setNumberOfPlantsPerContainer(v.getValue()));
-        });
+            List<String> numberOfPlantsPerContainer = getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(values, study);
+            ((StudyAdditionalInfo) additionalInfo).setNumberOfPlantsPerContainer(numberOfPlantsPerContainer);
+        }
+    }
+
+    private List<String> getAdditionalInfoValuesWithValuesWithAttributeDisplayedNameForStudy(List<Value> valuesWithAttributeDisplayedName, Study study) {
+        long studyId = Long.parseLong(study.getStudyDbId());
+        List<Value> valuesWithStudyId = dbValuesFacade.getAllValuesWithStudyIdFromValuesWithAttributeDisplayedName(studyId, valuesWithAttributeDisplayedName);
+
+        List<String> additionalInfoValues = new ArrayList<>();
+        for (Value value : valuesWithStudyId) {
+            if (value.getValue() != null) {
+                additionalInfoValues.add(value.getValue());
+            }
+        }
+        return additionalInfoValues;
     }
 }

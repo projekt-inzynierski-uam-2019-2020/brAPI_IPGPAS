@@ -1,31 +1,56 @@
 package org.brapi_igpas.brapi.calls.study.studies;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudyAdditionalInfo {
     private String description = "";
-    private String volume = "";
-    private String typeOfFertiliser = "";
-    private String sowingDensity = "";
-    private String plotSize = "";
-    private String pH = "";
-    private String numberOfPlantsPerContainer = "";
-    private String nightTemperature = "";
-    private String nBeforeFertilisation = "";
-    private String lengthOfLightPeriod = "";
-    private String irrigationType = "";
-    private String frequency = "";
-    private String factor = "";
-    private String experimentalUnit = "";
-    private String dayTemperature = "";
-    private String dailyPhotonFlux = "";
-    private String containerVolume = "";
-    private String containerType = "";
-    private String containerDimension = "";
-    private String characteristics = "";
-    private String assayType = "";
-    private String amountOfFertiliser = "";
-    private String airHumidity = "";
+    private List<String> volumes;
+    private List<String> typesOfFertiliser;
+    private List<String> sowingDensities;
+    private List<String> plotSizes;
+    private List<String> pH;
+    private List<String> numberOfPlantsPerContainer;
+    private List<String> nightTemperatures;
+    private List<String> nBeforeFertilisation;
+    private List<String> lengthOfLightPeriods;
+    private List<String> irrigationTypes;
+    private List<String> frequencies;
+    private List<String> factors;
+    private List<String> experimentalUnits;
+    private List<String> dayTemperatures;
+    private List<String> dailyPhotonFluxes;
+    private List<String> containerVolumes;
+    private List<String> containerTypes;
+    private List<String> containerDimensions;
+    private List<String> characteristics;
+    private List<String> assayTypes;
+    private List<String> amountOfFertiliser;
+    private List<String> airHumidity;
 
     public StudyAdditionalInfo() {
+        volumes = new ArrayList<>();
+        typesOfFertiliser = new ArrayList<>();
+        sowingDensities = new ArrayList<>();
+        plotSizes = new ArrayList<>();
+        pH = new ArrayList<>();
+        numberOfPlantsPerContainer = new ArrayList<>();
+        nightTemperatures = new ArrayList<>();
+        nBeforeFertilisation = new ArrayList<>();
+        lengthOfLightPeriods = new ArrayList<>();
+        irrigationTypes = new ArrayList<>();
+        frequencies = new ArrayList<>();
+        factors = new ArrayList<>();
+        experimentalUnits = new ArrayList<>();
+        dayTemperatures = new ArrayList<>();
+        dailyPhotonFluxes = new ArrayList<>();
+        containerVolumes = new ArrayList<>();
+        containerTypes = new ArrayList<>();
+        containerDimensions = new ArrayList<>();
+        characteristics = new ArrayList<>();
+        assayTypes = new ArrayList<>();
+        amountOfFertiliser = new ArrayList<>();
+        airHumidity = new ArrayList<>();
     }
 
     public String getDescription() {
@@ -36,179 +61,179 @@ public class StudyAdditionalInfo {
         this.description = description;
     }
 
-    public String getVolume() {
-        return volume;
+    public List<String> getVolumes() {
+        return volumes;
     }
 
-    public void setVolume(String volume) {
-        this.volume = volume;
+    public void setVolumes(List<String> volumes) {
+        this.volumes = volumes;
     }
 
-    public String getTypeOfFertiliser() {
-        return typeOfFertiliser;
+    public List<String> getTypesOfFertiliser() {
+        return typesOfFertiliser;
     }
 
-    public void setTypeOfFertiliser(String typeOfFertiliser) {
-        this.typeOfFertiliser = typeOfFertiliser;
+    public void setTypesOfFertiliser(List<String> typesOfFertiliser) {
+        this.typesOfFertiliser = typesOfFertiliser;
     }
 
-    public String getSowingDensity() {
-        return sowingDensity;
+    public List<String> getSowingDensities() {
+        return sowingDensities;
     }
 
-    public void setSowingDensity(String sowingDensity) {
-        this.sowingDensity = sowingDensity;
+    public void setSowingDensities(List<String> sowingDensities) {
+        this.sowingDensities = sowingDensities;
     }
 
-    public String getPlotSize() {
-        return plotSize;
+    public List<String> getPlotSizes() {
+        return plotSizes;
     }
 
-    public void setPlotSize(String plotSize) {
-        this.plotSize = plotSize;
+    public void setPlotSizes(List<String> plotSizes) {
+        this.plotSizes = plotSizes;
     }
 
-    public String getpH() {
+    public List<String> getpH() {
         return pH;
     }
 
-    public void setpH(String pH) {
+    public void setpH(List<String> pH) {
         this.pH = pH;
     }
 
-    public String getNumberOfPlantsPerContainer() {
+    public List<String> getNumberOfPlantsPerContainer() {
         return numberOfPlantsPerContainer;
     }
 
-    public void setNumberOfPlantsPerContainer(String numberOfPlantsPerContainer) {
+    public void setNumberOfPlantsPerContainer(List<String> numberOfPlantsPerContainer) {
         this.numberOfPlantsPerContainer = numberOfPlantsPerContainer;
     }
 
-    public String getNightTemperature() {
-        return nightTemperature;
+    public List<String> getNightTemperatures() {
+        return nightTemperatures;
     }
 
-    public void setNightTemperature(String nightTemperature) {
-        this.nightTemperature = nightTemperature;
+    public void setNightTemperatures(List<String> nightTemperatures) {
+        this.nightTemperatures = nightTemperatures;
     }
 
-    public String getnBeforeFertilisation() {
+    public List<String> getnBeforeFertilisation() {
         return nBeforeFertilisation;
     }
 
-    public void setnBeforeFertilisation(String nBeforeFertilisation) {
+    public void setnBeforeFertilisation(List<String> nBeforeFertilisation) {
         this.nBeforeFertilisation = nBeforeFertilisation;
     }
 
-    public String getLengthOfLightPeriod() {
-        return lengthOfLightPeriod;
+    public List<String> getLengthOfLightPeriods() {
+        return lengthOfLightPeriods;
     }
 
-    public void setLengthOfLightPeriod(String lengthOfLightPeriod) {
-        this.lengthOfLightPeriod = lengthOfLightPeriod;
+    public void setLengthOfLightPeriods(List<String> lengthOfLightPeriods) {
+        this.lengthOfLightPeriods = lengthOfLightPeriods;
     }
 
-    public String getIrrigationType() {
-        return irrigationType;
+    public List<String> getIrrigationTypes() {
+        return irrigationTypes;
     }
 
-    public void setIrrigationType(String irrigationType) {
-        this.irrigationType = irrigationType;
+    public void setIrrigationTypes(List<String> irrigationTypes) {
+        this.irrigationTypes = irrigationTypes;
     }
 
-    public String getFrequency() {
-        return frequency;
+    public List<String> getFrequencies() {
+        return frequencies;
     }
 
-    public void setFrequency(String frequency) {
-        this.frequency = frequency;
+    public void setFrequencies(List<String> frequencies) {
+        this.frequencies = frequencies;
     }
 
-    public String getFactor() {
-        return factor;
+    public List<String> getFactors() {
+        return factors;
     }
 
-    public void setFactor(String factor) {
-        this.factor = factor;
+    public void setFactors(List<String> factors) {
+        this.factors = factors;
     }
 
-    public String getExperimentalUnit() {
-        return experimentalUnit;
+    public List<String> getExperimentalUnits() {
+        return experimentalUnits;
     }
 
-    public void setExperimentalUnit(String experimentalUnit) {
-        this.experimentalUnit = experimentalUnit;
+    public void setExperimentalUnits(List<String> experimentalUnits) {
+        this.experimentalUnits = experimentalUnits;
     }
 
-    public String getDayTemperature() {
-        return dayTemperature;
+    public List<String> getDayTemperatures() {
+        return dayTemperatures;
     }
 
-    public void setDayTemperature(String dayTemperature) {
-        this.dayTemperature = dayTemperature;
+    public void setDayTemperatures(List<String> dayTemperatures) {
+        this.dayTemperatures = dayTemperatures;
     }
 
-    public String getDailyPhotonFlux() {
-        return dailyPhotonFlux;
+    public List<String> getDailyPhotonFluxes() {
+        return dailyPhotonFluxes;
     }
 
-    public void setDailyPhotonFlux(String dailyPhotonFlux) {
-        this.dailyPhotonFlux = dailyPhotonFlux;
+    public void setDailyPhotonFluxes(List<String> dailyPhotonFluxes) {
+        this.dailyPhotonFluxes = dailyPhotonFluxes;
     }
 
-    public String getContainerVolume() {
-        return containerVolume;
+    public List<String> getContainerVolumes() {
+        return containerVolumes;
     }
 
-    public void setContainerVolume(String containerVolume) {
-        this.containerVolume = containerVolume;
+    public void setContainerVolumes(List<String> containerVolumes) {
+        this.containerVolumes = containerVolumes;
     }
 
-    public String getContainerType() {
-        return containerType;
+    public List<String> getContainerTypes() {
+        return containerTypes;
     }
 
-    public void setContainerType(String containerType) {
-        this.containerType = containerType;
+    public void setContainerTypes(List<String> containerTypes) {
+        this.containerTypes = containerTypes;
     }
 
-    public String getContainerDimension() {
-        return containerDimension;
+    public List<String> getContainerDimensions() {
+        return containerDimensions;
     }
 
-    public void setContainerDimension(String containerDimension) {
-        this.containerDimension = containerDimension;
+    public void setContainerDimensions(List<String> containerDimensions) {
+        this.containerDimensions = containerDimensions;
     }
 
-    public String getCharacteristics() {
+    public List<String> getCharacteristics() {
         return characteristics;
     }
 
-    public void setCharacteristics(String characteristics) {
+    public void setCharacteristics(List<String> characteristics) {
         this.characteristics = characteristics;
     }
 
-    public String getAssayType() {
-        return assayType;
+    public List<String> getAssayTypes() {
+        return assayTypes;
     }
 
-    public void setAssayType(String assayType) {
-        this.assayType = assayType;
+    public void setAssayTypes(List<String> assayTypes) {
+        this.assayTypes = assayTypes;
     }
 
-    public String getAmountOfFertiliser() {
+    public List<String> getAmountOfFertiliser() {
         return amountOfFertiliser;
     }
 
-    public void setAmountOfFertiliser(String amountOfFertiliser) {
+    public void setAmountOfFertiliser(List<String> amountOfFertiliser) {
         this.amountOfFertiliser = amountOfFertiliser;
     }
 
-    public String getAirHumidity() {
+    public List<String> getAirHumidity() {
         return airHumidity;
     }
 
-    public void setAirHumidity(String airHumidity) {
+    public void setAirHumidity(List<String> airHumidity) {
         this.airHumidity = airHumidity;
     }
 }
