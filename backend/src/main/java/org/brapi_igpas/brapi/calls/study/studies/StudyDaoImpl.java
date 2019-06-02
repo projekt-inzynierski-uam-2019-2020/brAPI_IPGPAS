@@ -53,6 +53,7 @@ public class StudyDaoImpl implements StudyDao {
             Study study = new Study();
             study.setStudyDbId(String.valueOf(dbStudy.getId()));
             study.setTrialDbId(String.valueOf(dbStudy.getInvestigationId()));
+            study.setDocumentationURL("cropnet.pl/plantphenodb/?id=" + study.getTrialDbId());
             if (dbStudy.getTitle() != null) {
                 study.setName(dbStudy.getTitle());
                 study.setStudyName(dbStudy.getTitle());
