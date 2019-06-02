@@ -16,6 +16,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { StudyComponent } from './calls-components/study/study.component';
 import { TrialsComponent} from './calls-components/trials/trials.component';
 import {Server} from './calls/server';
+import { SeasonsComponent } from './calls-components/seasons/seasons.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {Server} from './calls/server';
     DatabasesPageComponent,
     StudyComponent,
     TrialsComponent,
+    SeasonsComponent,
   ],
   imports: [
     HttpClientModule,
