@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public class CallDao {
-    List<Call> calls = new ArrayList<>();
+    private List<Call> calls = new ArrayList<>();
 
     public CallDao() {
         calls.add(new Call("calls")

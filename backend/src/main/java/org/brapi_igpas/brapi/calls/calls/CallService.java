@@ -19,7 +19,7 @@ public class CallService {
         this.callDao = callDao;
     }
 
-    public BrApiDetailResponse getBrApiDetailResponse(String dataType, int page, int pageSize) {
+    BrApiDetailResponse getBrApiDetailResponse(String dataType, int page, int pageSize) {
         List<Call> calls = callDao.getAll();
 
         if (isParameterPresent(dataType)) {
