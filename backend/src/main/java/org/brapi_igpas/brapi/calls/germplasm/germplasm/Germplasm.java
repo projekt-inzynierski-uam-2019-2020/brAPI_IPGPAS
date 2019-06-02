@@ -6,6 +6,7 @@ import org.brapi_igpas.brapi.calls.germplasm.TaxonId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Germplasm {
@@ -38,6 +39,14 @@ public class Germplasm {
 
     public Germplasm() {
         taxonIds = new ArrayList<>();
+    }
+
+    public Germplasm(String commonCropName, String germplasmDbId, String germplasmName, String germplasmPUI) {
+        this();
+        this.commonCropName = commonCropName;
+        this.germplasmDbId = germplasmDbId;
+        this.germplasmName = germplasmName;
+        this.germplasmPUI = germplasmPUI;
     }
 
     public String getAccessionNumber() {
@@ -246,5 +255,43 @@ public class Germplasm {
 
     public void setTypeOfGermplasmStorageCode(List<String> typeOfGermplasmStorageCode) {
         this.typeOfGermplasmStorageCode = typeOfGermplasmStorageCode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Germplasm germplasm = (Germplasm) o;
+        return Objects.equals(accessionNumber, germplasm.accessionNumber) &&
+                Objects.equals(acquisitionDate, germplasm.acquisitionDate) &&
+                Objects.equals(biologicalStatusOfAccessionCode, germplasm.biologicalStatusOfAccessionCode) &&
+                Objects.equals(breedingMethodDbId, germplasm.breedingMethodDbId) &&
+                Objects.equals(commonCropName, germplasm.commonCropName) &&
+                Objects.equals(countryOfOriginCode, germplasm.countryOfOriginCode) &&
+                Objects.equals(defaultDisplayName, germplasm.defaultDisplayName) &&
+                Objects.equals(documentationURL, germplasm.documentationURL) &&
+                Objects.equals(donors, germplasm.donors) &&
+                Objects.equals(genus, germplasm.genus) &&
+                Objects.equals(germplasmDbId, germplasm.germplasmDbId) &&
+                Objects.equals(germplasmGenus, germplasm.germplasmGenus) &&
+                Objects.equals(germplasmName, germplasm.germplasmName) &&
+                Objects.equals(germplasmPUI, germplasm.germplasmPUI) &&
+                Objects.equals(germplasmSpecies, germplasm.germplasmSpecies) &&
+                Objects.equals(instituteCode, germplasm.instituteCode) &&
+                Objects.equals(instituteName, germplasm.instituteName) &&
+                Objects.equals(pedigree, germplasm.pedigree) &&
+                Objects.equals(seedSource, germplasm.seedSource) &&
+                Objects.equals(species, germplasm.species) &&
+                Objects.equals(speciesAuthority, germplasm.speciesAuthority) &&
+                Objects.equals(subtaxa, germplasm.subtaxa) &&
+                Objects.equals(subtaxaAuthority, germplasm.subtaxaAuthority) &&
+                Objects.equals(synonyms, germplasm.synonyms) &&
+                Objects.equals(taxonIds, germplasm.taxonIds) &&
+                Objects.equals(typeOfGermplasmStorageCode, germplasm.typeOfGermplasmStorageCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(accessionNumber, acquisitionDate, biologicalStatusOfAccessionCode, breedingMethodDbId, commonCropName, countryOfOriginCode, defaultDisplayName, documentationURL, donors, genus, germplasmDbId, germplasmGenus, germplasmName, germplasmPUI, germplasmSpecies, instituteCode, instituteName, pedigree, seedSource, species, speciesAuthority, subtaxa, subtaxaAuthority, synonyms, taxonIds, typeOfGermplasmStorageCode);
     }
 }
