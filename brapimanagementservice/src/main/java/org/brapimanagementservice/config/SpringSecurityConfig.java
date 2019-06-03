@@ -11,10 +11,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.httpBasic().
+        httpSecurity.
+                httpBasic().
                 and().
-                authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/servers").permitAll().and().
-                authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/servers/*").permitAll().and().
+                authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/servers").permitAll().
+                and().
+                authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/servers/*").permitAll().
+                and().
+                authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/organisations").permitAll().
+                and().
+                authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/organisations/*").permitAll().
+                and().
                 authorizeRequests().anyRequest().authenticated();
     }
 }
