@@ -41,6 +41,7 @@ public class ServerController {
                     record.setName(server.getName());
                     record.setDescription(server.getDescription());
                     record.setAddress(server.getAddress());
+                    record.setOrganisation(server.getOrganisation());
                     Server updated = serverRepository.save(record);
                     return ResponseEntity.ok().body(updated);
                 }).orElse(ResponseEntity.notFound().build());
