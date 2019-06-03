@@ -4,6 +4,7 @@ package org.brapimanagementservice.server;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.brapimanagementservice.organisation.Organisation;
 
 import javax.persistence.*;
 
@@ -27,5 +28,9 @@ public class Server {
 
     @Column(name = "address")
     private String address;
+
+    @ManyToOne
+    @JoinColumn(name = "organisation_id")
+    private Organisation organisation;
 
 }
