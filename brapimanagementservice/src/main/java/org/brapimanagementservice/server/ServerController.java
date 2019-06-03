@@ -1,5 +1,6 @@
 package org.brapimanagementservice.server;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class ServerController {
     }
 
     @GetMapping
-    public List findAll() {
+    public List<Server> findAll() {
         return serverRepository.findAll();
     }
 
@@ -28,11 +29,12 @@ public class ServerController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Server create(@RequestBody Server server) {
         return serverRepository.save(server);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Server> update(@PathVariable long id, @RequestBody Server server) {
         return serverRepository.findById(id)
                 .map(record -> {
