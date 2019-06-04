@@ -13,5 +13,14 @@ export class PdfService {
     const dataURL = canvas.toDataURL('image/png');
     return dataURL;
   }
-  
+
+  donloadPDF(elementId: string) {
+    const doc = new jsPDF();
+    const imageData = this.getBase64Image(document.getElementById(elementId));
+    console.log(imageData);
+    doc.addImage(imageData, 'JPG', 10, 10, 180, 90);
+    doc.addPage();
+    doc.save(elementId + '.pdf');
+  }
+
 }
