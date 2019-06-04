@@ -25,8 +25,10 @@ export class ChartService {
     }
   }
 
+
   columnChart(labels: any[], data: number[], text: string) {
 
+    // @ts-ignore
     this.BarChart = new Chart('barChart', {
       type: 'bar',
       data: {
@@ -59,6 +61,7 @@ export class ChartService {
   }
 
   lineChart(labels: any[], data: number[], text: string) {
+    // @ts-ignore
     this.LineChart = new Chart('lineChart', {
       type: 'line',
       data: {
