@@ -3,12 +3,13 @@ import {BrApiDetailPayloadResponse} from '../../calls/BrApiDetailPayloadResponse
 import {CallsService} from '../../calls/calls.service';
 import {Server} from '../../calls/server';
 import {ChartService} from '../../services/chart-service/chart-service';
+import {PdfService} from '../../services/pdf-service/pdf-service';
 
 @Component({
   selector: 'app-seasons',
   templateUrl: './seasons.component.html',
   styleUrls: ['./seasons.component.css'],
-  providers: [ChartService],
+  providers: [ChartService, PdfService],
 
 })
 export class SeasonsComponent implements OnInit {
@@ -22,7 +23,7 @@ export class SeasonsComponent implements OnInit {
   public pieChartData: number[];
   public pieChartType: string = 'pie';
 
-  constructor(private callsService: CallsService, private server: Server, private chartService: ChartService) {
+  constructor(private callsService: CallsService, private server: Server, private chartService: ChartService, private pdfService: PdfService) {
   }
 
   ngOnInit() {
@@ -74,6 +75,10 @@ export class SeasonsComponent implements OnInit {
   showPieChart() {
     this.pieChartLabels = this.year;
     this.pieChartData = this.sumOfYears;
+  }
+
+  saveToPDF(elementId: string){
+    this.pdfService.donloadPDF(elementId);
   }
 
   getCallsLength() {
