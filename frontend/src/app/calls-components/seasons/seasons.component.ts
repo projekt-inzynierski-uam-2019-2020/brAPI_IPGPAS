@@ -39,17 +39,19 @@ export class SeasonsComponent implements OnInit {
       );
   }
 
-  getUniqCommonCropNames() {
+  getUniqSeasons() {
     this.year = [];
     for (let i = 0; i < this.getCallsLength(); i++) {
       if (!this.year.includes(this.brApiDetailPayloadResponse.result.data[i].year)) {
         this.year.push(this.brApiDetailPayloadResponse.result.data[i].year);
       }
     }
+
     return this.year;
+
   }
 
-  getSumOfEachCropName() {
+  getSumOfEachSeason() {
     for (let i = 0; i < this.year.length; i++) {
       this.sumOfYears.push(0);
     }
