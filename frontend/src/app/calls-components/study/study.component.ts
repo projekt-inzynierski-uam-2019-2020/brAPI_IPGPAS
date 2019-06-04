@@ -3,15 +3,17 @@ import {CallsService} from '../../calls/calls.service';
 import {BrApiDetailPayloadResponse} from '../../calls/BrApiDetailPayloadResponse';
 import {Chart} from 'chart.js';
 import {Server} from '../../calls/server';
-
+import * as jsPDF from 'jspdf';
 import {ChartService} from '../../services/chart-service/chart-service';
+import {PdfService} from '../../services/pdf-service/pdf-service';
+
 
 
 @Component({
   selector: 'app-study',
   templateUrl: './study.component.html',
   styleUrls: ['./study.component.css'],
-  providers: [ChartService],
+  providers: [ChartService, PdfService],
 
 })
 export class StudyComponent implements OnInit {
@@ -24,13 +26,15 @@ export class StudyComponent implements OnInit {
   public pieChartLabels: string[];
   public pieChartData: number[];
   public pieChartType: string = 'pie';
+  doc = new jsPDF();
 
-  constructor(private callsService: CallsService, private server: Server, private chartService: ChartService) {
+  constructor(private callsService: CallsService, private server: Server, private chartService: ChartService, private pdfService: PdfService) {
   }
 
   ngOnInit() {
     this.getSelectedCall();
   }
+
 
   getSelectedCall() {
     return this.callsService.getSelectedCall(this.server.serverName + 'studies')
@@ -74,15 +78,20 @@ export class StudyComponent implements OnInit {
     this.chartService.lineChart(this.cropNames, this.sumOfCropNames, '# of CommonCropName in Studies');
   }
 
+  showPieChart() {
+    this.pieChartLabels = this.cropNames;
+    this.pieChartData = this.sumOfCropNames;
+  }
+
+  saveToPDF(elementId: string){
+    this.pdfService.donloadPDF(elementId);
+  }
+
   getCallsLength() {
     this.lengthCalls = this.brApiDetailPayloadResponse.result.data.length;
     return this.lengthCalls;
   }
 
-  showPieChart() {
-    this.pieChartLabels = this.cropNames;
-    this.pieChartData = this.sumOfCropNames;
-  }
 
   counter(i: number) {
     return new Array(i);
@@ -90,8 +99,8 @@ export class StudyComponent implements OnInit {
 
   toggleVisibility(e) {
     this.marked = e.target.checked;
-    this.showLineChart()
-    this.showColumnChart()
+    this.showLineChart();
+    this.showColumnChart();
     this.showPieChart();
     if (!this.marked) {
       this.canvasShow = false;

@@ -22,7 +22,6 @@ export class SeasonsComponent implements OnInit {
   public pieChartData: number[];
   public pieChartType: string = 'pie';
 
-
   constructor(private callsService: CallsService, private server: Server, private chartService: ChartService) {
   }
 
@@ -81,6 +80,7 @@ export class SeasonsComponent implements OnInit {
     this.lengthCalls = this.brApiDetailPayloadResponse.result.data.length;
     return this.lengthCalls;
   }
+
 
   public chartClicked(e: any): void {
     console.log(e);
