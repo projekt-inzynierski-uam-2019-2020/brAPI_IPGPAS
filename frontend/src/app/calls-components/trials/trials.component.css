@@ -134,6 +134,16 @@ section .container .charts table td {
   border-radius: 5px;
   margin-bottom: 50px;
 }
+section .container .charts table .btn-pdf {
+  float: right;
+  width: 160px;
+  height: 30px;
+  border-radius: 18px;
+  background: #4fa097;
+  border: none;
+  color: white;
+  outline: none;
+}
 
 .cbx {
   margin: auto;

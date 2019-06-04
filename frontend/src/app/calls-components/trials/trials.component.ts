@@ -4,12 +4,13 @@ import {CallsService} from '../../calls/calls.service';
 import {Chart} from 'chart.js';
 import {Server} from '../../calls/server';
 import {ChartService} from '../../services/chart-service/chart-service';
+import {PdfService} from '../../services/pdf-service/pdf-service';
 
 @Component({
   selector: 'app-trials',
   templateUrl: './trials.component.html',
   styleUrls: ['./trials.component.css'],
-  providers: [ChartService]
+  providers: [ChartService, PdfService]
 })
 export class TrialsComponent implements OnInit {
   brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
@@ -22,7 +23,7 @@ export class TrialsComponent implements OnInit {
   public pieChartData: number[];
   public pieChartType: string = 'pie';
 
-  constructor(private callService: CallsService,  private server: Server, private chartService: ChartService) {
+  constructor(private callService: CallsService,  private server: Server, private chartService: ChartService, private pdfService: PdfService) {
   }
 
   ngOnInit() {
@@ -77,6 +78,10 @@ export class TrialsComponent implements OnInit {
   showPieChart() {
     this.pieChartLabels = this.trialName;
     this.pieChartData = this.sumOfTrialNames;
+  }
+
+  saveToPDF(elementId: string){
+    this.pdfService.donloadPDF(elementId);
   }
 
   getCallLength() {
