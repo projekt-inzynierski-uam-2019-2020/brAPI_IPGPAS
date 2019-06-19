@@ -83,6 +83,11 @@ section .container .row .item button:hover {
   background: linear-gradient(120deg, #4e9c93 0%, #4e9c93 10%, #3E8178 10%, #3e8178 15%, #448c84 15%, #448c84 30%, #3E8178 30%, #3E8178 100%);
 }
 
+@supports (-moz-appearance: none) {
+  section .back .fas {
+    top: 6px;
+  }
+}
 @keyframes back {
   0% {
     left: 30px;

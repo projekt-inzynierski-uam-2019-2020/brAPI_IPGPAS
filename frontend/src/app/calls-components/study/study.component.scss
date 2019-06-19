@@ -224,6 +224,20 @@ section {
   transition: all 0.6s ease;
 }
 
+@supports (-moz-appearance:none) {
+  section {
+    .back {
+      .fas {
+        top: 6px;
+      }
+    }
+  }
+  .cbx span:first-child svg{
+    stroke-dasharray: 15.5px;
+  }
+}
+
+
 @keyframes wave {
   50% {
     transform: scale(0.9);

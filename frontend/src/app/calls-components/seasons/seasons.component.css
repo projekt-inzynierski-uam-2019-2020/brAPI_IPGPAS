@@ -91,17 +91,23 @@ section .container .list h2 {
 }
 section .container .list .list-group {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   text-align: center;
   margin: auto;
   margin-left: 240px;
+  height: auto;
 }
 section .container .list .list-group .list-group-item {
   width: 200px;
+  height: 100px;
   display: flex;
   justify-content: center;
   text-align: center;
-  margin: auto;
+  align-items: center;
+  padding: 0;
+  margin: 0;
 }
 section .container .charts {
   margin: auto;
@@ -222,6 +228,15 @@ section .container .charts table td {
   }
   100% {
     left: 30px;
+  }
+}
+@supports (-moz-appearance: none) {
+  section .back .fas {
+    top: 6px;
+  }
+
+  .cbx span:first-child svg {
+    stroke-dasharray: 15.5px;
   }
 }
 @media only screen and (max-width: 1400px) {
