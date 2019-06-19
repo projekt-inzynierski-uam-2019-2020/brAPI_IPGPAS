@@ -16,6 +16,9 @@ section {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
+  min-height: 100%;
+  overflow-y: scroll;
 
   .back{
     display: inline-block;
@@ -78,10 +81,8 @@ section {
           width: 200px;
           height: 80px;
           outline: none;
-          margin-top: 50px;
+          margin: 25px auto;
           display: block;
-          margin-left: auto;
-          margin-right: auto;
           border: none;
           border-radius: 5px;
           filter: opacity(90%);
