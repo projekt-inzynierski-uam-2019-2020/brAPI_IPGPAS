@@ -20,7 +20,7 @@ export class ServerPageComponent implements OnInit {
     if(flag === true){
       this.server.serverName = 'https://test-server.brapi.org/brapi/v1/';
     } else {
-      this.server.serverName = 'http://104.248.254.181:8080/brapi/v1/';
+      this.server.serverName = 'http://35.242.244.53:8080/brapi/v1/';
     }
 
   }
