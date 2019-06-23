@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/brapi/v1")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://35.246.155.60:4200")
 public class CommoncropnamesController {
     private final CommoncropnamesService commoncropnamesService;
 
