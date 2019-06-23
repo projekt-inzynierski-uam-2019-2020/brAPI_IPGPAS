@@ -292,12 +292,8 @@ section .container .charts table td .btn-pdf {
     margin-left: 0px;
   }
   section .container .charts table td {
-    width: 90vw;
-  }
-  section .container .charts table td .pie {
-    margin-left: -36px;
-    width: 125vw;
-    height: 300px;
+    width: 115vw;
+    margin-left: -23px;
   }
 }
 
