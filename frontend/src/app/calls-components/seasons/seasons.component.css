@@ -136,7 +136,8 @@ section .container .charts table td {
   margin-bottom: 50px;
 }
 section .container .charts table td .btn-pdf {
-  float: right;
+  margin-left: auto;
+  margin-right: auto;
   width: 160px;
   height: 30px;
   border-radius: 18px;

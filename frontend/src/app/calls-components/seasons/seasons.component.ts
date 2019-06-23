@@ -67,7 +67,7 @@ export class SeasonsComponent implements OnInit {
 
   showColumnChart() {
     this.chartService.chartColumnStyle(this.year);
-    this.chartService.columnChart(this.year, this.sumOfYears, '# of Years in Seasons');
+    this.chartService.columnChart(this.year, this.sumOfYears, '# of Studies in Season');
   }
 
 

@@ -8,12 +8,12 @@
                (click)="getUniqSeasons()  &&  getSumOfEachSeason()"/>
         <label class="cbx" for="cbx">
           <span><svg width="12px" height="10px" viewbox="0 0 12 10"><polyline points="1.5 6 4.5 9 10.5 1"></polyline></svg></span>
-          <span>Examined Years</span>
+          <span>Number of Studies</span>
         </label>
       </div>
     </div>
     <div class="list">
-      <h2 *ngIf="marked">Year</h2>
+      <h2 *ngIf="marked">Years</h2>
       <ul class="list-group" *ngIf="marked">
         <li class="list-group-item" *ngFor="let in of counter(year.length); let i = index ">{{year[i]}}</li>
       </ul>
@@ -29,9 +29,7 @@
           <canvas id="pieChart" baseChart
                   [data]="pieChartData"
                   [labels]="pieChartLabels"
-                  [chartType]="pieChartType"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)"></canvas>
+                  [chartType]="pieChartType"></canvas>
         </td>
       </table>
     </div>

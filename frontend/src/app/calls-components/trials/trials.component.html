@@ -25,14 +25,13 @@
           <canvas id="barChart"></canvas>
         </td>
 
-        <td>
+        <td class= "pie">
           <button class="btn-pdf" (click)="saveToPDF('pieChart')">Download PDF</button>
           <canvas id="pieChart" baseChart
                   [data]="pieChartData"
                   [labels]="pieChartLabels"
-                  [chartType]="pieChartType"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)"></canvas>
+                  [options]="responsive"
+                  [chartType]="pieChartType"></canvas>
         </td>
       </table>
     </div>

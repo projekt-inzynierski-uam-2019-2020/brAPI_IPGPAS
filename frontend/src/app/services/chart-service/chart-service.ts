@@ -41,12 +41,13 @@ export class ChartService {
         }]
       },
       options: {
+        responsive: true,
         title: {
           text: text,
           fontFamily: 'Verdana',
           fontSize: 15,
           fontStyle: 'normal',
-          display: true
+          display: true,
         },
         scales: {
           yAxes: [{

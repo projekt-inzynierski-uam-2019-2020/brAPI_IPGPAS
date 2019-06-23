@@ -18,7 +18,6 @@ export class PdfService {
     const doc = new jsPDF();
     const imageData = this.getBase64Image(document.getElementById(elementId));
     doc.addImage(imageData, 'JPG', 10, 10, 180, 90);
-    doc.addPage();
     doc.save(elementId + '.pdf');
   }
 

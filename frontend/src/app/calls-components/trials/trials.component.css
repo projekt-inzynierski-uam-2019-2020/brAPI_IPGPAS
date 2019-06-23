@@ -136,7 +136,8 @@ section .container .charts table td {
   margin-bottom: 50px;
 }
 section .container .charts table .btn-pdf {
-  float: right;
+  margin-left: auto;
+  margin-right: auto;
   width: 160px;
   height: 30px;
   border-radius: 18px;
@@ -297,7 +298,14 @@ section .container .charts table .btn-pdf {
     margin-left: 0px;
   }
   section .container .charts table td {
-    width: 90vw;
+    margin-left: -20px;
+    width: 110vw;
+    height: 300px;
+  }
+  section .container .charts table .pie {
+    margin-left: -36px;
+    width: 125vw;
+    height: 300px;
   }
 }
 

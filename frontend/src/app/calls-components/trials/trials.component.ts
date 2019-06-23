@@ -19,9 +19,11 @@ export class TrialsComponent implements OnInit {
   sumOfTrialNames: number[] = [];
   marked: false;
   canvasShow = false;
+  responsive = true;
   public pieChartLabels: string[];
   public pieChartData: number[];
   public pieChartType: string = 'pie';
+  public pieChartOptions = [ this.responsive = true];
 
   constructor(private callService: CallsService,  private server: Server, private chartService: ChartService, private pdfService: PdfService) {
   }
@@ -32,7 +34,7 @@ export class TrialsComponent implements OnInit {
 
 
   getSelectedCall() {
-    return this.callService.getSelectedCall(this.server.serverName + 'studies')
+    return this.callService.getSelectedCall(this.server.serverName + 'trials')
       .subscribe(
         call => {
           this.brApiDetailPayloadResponse = call;
