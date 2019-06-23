@@ -74,9 +74,6 @@ export class StudyComponent implements OnInit {
     this.chartService.columnChart(this.cropNames, this.sumOfCropNames, '# of CommonCropName in Studies');
   }
 
-  showLineChart() {
-    this.chartService.lineChart(this.cropNames, this.sumOfCropNames, '# of CommonCropName in Studies');
-  }
 
   showPieChart() {
     this.pieChartLabels = this.cropNames;
@@ -99,7 +96,6 @@ export class StudyComponent implements OnInit {
 
   toggleVisibility(e) {
     this.marked = e.target.checked;
-    this.showLineChart();
     this.showColumnChart();
     this.showPieChart();
     if (!this.marked) {

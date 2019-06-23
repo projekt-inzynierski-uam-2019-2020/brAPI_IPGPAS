@@ -12,6 +12,9 @@ section {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
+  min-height: 100%;
+  overflow-y: scroll;
 }
 section .back {
   display: inline-block;
@@ -66,10 +69,8 @@ section .container .row .item button {
   width: 200px;
   height: 80px;
   outline: none;
-  margin-top: 50px;
+  margin: 25px auto;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
   border: none;
   border-radius: 5px;
   filter: opacity(90%);
@@ -82,6 +83,16 @@ section .container .row .item button:hover {
   background: linear-gradient(120deg, #4e9c93 0%, #4e9c93 10%, #3E8178 10%, #3e8178 15%, #448c84 15%, #448c84 30%, #3E8178 30%, #3E8178 100%);
 }
 
+@supports (-moz-appearance: none) {
+  section .back .fas {
+    top: 6px;
+  }
+}
+@supports (-moz-appearance: none) {
+  section .back .fas {
+    top: 6px;
+  }
+}
 @keyframes back {
   0% {
     left: 30px;

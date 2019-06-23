@@ -4,7 +4,6 @@ import {Chart} from 'chart.js';
 @Injectable()
 export class ChartService {
   BarChart = [];
-  LineChart = [];
   backgroundChartColor = [];
   backgroundBorderChartColor = [];
   arrayOfRgba: string[] = [];
@@ -38,40 +37,6 @@ export class ChartService {
           data: data,
           backgroundColor: this.backgroundChartColor,
           borderColor: this.backgroundBorderChartColor,
-          borderWidth: 1
-        }]
-      },
-      options: {
-        title: {
-          text: text,
-          fontFamily: 'Verdana',
-          fontSize: 15,
-          fontStyle: 'normal',
-          display: true
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-    });
-  }
-
-  lineChart(labels: any[], data: number[], text: string) {
-    // @ts-ignore
-    this.LineChart = new Chart('lineChart', {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: '# of Items',
-          data: data,
-          fill: false,
-          lineTension: 0.2,
-          borderColor: 'red',
           borderWidth: 1
         }]
       },

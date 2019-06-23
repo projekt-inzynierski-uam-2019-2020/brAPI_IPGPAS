@@ -70,9 +70,6 @@ export class SeasonsComponent implements OnInit {
     this.chartService.columnChart(this.year, this.sumOfYears, '# of Years in Seasons');
   }
 
-  showLineChart() {
-    this.chartService.lineChart(this.year, this.sumOfYears, '# of Years in Seasons');
-  }
 
   showPieChart() {
     this.pieChartLabels = this.year;
@@ -104,7 +101,6 @@ export class SeasonsComponent implements OnInit {
 
   toggleVisibility(e) {
     this.marked = e.target.checked;
-    this.showLineChart();
     this.showColumnChart();
     this.showPieChart();
     if (!this.marked) {

@@ -71,9 +71,6 @@ export class TrialsComponent implements OnInit {
     this.chartService.columnChart(this.trialName, this.sumOfTrialNames, '# of TrialName in Trials');
   }
 
-  showLineChart() {
-    this.chartService.lineChart(this.trialName, this.sumOfTrialNames, '# of TrialName in Trials');
-  }
 
   showPieChart() {
     this.pieChartLabels = this.trialName;
@@ -96,7 +93,6 @@ export class TrialsComponent implements OnInit {
 
   toggleVisibility(e) {
     this.marked = e.target.checked;
-    this.showLineChart()
     this.showColumnChart()
     this.showPieChart()
     if (!this.marked) {
