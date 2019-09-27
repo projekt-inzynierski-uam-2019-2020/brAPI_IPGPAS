@@ -1,0 +1,121 @@
+@charset "UTF-8";
+section {
+  position: absolute;
+  z-index: -10;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+section .image {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("../../assets/home.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+section .image .loginBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 420px;
+  padding: 40px 40px;
+  box-sizing: border-box;
+  background: rgba(79, 160, 151, 0.8);
+}
+section .image .loginBox h2 {
+  text-align: center;
+  color: white;
+  font-family: "Questrial", sans-serif;
+}
+section .image .loginBox p {
+  color: white;
+  font-size: 20px;
+  margin-top: 21px;
+  font-family: "Questrial", sans-serif;
+}
+section .image .loginBox input {
+  width: 275px;
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  color: white;
+  font-size: 18px;
+  outline: none;
+  font-family: "Questrial", sans-serif;
+}
+section .image .loginBox input::placeholder {
+  color: #e5f6ff;
+  filter: opacity(50%);
+}
+section .image .loginBox button {
+  height: 45px;
+  width: 150px;
+  margin: 45px -75px;
+  position: relative;
+  left: 50%;
+  border-radius: 20px;
+  border: none;
+  background: rgba(13, 67, 66, 0.89);
+  color: white;
+  filter: opacity(80%);
+  outline: none;
+  font-size: 18px;
+  font-family: "Questrial", sans-serif;
+}
+section .image .loginBox span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+section .image .loginBox span:after {
+  content: "»";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+section .image .loginBox button:hover {
+  background-color: rgba(16, 83, 73, 0.76);
+  transition: 0.8s;
+}
+section .image .loginBox button:hover span {
+  padding-right: 25px;
+}
+section .image .loginBox button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+@media only screen and (max-width: 400px) {
+  section .image .loginBox {
+    padding: 25px 40px;
+    margin-top: 70px;
+    width: 280px;
+    height: 380px;
+  }
+  section .image .loginBox h2 {
+    font-size: 25px;
+  }
+  section .image .loginBox p {
+    font-size: 18px;
+  }
+  section .image .loginBox input {
+    width: 200px;
+  }
+  section .image .loginBox button {
+    width: 180px;
+    margin: 45px -89px;
+  }
+}
+
+/*# sourceMappingURL=login-page.component.css.map */
