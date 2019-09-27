@@ -183,7 +183,7 @@ a {
     left: -205px;
   }
 }
-@media (min-width: 1087px) {
+@media (min-width: 1400px) {
   .s-layout__content {
     margin-left: 15em;
   }

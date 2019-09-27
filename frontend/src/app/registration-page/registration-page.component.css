@@ -18,6 +18,7 @@ section .image {
   background-size: cover;
 }
 section .image .loginBox {
+  border-radius: 3px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -114,12 +115,8 @@ section .image .loginBox button:hover span:after {
   section .image .loginBox input {
     width: 200px;
   }
-  section .image .loginBox button {
-    width: 180px;
-    margin: 20px -89px;
-  }
 }
-@media only screen and (max-height: 850px) {
+@media only screen and (max-height: 850px) and (max-width: 550px) {
   section {
     overflow-y: auto;
   }
@@ -140,10 +137,6 @@ section .image .loginBox button:hover span:after {
   }
   section .image .loginBox input {
     width: 200px;
-  }
-  section .image .loginBox button {
-    width: 180px;
-    margin: 35px -89px;
   }
 }
 @media only screen and (max-height: 700px) {
