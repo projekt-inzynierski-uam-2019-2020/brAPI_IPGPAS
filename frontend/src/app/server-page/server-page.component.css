@@ -30,9 +30,7 @@ section .title {
   font-family: Roboto, sans-serif;
   color: #444;
 }
-section .col {
-  padding-left: 0;
-}
+
 section .row {
   display: flex;
   justify-content: center;
@@ -40,6 +38,9 @@ section .row {
   margin-top: 50px;
   margin-left: 240px;
   margin-bottom: 20px;
+  
+section .row .col {
+  padding-left: 0;
 }
 section .row .card {
   margin-left: auto;
@@ -68,6 +69,23 @@ section .row .card .card-body button {
   font-size: 16px;
   font-family: "Questrial", sans-serif;
 }
+
+section .row .card .card-body .btn {
+  margin-top: 63px;
+  width: 134px;
+  border-radius: 18px;
+  border: none;
+  background: #4fa097;
+  color: white;
+  height: 39px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  outline: none;
+  font-size: 16px;
+  font-family: "Questrial", sans-serif;
+}
+  
 section .row .card .card-body span {
   cursor: pointer;
   display: inline-block;
@@ -95,20 +113,20 @@ section .row .card .card-body button:hover span:after {
 }
 
 @media only screen and (max-width: 1400px) {
-  section .image .title {
+  section .title {
     margin-left: 40px;
     margin-top: 40px;
   }
-  section .image .row {
+  section .row {
     margin-left: 65px;
   }
 }
 @media only screen and (max-width: 671px) {
-  section .image .row {
+  section .row {
     margin-left: 0px;
     margin-top: 40px;
   }
-  section .image .title {
+  section .title {
     margin-left: 0px;
     margin-top: 80px;
   }

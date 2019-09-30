@@ -88,11 +88,7 @@ section .container .row .item button:hover {
     top: 6px;
   }
 }
-@supports (-moz-appearance: none) {
-  section .back .fas {
-    top: 6px;
-  }
-}
+
 @keyframes back {
   0% {
     left: 30px;

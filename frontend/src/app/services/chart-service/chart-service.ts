@@ -26,7 +26,6 @@ export class ChartService {
 
 
   columnChart(labels: any[], data: number[], text: string) {
-
     // @ts-ignore
     this.BarChart = new Chart('barChart', {
       type: 'bar',
@@ -47,7 +46,41 @@ export class ChartService {
           fontFamily: 'Verdana',
           fontSize: 15,
           fontStyle: 'normal',
-          display: true,
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }
+
+  lineChart(labels: any[], data: number[], text: string) {
+  // @ts-ignore
+    this.LineChart = new Chart('lineChart', {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: '# of Items',
+          data: data,
+          fill: false,
+          lineTension: 0.2,
+          borderColor: 'red',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        title: {
+          text: text,
+          fontFamily: 'Verdana',
+          fontSize: 15,
+          fontStyle: 'normal',
+          display: true
         },
         scales: {
           yAxes: [{

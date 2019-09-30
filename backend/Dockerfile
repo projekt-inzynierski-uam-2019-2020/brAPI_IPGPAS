@@ -1,5 +1,10 @@
+FROM maven:3-jdk-8-slim
+COPY . /root/brapi-app-build
+WORKDIR /root/brapi-app-build
+RUN mvn package -DskipTests
+
 FROM openjdk:8-jre-alpine3.9
-WORKDIR /brapi_ipgpas_project-spring
-COPY target/brapi_igpas-0.0.1-SNAPSHOT.jar /brapi_ipgpas_project-spring
 EXPOSE 8080
+WORKDIR /opt/brapi-app
+COPY --from=0 /root/brapi-app-build/target/brapi_igpas-0.0.1-SNAPSHOT.jar .
 CMD java -jar brapi_igpas-0.0.1-SNAPSHOT.jar

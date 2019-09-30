@@ -100,11 +100,6 @@ section {
   }
 }
 
-@supports (-moz-appearance: none) {
-  section .back .fas {
-    top: 6px;
-  }
-}
 
 @supports (-moz-appearance:none) {
   section {
