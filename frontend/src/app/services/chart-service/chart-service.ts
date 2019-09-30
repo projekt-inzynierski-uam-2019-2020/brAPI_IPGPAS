@@ -4,7 +4,6 @@ import {Chart} from 'chart.js';
 @Injectable()
 export class ChartService {
   BarChart = [];
-  LineChart = [];
   backgroundChartColor = [];
   backgroundBorderChartColor = [];
   arrayOfRgba: string[] = [];
@@ -25,6 +24,7 @@ export class ChartService {
     }
   }
 
+
   columnChart(labels: any[], data: number[], text: string) {
     // @ts-ignore
     this.BarChart = new Chart('barChart', {
@@ -40,6 +40,7 @@ export class ChartService {
         }]
       },
       options: {
+        responsive: true,
         title: {
           text: text,
           fontFamily: 'Verdana',

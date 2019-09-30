@@ -4,12 +4,13 @@ import {CallsService} from '../../calls/calls.service';
 import {Chart} from 'chart.js';
 import {Server} from '../../calls/server';
 import {ChartService} from '../../services/chart-service/chart-service';
+import {PdfService} from '../../services/pdf-service/pdf-service';
 
 @Component({
   selector: 'app-trials',
   templateUrl: './trials.component.html',
   styleUrls: ['./trials.component.css'],
-  providers: [ChartService]
+  providers: [ChartService, PdfService]
 })
 export class TrialsComponent implements OnInit {
   brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
@@ -18,11 +19,13 @@ export class TrialsComponent implements OnInit {
   sumOfTrialNames: number[] = [];
   marked: false;
   canvasShow = false;
+  responsive = true;
   public pieChartLabels: string[];
   public pieChartData: number[];
   public pieChartType: string = 'pie';
+  public pieChartOptions = [ this.responsive = true];
 
-  constructor(private callService: CallsService,  private server: Server, private chartService: ChartService) {
+  constructor(private callService: CallsService,  private server: Server, private chartService: ChartService, private pdfService: PdfService) {
   }
 
   ngOnInit() {
@@ -31,7 +34,7 @@ export class TrialsComponent implements OnInit {
 
 
   getSelectedCall() {
-    return this.callService.getSelectedCall(this.server.serverName + 'studies')
+    return this.callService.getSelectedCall(this.server.serverName + 'trials')
       .subscribe(
         call => {
           this.brApiDetailPayloadResponse = call;
@@ -70,13 +73,14 @@ export class TrialsComponent implements OnInit {
     this.chartService.columnChart(this.trialName, this.sumOfTrialNames, '# of TrialName in Trials');
   }
 
-  showLineChart() {
-    this.chartService.lineChart(this.trialName, this.sumOfTrialNames, '# of TrialName in Trials');
-  }
 
   showPieChart() {
     this.pieChartLabels = this.trialName;
     this.pieChartData = this.sumOfTrialNames;
+  }
+
+  saveToPDF(elementId: string){
+    this.pdfService.donloadPDF(elementId);
   }
 
   getCallLength() {
@@ -91,7 +95,6 @@ export class TrialsComponent implements OnInit {
 
   toggleVisibility(e) {
     this.marked = e.target.checked;
-    this.showLineChart()
     this.showColumnChart()
     this.showPieChart()
     if (!this.marked) {

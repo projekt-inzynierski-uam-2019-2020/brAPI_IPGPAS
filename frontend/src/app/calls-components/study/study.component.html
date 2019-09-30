@@ -21,20 +21,19 @@
     <div class="charts" *ngIf="canvasShow">
       <table>
         <td>
+          <button class="btn-pdf" (click)="saveToPDF('barChart')">Download PDF</button>
           <canvas id="barChart"></canvas>
         </td>
-        <td>
-          <canvas id="lineChart"></canvas>
-        </td>
-        <td>
-          <canvas baseChart
+        <td class= "pie">
+          <button class="btn-pdf" (click)="saveToPDF('pieChart')">Download PDF</button>
+          <canvas id="pieChart" baseChart
                   [data]="pieChartData"
                   [labels]="pieChartLabels"
-                  [chartType]="pieChartType"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)"></canvas>
+                  [chartType]="pieChartType"></canvas>
         </td>
       </table>
     </div>
+
   </div>
+
 </section>

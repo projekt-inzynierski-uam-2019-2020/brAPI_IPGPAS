@@ -155,6 +155,18 @@ section {
           margin-bottom: 50px;
         }
 
+        .btn-pdf{
+          margin-left: auto;
+          margin-right: auto;
+          width: 160px;
+          height: 30px;
+          border-radius: 18px;
+          background: #4fa097;
+          border: none;
+          color: white;
+          outline: none;
+        }
+
       }
 
 
@@ -305,7 +317,7 @@ section {
 
 @media only screen and (max-width: 671px) {
   section {
-    .back{
+    .back {
       left: 10px;
       top: 150px;
     }
@@ -332,14 +344,26 @@ section {
       }
 
       .charts {
+
         table {
           margin-left: 0px;
 
           td {
-            width: 90vw;
+            margin-left: -20px;
+            width: 110vw;
+            height: 300px;
+          }
+
+          .pie{
+           margin-left: -36px;
+            width: 125vw;
+            height: 300px;
           }
         }
-      }
+        }
     }
   }
 }
+
+
+

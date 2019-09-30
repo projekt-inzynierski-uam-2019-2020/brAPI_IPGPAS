@@ -3,12 +3,13 @@ import {BrApiDetailPayloadResponse} from '../../calls/BrApiDetailPayloadResponse
 import {CallsService} from '../../calls/calls.service';
 import {Server} from '../../calls/server';
 import {ChartService} from '../../services/chart-service/chart-service';
+import {PdfService} from '../../services/pdf-service/pdf-service';
 
 @Component({
   selector: 'app-seasons',
   templateUrl: './seasons.component.html',
   styleUrls: ['./seasons.component.css'],
-  providers: [ChartService],
+  providers: [ChartService, PdfService],
 
 })
 export class SeasonsComponent implements OnInit {
@@ -22,8 +23,7 @@ export class SeasonsComponent implements OnInit {
   public pieChartData: number[];
   public pieChartType: string = 'pie';
 
-
-  constructor(private callsService: CallsService, private server: Server, private chartService: ChartService) {
+  constructor(private callsService: CallsService, private server: Server, private chartService: ChartService, private pdfService: PdfService) {
   }
 
   ngOnInit() {
@@ -39,17 +39,19 @@ export class SeasonsComponent implements OnInit {
       );
   }
 
-  getUniqCommonCropNames() {
+  getUniqSeasons() {
     this.year = [];
     for (let i = 0; i < this.getCallsLength(); i++) {
       if (!this.year.includes(this.brApiDetailPayloadResponse.result.data[i].year)) {
         this.year.push(this.brApiDetailPayloadResponse.result.data[i].year);
       }
     }
+
     return this.year;
+
   }
 
-  getSumOfEachCropName() {
+  getSumOfEachSeason() {
     for (let i = 0; i < this.year.length; i++) {
       this.sumOfYears.push(0);
     }
@@ -65,22 +67,24 @@ export class SeasonsComponent implements OnInit {
 
   showColumnChart() {
     this.chartService.chartColumnStyle(this.year);
-    this.chartService.columnChart(this.year, this.sumOfYears, '# of Years in Seasons');
+    this.chartService.columnChart(this.year, this.sumOfYears, '# of Studies in Season');
   }
 
-  showLineChart() {
-    this.chartService.lineChart(this.year, this.sumOfYears, '# of Years in Seasons');
-  }
 
   showPieChart() {
     this.pieChartLabels = this.year;
     this.pieChartData = this.sumOfYears;
   }
 
+  saveToPDF(elementId: string){
+    this.pdfService.donloadPDF(elementId);
+  }
+
   getCallsLength() {
     this.lengthCalls = this.brApiDetailPayloadResponse.result.data.length;
     return this.lengthCalls;
   }
+
 
   public chartClicked(e: any): void {
     console.log(e);
@@ -97,7 +101,6 @@ export class SeasonsComponent implements OnInit {
 
   toggleVisibility(e) {
     this.marked = e.target.checked;
-    this.showLineChart();
     this.showColumnChart();
     this.showPieChart();
     if (!this.marked) {

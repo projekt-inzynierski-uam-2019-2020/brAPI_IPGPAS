@@ -153,6 +153,18 @@ section {
           background-color: white;
           border-radius: 5px;
           margin-bottom: 50px;
+
+          .btn-pdf{
+            margin-left: auto;
+            margin-right: auto;
+            width: 160px;
+            height: 30px;
+            border-radius: 18px;
+            background: #4fa097;
+            border: none;
+            color: white;
+            outline: none;
+          }
         }
       }
 
@@ -230,6 +242,16 @@ section {
   transition: all 0.6s ease;
 }
 
+@supports (-moz-appearance: none) {
+  section .back .fas {
+    top: 6px;
+  }
+
+  .cbx span:first-child svg {
+    stroke-dasharray: 15.5px;
+  }
+}
+
 @keyframes wave {
   50% {
     transform: scale(0.9);
@@ -254,7 +276,6 @@ section {
     stroke-dasharray: 15.5px;
   }
 }
-
 
 @media only screen and (max-width: 1400px){
   section{

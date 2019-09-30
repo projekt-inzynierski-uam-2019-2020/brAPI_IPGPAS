@@ -147,6 +147,19 @@ section {
           background-color: white;
           border-radius: 5px;
           margin-bottom: 50px;
+
+
+          .btn-pdf{
+            margin-left: auto;
+            margin-right: auto;
+            width: 160px;
+            height: 30px;
+            border-radius: 18px;
+            background: #4fa097;
+            border: none;
+            color: white;
+            outline: none;
+          }
         }
       }
 
@@ -236,7 +249,6 @@ section {
     stroke-dasharray: 15.5px;
   }
 }
-
 
 @keyframes wave {
   50% {
@@ -329,7 +341,11 @@ section {
           margin-left: 0px;
 
           td {
-            width: 90vw;
+            width: 115vw;
+            margin-left: -23px;
+
+
+
           }
         }
       }
