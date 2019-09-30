@@ -38,7 +38,8 @@ section .row {
   margin-top: 50px;
   margin-left: 240px;
   margin-bottom: 20px;
-  
+}
+
 section .row .col {
   padding-left: 0;
 }
@@ -85,7 +86,7 @@ section .row .card .card-body .btn {
   font-size: 16px;
   font-family: "Questrial", sans-serif;
 }
-  
+
 section .row .card .card-body span {
   cursor: pointer;
   display: inline-block;
