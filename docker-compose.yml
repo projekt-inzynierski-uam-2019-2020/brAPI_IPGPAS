@@ -1,0 +1,28 @@
+# TODO Add volumes to database containers
+version: '3.7'
+services:
+  admindb:
+    build: ./database/admin_db
+    ports: 
+      - "5433:5432" 
+  brapidb:
+    build: ./database/brapi_db
+    ports: 
+      - "5432:5432"
+  brapiapp:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    links:
+      - brapidb
+  adminapp:
+    build: ./brapimanagementservice
+    ports:
+      - "8081:8080"
+    links:
+      - admindb
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+  
