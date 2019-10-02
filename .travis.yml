@@ -7,4 +7,8 @@ before_install:
   - touch database/brapi_db/PlantPhenoDB.psql
 
 script:
-  - docker-compose up --build
+  - docker-compose up -d --build
+
+after_script:
+  - docker ps
+  - docker-compose down
