@@ -3,5 +3,8 @@ dist: bionic
 services:
   - docker
 
+before_install:
+  - touch database/brapi_db/PlantPhenoDB.psql
+
 script:
   - docker-compose up --build
