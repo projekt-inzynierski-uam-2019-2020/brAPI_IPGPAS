@@ -3,25 +3,34 @@ nav{
   height: 70px;
   margin: 0;
   padding: 0;
-  background-color: #fff;
+  background-color: #303338;
   position: fixed;
   top: 0;
   z-index: 999;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid #999;
 
-  .logotype{
-    height: 50px;
-    width: auto;
+  .logo{
+    background-color: #fff;
+    padding: 10px;
+    margin-left: 5%;
     display: flex;
     justify-content: left;
-    margin-left: 5%;
-    outline: none;
+    border-radius: 10px;
 
-    &:hover{
-      cursor: pointer;
+
+    .logotype{
+      height: 40px;
+      width: auto;
+      display: flex;
+      justify-content: left;
+      outline: none;
+
+      &:hover{
+        cursor: pointer;
+      }
     }
+
   }
 
   .container{
@@ -31,34 +40,39 @@ nav{
     display: flex;
     justify-content: flex-end;
 
-    .link{
+    .btn{
       display: inline-block;
       margin: 20px;
       text-align: center;
-      color: #999;
+      color: #fff;
       text-decoration: none;
-      font-family: 'Questrial', sans-serif;
+      font-family: Saira;
       font-weight: 300;
       font-size: 17px;
     }
 
-    .link:after{
-      display:block;
-      content: '';
-      border-bottom: solid 1px #999;
-      transform: scaleX(0);
-      transition: transform 250ms ease-in-out;
+    .btn.sign{
+      width: 90px;
+      border: 1px solid #B6844A;
+      border-radius: 5px;
+      padding: 5px 10px;
+
+      &:hover{
+        background-color: #715234;
+      }
     }
 
-    .link:hover:after { transform: scaleX(1); }
+    .btn.login{
+      width: 90px;
+      background-color: #B6844A;
+      border-radius: 5px;
+      padding: 5px 10px;
 
-    .fa-user-circle{
-      display: flex;
-      align-items: center;
-      font-size: 50px;
-      margin-left: 20px;
-      color: #ddd;
+      &:hover{
+        background-color: #715234;
+      }
     }
+
   }
 }
 
@@ -69,7 +83,7 @@ nav{
     }
     .container{
 
-      .link{
+      .btn{
         margin: 20px 10px;
       }
 

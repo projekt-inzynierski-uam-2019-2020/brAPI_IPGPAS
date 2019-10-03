@@ -3,58 +3,77 @@ nav {
   height: 70px;
   margin: 0;
   padding: 0;
-  background-color: #fff;
+  background-color: #303338;
   position: fixed;
   top: 0;
   z-index: 999;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid #999; }
-  nav .logotype {
-    height: 50px;
-    width: auto;
-    display: flex;
-    justify-content: left;
-    margin-left: 5%;
-    outline: none; }
-    nav .logotype:hover {
-      cursor: pointer; }
-  nav .container {
-    max-width: 100%;
-    margin: 0 5% 0 0;
-    padding: 0;
-    display: flex;
-    justify-content: flex-end; }
-    nav .container .link {
-      display: inline-block;
-      margin: 20px;
-      text-align: center;
-      color: #999;
-      text-decoration: none;
-      font-family: 'Questrial', sans-serif;
-      font-weight: 300;
-      font-size: 17px; }
-    nav .container .link:after {
-      display: block;
-      content: '';
-      border-bottom: solid 1px #999;
-      transform: scaleX(0);
-      transition: transform 250ms ease-in-out; }
-    nav .container .link:hover:after {
-      transform: scaleX(1); }
-    nav .container .fa-user-circle {
-      display: flex;
-      align-items: center;
-      font-size: 50px;
-      margin-left: 20px;
-      color: #ddd; }
+}
+nav .logo {
+  background-color: #fff;
+  padding: 10px;
+  margin-left: 5%;
+  display: flex;
+  justify-content: left;
+  border-radius: 10px;
+}
+nav .logo .logotype {
+  height: 40px;
+  width: auto;
+  display: flex;
+  justify-content: left;
+  outline: none;
+}
+nav .logo .logotype:hover {
+  cursor: pointer;
+}
+nav .container {
+  max-width: 100%;
+  margin: 0 5% 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+nav .container .btn {
+  display: inline-block;
+  margin: 20px;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  font-family: Saira;
+  font-weight: 300;
+  font-size: 17px;
+}
+nav .container .btn.sign {
+  width: 90px;
+  border: 1px solid #B6844A;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+nav .container .btn.sign:hover {
+  background-color: #715234;
+}
+nav .container .btn.login {
+  width: 90px;
+  background-color: #B6844A;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+nav .container .btn.login:hover {
+  background-color: #715234;
+}
 
 @media only screen and (max-width: 600px) {
   nav .logotype {
-    height: 30px; }
-  nav .container .link {
-    margin: 20px 10px; }
+    height: 30px;
+  }
+  nav .container .btn {
+    margin: 20px 10px;
+  }
   nav .container .fa-user-circle {
-    font-size: 30px; } }
+    font-size: 30px;
+  }
+}
 
 /*# sourceMappingURL=navbar.component.css.map */
