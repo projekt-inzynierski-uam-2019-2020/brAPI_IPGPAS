@@ -10,13 +10,13 @@ services:
     ports: 
       - "5432:5432"
   brapiapp:
-    build: ./backend
+    build: ./brapi
     ports:
       - "8080:8080"
     links:
       - brapidb
   adminapp:
-    build: ./brapimanagementservice
+    build: ./adminapi
     ports:
       - "8081:8080"
     links:
