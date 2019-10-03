@@ -1,6 +1,6 @@
 nav{
   width: 100%;
-  height: 70px;
+  height: 5rem;
   margin: 0;
   padding: 0;
   background-color: #303338;
@@ -9,10 +9,11 @@ nav{
   z-index: 999;
   display: flex;
   align-items: center;
+  padding-top: 2rem;
 
   .logo{
     background-color: #fff;
-    padding: 10px;
+    padding: 0.5rem;
     margin-left: 5%;
     display: flex;
     justify-content: left;
@@ -41,6 +42,7 @@ nav{
     justify-content: flex-end;
 
     .btn{
+      width: 6rem;
       display: inline-block;
       margin: 20px;
       text-align: center;
@@ -49,13 +51,12 @@ nav{
       font-family: Saira;
       font-weight: 300;
       font-size: 17px;
+      border-radius: 5px;
+      padding: 5px 10px;
     }
 
     .btn.sign{
-      width: 90px;
       border: 1px solid #B6844A;
-      border-radius: 5px;
-      padding: 5px 10px;
 
       &:hover{
         background-color: #715234;
@@ -63,10 +64,7 @@ nav{
     }
 
     .btn.login{
-      width: 90px;
       background-color: #B6844A;
-      border-radius: 5px;
-      padding: 5px 10px;
 
       &:hover{
         background-color: #715234;
@@ -76,19 +74,19 @@ nav{
   }
 }
 
-@media only screen and (max-width: 600px){
-  nav{
-    .logotype{
-      height: 30px;
-    }
-    .container{
-
-      .btn{
-        margin: 20px 10px;
+@media only screen and (max-width: 500px){
+  nav {
+    .logo{
+      .logotype{
+        height: 30px;
       }
+    }
 
-      .fa-user-circle{
-        font-size: 30px;
+    .container{
+      .btn{
+        margin: 10px;
+        width: 5rem;
+        font-size: 15px;
       }
     }
   }
