@@ -1,43 +1,49 @@
 nav {
+  position: fixed;
+  z-index: 999;
+  border: 0;
+  padding: 0;
+  margin: 0;
   width: 100%;
   height: 7rem;
-  margin: 0;
-  padding: 0;
   background-color: #303338;
-  position: fixed;
-  top: 0;
-  z-index: 999;
   display: flex;
   align-items: center;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
-nav .logo {
+nav .container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-content: center;
+}
+nav .container .logo {
   background-color: #fff;
   padding: 0.5rem;
-  margin-left: 5%;
   display: flex;
   justify-content: left;
   border-radius: 10px;
+  height: 3.5rem;
 }
-nav .logo .logotype {
+nav .container .logo .logotype {
   height: 40px;
   width: auto;
   display: flex;
   justify-content: left;
   outline: none;
 }
-nav .logo .logotype:hover {
+nav .container .logo .logotype:hover {
   cursor: pointer;
 }
-nav .container {
+nav .container .inner-container {
   max-width: 100%;
-  margin: 0 5% 0 0;
   padding: 0;
   display: flex;
   justify-content: flex-end;
 }
-nav .container .btn {
+nav .container .inner-container .btn {
   width: 6rem;
   display: inline-block;
   margin: 20px;
@@ -50,16 +56,17 @@ nav .container .btn {
   border-radius: 5px;
   padding: 5px 10px;
 }
-nav .container .btn.sign {
+nav .container .inner-container .btn.sign {
   border: 1px solid #B6844A;
 }
-nav .container .btn.sign:hover {
+nav .container .inner-container .btn.sign:hover {
   background-color: #715234;
 }
-nav .container .btn.login {
+nav .container .inner-container .btn.login {
   background-color: #B6844A;
+  margin-right: 0;
 }
-nav .container .btn.login:hover {
+nav .container .inner-container .btn.login:hover {
   background-color: #715234;
 }
 
@@ -67,7 +74,7 @@ nav .container .btn.login:hover {
   nav .logo .logotype {
     height: 30px;
   }
-  nav .container .btn {
+  nav .inner-container .btn {
     margin: 10px;
     width: 5rem;
     font-size: 15px;

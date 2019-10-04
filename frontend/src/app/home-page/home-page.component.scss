@@ -8,9 +8,24 @@ section {
   height: 100%;
   left: 0;
   top: 0;
-  /*background-color: #303338;*/
-  background-image: url("../../assets/background.gif");
-  background-size: cover;
+  background-color: #303338;
+  overflow: hidden;
+
+  #scene{
+    position: absolute;
+    top: -4rem;
+    left: -15rem;
+  }
+
+  .pic1{
+    opacity: .05;
+    transform: scale(.9);
+  }
+
+  .pic2{
+    opacity: .15;
+    transform: scale(.9);
+  }
 
   .container {
     width: 100%;

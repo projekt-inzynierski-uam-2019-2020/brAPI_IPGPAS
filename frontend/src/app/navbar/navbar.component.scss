@@ -1,77 +1,85 @@
 nav{
+  position: fixed;
+  z-index: 999;
+  border: 0;
+  padding: 0;
+  margin: 0;
   width: 100%;
   height: 7rem;
-  margin: 0;
-  padding: 0;
   background-color: #303338;
-  position: fixed;
-  top: 0;
-  z-index: 999;
   display: flex;
   align-items: center;
   padding-top: 2rem;
   padding-bottom: 2rem;
 
-  .logo{
-    background-color: #fff;
-    padding: 0.5rem;
-    margin-left: 5%;
+  .container{
+    width: 100%;
     display: flex;
-    justify-content: left;
-    border-radius: 10px;
+    justify-content: space-between;
+    flex-direction: row;
+    align-content: center;
 
-
-    .logotype{
-      height: 40px;
-      width: auto;
+    .logo{
+      background-color: #fff;
+      padding: 0.5rem;
       display: flex;
       justify-content: left;
-      outline: none;
+      border-radius: 10px;
+      height: 3.5rem;
 
-      &:hover{
-        cursor: pointer;
+
+      .logotype{
+        height: 40px;
+        width: auto;
+        display: flex;
+        justify-content: left;
+        outline: none;
+
+        &:hover{
+          cursor: pointer;
+        }
       }
+
     }
 
-  }
+    .inner-container{
+      max-width: 100%;
+      padding: 0;
+      display: flex;
+      justify-content: flex-end;
 
-  .container{
-    max-width: 100%;
-    margin: 0 5% 0 0;
-    padding: 0;
-    display: flex;
-    justify-content: flex-end;
-
-    .btn{
-      width: 6rem;
-      display: inline-block;
-      margin: 20px;
-      text-align: center;
-      color: #fff;
-      text-decoration: none;
-      font-family: Saira;
-      font-weight: 300;
-      font-size: 17px;
-      border-radius: 5px;
-      padding: 5px 10px;
-    }
-
-    .btn.sign{
-      border: 1px solid #B6844A;
-
-      &:hover{
-        background-color: #715234;
+      .btn{
+        width: 6rem;
+        display: inline-block;
+        margin: 20px;
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+        font-family: Saira;
+        font-weight: 300;
+        font-size: 17px;
+        border-radius: 5px;
+        padding: 5px 10px;
       }
-    }
 
-    .btn.login{
-      background-color: #B6844A;
+      .btn.sign{
+        border: 1px solid #B6844A;
 
-      &:hover{
-        background-color: #715234;
+        &:hover{
+          background-color: #715234;
+        }
       }
-    }
 
+      .btn.login{
+        background-color: #B6844A;
+        margin-right: 0;
+
+        &:hover{
+          background-color: #715234;
+        }
+      }
+
+    }
   }
 }
 
@@ -83,7 +91,7 @@ nav{
       }
     }
 
-    .container{
+    .inner-container{
       .btn{
         margin: 10px;
         width: 5rem;
