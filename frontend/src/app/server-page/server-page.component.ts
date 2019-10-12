@@ -6,7 +6,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-server-page',
   templateUrl: './server-page.component.html',
-  styleUrls: ['./server-page.component.css']
+  styleUrls: ['./server-page.component.scss']
 })
 export class ServerPageComponent {
   checkboxes = [

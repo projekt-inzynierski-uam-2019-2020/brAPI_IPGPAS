@@ -12,7 +12,7 @@ import {PdfService} from '../../services/pdf-service/pdf-service';
 @Component({
   selector: 'app-study',
   templateUrl: './study.component.html',
-  styleUrls: ['./study.component.css'],
+  styleUrls: ['./study.component.scss'],
   providers: [ChartService, PdfService],
 
 })

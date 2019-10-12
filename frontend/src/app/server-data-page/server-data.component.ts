@@ -4,7 +4,7 @@ import {CallsService} from '../calls/calls.service';
 @Component({
   selector: 'app-chart-page',
   templateUrl: './server-data.component.html',
-  styleUrls: ['./server-data.component.css'],
+  styleUrls: ['./server-data.component.scss'],
 
 })
 export class ServerDataComponent implements OnInit {
