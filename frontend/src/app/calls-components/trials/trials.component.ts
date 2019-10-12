@@ -9,7 +9,7 @@ import {PdfService} from '../../services/pdf-service/pdf-service';
 @Component({
   selector: 'app-trials',
   templateUrl: './trials.component.html',
-  styleUrls: ['./trials.component.css'],
+  styleUrls: ['./trials.component.scss'],
   providers: [ChartService, PdfService]
 })
 export class TrialsComponent implements OnInit {

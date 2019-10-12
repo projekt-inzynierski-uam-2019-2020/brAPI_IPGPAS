@@ -8,7 +8,7 @@ import {PdfService} from '../../services/pdf-service/pdf-service';
 @Component({
   selector: 'app-seasons',
   templateUrl: './seasons.component.html',
-  styleUrls: ['./seasons.component.css'],
+  styleUrls: ['./seasons.component.scss'],
   providers: [ChartService, PdfService],
 
 })
