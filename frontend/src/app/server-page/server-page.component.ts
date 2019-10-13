@@ -36,6 +36,7 @@ export class ServerPageComponent {
     console.log(result);
   }
   public toggleStyle(id) {
+    const card = document.getElementById(`card${ id }`);
     const header = document.getElementById(`card-header${ id }`);
     const body = document.getElementById(`card-body${ id }`);
 
@@ -46,12 +47,14 @@ export class ServerPageComponent {
       }*/
 
     if (this.isActive) {
+      card.style.boxShadow = '0px 10px 20px rgba(0, 0, 0, 0.7)';
       header.style.backgroundColor = '#B6844A';
       body.style.backgroundColor = '#F5E0B7';
       this.checkboxes[id].selected = true;
       console.log('active' + id);
       this.isActive = !this.isActive;
     } else {
+      card.style.boxShadow = 'none';
       header.style.backgroundColor = '#858585';
       body.style.backgroundColor = '#FFFFFF';
       this.checkboxes[id].selected = false;

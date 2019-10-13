@@ -1,4 +1,4 @@
-section {
+.servers {
   position: absolute;
   z-index: -10;
   border: 0;
@@ -6,7 +6,7 @@ section {
   margin: 0;
   left: 0;
   top: 0;
-  overflow-x: hidden;
+  overflow: hidden;
   padding-top: 100px;
   background-color: #303338;
   width: 100%;
@@ -17,34 +17,31 @@ section {
   background-attachment: scroll;
   min-height: 100%;
 
-  .background{
+  &__background {
     position: absolute;
-    overflow: hidden;
     z-index: -1;
 
-    &__back{
+    &--back {
       top: 0;
       left: 0;
-      overflow: hidden;
       opacity: .05;
     }
 
-    &__front{
+    &--front {
       position: absolute;
       top: 0;
       left: 0;
-      overflow: hidden;
       opacity: .2;
     }
   }
 
-  .col{
+  &__header {
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: center;
 
-    .title {
+    &--title {
       display: flex;
       justify-content: center;
       text-align: center;
@@ -56,7 +53,7 @@ section {
       color: #fff;
     }
 
-    .btn{
+    &--button, .btn {
       width: 200px;
       padding: 10px;
       color: #fff;
@@ -64,73 +61,80 @@ section {
       font-weight: lighter;
       font-size: 25px;
       border-radius: 5px;
-
-      &:focus, &btn:active {
-        outline: none !important;
-        box-shadow: none;
-      }
-    }
-
-    .next {
       display: flex;
       margin: auto;
       margin-top: 40px;
       justify-content: center;
       border: 1px solid #B6844A;
 
-      & .fa-long-arrow-alt-right{
+      &:focus, &btn:active {
+        outline: none !important;
+        box-shadow: none;
+      }
+
+      & .fa-long-arrow-alt-right {
         margin: 5px 0 0 20px;
+        
+
+      }
+    }
+
+    &--button:hover {
+      & .fa-long-arrow-alt-right {
+        transition: hvr-wobble-horizontal 1s ease-out;
+        animation-name: hvr-wobble-horizontal;
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
       }
     }
   }
 
-  .row {
+  &__container, .row {
     display: flex;
     justify-content: center;
     text-align: center;
+    margin: auto;
     margin-top: 50px;
     margin-bottom: 20px;
 
-    .col {
-      padding-left: 0;
-
-    }
-
-    .card {
-      margin-left: auto;
-      margin-right: auto;
+    &--card {
       width: 270px;
       margin-top: 20px;
-      height: 310px;
+      background-color: #FFFFFF;
       color: rgba(78, 78, 78, 0.92);
       padding: 0;
       cursor: pointer;
 
-      .card-header{
+      .card-title{
         font-family: Roboto;
         font-size: 24px;
         width: 100%;
+        padding: 5px;
         color: #ffffff;
         background-color: #858585;
+        margin-bottom: 0;
+        top: 0;
       }
 
       .card-body {
         text-align: center;
         background-color: #ffffff;
 
-        & .card-title{
+        .card-subtitle{
           font-family: Roboto;
           font-size: 18px;
           margin-bottom: 5px;
+          word-wrap: break-word;
         }
 
-        & .card-hr{
+        .card-hr{
           border-bottom: .5px solid rgb(133, 133, 133);
           margin-bottom: 30px;
           margin-top: 0;
         }
 
-        & .card-text{
+        .card-text{
           font-family: Roboto;
           font-size: 12px;
         }
@@ -205,23 +209,61 @@ section {
   }
 }
 
+@keyframes hvr-wobble-horizontal {
+  16.65% {
+    -webkit-transform: translateX(8px);
+    transform: translateX(8px);
+  }
+  33.3% {
+    -webkit-transform: translateX(-6px);
+    transform: translateX(-6px);
+  }
+  49.95% {
+    -webkit-transform: translateX(4px);
+    transform: translateX(4px);
+  }
+  66.6% {
+    -webkit-transform: translateX(-2px);
+    transform: translateX(-2px);
+  }
+  83.25% {
+    -webkit-transform: translateX(1px);
+    transform: translateX(1px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
 
-@media only screen and (max-width: 1400px) {
-  section {
-    .title{
-      margin-top: 40px;
+
+@media (max-width: 1400px) {
+  .servers {
+    &__header{
+      &--title{
+        font-size: 50px;
+      }
+
+      &--button, .btn{
+        width: 150px;
+        font-size: 20px;
+      }
     }
   }
 }
 
 @media only screen and (max-width: 671px) {
-  section {
-    .row {
-      margin-top: 40px;
-    }
+  .servers {
+    &__header{
+      &--title{
+        font-size: 30px;
+      }
 
-    .title{
-      margin-top: 80px;
+      &--button, .btn{
+        width: 150px;
+        font-size: 15px;
+        padding: 8px;
+      }
     }
   }
 }
