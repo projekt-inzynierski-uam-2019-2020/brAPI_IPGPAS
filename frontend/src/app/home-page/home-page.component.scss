@@ -10,10 +10,9 @@
   top: 0;
   background-color: #303338;
   overflow: hidden;
-
-  @media(max-height: 700px) {
-    overflow-y: scroll;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &__scene, #scene {
     position: absolute;
@@ -42,7 +41,6 @@
     justify-content: center;
     flex-direction: row;
     align-content: center;
-    margin-top: 15rem;
 
     &--left {
       display: flex;
@@ -255,7 +253,7 @@
   .homepage__box {
 
     flex-direction: column;
-    margin-top: 9rem;
+    margin-top: 5rem;
 
     &--left {
       text-align: center;
@@ -303,7 +301,7 @@
 
 @media (max-width: 511px) {
   .homepage__box {
-    margin-top: 10rem;
+    margin-top: 5rem;
 
     &--left-button {
 
