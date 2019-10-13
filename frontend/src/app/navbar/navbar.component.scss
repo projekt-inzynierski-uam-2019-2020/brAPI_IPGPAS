@@ -1,80 +1,104 @@
 nav{
-  width: 100%;
-  height: 70px;
-  margin: 0;
-  padding: 0;
-  background-color: #fff;
   position: fixed;
-  top: 0;
   z-index: 999;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  border-bottom: 0.2rem solid #B6844A;
+  width: 100%;
+  height: 5rem;
+  background-color: #303338;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid #999;
-
-  .logotype{
-    height: 50px;
-    width: auto;
-    display: flex;
-    justify-content: left;
-    margin-left: 5%;
-    outline: none;
-
-    &:hover{
-      cursor: pointer;
-    }
-  }
+  padding-top: 2rem;
+  justify-content: center;
+  padding-bottom: 2rem;
 
   .container{
-    max-width: 100%;
-    margin: 0 5% 0 0;
-    padding: 0;
+    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    flex-direction: row;
+    align-content: center;
 
-    .link{
-      display: inline-block;
-      margin: 20px;
-      text-align: center;
-      color: #999;
-      text-decoration: none;
-      font-family: 'Questrial', sans-serif;
-      font-weight: 300;
-      font-size: 17px;
-    }
-
-    .link:after{
-      display:block;
-      content: '';
-      border-bottom: solid 1px #999;
-      transform: scaleX(0);
-      transition: transform 250ms ease-in-out;
-    }
-
-    .link:hover:after { transform: scaleX(1); }
-
-    .fa-user-circle{
+    .logo{
+      background-color: #fff;
+      padding: 0.5rem;
       display: flex;
-      align-items: center;
-      font-size: 50px;
-      margin-left: 20px;
-      color: #ddd;
+      justify-content: left;
+      border-radius: 10px;
+      height: 3.5rem;
+      margin-top: 0.6rem;
+
+
+      .logotype{
+        height: 40px;
+        width: auto;
+        display: flex;
+        justify-content: left;
+        outline: none;
+
+        &:hover{
+          cursor: pointer;
+        }
+      }
+
+    }
+
+    .inner-container{
+      max-width: 100%;
+      padding: 0;
+      display: flex;
+      justify-content: flex-end;
+
+      .btn{
+        width: 6rem;
+        display: inline-block;
+        margin: 20px;
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+        font-family: Saira;
+        font-weight: 300;
+        font-size: 17px;
+        border-radius: 5px;
+        padding: 5px 10px;
+      }
+
+      .btn.sign{
+        border: 1px solid #B6844A;
+
+        &:hover{
+          background-color: #715234;
+        }
+      }
+
+      .btn.login{
+        background-color: #B6844A;
+        margin-right: 0;
+
+        &:hover{
+          background-color: #715234;
+        }
+      }
+
     }
   }
 }
 
-@media only screen and (max-width: 600px){
-  nav{
-    .logotype{
-      height: 30px;
-    }
-    .container{
-
-      .link{
-        margin: 20px 10px;
+@media only screen and (max-width: 500px){
+  nav {
+    .logo{
+      .logotype{
+        height: 30px;
       }
+    }
 
-      .fa-user-circle{
-        font-size: 30px;
+    .inner-container{
+      .btn{
+        margin: 10px;
+        width: 5rem;
+        font-size: 15px;
       }
     }
   }
