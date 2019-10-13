@@ -1,72 +1,81 @@
-section {
+.homepage {
   position: absolute;
   z-index: -10;
   border: 0;
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   left: 0;
   top: 0;
   background-color: #303338;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  #scene{
+  &__scene, #scene {
     position: absolute;
     top: -4rem;
     left: -15rem;
+
+    .leaves-background-1 {
+      opacity: .05;
+      transform: scale(.9);
+      margin: 0 auto;
+    }
+
+    .leaves-background-2 {
+
+      opacity: .15;
+      transform: scale(.9);
+    }
   }
 
-  .pic1{
-    opacity: .05;
-    transform: scale(.9);
-  }
 
-  .pic2{
-    opacity: .15;
-    transform: scale(.9);
-  }
-
-  .container {
-    width: 100%;
+  &__box {
+    margin: 0 auto;
+    max-width: 90%;
     max-height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: row;
     align-content: center;
-    margin-top: 15rem;
+    margin-top: 2rem;
 
-    .col{
+    &--left {
       display: flex;
       justify-content: center;
       flex-direction: column;
       align-content: center;
 
-      .title{
+      h2 {
         color: #fff;
         font-family: Roboto;
         font-size: 49px;
         font-weight: normal;
       }
 
-      .name{
+      .title {
         color: #fff;
         font-family: Roboto;
         font-size: 85px;
         font-weight: bold;
       }
 
-      .description{
+      p {
         color: #fff;
         font-family: Roboto;
         font-weight: lighter;
-        font-size: 29px;
+        font-size: 22px;
+        max-width: 35rem;
+
       }
 
-      .row{
+      &-button {
         margin: 20px 5px;
 
-        .btn{
+        .btn {
           width: 200px;
           padding: 10px;
           color: #fff;
@@ -76,226 +85,232 @@ section {
           border-radius: 5px;
         }
 
-        .btn:focus,.btn:active {
+        .btn:focus, .btn:active {
           outline: none !important;
           box-shadow: none;
         }
 
-        .sign-in{
+        .sign-in {
           margin-right: 50px;
           background-color: #B6844A;
 
-          &:hover{
-            -webkit-transition: shadow-pop-tr .3s cubic-bezier(.47,0.000,.745,.715) both;
-            animation: shadow-pop-tr .3s cubic-bezier(.47,0.000,.745,.715) both
+          &:hover {
+            -webkit-transition: shadow-pop-tr .3s cubic-bezier(.47, 0.000, .745, .715) both;
+            animation: shadow-pop-tr .3s cubic-bezier(.47, 0.000, .745, .715) both
           }
         }
 
-        .servers{
+        .servers {
           border: 1px solid #B6844A;
 
-          &:hover{
-            -webkit-transition: shadow-pop-tr .3s cubic-bezier(.47,0.000,.745,.715) both;
-            animation: shadow-pop-tr .3s cubic-bezier(.47,0.000,.745,.715) both
+          &:hover {
+            -webkit-transition: shadow-pop-tr .3s cubic-bezier(.47, 0.000, .745, .715) both;
+            animation: shadow-pop-tr .3s cubic-bezier(.47, 0.000, .745, .715) both
           }
         }
       }
+    }
 
-      .laptop{
+    &--right {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-content: center;
+
+      img {
         width: 45vw;
+        height: auto;
+        max-width: 864px;
         height: auto;
       }
     }
   }
-}
 
-@-webkit-keyframes shadow-pop-tr{
-  0%{
-    -webkit-box-shadow:0 0 #845f39,0 0 #845f39,0 0 #845f39,0 0 #845f39,0 0 #3e3e3e,0 0 #3e3e3e,0 0 #3e3e3e,0 0 #3e3e3e;
-    box-shadow:0 0 #845f39,0 0 #845f39,0 0 #845f39,0 0 #845f39,0 0 #3e3e3e,0 0 #3e3e3e,0 0 #3e3e3e,0 0 #3e3e3e;
-    -webkit-transform:translateX(0) translateY(0);
-    transform:translateX(0) translateY(0)
+  @-webkit-keyframes shadow-pop-tr {
+    0% {
+      -webkit-box-shadow: 0 0 #845f39, 0 0 #845f39, 0 0 #845f39, 0 0 #845f39, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
+      box-shadow: 0 0 #845f39, 0 0 #845f39, 0 0 #845f39, 0 0 #845f39, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
+      -webkit-transform: translateX(0) translateY(0);
+      transform: translateX(0) translateY(0)
+    }
+    100% {
+      -webkit-box-shadow: 1px -1px #845f39, 2px -2px #845f39, 3px -3px #845f39, 4px -4px #845f39, 5px -5px #3e3e3e, 6px -6px #3e3e3e, 7px -7px #3e3e3e, 8px -8px #3e3e3e;
+      box-shadow: 1px -1px #845f39, 2px -2px #845f39, 3px -3px #845f39, 4px -4px #845f39, 5px -5px #3e3e3e, 6px -6px #3e3e3e, 7px -7px #3e3e3e, 8px -8px #3e3e3e;
+      -webkit-transform: translateX(-8px) translateY(8px);
+      transform: translateX(-8px) translateY(8px)
+    }
   }
-  100%{
-    -webkit-box-shadow:1px -1px #845f39,2px -2px #845f39,3px -3px #845f39,4px -4px #845f39,5px -5px #3e3e3e,6px -6px #3e3e3e,7px -7px #3e3e3e,8px -8px #3e3e3e;
-    box-shadow:1px -1px #845f39,2px -2px #845f39,3px -3px #845f39,4px -4px #845f39,5px -5px #3e3e3e,6px -6px #3e3e3e,7px -7px #3e3e3e,8px -8px #3e3e3e;
-    -webkit-transform:translateX(-8px) translateY(8px);
-    transform:translateX(-8px) translateY(8px)
-  }
-}
 
-@keyframes shadow-pop-tr{
-  0%{
-    -webkit-box-shadow:0 0 #845f39,0 0 #845f39,0 0 #845f39,0 0 #845f39,0 0 #3e3e3e,0 0 #3e3e3e,0 0 #3e3e3e,0 0 #3e3e3e;
-    box-shadow:0 0 #845f39,0 0 #845f39,0 0 #845f39,0 0 #845f39,0 0 #3e3e3e,0 0 #3e3e3e,0 0 #3e3e3e,0 0 #3e3e3e;
-    -webkit-transform:translateX(0) translateY(0);
-    transform:translateX(0) translateY(0)
-  }
-  100%{
-    -webkit-box-shadow:1px -1px #845f39,2px -2px #845f39,3px -3px #845f39,4px -4px #845f39,5px -5px #3e3e3e,6px -6px #3e3e3e,7px -7px #3e3e3e,8px -8px #3e3e3e;
-    box-shadow:1px -1px #845f39,2px -2px #845f39,3px -3px #845f39,4px -4px #845f39,5px -5px #3e3e3e,6px -6px #3e3e3e,7px -7px #3e3e3e,8px -8px #3e3e3e;
-    -webkit-transform:translateX(-8px) translateY(8px);
-    transform:translateX(-8px) translateY(8px)
-  }
-}
-
-@media (max-width: 1700px){
-  section{
-
-    .container{
-
-      .col{
-
-        .title{
-          font-size: 35px;
-        }
-
-        .name{
-          font-size: 70px;
-        }
-
-        .description{
-          font-size: 20px;
-        }
-
-        .row{
-
-          .btn.sign-in{
-            width: 180px;
-            font-size: 20px;
-          }
-
-          .btn.servers{
-            width: 180px;
-            font-size: 20px;
-          }
-        }
-      }
+  @keyframes shadow-pop-tr {
+    0% {
+      -webkit-box-shadow: 0 0 #845f39, 0 0 #845f39, 0 0 #845f39, 0 0 #845f39, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
+      box-shadow: 0 0 #845f39, 0 0 #845f39, 0 0 #845f39, 0 0 #845f39, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
+      -webkit-transform: translateX(0) translateY(0);
+      transform: translateX(0) translateY(0)
+    }
+    100% {
+      -webkit-box-shadow: 1px -1px #845f39, 2px -2px #845f39, 3px -3px #845f39, 4px -4px #845f39, 5px -5px #3e3e3e, 6px -6px #3e3e3e, 7px -7px #3e3e3e, 8px -8px #3e3e3e;
+      box-shadow: 1px -1px #845f39, 2px -2px #845f39, 3px -3px #845f39, 4px -4px #845f39, 5px -5px #3e3e3e, 6px -6px #3e3e3e, 7px -7px #3e3e3e, 8px -8px #3e3e3e;
+      -webkit-transform: translateX(-8px) translateY(8px);
+      transform: translateX(-8px) translateY(8px)
     }
   }
 }
 
-@media (max-width: 1300px){
-  section{
+@media (max-width: 1700px) {
+  .homepage__box--left {
 
-    .container{
+    h2 {
+      font-size: 35px;
+    }
 
-      .col{
+    .title {
+      font-size: 70px;
+    }
 
-        .title{
-          font-size: 30px;
-        }
+    p {
+      font-size: 20px;
+    }
 
-        .name{
-          font-size: 60px;
-        }
+    &-button {
 
-        .description{
-          font-size: 18px;
-        }
+      .btn.sign-in {
+        width: 180px;
+        font-size: 20px;
+      }
 
-        .row{
-
-          .btn.sign-in{
-            width: 150px;
-            font-size: 20px;
-          }
-
-          .btn.servers{
-            width: 150px;
-            font-size: 20px;
-          }
-        }
+      .btn.servers {
+        width: 180px;
+        font-size: 20px;
       }
     }
   }
 }
 
 
-@media (max-width: 1000px){
-  section{
+@media (max-width: 1300px) {
+  .homepage__box--left {
 
-    .container{
+    h2 {
+      font-size: 30px;
+    }
 
-      .col{
+    .title {
+      font-size: 60px;
+    }
 
-        .title{
-          font-size: 25px;
-        }
+    p {
+      font-size: 18px;
+    }
 
-        .name{
-          font-size: 50px;
-        }
+    &-button {
 
-        .description{
+      .btn.sign-in {
+        width: 150px;
+        font-size: 20px;
+      }
+
+      .btn.servers {
+        width: 150px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 1000px) {
+  .homepage__box--left {
+
+    h2 {
+      font-size: 25px;
+    }
+
+    .title {
+      font-size: 50px;
+    }
+
+    p {
+      font-size: 15px;
+    }
+
+    &-button {
+
+      .btn.sign-in {
+        width: 120px;
+        font-size: 20px;
+      }
+
+      .btn.servers {
+        width: 120px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 700px) {
+  .homepage__box {
+
+    flex-direction: column;
+    margin-top: 5rem;
+
+    &--left {
+      text-align: center;
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .title {
+        font-size: 35px;
+      }
+
+      p {
+        margin: 0 auto;
+        font-size: 12px;
+      }
+
+      &-button {
+        flex-direction: column;
+        align-items: center;
+
+        .btn.sign-in {
+          width: 200px;
           font-size: 15px;
         }
 
-        .row{
-
-          .btn.sign-in{
-            width: 120px;
-            font-size: 20px;
-          }
-
-          .btn.servers{
-            width: 120px;
-            font-size: 20px;
-          }
+        .btn.servers {
+          width: 200px;
+          font-size: 15px;
         }
+      }
+    }
+
+    &--right {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 80vw;
       }
     }
   }
 }
 
-@media (max-width: 700px){
-  section{
 
-    .container{
-      flex-direction: column;
-      margin-top: 8rem;
+@media (max-width: 511px) {
+  .homepage__box {
+    margin-top: 5rem;
 
-      .col{
-        text-align: center;
+    &--left-button {
 
-        .title{
-          font-size: 20px;
-        }
+      .btn.sign-in {
+        margin: 1rem;
 
-        .name{
-          font-size: 35px;
-        }
-
-        .description{
-          font-size: 12px;
-        }
-
-        .row{
-          flex-direction: column;
-          align-items: center;
-
-          .btn.sign-in{
-            width: 200px;
-            font-size: 15px;
-            margin-right: 0;
-            margin-bottom: 1rem;
-          }
-
-          .btn.servers{
-            width: 200px;
-            font-size: 15px;
-          }
-        }
-
-        .laptop{
-          width: 80vw;
-        }
       }
 
-      .image{
-        display: flex;
-        align-items: center;
-      }
     }
   }
 }
