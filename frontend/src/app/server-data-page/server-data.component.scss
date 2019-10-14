@@ -1,4 +1,4 @@
-section {
+.data {
   position: absolute;
   z-index: -10;
   border: 0;
@@ -8,101 +8,134 @@ section {
   height: 100%;
   left: 0;
   top: 0;
-  background: linear-gradient(
-      rgba(247, 247, 247, .5),
-      rgba(247, 247, 247, 0.5)
-  ),
-  url("../../assets/background-servers.jpeg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+  background-color: #303338;
   min-height: 100%;
-  overflow-y: scroll;
+  overflow: hidden;
+  padding-top: 6rem;
 
-  .back{
-    display: inline-block;
-    width: 120px;
-    position: relative;
-    top: 100px;
-    left: 300px;
-    background-color: transparent;
-    border: 2px solid #2e5d54;
-    border-radius: 40px;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 20px;
-    color: #2e5d54;
-    padding-left: 50px;
+  &__background{
+    position: absolute;
+    z-index: -1;
 
-    &:hover{
-      .fas {
-        animation: back .8s infinite;
-      }
-    }
-
-    .fas{
+    &--front{
       position: absolute;
-      top: 8px;
-      left: 30px;
-      margin-right: 10px;
+      top: 0;
+      left: 0;
+      opacity: .05;
     }
 
-    &:active, &:focus{
-      outline: none;
+    &--back{
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: .2;
     }
   }
 
-  .container {
-    max-width: 100%;
+  &__header{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin-top: 50px;
+    text-align: center;
 
-    .title{
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      margin-left: 240px;
-      margin-top: 70px;
-      font-size: 35px;
-      font-family: Roboto, sans-serif;
-      color: #444;
-    }
+    .button, .btn{
+      margin: auto;
+      display: inline-block;
+      width: 8rem;
+      height: 3rem;
+      padding: 0;
+      background-color: transparent;
+      border: 2px solid #B6844A;
+      border-radius: 5px;
+      font-family: "Segoe UI", sans-serif;
+      font-size: 20px;
+      color: #FFFFFF;
+      margin-top: 4rem;
 
-    .row{
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      margin-left: 240px;
-
-      .item{
-        button{
-          width: 200px;
-          height: 80px;
-          outline: none;
-          margin: 25px auto;
-          display: block;
-          border: none;
-          border-radius: 5px;
-          filter: opacity(90%);
-          color: white;
-          font-family: "Segoe UI", sans-serif;
-          font-size: 20px;
-          background: linear-gradient(120deg, #62bab1 0%,#62BAB1 10%, #4fa097 10%, #4fa097 15%, #55AAA1 15%, #55AAA1 30%, #4fa097 30%, #4fa097 100%);
-
-          &:hover{
-            background: linear-gradient(120deg, #4e9c93 0%,#4e9c93 10%, #3E8178 10%, #3e8178 15%, #448c84 15%, #448c84 30%, #3E8178 30%, #3E8178 100%);
-          }
+      &:hover{
+        .fas {
+          transition: hvr-wobble-horizontal 1s ease-out;
+          animation-name: hvr-wobble-horizontal;
+          animation-duration: 1s;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
         }
       }
+
+      .fas{
+        top: 8px;
+        left: 2rem;
+        margin-right: 1rem;
+      }
+
+      &:active, &:focus{
+        outline: none;
+      }
     }
+
+    .title{
+      margin-top: 1rem;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 64px;
+      color: #FFFFFF;
+    }
+  }
+
+  &__container, .row {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+
+    &--item, .btn{
+      display: flex;
+      flex-direction: row;
+      width: 12rem;
+      height: 3rem;
+      margin-top: 1rem;
+      background: #7D786B;
+      border-radius: 9px;
+      cursor: pointer;
+      padding: 0;
+      border: none;
+
+      &:focus, &btn:active {
+        outline: none !important;
+        box-shadow: none;
+      }
+
+      .checkbox{
+        width: 3rem;
+        height: 3rem;
+        background-color: #B6844A;
+        border-radius: 9px;
+        padding: 10px;
+
+        .fa-check:before{
+          font-size: 25px;
+          color: #FFFFFF;
+        }
+      }
+
+      .name{
+        font-family: Roboto;
+        font-size: 24px;
+        width: 100%;
+        padding: 5px;
+        color: #FFFFFF;
+      }
+    }
+
   }
 }
 
 
 @supports (-moz-appearance:none) {
-  section {
+  .data {
     .back {
       .fas {
         top: 6px;
@@ -111,41 +144,48 @@ section {
   }
 }
 
-@keyframes back {
-  0% {left: 30px}
-  50%{left: 10px}
-  100%{left: 30px}
+@keyframes hvr-wobble-horizontal {
+  16.65% {
+    -webkit-transform: translateX(8px);
+    transform: translateX(8px);
+  }
+  33.3% {
+    -webkit-transform: translateX(-6px);
+    transform: translateX(-6px);
+  }
+  49.95% {
+    -webkit-transform: translateX(4px);
+    transform: translateX(4px);
+  }
+  66.6% {
+    -webkit-transform: translateX(-2px);
+    transform: translateX(-2px);
+  }
+  83.25% {
+    -webkit-transform: translateX(1px);
+    transform: translateX(1px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
 }
 
-@media only screen and (max-width: 1400px){
-  section{
-    .back{
-      left: 80px;
-    }
-    .container{
-      .title, .row{
-        margin-left: 65px;
+@media (max-width: 1400px) {
+  .data {
+    &__header{
+      .title{
+        font-size: 50px;
       }
     }
   }
 }
 
-
-@media only screen and (max-width: 671px){
-  section{
-    .back{
-      left: 10px;
-      top: 150px;
-    }
-    .container{
+@media only screen and (max-width: 671px) {
+  .data {
+    &__header{
       .title{
-        margin-left: 20px;
-        margin-top: 120px;
-      }
-
-      .row{
-        margin-left: 0px;
-        margin-top: 50px;
+        font-size: 30px;
       }
     }
   }

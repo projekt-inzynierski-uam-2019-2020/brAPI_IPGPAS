@@ -1,19 +1,28 @@
-<section>
-  <button class="back" type="button" href="#" routerLink="/servers"><i class="fas fa-long-arrow-alt-left"></i>Back</button>
-  <div class="container">
-    <h2 class="title">Choose Category</h2>
-    <div class="row">
-      <div class="col-md-6 col-lg-3 item">
-        <button type="button" href="#" routerLink="/servers/study">Study</button>
-      </div>
-      <div class="col-md-6 col-lg-3 item">
-        <button type="button" href="#" routerLink="/servers/trials">Trials</button>
-      </div>
-      <div class="col-md-6 col-lg-3 item">
-        <button type="button" href="#" routerLink="/servers/seasons">Season</button>
-      </div>
-    </div>
+<div class="data">
+  <div class="data__background">
+    <img class="data__background--front" src="../../assets/leaves-background-1.png"/>
+    <img class="data__background--back" src="../../assets/leaves-background-2.png" />
   </div>
-
-</section>
+  <div class="data__header">
+    <button class="btn button" type="button" href="#" routerLink="/servers">
+      <i class="fas fa-long-arrow-alt-left"></i>
+      Back
+    </button>
+    <h2 class="title">CHOOSE CATEGORY</h2>
+  </div>
+  <div class="row data__container">
+    <button class="btn mx-4 data__container--item" type="button" href="#" routerLink="/servers/study">
+      <div class="checkbox"><i class="fas fa-check"></i></div>
+      <p class="name">Study</p>
+    </button>
+    <button class="btn mx-4 data__container--item" type="button" href="#" routerLink="/servers/trials">
+      <div class="checkbox"><i class="fas fa-check"></i></div>
+      <p class="name">Trials</p>
+    </button>
+    <button class="btn mx-4 data__container--item" type="button" href="#" routerLink="/servers/seasons">
+      <div class="checkbox"><i class="fas fa-check"></i></div>
+      <p class="name">Season</p>
+    </button>
+  </div>
+</div>
 
