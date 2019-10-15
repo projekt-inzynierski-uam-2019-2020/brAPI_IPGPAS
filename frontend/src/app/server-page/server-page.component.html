@@ -1,39 +1,69 @@
-<section>
-  <div class="image">
-    <h2 class="title">SELECT SERVER</h2>
-    <div class="row">
-      <div class="col-md-6 col-lg-4 col">
-        <div class="card">
-          <h5 class="card-header">Breeding Api</h5>
-
-          <div class="card-body">
-            <h5 class="card-title">https://test-server.brapi.org/</h5>
-            <p class="card-text">Fully implemented example of the BrAPI specification, backed by a sample database.</p>
-            <input [(ngModel)]="checkboxes[0].selected" type="checkbox" value={{checkboxes[0].value}}
-                   id={{checkboxes[0].value}} name="num">
-            <button class="btn" style="margin-top: 10px" href="#" routerLink="data"><span>SELECT</span></button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 col">
-        <div class="card">
-          <h5 class="card-header">App hosting server</h5>
-          <div class="card-body">
-            <h5 class="card-title">http://35.242.244.53:8080/</h5>
-            <p class="card-text ">Hosted BrApi server with implemented part of requests</p>
-            <input [(ngModel)]="checkboxes[1].selected" type="checkbox" value={{checkboxes[1].value}}
-                   id={{checkboxes[1].value}} name="num">
-            <button class="btn" style="margin-top: 34px" href="#" routerLink="data"><span>SELECT</span></button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <button style="display: block; margin: 0 auto; text-align: center; background: #4fa097;
-          color: white; border-radius: 5px; border: none;  width: 134px; height: 39px; " (click)="getSelected()">SELECT
+<div class="servers">
+  <div class="servers__background">
+    <img
+      class="servers__background--back"
+      src="../../assets/leaves-background-1.png"
+    />
+    <img
+      class="servers__background--front"
+      src="../../assets/leaves-background-2.png"
+    />
+  </div>
+  <div class="servers__header">
+    <h2 class="servers__header--title">SELECT SERVER</h2>
+    <button
+      href="#"
+      routerLink="data"
+      class="btn servers__header--button"
+      (click)="getSelected()"
+    >
+      NEXT<i class="fas fa-long-arrow-alt-right"></i>
     </button>
   </div>
+  <div class="servers__container">
+    <div class="servers__container--card">
+      <input
+        class="servers__container--card-checkbox"
+        [(ngModel)]="checkboxes[0].selected"
+        type="checkbox"
+        value="{{ checkboxes[0].value }}"
+        id="{{ checkboxes[0].value }}"
+        name="num"
+        checked="checked"
+      />
+      <div class="servers__container--card-content">
+        <label for="{{ checkboxes[0].value }}">
+          <h3>Breeding Api</h3>
+          <hr />
+          <h5>https://test-server.brapi.org/</h5>
+          <p class="small-meta dim">
+            Fully implemented example of the BrAPI specification, backed by a
+            sample database.
+          </p>
+        </label>
+      </div>
+    </div>
 
-
-</section>
-
+    <div class="servers__container--card">
+      <input
+        class="servers__container--card-checkbox"
+        [(ngModel)]="checkboxes[1].selected"
+        type="checkbox"
+        value="{{ checkboxes[1].value }}"
+        id="{{ checkboxes[1].value }}"
+        name="num"
+        checked="checked"
+      />
+      <div class="servers__container--card-content">
+        <label for="{{ checkboxes[1].value }}">
+          <h3>App hosting server</h3>
+          <hr />
+          <h5>http://35.242.244.53:8080/</h5>
+          <p class="small-meta dim">
+            Hosted BrApi server with implemented part of requests
+          </p>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
