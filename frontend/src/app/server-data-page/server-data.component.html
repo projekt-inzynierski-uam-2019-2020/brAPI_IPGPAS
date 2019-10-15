@@ -5,13 +5,19 @@
   </div>
   <div class="data__header">
     <h2 class="title">CHOOSE CATEGORY</h2>
-    <button class="btn button" type="button" href="#" routerLink="/servers">
-      <i class="fas fa-long-arrow-alt-left"></i>
-      Back
-    </button>
+    <div class="buttons">
+      <button class="btn button" type="button" href="#" routerLink="/servers">
+        <i class="fas back fa-long-arrow-alt-left"></i>
+        BACK
+      </button>
+      <button class="btn button" type="button" href="#">
+        NEXT
+        <i class="fas next fa-long-arrow-alt-right"></i>
+      </button>
+    </div>
   </div>
   <div class="row data__container">
-    <div class="mx-4 data__container--item" href="#">
+    <div class="mx-5 col-md-4 col-lg-2 data__container--item" href="#">
       <!--routerLink="/servers/study"-->
       <label class="checkbox-label">
         <input id="study" type="checkbox">
@@ -19,7 +25,7 @@
       </label>
       <p class="name">Study</p>
     </div>
-    <div class="mx-4 data__container--item" href="#">
+    <div class="mx-5 col-md-4 col-lg-2 data__container--item" href="#">
       <!--routerLink="/servers/trials"-->
       <label class="checkbox-label">
         <input id="trials" type="checkbox">
@@ -27,7 +33,7 @@
       </label>
       <p class="name">Trials</p>
     </div>
-    <div class="mx-4 data__container--item" href="#">
+    <div class="mx-5 col-md-4 col-lg-2 data__container--item" href="#">
       <!--routerLink="/servers/seasons"-->
       <label class="checkbox-label">
         <input id="seasons" type="checkbox">
@@ -35,12 +41,44 @@
       </label>
       <p class="name">Season</p>
     </div>
-  </div>
-  <div class="data__next">
-    <button class="btn button" type="button" href="#">
-      Next
-      <i class="fas fa-long-arrow-alt-right"></i>
-    </button>
+
+
+
+    <div class="mx-5 col-md-4 col-lg-2 data__container--item" href="#">
+      <label class="checkbox-label">
+        <input type="checkbox">
+        <span class="checkbox-custom rectangular"></span>
+      </label>
+      <p class="name">Locations</p>
+    </div>
+    <div class="mx-5 col-md-4 col-lg-2 data__container--item" href="#">
+      <label class="checkbox-label">
+        <input type="checkbox">
+        <span class="checkbox-custom rectangular"></span>
+      </label>
+      <p class="name">People</p>
+    </div>
+    <div class="mx-5 col-md-4 col-lg-2 data__container--item" href="#">
+      <label class="checkbox-label">
+        <input type="checkbox">
+        <span class="checkbox-custom rectangular"></span>
+      </label>
+      <p class="name">Study</p>
+    </div>
+    <div class="mx-5 col-md-4 col-lg-2 data__container--item" href="#">
+      <label class="checkbox-label">
+        <input type="checkbox">
+        <span class="checkbox-custom rectangular"></span>
+      </label>
+      <p class="name">Trials</p>
+    </div>
+    <div class="mx-5 col-md-4 col-lg-2 data__container--item" href="#">
+      <label class="checkbox-label">
+        <input type="checkbox">
+        <span class="checkbox-custom rectangular"></span>
+      </label>
+      <p class="name">Seasons</p>
+    </div>
   </div>
 </div>
 

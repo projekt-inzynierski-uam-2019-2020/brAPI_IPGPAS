@@ -11,7 +11,7 @@
   background-color: #303338;
   min-height: 100%;
   overflow: hidden;
-  padding-top: 6rem;
+  padding-top: 100px;
 
   &__background{
     position: absolute;
@@ -38,49 +38,61 @@
     flex-direction: column;
     text-align: center;
 
-    .button, .btn{
-      margin: auto;
-      display: inline-block;
-      width: 8rem;
-      height: 3rem;
-      padding: 0;
-      background-color: transparent;
-      border: 1px solid #B6844A;
-      border-radius: 5px;
-      font-family: "Segoe UI", sans-serif;
-      font-size: 20px;
-      color: #FFFFFF;
-      margin-top: 4rem;
+    .buttons {
+      flex-direction: row;
+      margin-top: 2.5rem;
 
-      &:focus,
-      &btn:active {
-        outline: none !important;
-        box-shadow: none;
-      }
+      .button, .btn {
+        margin: auto;
+        display: inline-block;
+        width: 12.5rem;
+        padding: 0.6rem;
+        background-color: transparent;
+        border: 1px solid #B6844A;
+        border-radius: 5px;
+        font-family: "Segoe UI", sans-serif;
+        font-size: 1.5rem;
+        color: #FFFFFF;
+        margin-left: 10px;
+        margin-right: 10px;
 
-      &:hover{
-        .fas {
-          transition: hvr-wobble-horizontal 1s ease-out;
-          animation-name: hvr-wobble-horizontal;
-          animation-duration: 1s;
-          animation-timing-function: ease-in-out;
-          animation-iteration-count: infinite;
+        &:focus,
+        &btn:active {
+          outline: none !important;
+          box-shadow: none;
         }
-      }
 
-      .fas{
-        top: 8px;
-        left: 2rem;
-        margin-right: 1rem;
-      }
+        &:hover {
+          .fas {
+            transition: hvr-wobble-horizontal 1s ease-out;
+            animation-name: hvr-wobble-horizontal;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+          }
+        }
 
-      &:active, &:focus{
-        outline: none;
+        .fas {
+          top: 8px;
+          left: 2rem;
+        }
+
+        .back{
+          margin-right: 1rem;
+        }
+
+        .next{
+          margin-left: 1rem;
+        }
+
+        &:active, &:focus {
+          outline: none;
+        }
       }
     }
 
     .title{
-      margin-top: 1rem;
+      margin-top: 1.3rem;
       font-family: Roboto;
       font-style: normal;
       font-weight: bold;
@@ -97,7 +109,7 @@
     margin-top: 3rem;
     margin-bottom: 1rem;
 
-    &--item, .btn{
+    &--item{
       display: flex;
       flex-direction: row;
       width: 12rem;
@@ -201,54 +213,6 @@
         width: 100%;
         padding: 5px;
         color: #FFFFFF;
-      }
-    }
-  }
-
-  &__next{
-    display: flex;
-    text-align: center;
-    margin: auto;
-    justify-content: center;
-
-    .button, .btn{
-      margin: auto;
-      display: inline-block;
-      width: 8rem;
-      height: 3rem;
-      padding: 0;
-      background-color: transparent;
-      border: 1px solid #B6844A;
-      border-radius: 5px;
-      font-family: "Segoe UI", sans-serif;
-      font-size: 20px;
-      color: #FFFFFF;
-      margin-top: 4rem;
-
-      &:focus,
-      &btn:active {
-        outline: none !important;
-        box-shadow: none;
-      }
-
-      &:hover{
-        .fas {
-          transition: hvr-wobble-horizontal 1s ease-out;
-          animation-name: hvr-wobble-horizontal;
-          animation-duration: 1s;
-          animation-timing-function: ease-in-out;
-          animation-iteration-count: infinite;
-        }
-      }
-
-      .fas{
-        top: 8px;
-        left: 2rem;
-        margin-left: 1rem;
-      }
-
-      &:active, &:focus{
-        outline: none;
       }
     }
   }
