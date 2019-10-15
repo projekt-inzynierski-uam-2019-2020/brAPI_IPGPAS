@@ -8,11 +8,11 @@ import {CallsService} from '../calls/calls.service';
 
 })
 export class ServerDataComponent implements OnInit {
-
   constructor(private callsService: CallsService) {
   }
 
   ngOnInit() {
   }
+
 
 }
