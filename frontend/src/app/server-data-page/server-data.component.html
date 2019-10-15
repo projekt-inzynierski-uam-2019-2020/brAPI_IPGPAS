@@ -11,17 +11,35 @@
     </button>
   </div>
   <div class="row data__container">
-    <button class="btn mx-4 data__container--item" type="button" href="#" routerLink="/servers/study">
-      <input class="checkbox" type="checkbox" />
+    <div class="mx-4 data__container--item" href="#">
+      <!--routerLink="/servers/study"-->
+      <label class="checkbox-label">
+        <input id="study" type="checkbox">
+        <span class="checkbox-custom rectangular"></span>
+      </label>
       <p class="name">Study</p>
-    </button>
-    <button class="btn mx-4 data__container--item" type="button" href="#" routerLink="/servers/trials">
-      <div class="checkbox"><i class="fas fa-check"></i></div>
+    </div>
+    <div class="mx-4 data__container--item" href="#">
+      <!--routerLink="/servers/trials"-->
+      <label class="checkbox-label">
+        <input id="trials" type="checkbox">
+        <span class="checkbox-custom rectangular"></span>
+      </label>
       <p class="name">Trials</p>
-    </button>
-    <button class="btn mx-4 data__container--item" type="button" href="#" routerLink="/servers/seasons">
-      <div class="checkbox"><i class="fas fa-check"></i></div>
+    </div>
+    <div class="mx-4 data__container--item" href="#">
+      <!--routerLink="/servers/seasons"-->
+      <label class="checkbox-label">
+        <input id="seasons" type="checkbox">
+        <span class="checkbox-custom rectangular"></span>
+      </label>
       <p class="name">Season</p>
+    </div>
+  </div>
+  <div class="data__next">
+    <button class="btn button" type="button" href="#">
+      Next
+      <i class="fas fa-long-arrow-alt-right"></i>
     </button>
   </div>
 </div>
