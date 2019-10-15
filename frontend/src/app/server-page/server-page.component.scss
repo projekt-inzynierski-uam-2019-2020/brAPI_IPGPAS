@@ -110,8 +110,7 @@
         background-color: #ffffff;
         width: 25rem;
         color: rgba(78, 78, 78, 0.92);
-        border-radius: 3px;
-        padding: 1.5rem 1.5rem 0.6rem 1.5rem;
+        border-radius: 5px;
       }
 
       &-checkbox {
@@ -123,6 +122,8 @@
 
         ~ .servers__container--card-content {
           transition: all 500ms ease-out;
+          display: flex;
+          align-items: center;
 
           * {
             cursor: pointer;
@@ -130,10 +131,20 @@
 
           h3 {
             text-align: center;
+            background-color: #5e5e5e;
+            color: white;
+            padding: 10px 5px 10px 5px;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
           }
 
           h5 {
+            margin-top: 36px;
             text-align: center;
+
           }
 
           p {
@@ -142,61 +153,15 @@
             color: rgba(62, 62, 62, 0.71);
             text-align: center;
           }
-
-          &:before {
-            position: absolute;
-            top: 1px;
-            right: 1px;
-            content: "";
-            width: 0;
-            height: 0;
-            border-top: 3.2rem solid #ccc;
-            border-left: 3.2rem solid transparent;
-            transition: all 200ms ease-out;
-          }
-
-          &:after {
-            position: absolute;
-            top: 1px;
-            right: 1px;
-            content: "";
-            width: 0;
-            height: 0;
-            border-top: 3.1rem solid #fff;
-            border-left: 3.1rem solid transparent;
-            transition: all 200ms ease-out;
-          }
-
-          &:hover {
-            border: 1px solid #b6844a;
-
-            &:before {
-              border-top: 3.2rem solid #b6844a;
-            }
-          }
         }
         &:checked ~ .servers__container--card-content {
-          border: 1px solid #b6844a;
-          .card-state-icon {
-            background-position: -5.6rem 2px;
-          }
-          &:before {
-            border-top: 3.2rem solid #b6844a;
-          }
-          &:after {
-            border-top: 3.2rem solid #b6844a;
+          background-color: #ffedce;
+          h3 {
+            background-color: #b6844a;
+            transition: all 500ms ease-out;
           }
         }
         &:checked:hover ~ .servers__container--card-content {
-          .card-state-icon {
-            background-position: -3.7rem 2px;
-          }
-          &:before {
-            border-top: 3.2rem solid #b6844a;
-          }
-          &:after {
-            border-top: 3.2rem solid #b6844a;
-          }
         }
       }
     }

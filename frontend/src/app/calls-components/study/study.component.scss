@@ -5,39 +5,169 @@ section {
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 100%;
+  height: 200%;
   left: 0;
   top: 0;
+  background-color: #303338;
+  min-height: 100%;
+  padding-top: 100px;
+  .data__background{
+    position: absolute;
+    z-index: -1;
 
-  .back{
+    &--front{
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: .05;
+    }
+
+    &--back{
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: .2;
+    }
+  }
+  .button, .btn {
+    margin: auto;
     display: inline-block;
-    width: 120px;
-    position: relative;
-    top: 100px;
-    left: 300px;
+    width: 12.5rem;
+    padding: 0.6rem;
     background-color: transparent;
-    border: 2px solid #2e5d54;
-    border-radius: 40px;
+    border: 1px solid #B6844A;
+    border-radius: 5px;
     font-family: "Segoe UI", sans-serif;
-    font-size: 20px;
-    color: #2e5d54;
-    padding-left: 50px;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    margin-left: 10px;
+    margin-right: 10px;
 
-    &:hover{
+    &:focus,
+    &btn:active {
+      outline: none !important;
+      box-shadow: none;
+    }
+
+    &:hover {
       .fas {
-        animation: back .8s infinite;
+        transition: hvr-wobble-horizontal 1s ease-out;
+        animation-name: hvr-wobble-horizontal;
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
       }
     }
+  }
 
-    .fas{
-      position: absolute;
-      top: 8px;
-      left: 30px;
-      margin-right: 10px;
-    }
+  .data__container .row {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
 
-    &:active, &:focus{
-      outline: none;
+    &--item {
+      display: flex;
+      margin: 2rem auto;
+      flex-direction: row;
+      width: 40rem;
+      height: 3rem;
+
+      background: #7D786B;
+      border-radius: 9px;
+
+
+      padding: 0;
+      border: none;
+
+      &:focus, &btn:active {
+        outline: none !important;
+        box-shadow: none;
+      }
+
+      .checkbox-label {
+        display: block;
+        position: relative;
+        margin: auto;
+        cursor: pointer;
+        font-size: 22px;
+        line-height: 3rem;
+        height: 4rem;
+        width: 3rem;
+        clear: both;
+      }
+
+      .checkbox-label input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .checkbox-label .checkbox-custom {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 3rem;
+        width: 3rem;
+        background-color: transparent;
+        border-radius: 5px;
+        transition: all 0.3s ease-out;
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        background-color: #B6844A;
+      }
+
+
+      .checkbox-label input:checked ~ .checkbox-custom {
+        border-radius: 5px;
+        -webkit-transform: rotate(0deg) scale(1);
+        -ms-transform: rotate(0deg) scale(1);
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+        background-color: #B6844A;
+      }
+
+
+      .checkbox-label .checkbox-custom::after {
+        position: absolute;
+        content: "";
+        left: 1.5rem;
+        top: 1.5rem;
+        height: 0px;
+        width: 0px;
+        border-radius: 5px;
+        border: solid #FFFFFF;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(0deg) scale(0);
+        -ms-transform: rotate(0deg) scale(0);
+        transform: rotate(0deg) scale(0);
+        opacity: 1;
+        transition: all 0.3s ease-out;
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+      }
+
+
+      .checkbox-label input:checked ~ .checkbox-custom::after {
+        -webkit-transform: rotate(45deg) scale(1);
+        -ms-transform: rotate(45deg) scale(1);
+        transform: rotate(45deg) scale(1);
+        opacity: 1;
+        left: 17px;
+        top: 7px;
+        width: 0.8rem;
+        height: 1.6rem;
+        border: solid #FFFFFF;
+        border-width: 0 5px 5px 0;
+        background-color: transparent;
+        border-radius: 0;
+      }
     }
   }
 
@@ -47,11 +177,6 @@ section {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-    background: linear-gradient(
-        rgba(247, 247, 247, .5),
-        rgba(247, 247, 247, 0.5)
-    ),
-    url("../../../assets/background-servers.jpeg");
     min-height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -73,7 +198,6 @@ section {
       display: flex;
       justify-content: center;
       text-align: center;
-      margin-left: 240px;
 
       .item{
         width: 250px;
@@ -86,7 +210,7 @@ section {
         margin-right: auto;
         border: none;
         border-radius: 18px;
-        background: #4fa097;
+        background: #7D786B;
         filter: opacity(90%);
         color: white;
       }
@@ -110,7 +234,6 @@ section {
         justify-content: center;
         text-align: center;
         margin: auto;
-        margin-left: 240px;
 
         .list-group-item{
           width: 200px;
@@ -136,7 +259,6 @@ section {
         justify-content: center;
         text-align: center;
         flex-direction: column;
-        margin-left: 240px;
 
         td {
           margin: auto 10px;
@@ -155,7 +277,7 @@ section {
             width: 160px;
             height: 30px;
             border-radius: 18px;
-            background: #4fa097;
+            background: #7D786B;
             border: none;
             color: white;
             outline: none;
@@ -224,8 +346,8 @@ section {
 }
 
 .inp-cbx:checked + .cbx span:first-child {
-  background: #4fa097;
-  border-color: #4fa097;
+  background: #7D786B;
+  border-color: #7D786B;
   animation: wave 0.4s ease;
 }
 .inp-cbx:checked + .cbx span:first-child svg {

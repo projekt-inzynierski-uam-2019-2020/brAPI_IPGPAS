@@ -20,6 +20,7 @@ import {SeasonsComponent} from './calls-components/seasons/seasons.component';
 import {ChartsModule} from 'ng2-charts-x';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { InvestigationPageComponent } from './investigation-page/investigation-page.component';
+import { ExperienceComponent } from './experience/experience.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { InvestigationPageComponent } from './investigation-page/investigation-p
     TrialsComponent,
     SeasonsComponent,
     InvestigationPageComponent,
+    ExperienceComponent,
   ],
   imports: [
     HttpClientModule,
