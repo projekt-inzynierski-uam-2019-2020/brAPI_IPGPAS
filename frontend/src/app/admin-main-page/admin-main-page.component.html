@@ -1,0 +1,38 @@
+<div class="admin">
+  <div class="admin__server-dialog">
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">ADD SERVER</h4>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div style="" class="form-group">
+            <input type="text" placeholder="Enter Server name:" />
+            <input type="text" placeholder="Enter Server link:" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" style="width: 100%">
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="modal.close('Save click')"
+        >
+          ADD SERVER
+        </button>
+      </div>
+    </ng-template>
+  </div>
+
+  <button class="btn btn-outline-dark" (click)="open(content)">
+    ADD NEW SERVER
+  </button>
+</div>

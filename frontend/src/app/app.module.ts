@@ -19,6 +19,9 @@ import {Server} from './calls/server';
 import {SeasonsComponent} from './calls-components/seasons/seasons.component';
 import {ChartsModule} from 'ng2-charts-x';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AdminMainPageComponent} from './admin-main-page/admin-main-page.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     StudyComponent,
     TrialsComponent,
     SeasonsComponent,
+    AdminMainPageComponent,
   ],
   imports: [
     HttpClientModule,
@@ -42,11 +46,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     BrowserModule,
     ChartsModule,
     ReactiveFormsModule,
-    FormsModule
-
+    FormsModule,
+    BrowserAnimationsModule,
+    NgbModule,
   ],
   providers: [Server],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule {
 }
