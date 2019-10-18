@@ -8,6 +8,7 @@ import {ServerPageComponent} from './server-page/server-page.component';
 import {StudyComponent} from './calls-components/study/study.component';
 import {TrialsComponent} from './calls-components/trials/trials.component';
 import {SeasonsComponent} from './calls-components/seasons/seasons.component';
+import {AdminMainPageComponent} from './admin-main-page/admin-main-page.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'servers/study', component: StudyComponent},
   {path: 'servers/trials', component: TrialsComponent},
   {path: 'servers/seasons', component: SeasonsComponent},
+  {path: 'admin/page', component: AdminMainPageComponent},
   {path: '', component: HomePageComponent},
 
   {path: '**', component: HomePageComponent}
