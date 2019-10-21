@@ -15,21 +15,41 @@
       <div class="modal-body">
         <form>
           <div style="" class="form-group">
-            <input type="text" placeholder="Enter Server name:" />
-            <input type="text" placeholder="Enter Server link:" />
+            <input
+              type="text"
+              placeholder="Enter Server name:"
+              autocomplete="off"
+              name="something"
+              [(ngModel)]="server_name"
+            />
+            <input
+              type="text"
+              placeholder="Enter Server link:"
+              name="something"
+              [(ngModel)]="server_link"
+            />
           </div>
         </form>
       </div>
+
       <div class="modal-footer" style="width: 100%">
         <button
           type="button"
           class="btn btn-success"
-          (click)="modal.close('Save click')"
+          [disabled]="!server_link || !server_name"
+          (click)="modal.close('Save click') || changeSuccessMessage()"
         >
           ADD SERVER
         </button>
       </div>
     </ng-template>
+
+    <ngb-alert
+      *ngIf="successMessage"
+      type="success"
+      (close)="successMessage = null"
+      >{{ successMessage }}</ngb-alert
+    >
   </div>
 
   <button class="btn btn-outline-dark" (click)="open(content)">
