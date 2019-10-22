@@ -2,6 +2,8 @@ import {Component, Inject, OnInit, VERSION} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {debounceTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {ServersService} from '../services/servers-service/servers.service';
+import {Server} from '../services/servers-service/servers';
 
 
 @Component({
@@ -16,6 +18,8 @@ export class AdminMainPageComponent implements OnInit{
   successMessage: string;
   server_name: string;
   server_link: string;
+  servers: Server[];
+  server: Server = new Server();
 
 
   ngOnInit(): void {
@@ -24,13 +28,25 @@ export class AdminMainPageComponent implements OnInit{
     this._success.pipe(
       debounceTime(5000)
     ).subscribe(() => this.successMessage = null);
+    this.serverService.getAllServers()
+      .subscribe(data => {
+        this.servers = data;
+      });
+
+  }
+
+  createServer(): void{
+    this.serverService.createServer(this.server)
+      .subscribe(data => {
+        console.log("User created successfully.")
+      });
   }
 
   public changeSuccessMessage() {
     this._success.next(`${new Date()} - The server has been added`);
   }
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private serverService: ServersService) {
   }
 
   open(content) {

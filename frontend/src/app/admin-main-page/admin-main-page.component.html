@@ -20,13 +20,13 @@
               placeholder="Enter Server name:"
               autocomplete="off"
               name="something"
-              [(ngModel)]="server_name"
+              [(ngModel)]="server.name"
             />
             <input
               type="text"
               placeholder="Enter Server link:"
               name="something"
-              [(ngModel)]="server_link"
+              [(ngModel)]="server.link"
             />
           </div>
         </form>
@@ -36,8 +36,8 @@
         <button
           type="button"
           class="btn btn-success"
-          [disabled]="!server_link || !server_name"
-          (click)="modal.close('Save click') || changeSuccessMessage()"
+          [disabled]="!server.name || !server.link"
+          (click)="modal.close('Save click') || this.createServer() || changeSuccessMessage()"
         >
           ADD SERVER
         </button>
@@ -51,8 +51,11 @@
       >{{ successMessage }}</ngb-alert
     >
   </div>
+  <div *ngFor="let server of servers">
+    <p>{{server.name}}</p>
+  </div>
 
-  <button class="btn btn-outline-dark" (click)="open(content)">
+  <button class="btn btn-outline-dark" (click)="open(content) ">
     ADD NEW SERVER
   </button>
 </div>

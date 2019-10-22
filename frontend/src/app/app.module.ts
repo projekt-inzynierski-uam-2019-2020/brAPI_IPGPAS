@@ -22,6 +22,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AdminMainPageComponent} from './admin-main-page/admin-main-page.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ServersService} from './services/servers-service/servers.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     NgbModule,
   ],
-  providers: [Server],
+  providers: [Server, ServersService],
   bootstrap: [AppComponent],
 
 })
