@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Server} from '../calls/server';
+
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {style} from '@angular/animations';
+import {ServersService} from '../services/servers-service/servers.service';
+import {Server} from '../services/servers-service/servers';
 
 
 @Component({
@@ -9,25 +11,31 @@ import {style} from '@angular/animations';
   templateUrl: './server-page.component.html',
   styleUrls: ['./server-page.component.scss']
 })
-export class ServerPageComponent {
+export class ServerPageComponent implements OnInit {
   isActive = false;
+  servers: Server[];
+  server: Server = new Server();
+
   checkboxes = [
-    {
-      value: 'https://test-server.brapi.org/',
-      selected: false
-    },
-    {
-      value: 'http://35.242.244.53:8080',
-      selected: false
-    },
   ];
 
+  ngOnInit(): void {
+    this.serverService.getAllServers()
+      .subscribe(data => {
+        this.servers = data;
+        for (let i = 0; i < this.servers.length; i++) {
+          this.checkboxes.push({value: this.servers[i].link, selected: false});
+        }
+      });
+  }
 
-  constructor(private server: Server, private formBuilder: FormBuilder) {
+
+
+  constructor(private formBuilder: FormBuilder, private serverService: ServersService) {
   }
 
   public getSelected() {
-    let result = this.checkboxes.filter((ch) => {
+    const result = this.checkboxes.filter((ch) => {
       return ch.selected;
     })
       .map((ch) => {

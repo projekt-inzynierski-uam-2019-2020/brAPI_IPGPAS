@@ -20,47 +20,24 @@
       NEXT<i class="fas fa-long-arrow-alt-right"></i>
     </button>
   </div>
-  <div class="servers__container">
-    <div class="servers__container--card">
+   <div class="servers__container" >
+    <div class="servers__container--card" *ngFor="let server of servers;let i = index ">
       <input
         class="servers__container--card-checkbox"
-        [(ngModel)]="checkboxes[0].selected"
+        [(ngModel)]="checkboxes[i].selected"
         type="checkbox"
-        value="{{ checkboxes[0].value }}"
-        id="{{ checkboxes[0].value }}"
+        value="{{ checkboxes[i].value }}"
+        id="{{ checkboxes[i].value }}"
         name="num"
         checked="checked"
       />
       <div class="servers__container--card-content">
-        <label for="{{ checkboxes[0].value }}">
-          <h3>Breeding Api</h3>
-          <hr />
-          <h5>https://test-server.brapi.org/</h5>
+        <label for="{{ checkboxes[i].value }}">
+          <h3>{{server.name}}</h3>
+          <h5>{{server.link}}</h5>
           <p class="small-meta dim">
             Fully implemented example of the BrAPI specification, backed by a
             sample database.
-          </p>
-        </label>
-      </div>
-    </div>
-
-    <div class="servers__container--card">
-      <input
-        class="servers__container--card-checkbox"
-        [(ngModel)]="checkboxes[1].selected"
-        type="checkbox"
-        value="{{ checkboxes[1].value }}"
-        id="{{ checkboxes[1].value }}"
-        name="num"
-        checked="checked"
-      />
-      <div class="servers__container--card-content">
-        <label for="{{ checkboxes[1].value }}">
-          <h3>App hosting server</h3>
-          <hr />
-          <h5>http://35.242.244.53:8080/</h5>
-          <p class="small-meta dim">
-            Hosted BrApi server with implemented part of requests
           </p>
         </label>
       </div>
