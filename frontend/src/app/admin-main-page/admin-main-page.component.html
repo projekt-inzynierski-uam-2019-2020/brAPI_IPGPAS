@@ -27,6 +27,7 @@
               placeholder="Enter Server link:"
               name="something"
               [(ngModel)]="server.link"
+              #check
             />
           </div>
         </form>
@@ -51,11 +52,28 @@
       >{{ successMessage }}</ngb-alert
     >
   </div>
-  <div *ngFor="let server of servers">
-    <p>{{server.name}}</p>
-  </div>
 
   <button class="btn btn-outline-dark" (click)="open(content) ">
     ADD NEW SERVER
   </button>
+
+
+  <table style="margin: 3rem auto 0 auto;" class="table table-striped">
+    <thead>
+    <tr>
+      <th class="hidden">Id</th>
+      <th>Server Name</th>
+      <th>Server Link</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let server of servers">
+      <td class="hidden">{{server.id}}</td>
+      <td>{{server.name}}</td>
+      <td>{{server.link}}</td>
+      <td style="width: 15rem"><button class="btn btn-danger" (click)="deleteUser(server)" style="float:left;" > Delete Server</button><button class="btn btn-info" style="float:left; margin-left: 1rem">Edit</button></td>
+    </tr>
+    </tbody>
+  </table>
 </div>

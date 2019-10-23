@@ -16,8 +16,6 @@ export class AdminMainPageComponent implements OnInit{
   closeResult: string;
   staticAlertClosed = false;
   successMessage: string;
-  server_name: string;
-  server_link: string;
   servers: Server[];
   server: Server = new Server();
 
@@ -28,17 +26,30 @@ export class AdminMainPageComponent implements OnInit{
     this._success.pipe(
       debounceTime(5000)
     ).subscribe(() => this.successMessage = null);
+    this.getServers();
+
+  }
+
+  getServers() {
     this.serverService.getAllServers()
       .subscribe(data => {
         this.servers = data;
       });
-
   }
 
   createServer(): void{
     this.serverService.createServer(this.server)
       .subscribe(data => {
-        console.log("User created successfully.")
+        this.getServers();
+      });
+    this.server.link = '';
+
+  }
+
+  deleteUser(server: Server): void {
+    this.serverService.deleteUser(server)
+      .subscribe( data => {
+        this.servers = this.servers.filter(u => u !== server);
       });
   }
 
