@@ -24,6 +24,19 @@ public class ServerServiceImpl implements ServerService {
         return serverRepository.findAll();
     }
 
+  /*  @Override
+    public Server delete(long id) {
+        Server user = findById(id);
+        if(user != null){
+            serverRepository.delete(user);
+        }
+        return user;
+    }
+
+    @Override
+    public Server findById(long id) {
+        return serverRepository.findOne(id);
+    }*/
 
     @Override
     public Server update(Server user) {

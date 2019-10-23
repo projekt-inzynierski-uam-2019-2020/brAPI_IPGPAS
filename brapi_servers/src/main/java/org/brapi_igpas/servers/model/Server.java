@@ -22,6 +22,7 @@ public class Server {
     public Server() {
     }
 
+
     public long getId() {
         return id;
     }
@@ -44,5 +45,10 @@ public class Server {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    @Override
+    public String toString() {
+        return "Servers [id=" +id + ", name=" + name + ", link=" + link + "]";
     }
 }

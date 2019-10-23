@@ -21,4 +21,8 @@ export class ServersService {
   createServer(server: Server) {
     return this.http.post<Server>(this.serversUrl, server);
   }
+
+  public deleteUser(user) {
+    return this.http.delete(this.serversUrl + '/' + user.id);
+  }
 }

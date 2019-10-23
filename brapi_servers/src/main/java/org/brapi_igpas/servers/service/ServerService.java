@@ -14,4 +14,8 @@ public interface ServerService {
 
     public Server create(Server server);
 
+  /*  public Server findById(long id);*/
+
+  /*  public Server delete(long id);*/
+
 }
