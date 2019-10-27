@@ -1,6 +1,6 @@
 package org.brapi_igpas.brapi.utils;
 
-import org.brapi_igpas.brapi.domain.response.metadata.Pagination;
+import org.brapi_igpas.brapi.response.metadata.Pagination;
 
 import java.util.Collections;
 import java.util.List;
