@@ -3,7 +3,7 @@ package org.brapi_igpas.brapi.calls.calls;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Call {
+class Call {
     static final String DATATYPE_JSON = "application/json";
     static final String DATATYPE_CSV = "text/csv";
 
@@ -22,70 +22,11 @@ public class Call {
     private List<String> methods;
     private List<String> versions;
 
-    Call() {
+    Call(String call) {
+        this.call = call;
         dataTypes = new ArrayList<>();
         methods = new ArrayList<>();
         versions = new ArrayList<>();
-    }
-
-    Call(String call) {
-        this();
-        this.call = call;
-    }
-
-    Call withDataTypeJson() {
-        return addDataType(DATATYPE_JSON);
-    }
-
-    Call withDataTypeCsv() {
-        return addDataType(DATATYPE_CSV);
-    }
-
-    private Call addDataType(String dataType) {
-        dataTypes.add(dataType);
-        return this;
-    }
-
-    Call withMethodGet() {
-        return addMethod(METHOD_GET);
-    }
-
-    Call withMethodPost() {
-        return addMethod(METHOD_POST);
-    }
-
-    Call withMethodPut() {
-        return addMethod(METHOD_PUT);
-    }
-
-    Call withMethodDelete() {
-        return addMethod(METHOD_DELETE);
-    }
-
-    private Call addMethod(String method) {
-        methods.add(method);
-        return this;
-    }
-
-    Call withVersionOneZero() {
-        return addVersion(VERSION_ONE_ZERO);
-    }
-
-    Call withVersionOneOne() {
-        return addVersion(VERSION_ONE_ONE);
-    }
-
-    Call withVersionOneTwo() {
-        return addVersion(VERSION_ONE_TWO);
-    }
-
-    Call withVersionOneThree() {
-        return addVersion(VERSION_ONE_THREE);
-    }
-
-    private Call addVersion(String version) {
-        versions.add(version);
-        return this;
     }
 
     public String getCall() {
@@ -102,5 +43,60 @@ public class Call {
 
     public List<String> getVersions() {
         return versions;
+    }
+
+    Call withDataTypeJson() {
+        return getThisWithAddedDataType(DATATYPE_JSON);
+    }
+
+    Call withDataTypeCsv() {
+        return getThisWithAddedDataType(DATATYPE_CSV);
+    }
+
+    private Call getThisWithAddedDataType(String dataType) {
+        dataTypes.add(dataType);
+        return this;
+    }
+
+    Call withMethodGet() {
+        return getThisWithAddedMethod(METHOD_GET);
+    }
+
+    Call withMethodPost() {
+        return getThisWithAddedMethod(METHOD_POST);
+    }
+
+    Call withMethodPut() {
+        return getThisWithAddedMethod(METHOD_PUT);
+    }
+
+    Call withMethodDelete() {
+        return getThisWithAddedMethod(METHOD_DELETE);
+    }
+
+    private Call getThisWithAddedMethod(String method) {
+        methods.add(method);
+        return this;
+    }
+
+    Call withVersionOneZero() {
+        return getThisWithAddedVersion(VERSION_ONE_ZERO);
+    }
+
+    Call withVersionOneOne() {
+        return getThisWithAddedVersion(VERSION_ONE_ONE);
+    }
+
+    Call withVersionOneTwo() {
+        return getThisWithAddedVersion(VERSION_ONE_TWO);
+    }
+
+    Call withVersionOneThree() {
+        return getThisWithAddedVersion(VERSION_ONE_THREE);
+    }
+
+    private Call getThisWithAddedVersion(String version) {
+        versions.add(version);
+        return this;
     }
 }
