@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const server = require("./routes/serverRoute");
 
@@ -21,7 +22,7 @@ let db = mongoose.connection;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(cors());
 app.use("/servers", server);
 
 app.listen(port, () => {
