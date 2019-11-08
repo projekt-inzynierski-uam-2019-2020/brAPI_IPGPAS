@@ -1,13 +1,13 @@
 <div class="sidebar">
-  <div class="sidebar__logo">
+  <div class="sidebar__logo" routerLink="home">
     <h1 class="sidebar__logo--upper">PlantPheno</h1>
     <h3 class="sidebar__logo--lower">Analitics</h3>
   </div>
   <nav class="sidebar__navigation">
     <ul style="padding: 0">
-      <li class="sidebar__navigation--item"><a href="#">Log in</a></li>
-      <li class="sidebar__navigation--item"><a href="#">Sign up</a></li>
-      <li class="sidebar__navigation--item"><a href="#">Analytics</a></li>
+      <li class="sidebar__navigation--item" routerLink="/login"><a>Log in</a></li>
+      <li class="sidebar__navigation--item" routerLink="registration"><a>Sign up</a></li>
+      <li class="sidebar__navigation--item" routerLink="/servers"><a>Analytics</a></li>
     </ul>
 
   </nav>
