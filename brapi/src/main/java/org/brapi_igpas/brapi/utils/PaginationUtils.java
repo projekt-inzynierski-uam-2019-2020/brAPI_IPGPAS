@@ -1,6 +1,9 @@
 package org.brapi_igpas.brapi.utils;
 
-import org.brapi_igpas.brapi.metadata.Pagination;
+import org.brapi_igpas.brapi.response.metadata.Pagination;
+
+import java.util.Collections;
+import java.util.List;
 
 public class PaginationUtils {
 
@@ -9,31 +12,28 @@ public class PaginationUtils {
         return new Pagination(page, pageSize, totalCount, totalPages);
     }
 
-    public static int getFromIndex(int elementsSize, int page, int pageSize) {
-        final int firstIndex = 0;
-        if (isFromIndexWithinPaginationBorders(elementsSize, page, pageSize)) {
-            return page * pageSize;
-        } else return firstIndex;
-    }
-
-    public static int getToIndex(int elementsSize, int page, int pageSize) {
-        if (!isFromIndexWithinPaginationBorders(elementsSize, page, pageSize)) {
-            return 0;
-        }
-        int fromIndex = getFromIndex(elementsSize, page, pageSize);
-        int numberOfElements = Math.min(pageSize, elementsSize - fromIndex);
-        return fromIndex + numberOfElements;
-    }
-
-    private static boolean isFromIndexWithinPaginationBorders(int elementsSize, int page, int pageSize) {
-        return page * pageSize < elementsSize;
-    }
-
-    private static int getTotalPages(int elementsSize, int pageSize) {
+    static int getTotalPages(int elementsSize, int pageSize) {
         final int remainderPage = 1;
         if (elementsSize == 0) {
             return remainderPage;
         }
         return elementsSize / pageSize + ((elementsSize % pageSize == 0) ? 0 : remainderPage);
+    }
+
+    public static <T> List<T> getPaginatedList(List<T> list, int page, int pageSize) {
+        int fromIndex = page * pageSize;
+        int elementsSize = list.size();
+
+        if (fromIndex < elementsSize) {
+            int toIndex = getToIndex(fromIndex, elementsSize, pageSize);
+            return list.subList(fromIndex, toIndex);
+        }
+        return Collections.emptyList();
+    }
+
+    private static int getToIndex(int fromIndex, int elementsSize, int pageSize) {
+        int numberOfRemainingElements = elementsSize - fromIndex;
+        int complement = Math.min(pageSize, numberOfRemainingElements);
+        return fromIndex + complement;
     }
 }

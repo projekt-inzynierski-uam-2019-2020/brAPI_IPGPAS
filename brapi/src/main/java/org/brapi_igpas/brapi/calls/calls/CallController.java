@@ -1,14 +1,12 @@
 package org.brapi_igpas.brapi.calls.calls;
 
-import org.brapi_igpas.brapi.BrApiDetailResponse;
-import org.brapi_igpas.brapi.exceptions.InvalidNumericalParameterValueException;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
+import org.brapi_igpas.brapi.annotation.BrAPIController;
+import org.brapi_igpas.brapi.response.BrAPIDetailResponse;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/brapi/v1")
-@CrossOrigin(origins = "http://35.246.155.60:4200")
+import javax.validation.constraints.Min;
+
+@BrAPIController
 public class CallController {
     private final CallService callService;
 
@@ -17,18 +15,12 @@ public class CallController {
     }
 
     @GetMapping("/calls")
-    @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody
-    BrApiDetailResponse getBrApiDetailResponse(
+    public BrAPIDetailResponse getBrAPICalls(
             @RequestParam(value = "dataType", required = false) final String dataType,
-            @RequestParam(value = "page", defaultValue = "0") final int page,
-            @RequestParam(value = "pageSize", defaultValue = "1000") final int pageSize) {
-        if (page < 0) {
-            throw new InvalidNumericalParameterValueException("page");
-        }
-        if (pageSize <= 0) {
-            throw new InvalidNumericalParameterValueException("pageSize");
-        }
-        return callService.getBrApiDetailResponse(dataType, page, pageSize);
+            @RequestParam(value = "page", defaultValue = "0")
+            @Min(value = 0, message = "'page' value is invalid.") final int page,
+            @RequestParam(value = "pageSize", defaultValue = "1000")
+            @Min(value = 1, message = "'pageSize' value is invalid.") final int pageSize) {
+        return callService.getBrAPIDetailResponse(dataType, page, pageSize);
     }
 }
