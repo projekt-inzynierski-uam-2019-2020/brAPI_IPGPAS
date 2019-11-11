@@ -6,7 +6,7 @@ const cors = require("cors");
 const server = require("./routes/serverRoute");
 
 let port = 3000;
-let mongoUrl = "mongodb://admin:admin@localhost:27017/adminapi-db";
+let mongoUrl = "mongodb://admin:admin@db.admin.local:27017/adminapi-db";
 
 const app = express();
 

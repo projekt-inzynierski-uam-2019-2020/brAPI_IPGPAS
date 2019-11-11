@@ -14,13 +14,13 @@ services:
     ports:
       - "8080:8080"
     links:
-      - brapidb
+      - brapidb:db.brapi.local
   adminapp:
     build: ./adminapi
     ports:
       - "3000:3000"
     links:
-      - admindb
+      - admindb:db.admin.local
   frontend:
     build: ./frontend
     ports:
