@@ -4,7 +4,7 @@ services:
   admindb:
     build: ./database/admin_db
     ports: 
-      - "5433:5432" 
+      - "27017:27017"
   brapidb:
     build: ./database/brapi_db
     ports: 
@@ -14,13 +14,13 @@ services:
     ports:
       - "8080:8080"
     links:
-      - brapidb
+      - brapidb:db.brapi.local
   adminapp:
     build: ./adminapi
     ports:
-      - "8081:8080"
+      - "3000:3000"
     links:
-      - admindb
+      - admindb:db.admin.local
   frontend:
     build: ./frontend
     ports:
