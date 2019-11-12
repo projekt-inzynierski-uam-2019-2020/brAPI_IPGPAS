@@ -1,5 +1,6 @@
 export class Server {
-  id: string;
+  _id: string;
   name: string;
-  link: string;
+  ipAddress: string;
+  description: string;
 }

@@ -26,7 +26,14 @@
               type="text"
               placeholder="Enter Server link:"
               name="something"
-              [(ngModel)]="server.link"
+              [(ngModel)]="server.ipAddress"
+              #check
+            />
+            <input
+              type="text"
+              placeholder="Enter Server link:"
+              name="something"
+              [(ngModel)]="server.description"
               #check
             />
           </div>
@@ -37,7 +44,7 @@
         <button
           type="button"
           class="btn btn-success"
-          [disabled]="!server.name || !server.link"
+          [disabled]="!server.name || !server.ipAddress || !server.description"
           (click)="modal.close('Save click') || this.createServer() || changeSuccessMessage()"
         >
           ADD SERVER
@@ -69,10 +76,11 @@
     </thead>
     <tbody>
     <tr *ngFor="let server of servers">
-      <td class="hidden">{{server.id}}</td>
+      <td class="hidden">{{server._id}}</td>
       <td>{{server.name}}</td>
-      <td>{{server.link}}</td>
-      <td style="width: 15rem"><button class="btn btn-danger" (click)="deleteUser(server)" style="float:left;" > Delete Server</button><button class="btn btn-info" style="float:left; margin-left: 1rem">Edit</button></td>
+      <td>{{server.ipAddress}}</td>
+      <td>{{server.description}}</td>
+      <td style="width: 15rem"><button class="btn btn-danger" (click)="deleteUser(server)"  style="float:left;" > Delete Server</button><button class="btn btn-info" (click)="open(content)" style="float:left; margin-left: 1rem">Edit</button></td>
     </tr>
     </tbody>
   </table>

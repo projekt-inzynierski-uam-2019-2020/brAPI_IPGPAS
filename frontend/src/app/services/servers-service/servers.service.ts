@@ -9,7 +9,7 @@ const httpOptions = {
 
 @Injectable()
 export class ServersService {
-  private serversUrl = 'http://localhost:8080/servers';
+  private serversUrl = 'http://localhost:3000/servers';
 
   constructor(private http: HttpClient) {
   }
@@ -19,10 +19,10 @@ export class ServersService {
   }
 
   createServer(server: Server) {
-    return this.http.post<Server>(this.serversUrl, server);
+    return this.http.post<Server>(this.serversUrl + '/create', server);
   }
 
   public deleteUser(user) {
-    return this.http.delete(this.serversUrl + '/' + user.id);
+    return this.http.delete(this.serversUrl + '/' + user + '/delete');
   }
 }

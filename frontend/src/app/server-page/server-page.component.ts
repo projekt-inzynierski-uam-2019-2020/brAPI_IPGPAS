@@ -24,7 +24,7 @@ export class ServerPageComponent implements OnInit {
       .subscribe(data => {
         this.servers = data;
         for (let i = 0; i < this.servers.length; i++) {
-          this.checkboxes.push({value: this.servers[i].link, selected: false});
+          this.checkboxes.push({value: this.servers[i].ipAddress, selected: false});
         }
       });
   }
