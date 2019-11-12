@@ -1,7 +1,7 @@
 .sidebar{
   position: fixed;
   z-index: 999;
-  width: 280px;
+  width: 15vw;
   height: 100%;
   background-color: #2C3034;
   padding: 40px;
@@ -63,6 +63,113 @@
         &:visited, &:hover{
           text-underline: none;
           text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+.active{
+  background-color: #262B2E;
+  outline: none;
+  border-left: 6px solid #139553;
+}
+
+@media (max-width: 1500px) {
+  .sidebar{
+    width: 230px;
+  }
+}
+
+@media (max-width: 800px) {
+  .sidebar {
+    width: 100%;
+    height: 80px;
+    position: relative;
+    padding: 10px 30px;
+
+
+    &__logo {
+      float: left;
+      margin-top: 10px;
+
+      &--upper{
+        font-size: 20px;
+        margin-bottom: 0;
+      }
+
+      &--lower{
+        font-size: 15px;
+      }
+    }
+
+    &__navigation{
+      display: flex;
+      flex-direction: row;
+      float: left;
+      align-items: center;
+
+      ul{
+        flex-direction: row;
+        display: flex;
+        margin-bottom: 0;
+        margin-top: 5px;
+
+        .sidebar__navigation--item{
+          float: left;
+          margin-left: 0;
+          margin: auto 10px;
+          padding-right: 20px;
+          border-top: none;
+          border-bottom: 2px solid #2C3034;
+
+          &:active, &:focus{
+            background-color: #262B2E;
+            outline: none;
+            border-left: none;
+            border-bottom: 2px solid #139553;
+
+          }
+        }
+      }
+    }
+  }
+  .active{
+    background-color: #262B2E;
+    outline: none;
+    border-left: none;
+    border-bottom: 2px solid #139553;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    height: 300px;
+    text-align: center;
+    float: none;
+
+    &__logo{
+      text-align: center;
+      float: none;
+    }
+
+    &__navigation{
+      text-align: center;
+      float: none;
+      flex-direction: column;
+
+      ul{
+        flex-direction: column;
+        text-align: center;
+
+        .sidebar__navigation--item{
+          float: none;
+          margin: 0;
+          padding: 20px;
+        }
+
+        li>a{
+          margin: 0;
         }
       }
     }

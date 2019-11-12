@@ -39,7 +39,7 @@
 
   &__box {
     margin: 0 auto;
-    padding-left: 280px;;
+    padding-left: 15vw;
     overflow: hidden;
     max-width: 90%;
     max-height: 100%;
@@ -54,9 +54,9 @@
       justify-content: center;
       flex-direction: column;
       align-content: center;
-      margin-right: 100px;
+      margin-right: 6vw;
 
-      h2 {
+      h1 {
         color: #fff;
         font-family: Roboto;
         font-size: 50px;
@@ -76,6 +76,8 @@
         font-weight: lighter;
         font-size: 22px;
         max-width: 35rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
 
       }
 
@@ -123,6 +125,7 @@
       justify-content: center;
       flex-direction: column;
       align-content: center;
+      margin-left: 6vw;
 
       img {
         width: 25vw;
@@ -152,7 +155,7 @@
 @media (max-width: 1700px) {
   .homepage__box--left {
 
-    h2 {
+    h1 {
       font-size: 35px;
     }
 
@@ -179,11 +182,19 @@
   }
 }
 
+@media (max-width: 1500px) {
+  .homepage{
+    &__box {
+      padding-left: 230px;
+    }
+  }
+}
+
 
 @media (max-width: 1300px) {
   .homepage__box--left {
 
-    h2 {
+    h1 {
       font-size: 30px;
     }
 
@@ -200,6 +211,7 @@
       .btn.sign-in {
         width: 150px;
         font-size: 20px;
+        margin-right: 20px;
       }
 
       .btn.servers {
@@ -211,10 +223,11 @@
 }
 
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .homepage__box--left {
+    margin-right: 4vw;
 
-    h2 {
+    h1 {
       font-size: 25px;
     }
 
@@ -227,6 +240,7 @@
     }
 
     &-button {
+      margin: 15px 0px;
 
       .btn.sign-in {
         width: 120px;
@@ -239,10 +253,18 @@
       }
     }
   }
+  .homepage__box--right{
+    margin-left: 4vw;
+  }
 }
 
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
+  .homepage{
+    &__box {
+      padding-left: 0;
+    }
+  }
   .homepage__box {
 
     flex-direction: column;
@@ -251,7 +273,7 @@
     &--left {
       text-align: center;
 
-      h2 {
+      h1 {
         font-size: 20px;
       }
 
@@ -280,29 +302,14 @@
       }
     }
 
-    &--right {
+    &--left{
+      margin-right: 0;
+    }
+
+    &--right{
       display: flex;
       align-items: center;
-
-      img {
-        width: 80vw;
-      }
-    }
-  }
-}
-
-
-@media (max-width: 511px) {
-  .homepage__box {
-    margin-top: 5rem;
-
-    &--left-button {
-
-      .btn.sign-in {
-        margin: 1rem;
-
-      }
-
+      margin-left: 0;
     }
   }
 }
