@@ -8,27 +8,31 @@ export class Servers {
 
   serverName: string;
   lengthCalls: number;
-  serversArray = ['https://test-server.brapi.org/brapi/v1/trials', '']
+  serversArray = ['https://test-server.brapi.org/brapi/v1/trials', 'https://yambase.org/brapi/v1/trials']
 
 
   private test_server_url = 'https://test-server.brapi.org/brapi/v1/trials';
   brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
 
-  constructor(private http: HttpClient, private  callService: CallsService) { }
+  constructor(private http: HttpClient, private  callService: CallsService) {
+  }
 
   getSelectedCall() {
-    return this.callService.getSelectedCall(this.test_server_url)
-      .subscribe(
-        call => {
-          this.brApiDetailPayloadResponse = call;
-          for (let i = 0; i < this.getCallsLength(); i++) {
-            console.log(this.brApiDetailPayloadResponse.result.data[i].trialName);
-            console.log(this.brApiDetailPayloadResponse.result.data[i].commonCropName);
-            console.log(this.brApiDetailPayloadResponse.result.data[i].programName);
+    for (let i = 0; i < this.serversArray.length; i++) {
+      this.callService.getSelectedCall(this.serversArray[i])
+        .subscribe(
+          call => {
+            this.brApiDetailPayloadResponse = call;
+            for (let j = 0; j < this.getCallsLength(); j++) {
+              console.log(this.brApiDetailPayloadResponse.result.data[j].trialName);
+              console.log(this.brApiDetailPayloadResponse.result.data[j].programName);
+            }
           }
-        }
-      );
+        );
+    }
   }
+
+
 
   getCallsLength() {
     this.lengthCalls = this.brApiDetailPayloadResponse.result.data.length;
