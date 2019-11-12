@@ -22,6 +22,10 @@ export class ServersService {
     return this.http.post<Server>(this.serversUrl + '/create', server);
   }
 
+  updateServer(server: Server, serverId) {
+    return this.http.put<Server>(this.serversUrl + '/' + serverId + '/update', server, httpOptions);
+  }
+
   public deleteUser(user) {
     return this.http.delete(this.serversUrl + '/' + user + '/delete');
   }

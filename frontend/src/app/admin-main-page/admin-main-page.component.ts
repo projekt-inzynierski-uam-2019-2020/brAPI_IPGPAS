@@ -11,13 +11,14 @@ import {Server} from '../services/servers-service/servers';
   templateUrl: './admin-main-page.component.html',
   styleUrls: ['./admin-main-page.component.scss']
 })
-export class AdminMainPageComponent implements OnInit{
+export class AdminMainPageComponent implements OnInit {
   private _success = new Subject<string>();
   closeResult: string;
   staticAlertClosed = false;
   successMessage: string;
   servers: Server[];
   server: Server = new Server();
+  id: string;
 
 
   ngOnInit(): void {
@@ -37,12 +38,24 @@ export class AdminMainPageComponent implements OnInit{
       });
   }
 
-  createServer(): void{
+  createServer(): void {
     this.serverService.createServer(this.server)
       .subscribe(data => {
         this.getServers();
       });
 
+  }
+
+  updateServer(server: Server): void {
+    this.serverService.updateServer(this.server, this.id)
+      .subscribe(data => {
+        this.servers = this.servers.filter(u => u !== server);
+      });
+
+  }
+
+  updateInfo(server: Server)  {
+    this.id = server._id;
   }
 
   deleteUser(server: Server): void {
@@ -66,6 +79,7 @@ export class AdminMainPageComponent implements OnInit{
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
