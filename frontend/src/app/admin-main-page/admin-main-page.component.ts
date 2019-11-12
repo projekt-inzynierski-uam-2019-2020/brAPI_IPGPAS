@@ -2,6 +2,8 @@ import {Component, Inject, OnInit, VERSION} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {debounceTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {ServersService} from '../services/servers-service/servers.service';
+import {Server} from '../services/servers-service/servers';
 
 
 @Component({
@@ -9,13 +11,14 @@ import {Subject} from 'rxjs';
   templateUrl: './admin-main-page.component.html',
   styleUrls: ['./admin-main-page.component.scss']
 })
-export class AdminMainPageComponent implements OnInit{
+export class AdminMainPageComponent implements OnInit {
   private _success = new Subject<string>();
   closeResult: string;
   staticAlertClosed = false;
   successMessage: string;
-  server_name: string;
-  server_link: string;
+  servers: Server[];
+  server: Server = new Server();
+  id: string;
 
 
   ngOnInit(): void {
@@ -24,13 +27,49 @@ export class AdminMainPageComponent implements OnInit{
     this._success.pipe(
       debounceTime(5000)
     ).subscribe(() => this.successMessage = null);
+    this.getServers();
+
+  }
+
+  getServers() {
+    this.serverService.getAllServers()
+      .subscribe(data => {
+        this.servers = data;
+      });
+  }
+
+  createServer(): void {
+    this.serverService.createServer(this.server)
+      .subscribe(data => {
+        this.getServers();
+      });
+
+  }
+
+  updateServer(server: Server): void {
+    this.serverService.updateServer(this.server, this.id)
+      .subscribe(data => {
+        this.servers = this.servers.filter(u => u !== server);
+      });
+
+  }
+
+  updateInfo(server: Server)  {
+    this.id = server._id;
+  }
+
+  deleteUser(server: Server): void {
+    this.serverService.deleteUser(server._id)
+      .subscribe( data => {
+        this.servers = this.servers.filter(u => u !== server);
+      });
   }
 
   public changeSuccessMessage() {
     this._success.next(`${new Date()} - The server has been added`);
   }
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private serverService: ServersService) {
   }
 
   open(content) {
@@ -40,6 +79,7 @@ export class AdminMainPageComponent implements OnInit{
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

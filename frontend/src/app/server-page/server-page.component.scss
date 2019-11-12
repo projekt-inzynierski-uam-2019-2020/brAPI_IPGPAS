@@ -111,7 +111,16 @@
         width: 25rem;
         color: rgba(78, 78, 78, 0.92);
         border-radius: 3px;
-        padding: 1.5rem 1.5rem 0.6rem 1.5rem;
+
+        h3{
+          background-color: #808081;
+          color: white;
+          padding: 0.6rem;
+        }
+
+        h5{
+          margin-top: 2rem;
+        }
       }
 
       &-checkbox {
@@ -143,29 +152,7 @@
             text-align: center;
           }
 
-          &:before {
-            position: absolute;
-            top: 1px;
-            right: 1px;
-            content: "";
-            width: 0;
-            height: 0;
-            border-top: 3.2rem solid #ccc;
-            border-left: 3.2rem solid transparent;
-            transition: all 200ms ease-out;
-          }
 
-          &:after {
-            position: absolute;
-            top: 1px;
-            right: 1px;
-            content: "";
-            width: 0;
-            height: 0;
-            border-top: 3.1rem solid #fff;
-            border-left: 3.1rem solid transparent;
-            transition: all 200ms ease-out;
-          }
 
           &:hover {
             border: 1px solid #b6844a;
@@ -177,6 +164,11 @@
         }
         &:checked ~ .servers__container--card-content {
           border: 1px solid #b6844a;
+          h3{
+            background-color: #b6844a;
+            transition: all 500ms ease-out;
+          }
+          background-color: rgb(255, 252, 204);
           .card-state-icon {
             background-position: -5.6rem 2px;
           }
@@ -184,20 +176,12 @@
             border-top: 3.2rem solid #b6844a;
           }
           &:after {
+
+              background-color: #b6844a;
             border-top: 3.2rem solid #b6844a;
           }
         }
-        &:checked:hover ~ .servers__container--card-content {
-          .card-state-icon {
-            background-position: -3.7rem 2px;
-          }
-          &:before {
-            border-top: 3.2rem solid #b6844a;
-          }
-          &:after {
-            border-top: 3.2rem solid #b6844a;
-          }
-        }
+
       }
     }
   }
