@@ -15,6 +15,7 @@ This project consists of three main components:
 2. Paste IGR PAN's database dump named `PlantPhenoDB.psql` into `database/brapi_db/` directory 
 3. `cd` into the cloned repository
 4. Run `docker-compose up`
+5. To rebuild the project: `docker-compose up --build`
 
 Information on how to install Docker and Docker Compose on your system can be found [here](https://docs.docker.com/install/) and [here](https://docs.docker.com/compose/install/) respectively.
 ## License
