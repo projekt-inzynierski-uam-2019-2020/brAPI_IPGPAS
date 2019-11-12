@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BrApiDetailPayloadResponse} from '../../calls/BrApiDetailPayloadResponse';
 import {CallsService} from '../../calls/calls.service';
-import {Server} from '../../calls/server';
+
 import {ChartService} from '../../services/chart-service/chart-service';
 import {PdfService} from '../../services/pdf-service/pdf-service';
 
@@ -23,21 +23,14 @@ export class SeasonsComponent implements OnInit {
   public pieChartData: number[];
   public pieChartType: string = 'pie';
 
-  constructor(private callsService: CallsService, private server: Server, private chartService: ChartService, private pdfService: PdfService) {
+  constructor(private callsService: CallsService,  private chartService: ChartService, private pdfService: PdfService) {
   }
 
   ngOnInit() {
-    this.getSelectedCall();
+
   }
 
-  getSelectedCall() {
-    return this.callsService.getSelectedCall(this.server.serverName + 'seasons')
-      .subscribe(
-        calls => {
-          this.brApiDetailPayloadResponse = calls;
-        }
-      );
-  }
+
 
   getUniqSeasons() {
     this.year = [];

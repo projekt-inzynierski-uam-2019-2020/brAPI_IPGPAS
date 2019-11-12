@@ -4,7 +4,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {style} from '@angular/animations';
 import {ServersService} from '../services/servers-service/servers.service';
 import {Server} from '../services/servers-service/servers';
-
+import { Servers } from '../calls/server';
 
 @Component({
   selector: 'app-server-page',
@@ -20,6 +20,7 @@ export class ServerPageComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.serverrs.getSelectedCall();
     this.serverService.getAllServers()
       .subscribe(data => {
         this.servers = data;
@@ -31,7 +32,7 @@ export class ServerPageComponent implements OnInit {
 
 
 
-  constructor(private formBuilder: FormBuilder, private serverService: ServersService) {
+  constructor(private formBuilder: FormBuilder, private serverService: ServersService, private serverrs: Servers) {
   }
 
   public getSelected() {

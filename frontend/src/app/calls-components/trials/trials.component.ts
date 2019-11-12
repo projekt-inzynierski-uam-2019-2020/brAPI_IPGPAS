@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {BrApiDetailPayloadResponse} from '../../calls/BrApiDetailPayloadResponse';
 import {CallsService} from '../../calls/calls.service';
 import {Chart} from 'chart.js';
-import {Server} from '../../calls/server';
 import {ChartService} from '../../services/chart-service/chart-service';
 import {PdfService} from '../../services/pdf-service/pdf-service';
 
@@ -25,21 +24,10 @@ export class TrialsComponent implements OnInit {
   public pieChartType: string = 'pie';
   public pieChartOptions = [ this.responsive = true];
 
-  constructor(private callService: CallsService,  private server: Server, private chartService: ChartService, private pdfService: PdfService) {
+  constructor(private callService: CallsService,  private chartService: ChartService, private pdfService: PdfService) {
   }
 
   ngOnInit() {
-    this.getSelectedCall();
-  }
-
-
-  getSelectedCall() {
-    return this.callService.getSelectedCall(this.server.serverName + 'trials')
-      .subscribe(
-        call => {
-          this.brApiDetailPayloadResponse = call;
-        }
-      );
   }
 
   getUniqTrialCall() {
