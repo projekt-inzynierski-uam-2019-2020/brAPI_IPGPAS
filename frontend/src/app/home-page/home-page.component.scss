@@ -154,14 +154,14 @@
 
 @media (max-width: 1700px) {
   .homepage__box--left {
-
     h1 {
-      font-size: 35px;
+      font-size: 30px;
     }
 
     .title {
-      font-size: 70px;
+      font-size: 40px;
     }
+
 
     p {
       font-size: 20px;
@@ -193,17 +193,17 @@
 
 @media (max-width: 1300px) {
   .homepage__box--left {
-
     h1 {
-      font-size: 30px;
+      font-size: 25px;
     }
 
     .title {
-      font-size: 60px;
+      font-size: 30px;
     }
 
+
     p {
-      font-size: 18px;
+      font-size: 15px;
     }
 
     &-button {
@@ -225,19 +225,6 @@
 
 @media (max-width: 1200px) {
   .homepage__box--left {
-    margin-right: 4vw;
-
-    h1 {
-      font-size: 25px;
-    }
-
-    .title {
-      font-size: 50px;
-    }
-
-    p {
-      font-size: 15px;
-    }
 
     &-button {
       margin: 15px 0px;

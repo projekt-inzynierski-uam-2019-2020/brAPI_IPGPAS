@@ -1,29 +1,26 @@
 <div class="servers">
-  <div class="servers__background">
-    <img
-      class="servers__background--back"
-      src="../../assets/leaves-background-1.png"
-    />
-    <img
-      class="servers__background--front"
-      src="../../assets/leaves-background-2.png"
-    />
-  </div>
   <div class="servers__header">
-    <h2 class="servers__header--title">SELECT SERVER</h2>
+    <div class="servers__header--back">
+      <div class="info" routerLink="servers">
+        <img src="../../assets/back.png" alt="Back">
+        <h4 class="back__title">Home page</h4>
+      </div>
+      <div class="servers__header--separator"></div>
+      <h2 class="servers__header--title">Choose server</h2>
+    </div>
     <button
       href="#"
       routerLink="data"
       class="btn servers__header--button"
       (click)="getSelected()"
     >
-      NEXT<i class="fas fa-long-arrow-alt-right"></i>
+      Next <img src="../../assets/next.png" alt="Next">
     </button>
   </div>
-   <div class="servers__container" >
-    <div class="servers__container--card" *ngFor="let server of servers;let i = index ">
+   <div class="servers__container">
+    <div class="servers__container&#45;&#45;card" *ngFor="let server of servers;let i = index ">
       <input
-        class="servers__container--card-checkbox"
+        class="servers__container&#45;&#45;card-checkbox"
         [(ngModel)]="checkboxes[i].selected"
         type="checkbox"
         value="{{ checkboxes[i].value }}"
@@ -31,10 +28,13 @@
         name="num"
         checked="checked"
       />
-      <div class="servers__container--card-content">
+      <div class="servers__container&#45;&#45;card-content">
         <label for="{{ checkboxes[i].value }}">
-          <h3>{{server.name}}</h3>
-          <h5>{{server.ipAddress}}</h5>
+          <div class="header">
+            <h3>{{server.name}}</h3>
+            <div class="separator"></div>
+            <h5>{{server.ipAddress}}</h5>
+          </div>
           <p class="small-meta dim">
             Fully implemented example of the BrAPI specification, backed by a
             sample database.
