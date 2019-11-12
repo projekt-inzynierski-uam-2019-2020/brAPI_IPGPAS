@@ -1,19 +1,14 @@
 <div class="sidebar">
-  <div class="s-layout__sidebar">
-    <a onclick="" class="s-sidebar__trigger">
-      <i class="fa fa-bars"></i>
-    </a>
-    <nav class="s-sidebar__nav">
-      <ul>
-        <li>
-          <input type="text" class="searching" placeholder="Search"><i class="fa fa-search"></i>
-        </li>
-        <li>
-          <a class="s-sidebar__nav-link" href="#" routerLink="servers">
-            <i class="fas fa-server"></i><em>Servers</em>
-          </a>
-        </li>
-      </ul>
-    </nav>
+  <div class="sidebar__logo" routerLink="home">
+    <h1 class="sidebar__logo--upper">PlantPheno</h1>
+    <h3 class="sidebar__logo--lower">Analitics</h3>
   </div>
+  <nav class="sidebar__navigation">
+    <ul style="padding: 0">
+      <li class="sidebar__navigation--item" routerLinkActive="active" routerLink="/login"><a>Log in</a></li>
+      <li class="sidebar__navigation--item" routerLinkActive="active" routerLink="registration"><a>Sign up</a></li>
+      <li class="sidebar__navigation--item" routerLinkActive="active" routerLink="/servers"><a>Analytics</a></li>
+    </ul>
+
+  </nav>
 </div>
