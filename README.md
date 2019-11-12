@@ -1,4 +1,4 @@
-# IGR PAN BrAPI Application
+# PlantPheno Analytics
 [![Build Status](https://travis-ci.org/projekt-inzynierski-uam-2019-2020/brAPI_IPGPAS.svg?branch=dev)](https://travis-ci.org/projekt-inzynierski-uam-2019-2020/brAPI_IPGPAS)
 ## Content of this repository
 This project consists of three main components:
