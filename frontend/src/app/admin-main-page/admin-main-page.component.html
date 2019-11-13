@@ -31,10 +31,9 @@
             />
             <input
               type="text"
-              placeholder="Enter Server link:"
+              placeholder="Enter Server description:"
               name="something"
               [(ngModel)]="server.description"
-              #check
             />
           </div>
         </form>
@@ -84,10 +83,9 @@
             />
             <input
               type="text"
-              placeholder="Enter Server link:"
+              placeholder="Enter Server description:"
               name="something"
               [(ngModel)]="server.description"
-              #check
             />
           </div>
         </form>
@@ -118,10 +116,9 @@
   </button>
 
 
-  <table style="margin: 3rem auto 0 auto;" class="table table-striped">
+  <table style="margin: 3rem auto 0 auto;width:80%; align: right; float: right; right: 0" class="table table-striped" >
     <thead>
     <tr>
-      <th class="hidden">Id</th>
       <th>Server Name</th>
       <th>Server Link</th>
       <th>Description</th>
@@ -130,7 +127,6 @@
     </thead>
     <tbody>
     <tr *ngFor="let server of servers">
-      <td class="hidden">{{server._id}}</td>
       <td>{{server.name}}</td>
       <td>{{server.ipAddress}}</td>
       <td>{{server.description}}</td>
