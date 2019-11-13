@@ -5,6 +5,10 @@ import {style} from '@angular/animations';
 import {ServersService} from '../services/servers-service/servers.service';
 import {Server} from '../services/servers-service/servers';
 import { Servers } from '../calls/server';
+import {BrApiDetailPayloadResponse} from '../calls/BrApiDetailPayloadResponse';
+import {HttpClient} from '@angular/common/http';
+import {CallsService} from '../calls/calls.service';
+import {ServerDataComponent} from '../server-data-page/server-data.component';
 
 @Component({
   selector: 'app-server-page',
@@ -13,14 +17,23 @@ import { Servers } from '../calls/server';
 })
 export class ServerPageComponent implements OnInit {
   isActive = false;
+  isDisplay = false;
   servers: Server[];
   server: Server = new Server();
+  serverName: string;
+  lengthCalls: number;
+  serversArray = ['https://test-server.brapi.org/brapi/v1/trials', 'https://yambase.org/brapi/v1/trials']
+  serversArrayT = [];
+  trialName = [];
+  programName = [];
+  brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
+  checkName = [];
+
 
   checkboxes = [
   ];
 
   ngOnInit(): void {
-    this.serverrs.getSelectedCall();
     this.serverService.getAllServers()
       .subscribe(data => {
         this.servers = data;
@@ -31,9 +44,10 @@ export class ServerPageComponent implements OnInit {
   }
 
 
-
-  constructor(private formBuilder: FormBuilder, private serverService: ServersService, private serverrs: Servers) {
+  constructor(private formBuilder: FormBuilder, private serverService: ServersService,  private http: HttpClient, private  callService: CallsService, private serverss: Servers) {
   }
+
+
 
   public getSelected() {
     const result = this.checkboxes.filter((ch) => {
@@ -43,6 +57,11 @@ export class ServerPageComponent implements OnInit {
         return ch.value;
       });
     console.log(result);
+    this.getServerList(result);
+    this.serverss.getServerList(result);
+    this.getSelectedCall();
+    this.isDisplay = true;
+
   }
   public toggleStyle(id) {
     const card = document.getElementById(`card${ id }`);
@@ -70,5 +89,52 @@ export class ServerPageComponent implements OnInit {
       console.log('non active' + id);
       this.isActive = !this.isActive;
     }
+  }
+
+
+  getSelectedCall() {
+    for (let i = 0; i < this.serversArrayT.length; i++) {
+      this.serversArrayT[i] = this.serversArrayT[i] + 'trials';
+      console.log(this.serversArrayT);
+    }
+    for (let i = 0; i < this.serversArrayT.length; i++) {
+      this.callService.getSelectedCall(this.serversArrayT[i])
+        .subscribe(
+          call => {
+            this.brApiDetailPayloadResponse = call;
+            this.putArray(this.brApiDetailPayloadResponse);
+            this.getArray();
+          }
+        );
+    }
+  }
+
+  putArray(brApiDetailPayloadResponse) {
+    console.log(brApiDetailPayloadResponse);
+    for(let i = 0; i < this.serversArrayT.length; i++) {
+      for (let j = 0; j < this.getCallsLength(); j++) {
+        this.trialName.push(this.brApiDetailPayloadResponse.result.data[j].trialName);
+        this.programName.push(this.brApiDetailPayloadResponse.result.data[j].programName);
+      }
+    }
+    return this.trialName;
+  }
+
+  getArray() {
+    // console.log(this.trialName[1]);
+    for(let i = 0; i < this.trialName.length; i++){
+      console.log(this.trialName[i]);
+    }
+  }
+
+  getCallsLength() {
+    this.lengthCalls = this.brApiDetailPayloadResponse.result.data.length;
+    return this.lengthCalls;
+  }
+
+
+  getServerList(listServers) {
+    this.serversArrayT = listServers;
+    console.log(this.serversArrayT);
   }
 }

@@ -1,19 +1,44 @@
-<section>
-  <button class="back" type="button" href="#" routerLink="/servers"><i class="fas fa-long-arrow-alt-left"></i>Back</button>
-  <div class="container">
-    <h2 class="title">Choose Category</h2>
-    <div class="row">
-      <div class="col-md-6 col-lg-3 item">
-        <button type="button" href="#" routerLink="/servers/study">Study</button>
+<div class="servers">
+  <div class="servers__header">
+    <div class="servers__header--back">
+      <div class="info" routerLink="servers">
+        <img src="../../assets/back.png" alt="Back">
+        <h4 class="back__title">Servers</h4>
       </div>
-      <div class="col-md-6 col-lg-3 item">
-        <button type="button" href="#" routerLink="/servers/trials">Trials</button>
-      </div>
-      <div class="col-md-6 col-lg-3 item">
-        <button type="button" href="#" routerLink="/servers/seasons">Season</button>
+      <div class="servers__header--separator"></div>
+      <h2 class="servers__header--title">Choose trial</h2>
+    </div>
+    <button
+      href="#"
+      routerLink="data"
+      class="btn servers__header--button"
+    >
+      Next <img src="../../assets/next.png" alt="Next">
+    </button>
+  </div>
+  <div class="servers__container">
+    <div class="servers__container&#45;&#45;card" *ngFor="let server of servers;let i = index ">
+      <input
+        class="servers__container&#45;&#45;card-checkbox"
+        [(ngModel)]="checkboxes[i].selected"
+        type="checkbox"
+        value="{{ checkboxes[i].value }}"
+        id="{{ checkboxes[i].value }}"
+        name="num"
+        checked="checked"
+      />
+      <div class="servers__container&#45;&#45;card-content">
+        <label for="{{ checkboxes[i].value }}">
+          <div class="header">
+            <h3>{{server.name}}</h3>
+            <div class="separator"></div>
+            <h5>{{server.ipAddress}}</h5>
+          </div>
+          <p class="small-meta dim">
+            {{server.description}}
+          </p>
+        </label>
       </div>
     </div>
   </div>
-
-</section>
-
+</div>

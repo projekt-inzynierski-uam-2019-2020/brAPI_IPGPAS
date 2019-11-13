@@ -3,14 +3,13 @@
     <div class="servers__header--back">
       <div class="info" routerLink="servers">
         <img src="../../assets/back.png" alt="Back">
-        <h4 class="back__title">Home page</h4>
+        <h4 class="back__title" (click)="isDisplay= false">Homepage</h4>
       </div>
       <div class="servers__header--separator"></div>
       <h2 class="servers__header--title">Choose server</h2>
     </div>
     <button
       href="#"
-      routerLink="data"
       class="btn servers__header--button"
       (click)="getSelected()"
     >
@@ -36,11 +35,30 @@
             <h5>{{server.ipAddress}}</h5>
           </div>
           <p class="small-meta dim">
-            Fully implemented example of the BrAPI specification, backed by a
-            sample database.
+            {{server.description}}
           </p>
+
         </label>
       </div>
     </div>
+
+     <table class="table table-dark" *ngIf="isDisplay">
+       <thead>
+       <tr>
+         <th scope="col">#</th>
+         <th scope="col">Trial Name</th>
+         <th scope="col">Program Name</th>
+         <th scope="col">Program Name</th>
+       </tr>
+       </thead>
+       <tbody>
+       <tr *ngFor="let trial of trialName; let i = index">
+         <th scope="row">{{i}}</th>
+         <td>{{trialName[i]}}</td>
+         <td>{{programName[i]}}</td>
+         <td>{{checkName[i]}}</td>
+       </tr>
+       </tbody>
+     </table>
   </div>
 </div>

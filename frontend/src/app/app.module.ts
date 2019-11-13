@@ -51,7 +51,7 @@ import {ServersService} from './services/servers-service/servers.service';
     BrowserAnimationsModule,
     NgbModule,
   ],
-  providers: [ServersService, Servers],
+  providers: [ServersService, Servers, ServerPageComponent],
   bootstrap: [AppComponent],
 
 })

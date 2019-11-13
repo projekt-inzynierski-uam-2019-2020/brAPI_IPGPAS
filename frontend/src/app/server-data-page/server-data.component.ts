@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {CallsService} from '../calls/calls.service';
+import {Server} from '../services/servers-service/servers';
+import {Servers} from '../calls/server';
+import {ServerPageComponent} from '../server-page/server-page.component';
+
 
 @Component({
   selector: 'app-chart-page',
@@ -8,11 +12,18 @@ import {CallsService} from '../calls/calls.service';
 
 })
 export class ServerDataComponent implements OnInit {
+  checkboxes = [
+  ];
+   array;
+   trialName;
 
-  constructor(private callsService: CallsService) {
+
+  constructor(private callsService: CallsService, private serverrs: Servers, private serverspage: ServerPageComponent) {
   }
 
   ngOnInit() {
+
+
   }
 
 }
