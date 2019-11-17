@@ -42,7 +42,7 @@ public class GermplasmControllerTest {
         this.mockMvc.perform(get(URL_TEMPLATE))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().string(containsString(expectedResultData)));
+                .andExpect(content().string(expectedResultData));
 
         verify(germplasmService, times(1)).getBrAPIDetailResponse(null, null, null, null, 0, 1000);
         verifyNoMoreInteractions(germplasmService);
@@ -89,14 +89,14 @@ public class GermplasmControllerTest {
     }
 
     private BrAPIDetailResponse createGermplasmBrAPIResponse() {
-        List<Germplasm> calls = Arrays.asList(
+        List<Germplasm> germplasms = Arrays.asList(
                 createGermplasmWithValue("Germplasm7"),
                 createGermplasmWithValue("Germplasm2"),
                 createGermplasmWithValue("Germplasm1"),
                 createGermplasmWithValue("Germplasm6")
         );
         Pagination pagination = new Pagination(1, 1000, 4, 1);
-        return new BrAPIDetailResponse(pagination, calls);
+        return new BrAPIDetailResponse(pagination, germplasms);
     }
 
     private Germplasm createGermplasmWithValue(String value) {

@@ -25,7 +25,6 @@ public class CommoncropnamesDAOImplTest {
     @InjectMocks
     private CommoncropnamesDAOImpl commoncropnamesDAO;
 
-
     @Test
     public void getAllShouldReturnMappedCommoncropnamesFromRepositoryValuesEntities() {
         List<ValuesEntity> valuesEntities = createValuesEntities();
@@ -38,10 +37,10 @@ public class CommoncropnamesDAOImplTest {
     }
 
     private List<ValuesEntity> createValuesEntities() {
-        return Arrays.asList(createValuesEntityWithRandomValue("Tomatillo"), createValuesEntityWithRandomValue("Hordeum Vulgare"));
+        return Arrays.asList(createValuesEntityWithValue("Tomatillo"), createValuesEntityWithValue("Hordeum Vulgare"));
     }
 
-    private ValuesEntity createValuesEntityWithRandomValue(String value) {
+    private ValuesEntity createValuesEntityWithValue(String value) {
         ValuesEntity valuesEntity = new ValuesEntity();
         valuesEntity.setValue(value);
         return valuesEntity;

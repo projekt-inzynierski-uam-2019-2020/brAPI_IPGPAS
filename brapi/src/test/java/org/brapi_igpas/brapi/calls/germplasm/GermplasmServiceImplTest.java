@@ -53,12 +53,12 @@ public class GermplasmServiceImplTest {
         List<Germplasm> DAOGermplasms = createNGermplasms(10);
         when(germplasmDAO.getAll()).thenReturn(DAOGermplasms);
 
-        Pagination DAOCallPagination = new Pagination(1, 1000, 10, 1);
-        when(paginationService.getPagination(DAOGermplasms.size(), page, pageSize)).thenReturn(DAOCallPagination);
+        Pagination DAOGermplasmPagination = new Pagination(1, 1000, 10, 1);
+        when(paginationService.getPagination(DAOGermplasms.size(), page, pageSize)).thenReturn(DAOGermplasmPagination);
         when(paginationService.paginateList(DAOGermplasms, page, pageSize)).thenReturn(DAOGermplasms);
 
         BrAPIDetailResponse actualBrAPIResponse = germplasmService.getBrAPIDetailResponse(null, null, null, null, page, pageSize);
-        BrAPIDetailResponse expectedBrAPIResponse = new BrAPIDetailResponse(DAOCallPagination, DAOGermplasms);
+        BrAPIDetailResponse expectedBrAPIResponse = new BrAPIDetailResponse(DAOGermplasmPagination, DAOGermplasms);
 
         assertNotNull(actualBrAPIResponse);
         assertEquals(expectedBrAPIResponse, actualBrAPIResponse);
@@ -84,12 +84,12 @@ public class GermplasmServiceImplTest {
         filteredGermplasms = createNGermplasms(1);
         when(germplasmFilter.filterByCommonCropName(previousFiltered, commonCropName)).thenReturn(filteredGermplasms);
 
-        Pagination filteredGermplasmsPagination = new Pagination(1, 1000, 1, 1);
-        when(paginationService.getPagination(filteredGermplasms.size(), page, pageSize)).thenReturn(filteredGermplasmsPagination);
+        Pagination filteredGermplasmPagination = new Pagination(1, 1000, 1, 1);
+        when(paginationService.getPagination(filteredGermplasms.size(), page, pageSize)).thenReturn(filteredGermplasmPagination);
         when(paginationService.paginateList(filteredGermplasms, page, pageSize)).thenReturn(filteredGermplasms);
 
         BrAPIDetailResponse actualBrAPIResponse = germplasmService.getBrAPIDetailResponse(germplasmPUI, germplasmDbId, germplasmName, commonCropName, page, pageSize);
-        BrAPIDetailResponse expectedBrAPIResponse = new BrAPIDetailResponse(filteredGermplasmsPagination, filteredGermplasms);
+        BrAPIDetailResponse expectedBrAPIResponse = new BrAPIDetailResponse(filteredGermplasmPagination, filteredGermplasms);
 
         assertNotNull(actualBrAPIResponse);
         assertEquals(expectedBrAPIResponse, actualBrAPIResponse);
@@ -103,12 +103,12 @@ public class GermplasmServiceImplTest {
         List<Germplasm> filteredGermplasms = createNGermplasms(6);
         when(germplasmFilter.filterByGermplasmPUI(DAOGermplasms, germplasmPUI)).thenReturn(filteredGermplasms);
 
-        Pagination filteredGermplasmsPagination = new Pagination(1, 1000, 6, 1);
-        when(paginationService.getPagination(filteredGermplasms.size(), page, pageSize)).thenReturn(filteredGermplasmsPagination);
+        Pagination filteredGermplasmPagination = new Pagination(1, 1000, 6, 1);
+        when(paginationService.getPagination(filteredGermplasms.size(), page, pageSize)).thenReturn(filteredGermplasmPagination);
         when(paginationService.paginateList(filteredGermplasms, page, pageSize)).thenReturn(filteredGermplasms);
 
         BrAPIDetailResponse actualBrAPIResponse = germplasmService.getBrAPIDetailResponse(germplasmPUI, null, null, null, page, pageSize);
-        BrAPIDetailResponse expectedBrAPIResponse = new BrAPIDetailResponse(filteredGermplasmsPagination, filteredGermplasms);
+        BrAPIDetailResponse expectedBrAPIResponse = new BrAPIDetailResponse(filteredGermplasmPagination, filteredGermplasms);
 
         assertNotNull(actualBrAPIResponse);
         assertEquals(expectedBrAPIResponse, actualBrAPIResponse);
@@ -122,12 +122,12 @@ public class GermplasmServiceImplTest {
         List<Germplasm> filteredGermplasms = createNGermplasms(4);
         when(germplasmFilter.filterByGermplasmDbId(DAOGermplasms, germplasmDbId)).thenReturn(filteredGermplasms);
 
-        Pagination filteredGermplasmsPagination = new Pagination(1, 1000, 4, 1);
-        when(paginationService.getPagination(filteredGermplasms.size(), page, pageSize)).thenReturn(filteredGermplasmsPagination);
+        Pagination filteredGermplasmPagination = new Pagination(1, 1000, 4, 1);
+        when(paginationService.getPagination(filteredGermplasms.size(), page, pageSize)).thenReturn(filteredGermplasmPagination);
         when(paginationService.paginateList(filteredGermplasms, page, pageSize)).thenReturn(filteredGermplasms);
 
         BrAPIDetailResponse actualBrAPIResponse = germplasmService.getBrAPIDetailResponse(null, germplasmDbId, null, null, page, pageSize);
-        BrAPIDetailResponse expectedBrAPIResponse = new BrAPIDetailResponse(filteredGermplasmsPagination, filteredGermplasms);
+        BrAPIDetailResponse expectedBrAPIResponse = new BrAPIDetailResponse(filteredGermplasmPagination, filteredGermplasms);
 
         assertNotNull(actualBrAPIResponse);
         assertEquals(expectedBrAPIResponse, actualBrAPIResponse);
@@ -141,12 +141,12 @@ public class GermplasmServiceImplTest {
         List<Germplasm> filteredGermplasms = createNGermplasms(7);
         when(germplasmFilter.filterByGermplasmName(DAOGermplasms, germplasmName)).thenReturn(filteredGermplasms);
 
-        Pagination filteredGermplasmsPagination = new Pagination(1, 1000, 7, 1);
-        when(paginationService.getPagination(filteredGermplasms.size(), page, pageSize)).thenReturn(filteredGermplasmsPagination);
+        Pagination filteredGermplasmPagination = new Pagination(1, 1000, 7, 1);
+        when(paginationService.getPagination(filteredGermplasms.size(), page, pageSize)).thenReturn(filteredGermplasmPagination);
         when(paginationService.paginateList(filteredGermplasms, page, pageSize)).thenReturn(filteredGermplasms);
 
         BrAPIDetailResponse actualBrAPIResponse = germplasmService.getBrAPIDetailResponse(null, null, germplasmName, null, page, pageSize);
-        BrAPIDetailResponse expectedBrAPIResponse = new BrAPIDetailResponse(filteredGermplasmsPagination, filteredGermplasms);
+        BrAPIDetailResponse expectedBrAPIResponse = new BrAPIDetailResponse(filteredGermplasmPagination, filteredGermplasms);
 
         assertNotNull(actualBrAPIResponse);
         assertEquals(expectedBrAPIResponse, actualBrAPIResponse);
@@ -160,12 +160,12 @@ public class GermplasmServiceImplTest {
         List<Germplasm> filteredGermplasms = createNGermplasms(5);
         when(germplasmFilter.filterByCommonCropName(DAOGermplasms, commonCropName)).thenReturn(filteredGermplasms);
 
-        Pagination filteredGermplasmsPagination = new Pagination(1, 1000, 5, 1);
-        when(paginationService.getPagination(filteredGermplasms.size(), page, pageSize)).thenReturn(filteredGermplasmsPagination);
+        Pagination filteredGermplasmPagination = new Pagination(1, 1000, 5, 1);
+        when(paginationService.getPagination(filteredGermplasms.size(), page, pageSize)).thenReturn(filteredGermplasmPagination);
         when(paginationService.paginateList(filteredGermplasms, page, pageSize)).thenReturn(filteredGermplasms);
 
         BrAPIDetailResponse actualBrAPIResponse = germplasmService.getBrAPIDetailResponse(null, null, null, commonCropName, page, pageSize);
-        BrAPIDetailResponse expectedBrAPIResponse = new BrAPIDetailResponse(filteredGermplasmsPagination, filteredGermplasms);
+        BrAPIDetailResponse expectedBrAPIResponse = new BrAPIDetailResponse(filteredGermplasmPagination, filteredGermplasms);
 
         assertNotNull(actualBrAPIResponse);
         assertEquals(expectedBrAPIResponse, actualBrAPIResponse);
