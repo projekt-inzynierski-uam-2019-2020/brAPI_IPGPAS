@@ -18,15 +18,24 @@ export class ServerDataComponent implements OnInit {
    array;
    trialName;
   globals: Globals;
-  isDisplay = false;
-
+  isDisplay = {
+    trials: true,
+    studyFilters: false,
+    study: false,
+  };
+  showMore = false;
 
   constructor(private callsService: CallsService, private serverrs: Servers, private serverspage: ServerPageComponent, private global: Globals) {
   }
 
   ngOnInit() {
     this.globals = this.global;
+  }
 
+  showStudyFilters() {
+    this.isDisplay.trials = false;
+    this.isDisplay.studyFilters = true;
+    this.isDisplay.study = false;
   }
 
 }
