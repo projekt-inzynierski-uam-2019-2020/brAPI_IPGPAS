@@ -23,6 +23,7 @@ import {AdminMainPageComponent} from './admin-main-page/admin-main-page.componen
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ServersService} from './services/servers-service/servers.service';
+import {Globals} from './globals';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import {ServersService} from './services/servers-service/servers.service';
     BrowserAnimationsModule,
     NgbModule,
   ],
-  providers: [ServersService, Servers, ServerPageComponent],
+  providers: [ServersService, Servers, ServerPageComponent, Globals],
   bootstrap: [AppComponent],
 
 })

@@ -104,7 +104,7 @@
 
   &__container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
     flex-flow: wrap;
     margin: auto 60px;
@@ -118,7 +118,7 @@
       &-content {
         height: 150px;
         background-color: #34373A;
-        width: 35vw;
+        width: 15vw;
         color: #66707A;
         border-radius: 2px;
 
