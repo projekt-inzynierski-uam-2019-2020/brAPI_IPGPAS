@@ -9,6 +9,7 @@ import {BrApiDetailPayloadResponse} from '../calls/BrApiDetailPayloadResponse';
 import {HttpClient} from '@angular/common/http';
 import {CallsService} from '../calls/calls.service';
 import {ServerDataComponent} from '../server-data-page/server-data.component';
+import {Globals} from '../globals';
 
 @Component({
   selector: 'app-server-page',
@@ -28,12 +29,15 @@ export class ServerPageComponent implements OnInit {
   programName = [];
   brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
   checkName = [];
+  globals: Globals;
 
 
   checkboxes = [
   ];
 
   ngOnInit(): void {
+    this.globals = this.global;
+    console.log(this.globals.role);
     this.serverService.getAllServers()
       .subscribe(data => {
         this.servers = data;
@@ -44,7 +48,7 @@ export class ServerPageComponent implements OnInit {
   }
 
 
-  constructor(private formBuilder: FormBuilder, private serverService: ServersService,  private http: HttpClient, private  callService: CallsService, private serverss: Servers) {
+  constructor(private formBuilder: FormBuilder, private serverService: ServersService,  private http: HttpClient, private  callService: CallsService, private serverss: Servers, public global: Globals) {
   }
 
 
@@ -56,11 +60,17 @@ export class ServerPageComponent implements OnInit {
       .map((ch) => {
         return ch.value;
       });
-    console.log(result);
+
+    for (let i = 0; i < result.length; i++) {
+      this.globals.serversArray.push(result[i]);
+    }
+    console.log(this.globals.serversArray[1]);
     this.getServerList(result);
+    this.serverss.getSelectedCall();
     this.serverss.getServerList(result);
-    this.getSelectedCall();
     this.isDisplay = true;
+
+    console.log(this.globals.trialName[1]);
 
   }
   public toggleStyle(id) {
@@ -91,23 +101,6 @@ export class ServerPageComponent implements OnInit {
     }
   }
 
-
-  getSelectedCall() {
-    for (let i = 0; i < this.serversArrayT.length; i++) {
-      this.serversArrayT[i] = this.serversArrayT[i] + 'trials';
-      console.log(this.serversArrayT);
-    }
-    for (let i = 0; i < this.serversArrayT.length; i++) {
-      this.callService.getSelectedCall(this.serversArrayT[i])
-        .subscribe(
-          call => {
-            this.brApiDetailPayloadResponse = call;
-            this.putArray(this.brApiDetailPayloadResponse);
-            this.getArray();
-          }
-        );
-    }
-  }
 
   putArray(brApiDetailPayloadResponse) {
     console.log(brApiDetailPayloadResponse);
