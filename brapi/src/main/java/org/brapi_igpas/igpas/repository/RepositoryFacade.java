@@ -32,4 +32,13 @@ public class RepositoryFacade {
         }
         return Collections.emptyList();
     }
+
+    public List<ValuesEntity> getValuesEntitiesByAttributeDisplayedName(String displayedName) {
+        Optional<AttributesEntity> attributesEntity = attributesEntityRepository.getAttributeByDisplayedName(displayedName);
+        if (attributesEntity.isPresent()) {
+            int attributeId = attributesEntity.get().getId();
+            return new ArrayList<>(valuesEntityRepository.getValuesByAttributeId(attributeId));
+        }
+        return Collections.emptyList();
+    }
 }
