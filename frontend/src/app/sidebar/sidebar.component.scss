@@ -8,7 +8,7 @@
 
   &__logo{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     color: #ffffff;
     font-family: 'Saira';
     margin-bottom: 30px;
@@ -18,12 +18,17 @@
       cursor: pointer;
     }
 
+    &--logotype{
+      height: 45px;
+      margin-right: 10px;
+    }
+
     &--upper{
-      font-size: 30px;
+      font-size: 20px;
     }
 
     &--lower{
-      font-size: 18px;
+      font-size: 15px;
     }
   }
 
