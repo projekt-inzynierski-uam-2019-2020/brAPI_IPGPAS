@@ -23,7 +23,6 @@ export class ServerDataComponent implements OnInit {
     studyFilters: false,
     study: false,
   };
-  showMore = false;
 
   constructor(private callsService: CallsService, private serverrs: Servers, private serverspage: ServerPageComponent, private global: Globals) {
   }
