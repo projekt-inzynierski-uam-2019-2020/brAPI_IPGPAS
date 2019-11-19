@@ -26,6 +26,8 @@ export class ServerDataComponent implements OnInit {
 
   ngOnInit() {
     this.globals = this.global;
+      console.log("Test" + this.globals.serversArray[0].trialName);
+
 
   }
 

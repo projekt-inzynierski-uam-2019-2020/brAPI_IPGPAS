@@ -11,10 +11,15 @@ export class Servers {
 
   serverName: string;
   lengthCalls: number;
-  serversArray = ['https://test-server.brapi.org/brapi/v1/trials', 'https://yambase.org/brapi/v1/trials'];
+  serversArray = ['https://test-server.brapi.org/brapi/v1/'];
   serversArrayT = [];
+  studiesIdArray = [1001, 1002, 1003];
+  studiesRequests = [];
+  testArray = [];
   brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
+  brApiDetailPayloadResponse2: BrApiDetailPayloadResponse;
   global: Globals;
+  studiesArray = [];
 
   constructor(private http: HttpClient, private  callService: CallsService, private globals: Globals) {
   }
@@ -40,8 +45,46 @@ export class Servers {
     }
   }
 
+  getSelectedCallStudies() {
+    this.global = this.globals;
+    for (let i = 0; i < this.studiesIdArray.length; i++) {
+      this.testArray[i] = 'https://test-server.brapi.org/brapi/v1/' + 'studies' + '?studyDbId=' + this.studiesIdArray[i];
+      console.log(this.testArray[i]);
+    }
+    for (let i = 0; i < this.studiesIdArray.length; i++) {
+      console.log(this.testArray[i]);
+      this.callService.getSelectedCall(this.testArray[i])
+        .subscribe(
+          call => {
+            this.brApiDetailPayloadResponse2 = call;
+            console.log(this.brApiDetailPayloadResponse2);
+            this.putStudiesArray(this.brApiDetailPayloadResponse2);
+          }
+        );
+    }
+    console.log(this.studiesArray);
+  }
+
+  getSelectedCallLocation(){
+
+  }
+
+  putStudiesArray(brApiDetailPayloadResponse2) {
+    for (let i = 0; i < this.studiesIdArray.length; i++) {
+      for (let j = 0; j < this.brApiDetailPayloadResponse2.result.data.length; j++) {
+        this.studiesArray.push(
+          {
+            studyName: this.brApiDetailPayloadResponse2.result.data[j].studyName,
+            studyType: this.brApiDetailPayloadResponse2.result.data[j].studyType,
+            startDate: this.brApiDetailPayloadResponse2.result.data[j].startDate,
+            endDate: this.brApiDetailPayloadResponse2.result.data[j].endDate
+          });
+      }
+    }
+
+  }
+
   putArray(brApiDetailPayloadResponse) {
-    console.log(brApiDetailPayloadResponse);
     for (let i = 0; i < this.serversArrayT.length; i++) {
       for (let j = 0; j < this.getCallsLength(); j++) {
         for (let k = 0; k < this.brApiDetailPayloadResponse.result.data[j].studies.length; k++) {

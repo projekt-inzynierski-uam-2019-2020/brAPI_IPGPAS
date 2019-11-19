@@ -68,6 +68,7 @@ export class ServerPageComponent implements OnInit {
     this.getServerList(result);
     this.serverss.getSelectedCall();
     this.serverss.getServerList(result);
+    this.serverss.getSelectedCallStudies();
     this.isDisplay = true;
 
     console.log(this.globals.trialName[1]);
