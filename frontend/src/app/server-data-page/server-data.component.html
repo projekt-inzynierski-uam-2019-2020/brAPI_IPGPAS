@@ -26,34 +26,49 @@
           name="num"
           checked="checked"
         />
-    </div>
-      <div class="trials" *ngIf="isDisplay.trials">
-        <div class="filters__container&#45;&#45;card" *ngFor="let trial of this.globals.serverArray; let i = index">
-          <input
-            class="filters__container&#45;&#45;card-checkbox"
-            type="checkbox"
-            value="{{ checkboxes[i].value }}"
-            id="{{ checkboxes[i].value }}"
-            name="num"
-            checked="checked"
-          />
-          <div class="filters__container&#45;&#45;card-content">
-            <label>
-              <div class="header">
-                <h3>{{this.globals.serverArray[i].trialName}}</h3>
-                <div class="row mt-4">
-                  <h5>Program Name:</h5>
-                  <h5 class="bold">{{this.globals.serverArray[i].programName}}</h5>
-                </div>
-                <div class="row">
-                  <h5>Common Crop Name:</h5>
-                  <h5 class="bold">{{this.globals.serverArray[i].commonCropName}}</h5>
-                </div>
+        <div class="filters__container&#45;&#45;card-content">
+          <label>
+            <div class="header">
+              <h3>{{this.globals.serverArray[i].trialName}}</h3>
+              <div class="row mt-4">
+                <h5>Program Name:</h5>
+                <h5 class="bold">{{this.globals.serverArray[i].programName}}</h5>
               </div>
-            </label>
-          </div>
+              <div class="row">
+                <h5>Common Crop Name:</h5>
+                <h5 class="bold">{{this.globals.serverArray[i].commonCropName}}</h5>
+              </div>
+            </div>
+          </label>
         </div>
       </div>
+      <div *ngIf="!showMore" class="showMore"><button (click)="showMore = true" class="btn showMore__button">Show more</button></div>
+    </div>
+    <div class="trials" *ngIf="isDisplay.trials && showMore">
+      <div class="filters__container&#45;&#45;card" *ngFor="let trial of this.globals.serverArray; let i = index">
+        <input
+          class="filters__container&#45;&#45;card-checkbox"
+          type="checkbox"
+          name="num"
+          checked="checked"
+        />
+        <div class="filters__container&#45;&#45;card-content">
+          <label>
+            <div class="header">
+              <h3>{{this.globals.serverArray[i].trialName}}</h3>
+              <div class="row mt-4">
+                <h5>Program Name:</h5>
+                <h5 class="bold">{{this.globals.serverArray[i].programName}}</h5>
+              </div>
+              <div class="row">
+                <h5>Common Crop Name:</h5>
+                <h5 class="bold">{{this.globals.serverArray[i].commonCropName}}</h5>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
 
     <div class="studyFilters" *ngIf="isDisplay.studyFilters">
       <div class="filters__container&#45;&#45;card">
