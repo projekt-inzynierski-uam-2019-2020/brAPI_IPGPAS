@@ -119,8 +119,7 @@
       margin: 25px;
 
       &-content {
-        height: auto;
-        max-height: 150px;
+        height: 170px;
         background-color: #34373A;
         width: 300px;
         color: #66707A;
@@ -138,17 +137,20 @@
           color: #FFFFFF;
 
           h3{
-            font-size: 22px;
+            font-size: 17px;
             font-family: 'Roboto';
             text-align: center;
           }
 
           .row{
             margin: auto 10px;
+            display: flex;
+            flex-wrap: initial;
+            align-items: center;
 
 
             h5 {
-              font-size: 14px;
+              font-size: 10px;
               font-family: 'Roboto';
               text-align: left;
             }
@@ -226,6 +228,11 @@
         font-family: 'Roboto';
         font-size: 20px;
       }
+
+      .btn:focus,.btn:active {
+        outline: none !important;
+        box-shadow: none;
+      }
     }
 
     .studyFilters{
@@ -235,6 +242,10 @@
       flex-flow: wrap;
       margin: auto 60px;
       padding: 0 0 2rem 0;
+
+      .filters__container--card-content{
+        height: 80px;
+      }
     }
   }
 }
@@ -254,38 +265,32 @@
   }
 }
 
-@media (max-width: 1400px) {
-  .filters {
-    &__header {
-      &--separator{
-        height: 40px;
-      }
-
-      &--title {
+@media (max-width: 1000px){
+  .filters{
+    &__header{
+      &--title{
         font-size: 25px;
-        margin-top: 8px;
-      }
-
-      &--button,
-      .btn {
-        width: 9.3rem;
-        font-size: 1.25rem;
+        margin-top: 10px;
+        margin-right: 10px;
       }
     }
   }
 }
 
-@media (max-width: 913px) {
+@media (max-width: 768px) {
   .filters {
-    overflow-y: scroll;
-  }
-}
+    padding-left: 0;
+    padding-top: 80px;
 
-@media only screen and (max-width: 671px) {
-  .filters {
     &__header {
+      flex-direction: column;
+
       &--title {
-        font-size: 1.8rem;
+        font-size: 25px;
+      }
+
+      &--back{
+        margin-bottom: 20px;
       }
 
       &--button,
@@ -295,14 +300,13 @@
         padding: 8px;
       }
     }
+
+    &__container{
+      margin: 0;
+    }
   }
 }
 
-@media (max-width: 465px) {
-  .filters__container--card-content {
-    width: 18.7rem;
-  }
-}
 
 @keyframes bounce-left {
   0% {

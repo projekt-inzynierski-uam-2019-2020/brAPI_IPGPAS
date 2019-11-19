@@ -17,33 +17,12 @@
       Next <img src="../../assets/next.png" alt="Next">
     </button>
   </div>
-
-  <table class="table table-dark" style="background-color: #242729;" *ngIf="isDisplay">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Trial Name</th>
-      <th scope="col">Program Name</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let trial of this.globals.trialName; let i = index">
-      <th scope="row">{{i}}</th>
-      <td>{{this.globals.trialName[i]}}</td>
-      <td>{{this.globals.programName[i]}}</td>
-      <td>{{checkName[i]}}</td>
-    </tr>
-    </tbody>
-  </table>
-
   <div class="servers__container">
-
     <div class="servers__container&#45;&#45;card" *ngFor="let server of servers;let i = index ">
       <input
         class="servers__container&#45;&#45;card-checkbox"
         [(ngModel)]="checkboxes[i].selected"
         type="checkbox"
-        value="{{ checkboxes[i].value }}"
         id="{{ checkboxes[i].value }}"
         name="num"
         checked="checked"
