@@ -28,7 +28,7 @@ export class Servers {
     this.global = this.globals;
 
     this.serversArrayT = this.global.serversArray;
-    console.log(this.serversArrayT.length);
+    console.log('check 2' + this.serversArrayT);
     for (let i = 0; i < this.global.serversArray.length; i++) {
       this.serversArrayT[i] = this.serversArrayT[i] + 'trials';
       console.log(this.serversArrayT);
@@ -38,6 +38,7 @@ export class Servers {
         .subscribe(
           call => {
             this.brApiDetailPayloadResponse = call;
+            console.log('check' + this.brApiDetailPayloadResponse)
             this.putArray(this.brApiDetailPayloadResponse);
             this.getArray();
           }
@@ -87,14 +88,12 @@ export class Servers {
   putArray(brApiDetailPayloadResponse) {
     for (let i = 0; i < this.serversArrayT.length; i++) {
       for (let j = 0; j < this.getCallsLength(); j++) {
-        for (let k = 0; k < this.brApiDetailPayloadResponse.result.data[j].studies.length; k++) {
           this.globals.serverArray.push({
             trialName: this.brApiDetailPayloadResponse.result.data[j].trialName,
             commonCropName: this.brApiDetailPayloadResponse.result.data[j].commonCropName,
             programName: this.brApiDetailPayloadResponse.result.data[j].programName,
-            studyDbId: this.brApiDetailPayloadResponse.result.data[j].studies[k].studyDbId
+            studyDbId: this.brApiDetailPayloadResponse.result.data[j].studies
           });
-        }
       }
     }
     console.log(this.globals.serverArray);
