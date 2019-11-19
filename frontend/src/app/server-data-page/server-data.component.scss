@@ -119,10 +119,9 @@
       margin: 25px;
 
       &-content {
-        height: auto;
-        max-height: 150px;
+        height: 200px;
         background-color: #34373A;
-        width: 300px;
+        width: 400px;
         color: #66707A;
         border-radius: 2px;
 
@@ -145,6 +144,10 @@
 
           .row{
             margin: auto 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
 
 
             h5 {
@@ -226,6 +229,11 @@
         font-family: 'Roboto';
         font-size: 20px;
       }
+
+      .btn:focus,.btn:active {
+        outline: none !important;
+        box-shadow: none;
+      }
     }
 
     .studyFilters{
@@ -235,6 +243,10 @@
       flex-flow: wrap;
       margin: auto 60px;
       padding: 0 0 2rem 0;
+
+      .filters__container--card-content{
+        height: 80px;
+      }
     }
   }
 }
