@@ -272,13 +272,19 @@
   }
 }
 
-@media (max-width: 1000px){
+@media (max-width: 1050px){
   .filters{
     &__header{
       &--title{
         font-size: 25px;
         margin-top: 10px;
         margin-right: 10px;
+      }
+    }
+
+    .trials{
+      .filters__container--card-content{
+        width: 50vw;
       }
     }
   }
@@ -310,6 +316,12 @@
 
     &__container{
       margin: 0;
+    }
+
+    .trials{
+      .filters__container--card-content{
+        width: 80vw;
+      }
     }
   }
 }
