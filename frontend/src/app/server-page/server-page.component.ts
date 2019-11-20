@@ -30,6 +30,7 @@ export class ServerPageComponent implements OnInit {
   brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
   checkName = [];
   globals: Globals;
+  isLocation = false;
 
 
   checkboxes = [
@@ -63,6 +64,7 @@ export class ServerPageComponent implements OnInit {
 
     for (let i = 0; i < result.length; i++) {
       this.globals.serversArray.push(result[i]);
+      this.globals.serversArray2.push(result[i]);
     }
     console.log(this.globals.serversArray[1]);
     this.getServerList(result);

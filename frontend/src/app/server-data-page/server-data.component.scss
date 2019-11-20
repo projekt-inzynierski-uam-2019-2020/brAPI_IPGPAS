@@ -100,6 +100,13 @@
         background-color: #117a43;
       }
     }
+    &--button-l{
+      background-color: #34373A;
+      width: 156px;
+      padding: 0.6rem;
+      color: #fff;
+      font-family: 'Roboto';
+    }
   }
 
   &__container {
@@ -180,7 +187,7 @@
         opacity: 0;
         visibility: hidden;
 
-        ~ .servers__container--card-content {
+        ~ .filters__container--card-content {
           transition: all 500ms ease-out;
 
           * {
@@ -206,7 +213,7 @@
           }
 
         }
-        &:checked ~ .servers__container--card-content {
+        &:checked ~ .filters__container--card-content {
 
           h3{
             transition: all 500ms ease-out;

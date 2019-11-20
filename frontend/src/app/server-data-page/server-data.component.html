@@ -9,7 +9,17 @@
       <h2 class="filters__header--title">Choose filters</h2>
     </div>
     <button
-      (click)="showStudyFilters()"
+      *ngIf="firstAcceptButton"
+      (click)="showStudyFilters() || showLocationFiletrs()"
+      href="#"
+      class="btn filters__header--button"
+    >
+      Accept
+      <img src="../../assets/next.png" alt="Next">
+    </button>
+    <button
+      *ngIf="acceptButtonS"
+      (click)="acceptButtonSF() "
       href="#"
       class="btn filters__header--button"
     >
@@ -18,50 +28,33 @@
     </button>
   </div>
   <div class="filters__container">
-    <div class="trials" *ngIf="isDisplay.trials && !showMore">
-      <div class="filters__container&#45;&#45;card" *ngFor="let trial of this.globals.serverArray | slice:0:9; let i = index">
-        <input
-          class="filters__container&#45;&#45;card-checkbox"
-          type="checkbox"
-          name="num"
-          checked="checked"
-        />
-        <div class="filters__container&#45;&#45;card-content">
-          <label>
-            <div class="header">
-              <h3>{{this.globals.serverArray[i].trialName}}</h3>
-              <div class="row mt-4">
-                <h5>Program Name:</h5>
-                <h5 class="bold">{{this.globals.serverArray[i].programName}}</h5>
-              </div>
-              <div class="row">
-                <h5>Common Crop Name:</h5>
-                <h5 class="bold">{{this.globals.serverArray[i].commonCropName}}</h5>
-              </div>
-            </div>
-          </label>
-        </div>
-      </div>
-      <div *ngIf="!showMore" class="showMore"><button (click)="showMore = true" class="btn showMore__button">Show more</button></div>
-    </div>
-    <div class="trials" *ngIf="isDisplay.trials && showMore">
+    <button
+      class="btn filters__header--button-l"
+      (click)="trialsFunction() "
+    >
+      Show loaded Trials
+      <img src="../../assets/next.png" alt="Next">
+    </button>
+    <div  *ngIf="isShow" class="trials">
       <div class="filters__container&#45;&#45;card" *ngFor="let trial of this.globals.serverArray; let i = index">
         <input
           class="filters__container&#45;&#45;card-checkbox"
+          [(ngModel)]="checkboxes[i].selected"
           type="checkbox"
+          id="{{ checkboxes[i].trialName }}{{i}}"
           name="num"
           checked="checked"
         />
         <div class="filters__container&#45;&#45;card-content">
-          <label>
+          <label for="{{ checkboxes[i].trialName }}{{i}}">
             <div class="header">
-              <h3>{{this.globals.serverArray[i].trialName}}</h3>
+              <h3>{{checkboxes[i].trialName}}</h3>
               <div class="row mt-4">
                 <h5>Program Name:</h5>
-                <h5 class="bold">{{this.globals.serverArray[i].programName}}</h5>
+                <h5 class="bold" >{{checkboxes[i].programName}}</h5>
               </div>
               <div class="row">
-                <h5>Common Crop Name:</h5>
+                <h5>Examined Crop:</h5>
                 <h5 class="bold">{{this.globals.serverArray[i].commonCropName}}</h5>
               </div>
             </div>
@@ -69,54 +62,82 @@
         </div>
       </div>
     </div>
-
     <div class="studyFilters" *ngIf="isDisplay.studyFilters">
-      <div class="filters__container&#45;&#45;card">
+      <div class="filters__container&#45;&#45;card" *ngFor="let check of [0,1,2]; let j = index">
         <input
           class="filters__container&#45;&#45;card-checkbox"
+          [(ngModel)]="staticCheckboxes[j].selected"
           type="checkbox"
+          id="{{ staticCheckboxes[j].study}}{{j}}"
           name="num"
           checked="checked"
         />
         <div class="filters__container&#45;&#45;card-content">
-          <label>
+          <label for="{{ staticCheckboxes[j].study}}{{j}}">
             <div class="header">
-              <h3 class="mb-0 mt-2">Studies</h3>
-            </div>
-          </label>
-        </div>
-      </div>
-      <div class="filters__container&#45;&#45;card">
-        <input
-          class="filters__container&#45;&#45;card-checkbox"
-          type="checkbox"
-          name="num"
-          checked="checked"
-        />
-        <div class="filters__container&#45;&#45;card-content">
-          <label>
-            <div class="header">
-              <h3 class="mb-0 mt-2">Location</h3>
-            </div>
-          </label>
-        </div>
-      </div>
-      <div class="filters__container&#45;&#45;card">
-        <input
-          class="filters__container&#45;&#45;card-checkbox"
-          type="checkbox"
-          name="num"
-          checked="checked"
-        />
-        <div class="filters__container&#45;&#45;card-content">
-          <label>
-            <div class="header">
-              <h3 class="mb-0 mt-2">Season</h3>
+              <h3 class="mb-0 mt-2">{{ staticCheckboxes[j].study}}</h3>
             </div>
           </label>
         </div>
       </div>
     </div>
-
+    <div  *ngIf="isStudy" class="trials">
+      <div class="filters__container&#45;&#45;card" *ngFor="let trial of this.globals.studiesIdArray; let i = index">
+        <input
+          class="filters__container&#45;&#45;card-checkbox"
+          [(ngModel)]="studiesCheckboxes[i].selected"
+          type="checkbox"
+          id="{{studiesCheckboxes[i].studyName}}"
+          name="num"
+          checked="checked"
+        />
+        <div class="filters__container&#45;&#45;card-content">
+          <label for="{{studiesCheckboxes[i].studyName}}">
+            <div class="header">
+              <h3>{{studiesCheckboxes[i].studyName}}</h3>
+              <div class="row mt-4">
+                <h5>Study type::</h5>
+                <h5 class="bold" >{{studiesCheckboxes[i].studyType}}</h5>
+              </div>
+              <div class="row">
+                <h5>Start date:</h5>
+                <h5 class="bold">{{studiesCheckboxes[i].startDate}}</h5>
+              </div>
+              <div class="row">
+                <h5>Finish date:</h5>
+                <h5 class="bold">{{studiesCheckboxes[i].endDate}}</h5>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div  *ngIf="isLocation" class="trials">
+      <div class="filters__container&#45;&#45;card" *ngFor="let trial of this.globals.locationDbId; let i = index">
+        <input
+          class="filters__container&#45;&#45;card-checkbox"
+          [(ngModel)]="filtersCheckboxes[i].selected"
+          type="checkbox"
+          id="{{filtersCheckboxes[i].locationName}}"
+          name="num"
+          checked="checked"
+        />
+        <div class="filters__container&#45;&#45;card-content">
+          <label for="{{filtersCheckboxes[i].locationName}}">
+            <div class="header">
+              <h3>{{filtersCheckboxes[i].locationName}}</h3>
+              <div class="row mt-4">
+                <h5>Study Name:</h5>
+                <h5 class="bold" >{{filtersCheckboxes[i].studyName}}</h5>
+              </div>
+              <div class="row">
+                <h5>Program Name:</h5>
+                <h5 class="bold">{{filtersCheckboxes[i].programName}}</h5>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
