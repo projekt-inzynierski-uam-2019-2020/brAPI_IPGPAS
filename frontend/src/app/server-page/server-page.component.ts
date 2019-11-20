@@ -10,6 +10,7 @@ import {HttpClient} from '@angular/common/http';
 import {CallsService} from '../calls/calls.service';
 import {ServerDataComponent} from '../server-data-page/server-data.component';
 import {Globals} from '../globals';
+import {routing} from '../app-routing';
 
 @Component({
   selector: 'app-server-page',
@@ -30,6 +31,7 @@ export class ServerPageComponent implements OnInit {
   brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
   checkName = [];
   globals: Globals;
+  isLocation = false;
 
 
   checkboxes = [
@@ -63,11 +65,13 @@ export class ServerPageComponent implements OnInit {
 
     for (let i = 0; i < result.length; i++) {
       this.globals.serversArray.push(result[i]);
+      this.globals.serversArray2.push(result[i]);
     }
     console.log(this.globals.serversArray[1]);
     this.getServerList(result);
     this.serverss.getSelectedCall();
     this.serverss.getServerList(result);
+    this.serverss.getSelectedCallStudies();
     this.isDisplay = true;
 
     console.log(this.globals.trialName[1]);
