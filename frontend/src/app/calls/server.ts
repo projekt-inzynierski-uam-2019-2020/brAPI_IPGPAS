@@ -11,10 +11,16 @@ export class Servers {
 
   serverName: string;
   lengthCalls: number;
-  serversArray = ['https://test-server.brapi.org/brapi/v1/trials', 'https://yambase.org/brapi/v1/trials'];
+  serversArray = ['https://test-server.brapi.org/brapi/v1/'];
   serversArrayT = [];
+  studiesRequests = [];
+  testArray = [];
+  testLocationArray = [];
   brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
+  brApiDetailPayloadResponse2: BrApiDetailPayloadResponse;
+  brApiDetailPayloadResponse3: BrApiDetailPayloadResponse;
   global: Globals;
+  studiesArray = [];
 
   constructor(private http: HttpClient, private  callService: CallsService, private globals: Globals) {
   }
@@ -23,35 +29,114 @@ export class Servers {
     this.global = this.globals;
 
     this.serversArrayT = this.global.serversArray;
-    console.log(this.serversArrayT.length);
+    console.log('check 2' + this.serversArrayT);
     for (let i = 0; i < this.global.serversArray.length; i++) {
       this.serversArrayT[i] = this.serversArrayT[i] + 'trials';
-      console.log(this.serversArrayT);
+      console.log(this.serversArrayT[i]);
+
     }
     for (let i = 0; i < this.serversArrayT.length; i++) {
       this.callService.getSelectedCall(this.serversArrayT[i])
         .subscribe(
           call => {
             this.brApiDetailPayloadResponse = call;
+            console.log('check' + this.brApiDetailPayloadResponse)
             this.putArray(this.brApiDetailPayloadResponse);
             this.getArray();
+            console.log("Test1" + this.globals.serverArray.length);
           }
         );
     }
   }
 
+  getSelectedCallStudies() {
+    this.global = this.globals;
+    console.log(this.globals.studiesIdArray);
+    for (let i = 0; i < this.globals.studiesIdArray.length; i++) {
+      this.testArray[i] = this.globals.serversArray2 + 'studies' + '?studyDbId=' + this.globals.studiesIdArray[i];
+      console.log(this.testArray[i]);
+    }
+    for (let i = 0; i < this.globals.studiesIdArray.length; i++) {
+      console.log(this.testArray[i]);
+      this.callService.getSelectedCall(this.testArray[i])
+        .subscribe(
+          call => {
+            this.brApiDetailPayloadResponse2 = call;
+            console.log(this.brApiDetailPayloadResponse2);
+            this.putStudiesArray(this.brApiDetailPayloadResponse2);
+          }
+        );
+    }
+    console.log(this.brApiDetailPayloadResponse2);
+  }
+
+  getSelectedCallLocation() {
+    this.global = this.globals;
+    console.log(this.globals.locationDbId);
+    for (let i = 0; i < this.globals.locationDbId.length; i++) {
+      this.testLocationArray[i] = this.globals.serversArray2 + 'studies' + '?locationDbId=' + this.globals.locationDbId[i];
+      console.log(this.testArray[i]);
+    }
+    for (let i = 0; i < this.globals.locationDbId.length; i++) {
+      console.log(this.testLocationArray[i]);
+      this.callService.getSelectedCall(this.testLocationArray[i])
+        .subscribe(
+          call => {
+            this.brApiDetailPayloadResponse3 = call;
+            console.log(this.brApiDetailPayloadResponse3);
+            this.putLocationArray(this.brApiDetailPayloadResponse3);
+          }
+        );
+    }
+    console.log(this.brApiDetailPayloadResponse2);
+  }
+
+
+  putLocationArray(brApiDetailPayloadResponse2) {
+
+    for (let j = 0; j < this.brApiDetailPayloadResponse2.result.data.length; j++) {
+      this.globals.locationsArray.push(
+        {
+          locationName: this.brApiDetailPayloadResponse2.result.data[j].locationName,
+          studyName: this.brApiDetailPayloadResponse2.result.data[j].studyName,
+          programName: this.brApiDetailPayloadResponse2.result.data[j].programName,
+        });
+    }
+
+
+    console.log(this.globals.studiesArray);
+
+  }
+
+  putStudiesArray(brApiDetailPayloadResponse2) {
+
+      for (let j = 0; j < this.brApiDetailPayloadResponse2.result.data.length; j++) {
+        this.globals.studiesArray.push(
+          {
+            studyName: this.brApiDetailPayloadResponse2.result.data[j].studyName,
+            studyType: this.brApiDetailPayloadResponse2.result.data[j].studyType,
+            startDate: this.brApiDetailPayloadResponse2.result.data[j].startDate,
+            endDate: this.brApiDetailPayloadResponse2.result.data[j].endDate
+          });
+      }
+
+
+    console.log(this.globals.studiesArray);
+
+  }
+
   putArray(brApiDetailPayloadResponse) {
-    console.log(brApiDetailPayloadResponse);
-    for (let i = 0; i < this.serversArrayT.length; i++) {
+    console.log(this.global.serversArray[0].id);
+    console.log(this.getCallsLength());
+    for (let i = 0; i < this.globals.serversArray.length; i++) {
       for (let j = 0; j < this.getCallsLength(); j++) {
-        for (let k = 0; k < this.brApiDetailPayloadResponse.result.data[j].studies.length; k++) {
           this.globals.serverArray.push({
             trialName: this.brApiDetailPayloadResponse.result.data[j].trialName,
             commonCropName: this.brApiDetailPayloadResponse.result.data[j].commonCropName,
             programName: this.brApiDetailPayloadResponse.result.data[j].programName,
-            studyDbId: this.brApiDetailPayloadResponse.result.data[j].studies[k].studyDbId
+            studyDbId: this.brApiDetailPayloadResponse.result.data[j].studies,
+            locationDbId: this.brApiDetailPayloadResponse.result.data[j].studies,
           });
-        }
       }
     }
     console.log(this.globals.serverArray);
