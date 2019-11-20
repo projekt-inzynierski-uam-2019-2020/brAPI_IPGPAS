@@ -26,6 +26,15 @@
       Accept
       <img src="../../assets/next.png" alt="Next">
     </button>
+    <button
+      *ngIf="acceptButtonTable"
+      (click)="acceptButtonTablee() "
+      href="#"
+      class="btn filters__header--button"
+    >
+      Accept
+      <img src="../../assets/next.png" alt="Next">
+    </button>
   </div>
   <div class="filters__container">
     <button
@@ -140,4 +149,33 @@
       </div>
     </div>
   </div>
+
+  <table class="table table-dark table-bordered table-hover"  *ngIf="isTable" style="margin-top: 2rem" >
+    <thead>
+    <tr>
+      <th scope="col">Examine</th>
+      <th scope="col">Study Name</th>
+      <th scope="col">Examined Crop</th>
+      <th scope="col">Study Type</th>
+      <th scope="col">Location Name</th>
+      <th scope="col">Trial Name </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let trial of this.globals.locationDbId; let i = index">
+      <th>
+        <!-- Default unchecked -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck1{{i}}">
+          <label class="custom-control-label" for="tableDefaultCheck1{{i}}"></label>
+        </div>
+      </th>
+      <th scope="row">{{this.globals.studiesArray[i].studyName}}</th>
+      <th scope="row">{{this.globals.studiesArray[i].studyNType}}</th>
+      <td>{{this.globals.studiesArray[i].commonCropsName}}</td>
+      <td>{{this.globals.locationsArray[i].locationName}}</td>
+      <td>{{this.globals.serverArray[i].trialName}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>

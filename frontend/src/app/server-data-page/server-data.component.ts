@@ -6,6 +6,7 @@ import {ServerPageComponent} from '../server-page/server-page.component';
 import {Globals} from '../globals';
 import {Subject} from 'rxjs';
 import {load} from '@angular/core/src/render3/instructions';
+import {routing} from '../app-routing';
 
 
 @Component({
@@ -19,6 +20,8 @@ export class ServerDataComponent implements OnInit {
   staticCheckboxes = [];
   studiesCheckboxes = [];
   filtersCheckboxes = [];
+  isTable = false;
+  acceptButtonTable = false;
   array;
   initialized = false;
   trialName;
@@ -132,8 +135,16 @@ export class ServerDataComponent implements OnInit {
     this.isShow = true;
   }
 
-  acceptButtonSF() {
+  acceptButtonTablee(){
+    this.isTable = true;
+    this.isStudy = false;
+    this.isDisplay.studyFilters = false;
+  }
 
+  acceptButtonSF() {
+    this.isDisplay.studyFilters = false;
+    this.acceptButtonS = false;
+    this.acceptButtonTable = true;
 
     for (let i = 0; i < this.globals.locationDbId.length; i++) {
       this.filtersCheckboxes.push({

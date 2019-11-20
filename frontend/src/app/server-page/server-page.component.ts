@@ -10,6 +10,7 @@ import {HttpClient} from '@angular/common/http';
 import {CallsService} from '../calls/calls.service';
 import {ServerDataComponent} from '../server-data-page/server-data.component';
 import {Globals} from '../globals';
+import {routing} from '../app-routing';
 
 @Component({
   selector: 'app-server-page',
