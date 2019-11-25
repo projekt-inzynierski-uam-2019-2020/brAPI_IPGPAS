@@ -73,7 +73,7 @@
 
     .table{
       margin: 3rem auto 0 auto;
-      width:100%;
+      width: 100%;
       align: right;
       float: right;
       right: 0;
@@ -82,6 +82,7 @@
         float: left;
         background-color: #5E8CB7;
         border-radius: 2px;
+        min-width: 55px;
       }
 
       .btn-danger{
@@ -89,6 +90,7 @@
         margin-left: 1rem;
         background-color: #BA4747;
         border-radius: 2px;
+        min-width: 125px;
       }
     }
   }
@@ -186,6 +188,9 @@
 
     &__container{
       margin: 0;
+    }
+    .table{
+      margin: auto 20px;
     }
   }
 }
