@@ -9,6 +9,9 @@ import {StudyComponent} from './calls-components/study/study.component';
 import {TrialsComponent} from './calls-components/trials/trials.component';
 import {SeasonsComponent} from './calls-components/seasons/seasons.component';
 import {AdminMainPageComponent} from './admin-main-page/admin-main-page.component';
+import {TrialComponent} from './analytics-components/trial/trial.component';
+import {DataResolve} from './fetch-services/DataResolve';
+
 
 
 const routes: Routes = [
@@ -22,6 +25,7 @@ const routes: Routes = [
   {path: 'servers/trials', component: TrialsComponent},
   {path: 'servers/seasons', component: SeasonsComponent},
   {path: 'admin/page', component: AdminMainPageComponent},
+  {path: 'servers/trial', component: TrialComponent, resolve: {dataResolve: DataResolve}},
   {path: '', component: HomePageComponent},
 
   {path: '**', component: HomePageComponent}

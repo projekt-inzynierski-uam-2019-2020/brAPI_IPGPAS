@@ -1,0 +1,14 @@
+import {Trial} from '../call-models/trial';
+import {Injectable} from '@angular/core';
+
+@Injectable()
+export class CommonCropNameExtractorService {
+
+  extractCommonCropNamesFromTrials(trialsList: Trial[]) {
+    const commonCropNames: string[] = [];
+    for (trial of trialsList) {
+      commonCropNames.push(trial.commonCropName);
+    }
+    return commonCropNames;
+  }
+}

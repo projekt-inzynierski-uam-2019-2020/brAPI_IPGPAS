@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {style} from '@angular/animations';
-import {ServersService} from '../services/servers-service/servers.service';
+import {ServersFetchingService} from '../services/servers-service/servers-fetching.service';
 import {Server} from '../services/servers-service/servers';
 import { Servers } from '../calls/server';
 import {BrApiDetailPayloadResponse} from '../calls/BrApiDetailPayloadResponse';
@@ -21,7 +21,7 @@ export class ServerPageComponent implements OnInit {
   isActive = false;
   isDisplay = false;
   servers: Server[];
-  server: Server = new Server();
+ // server: Server = new Server();
   serverName: string;
   lengthCalls: number;
   serversArray = ['https://test-server.brapi.org/brapi/v1/trials', 'https://yambase.org/brapi/v1/trials']
@@ -43,33 +43,30 @@ export class ServerPageComponent implements OnInit {
     this.serverService.getAllServers()
       .subscribe(data => {
         this.servers = data;
-        for (let i = 0; i < this.servers.length; i++) {
-          this.checkboxes.push({value: this.servers[i].ipAddress, selected: false});
+        for (const server of this.servers) {
+          this.checkboxes.push({value: server.ipAddress, selected: false});
         }
+
       });
+
   }
 
 
-  constructor(private formBuilder: FormBuilder, private serverService: ServersService,  private http: HttpClient, private  callService: CallsService, private serverss: Servers, public global: Globals) {
+  constructor(private formBuilder: FormBuilder, private serverService: ServersFetchingService, private http: HttpClient, private  callService: CallsService, private serverss: Servers, public global: Globals) {
   }
-
 
 
   public getSelected() {
-    const result = this.checkboxes.filter((ch) => {
-      return ch.selected;
-    })
-      .map((ch) => {
-        return ch.value;
+    const result = this.checkboxes.filter((checkbox) => checkbox.selected)
+      .map((checkbox) => {
+        return checkbox.value;
       });
-
     for (let i = 0; i < result.length; i++) {
-      this.globals.serversArray.push(result[i]);
+      this.globals.selectedServers.push(result[i]);
       this.globals.serversArray2.push(result[i]);
     }
-    console.log(this.globals.serversArray[1]);
+    console.log(this.globals.selectedServers);
     this.getServerList(result);
-    this.serverss.getSelectedCall();
     this.serverss.getServerList(result);
     this.serverss.getSelectedCallStudies();
     this.isDisplay = true;
@@ -81,12 +78,6 @@ export class ServerPageComponent implements OnInit {
     const card = document.getElementById(`card${ id }`);
     const header = document.getElementById(`card-header${ id }`);
     const body = document.getElementById(`card-body${ id }`);
-
-  /*  if (!isActive) {
-      isActive = true;
-    } else {
-        isActive = false;
-      }*/
 
     if (this.isActive) {
       card.style.boxShadow = '0px 10px 20px rgba(0, 0, 0, 0.7)';

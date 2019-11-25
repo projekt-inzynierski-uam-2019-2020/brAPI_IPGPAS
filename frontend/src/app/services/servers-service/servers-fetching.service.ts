@@ -8,7 +8,7 @@ const httpOptions = {
 };
 
 @Injectable()
-export class ServersService {
+export class ServersFetchingService {
   private serversUrl = 'http://localhost:3000/servers';
 
   constructor(private http: HttpClient) {
