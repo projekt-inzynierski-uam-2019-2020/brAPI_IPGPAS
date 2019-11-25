@@ -8,9 +8,9 @@ import javax.validation.constraints.Min;
 
 @BrAPIController
 public class CallController {
-    private final CallService callService;
+    private final CallServiceImpl callService;
 
-    public CallController(CallService callService) {
+    public CallController(CallServiceImpl callService) {
         this.callService = callService;
     }
 

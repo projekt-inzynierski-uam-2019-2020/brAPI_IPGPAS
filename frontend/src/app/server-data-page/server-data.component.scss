@@ -247,8 +247,9 @@
       justify-content: space-around;
       flex-wrap: wrap;
       flex-flow: wrap;
-      margin: auto 60px;
+      margin: auto auto;
       padding: 0 0 2rem 0;
+      width: 200px;
 
       .filters__container--card-content{
         height: 80px;

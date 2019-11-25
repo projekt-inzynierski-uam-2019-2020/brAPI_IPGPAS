@@ -38,6 +38,7 @@ export class ServerDataComponent implements OnInit {
   firstAcceptButton = true;
   isStudy = false;
   isLocation = false;
+  isTrials = true;
 
   constructor(private callsService: CallsService, private serverrs: Servers, private serverspage: ServerPageComponent, private global: Globals) {
   }
@@ -55,6 +56,7 @@ export class ServerDataComponent implements OnInit {
 
 
   showStudyFilters() {
+    this.isTrials = false;
     this.isDisplay.trials = false;
     this.isDisplay.studyFilters = true;
     this.isDisplay.study = false;
@@ -137,6 +139,7 @@ export class ServerDataComponent implements OnInit {
   acceptButtonTablee(){
     this.isTable = true;
     this.isStudy = false;
+    this.isLocation = false;
     this.isDisplay.studyFilters = false;
   }
 

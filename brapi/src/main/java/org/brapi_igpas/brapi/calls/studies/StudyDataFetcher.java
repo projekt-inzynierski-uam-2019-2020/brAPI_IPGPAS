@@ -53,12 +53,12 @@ public class StudyDataFetcher {
     }
 
     private Optional<ValuesEntity> getValuesEntityWithStudyId(long studyId, String displayedName) {
-        List<ValuesEntity> valuesEntities = repositoryFacade.getDistinctValuesEntitiesByAttributeDisplayedName(displayedName);
+        List<ValuesEntity> valuesEntities = repositoryFacade.getValuesEntitiesByAttributeDisplayedName(displayedName);
         return valuesEntities.stream().filter(v -> v.getStudyId() == studyId).findFirst();
     }
 
     List<Season> getSeasonsByStudyId(long studyId) {
-        List<ValuesEntity> valuesEntities = repositoryFacade.getDistinctValuesEntitiesByAttributeDisplayedName("Study start");
+        List<ValuesEntity> valuesEntities = repositoryFacade.getValuesEntitiesByAttributeDisplayedName("Study start");
 
         valuesEntities = valuesEntities.stream().filter(valuesEntity -> valuesEntity.getStudyId() == studyId)
                 .collect(Collectors.toCollection(ArrayList::new));

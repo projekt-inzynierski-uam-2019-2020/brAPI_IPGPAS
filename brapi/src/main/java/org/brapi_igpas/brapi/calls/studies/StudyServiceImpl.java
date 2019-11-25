@@ -2,70 +2,76 @@ package org.brapi_igpas.brapi.calls.studies;
 
 import org.brapi_igpas.brapi.response.BrAPIDetailResponse;
 import org.brapi_igpas.brapi.response.metadata.Pagination;
+import org.brapi_igpas.brapi.utils.PaginationService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static org.brapi_igpas.brapi.utils.PaginationUtils.getPaginatedList;
-import static org.brapi_igpas.brapi.utils.PaginationUtils.getPaginationInfo;
 import static org.brapi_igpas.brapi.validator.ParameterValidator.isParameterPresent;
 
 @Service
 public class StudyServiceImpl implements StudyService {
     private final StudyDAO studyDAO;
+    private final StudyFilter studyFilter;
+    private final StudySorter studySorter;
+    private final PaginationService paginationService;
 
-    public StudyServiceImpl(StudyDAO studyDAO) {
+    public StudyServiceImpl(StudyDAO studyDAO, StudyFilter studyFilter, StudySorter studySorter,
+                            PaginationService paginationService) {
         this.studyDAO = studyDAO;
+        this.studyFilter = studyFilter;
+        this.studySorter = studySorter;
+        this.paginationService = paginationService;
     }
 
     public BrAPIDetailResponse getBrAPIDetailResponse(String commonCropName, String studyTypeDbId, String programDbId,
                                                       String locationDbId, String seasonDbId, String trialDbId,
                                                       String studyDbId, String active, String sortBy,
                                                       String sortOrder, int page, int pageSize) {
-        StudyList studyList = new StudyList(studyDAO.getAll());
+        List<Study> studies = studyDAO.getAll();
 
         if (isParameterPresent(commonCropName)) {
-            studyList.filterByCommonCropName(commonCropName);
+            studies = studyFilter.filterByCommonCropName(studies, commonCropName);
         }
 
         if (isParameterPresent(studyTypeDbId)) {
-            studyList.filterByStudyTypeDbId(studyTypeDbId);
+            studies = studyFilter.filterByStudyTypeDbId(studies, studyTypeDbId);
         }
 
         if (isParameterPresent(programDbId)) {
-            studyList.filterByProgramDbId(programDbId);
+            studies = studyFilter.filterByProgramDbId(studies, programDbId);
         }
 
         if (isParameterPresent(locationDbId)) {
-            studyList.filterByLocationDbId(locationDbId);
+            studies = studyFilter.filterByLocationDbId(studies, locationDbId);
         }
 
         if (isParameterPresent(seasonDbId)) {
-            studyList.filterBySeasonDbId(seasonDbId);
+            studies = studyFilter.filterBySeasonDbId(studies, seasonDbId);
         }
 
         if (isParameterPresent(trialDbId)) {
-            studyList.filterByTrialDbId(trialDbId);
+            studies = studyFilter.filterByTrialDbId(studies, trialDbId);
         }
 
         if (isParameterPresent(studyDbId)) {
-            studyList.filterByStudyDbId(studyDbId);
+            studies = studyFilter.filterByStudyDbId(studies, studyDbId);
         }
 
         if (isParameterPresent(active)) {
-            studyList.filterByActive(active);
+            studies = studyFilter.filterByActive(studies, active);
         }
 
         if (isParameterPresent(sortBy)) {
-            studyList.sortBy(sortBy);
+            studies = studySorter.sortBy(studies, sortBy);
         }
 
         if (isParameterPresent(sortOrder)) {
-            studyList.sortOrder(sortOrder);
+            studies = studySorter.sortOrder(studies, sortOrder);
         }
 
-        Pagination paginationInfo = getPaginationInfo(studyList.size(), page, pageSize);
-        List<Study> studies = getPaginatedList(studyList.getList(), page, pageSize);
+        Pagination paginationInfo = paginationService.getPagination(studies.size(), page, pageSize);
+        studies = paginationService.paginateList(studies, page, pageSize);
 
         return new BrAPIDetailResponse(paginationInfo, studies);
     }
@@ -73,8 +79,6 @@ public class StudyServiceImpl implements StudyService {
     // TODO IMPLEMENT
     @Override
     public BrAPIDetailResponse getBrAPIDetailResponse(String studyDbId, int page, int pageSize) {
-        StudyList studyList = new StudyList(studyDAO.getAll());
-        studyList.filterByStudyDbId(studyDbId);
 
         return null;
     }
