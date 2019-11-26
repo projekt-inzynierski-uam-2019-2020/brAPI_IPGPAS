@@ -17,4 +17,6 @@ export class Globals {
   locationsArray = [];
   testArray = [];
   test = [];
+  tableList = [];
+  selectedServer;
 }

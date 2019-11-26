@@ -27,10 +27,9 @@ import {Globals} from './globals';
 import {TrialService} from './call-services/trial/trial-service';
 import { TrialComponent } from './analytics-components/trial/trial.component';
 import {ServersService} from './servers-services/servers-service';
-import {DataResolve} from './fetch-services/DataResolve';
 import {FetchBrapiResultService} from './fetch-services/fetch-brapi-result-service';
 import {RouterModule} from '@angular/router';
-import {DataBrapiResolve} from './fetch-services/DataBrapiResolve';
+import {TrialsResolve} from './call-services/trial/trials-resolve.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +62,7 @@ import {DataBrapiResolve} from './fetch-services/DataBrapiResolve';
       {path: 'servers/trials', component: TrialsComponent},
       {path: 'servers/seasons', component: SeasonsComponent},
       {path: 'admin/page', component: AdminMainPageComponent},
-      {path: 'servers/trial', component: TrialComponent, resolve: {dataResolve: DataBrapiResolve}},
+      {path: 'servers/trial', component: TrialComponent, resolve: {dataResolve: TrialsResolve}},
       {path: '', component: HomePageComponent},
 
       {path: '**', component: HomePageComponent}]),
@@ -75,7 +74,7 @@ import {DataBrapiResolve} from './fetch-services/DataBrapiResolve';
     NgbModule,
   ],
   // tslint:disable-next-line:max-line-length
-  providers: [ServersFetchingService, Servers, ServerPageComponent, Globals, TrialService, ServersService, DataResolve, FetchBrapiResultService, DataBrapiResolve],
+  providers: [ServersFetchingService, Servers, ServerPageComponent, Globals, TrialService, ServersService, TrialsResolve, FetchBrapiResultService, TrialsResolve],
   bootstrap: [AppComponent],
 
 })

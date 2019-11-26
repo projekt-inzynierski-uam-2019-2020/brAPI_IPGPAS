@@ -1,14 +1,12 @@
 import {Injectable} from '@angular/core';
 import {FetchBrapiResultService} from '../../fetch-services/fetch-brapi-result-service';
 import {Globals} from '../../globals';
-import {BrAPIDetailResponse} from '../../call-models/response/brAPIDetailResponse';
 import {DetailResult} from '../../call-models/response/detailResult';
 
 @Injectable()
 export class TrialService {
 
   fetchBrApiResponseService: FetchBrapiResultService;
-
   globals: Globals;
 
   /* services */
@@ -29,16 +27,13 @@ export class TrialService {
     return data;
   }
 
-  pushTrials(trials: DetailResult){
-    console.log(trials.data.length);
-    for (let j = 0; j < trials.data.length; j++) {
-      this.globals.trialsArray.push(
-        {
-          commonCropName: trials.data[j].commonCropName,
-          trialName: trials.data[j].trialName,
-          programName: trials.data[j].programName
-
-        });
+  pushTrials(trials: DetailResult) {
+    for ( const trial of trials.data) {
+      this.globals.trialsArray.push({
+        commonCropName: trial.commonCropName,
+        trialName: trial.trialName,
+        programName: trial.programName
+      });
     }
     return this.globals.trialsArray;
   }

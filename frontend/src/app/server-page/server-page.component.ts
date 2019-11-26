@@ -61,7 +61,9 @@ export class ServerPageComponent implements OnInit {
       .map((checkbox) => {
         return checkbox.value;
       });
+    this.globals.selectedServer = result;
     for (let i = 0; i < result.length; i++) {
+
       this.globals.selectedServers.push(result[i]);
       this.globals.serversArray2.push(result[i]);
     }

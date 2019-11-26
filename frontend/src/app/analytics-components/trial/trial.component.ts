@@ -16,18 +16,10 @@ import {delay, map} from 'rxjs/operators';
 })
 export class TrialComponent implements OnInit {
   checkboxes = [];
-  isShow = false;
-
   serversService: ServersService;
   trialService: TrialService;
-  test: BrAPIDetailResponse;
-  test2;
-
-  postObject$;
-
   trials: Trial[];
   globals: Globals;
-  isDataAvailable = false;
 
   constructor(trialService: TrialService, serversService: ServersService, globals: Globals, private fetchBrapiResult: FetchBrapiResultService, private routes: ActivatedRoute) {
     this.trialService = trialService;
@@ -36,28 +28,14 @@ export class TrialComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getTrialsFromSelectedServers(this.serversService.getAllSelected());
-    for (let i = 0; i < this.routes.snapshot.data.dataResolve.data.length; i++) {
+    for ( const trial of this.routes.snapshot.data.dataResolve.data){
       this.checkboxes.push({
-        trialName: this.globals.trialsArray[i].trialName,
-        commonCropName: this.globals.trialsArray[i].commonCropName,
-        programName: this.globals.trialsArray[i].programName,
-        studies: this.globals.trialsArray[i].studyDbId,
+        trialName: trial.trialName,
+        commonCropName: trial.commonCropName,
+        programName: trial.programName,
         selected: false
       });
     }
 
-
-  }
-
-  getTrialsFromSelectedServers(selectedServersUrls: string[]) {
-    for (const serverUrl of selectedServersUrls) {
-      this.trialService.getAllTrials(serverUrl);
-    }
-  }
-
-  function() {
-
-    return 'sdf';
   }
 }

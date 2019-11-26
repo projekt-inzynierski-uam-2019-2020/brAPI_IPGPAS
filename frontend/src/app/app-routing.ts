@@ -10,7 +10,7 @@ import {TrialsComponent} from './calls-components/trials/trials.component';
 import {SeasonsComponent} from './calls-components/seasons/seasons.component';
 import {AdminMainPageComponent} from './admin-main-page/admin-main-page.component';
 import {TrialComponent} from './analytics-components/trial/trial.component';
-import {DataResolve} from './fetch-services/DataResolve';
+import {TrialsResolve} from './call-services/trial/trials-resolve.service';
 
 
 
@@ -25,7 +25,7 @@ const routes: Routes = [
   {path: 'servers/trials', component: TrialsComponent},
   {path: 'servers/seasons', component: SeasonsComponent},
   {path: 'admin/page', component: AdminMainPageComponent},
-  {path: 'servers/trial', component: TrialComponent, resolve: {dataResolve: DataResolve}},
+  {path: 'servers/trial', component: TrialComponent, resolve: {dataResolve: TrialsResolve}},
   {path: '', component: HomePageComponent},
 
   {path: '**', component: HomePageComponent}
