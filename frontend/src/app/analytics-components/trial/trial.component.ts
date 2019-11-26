@@ -5,9 +5,7 @@ import {Trial} from '../../call-models/trial';
 import {Globals} from '../../globals';
 import {FetchBrapiResultService} from '../../fetch-services/fetch-brapi-result-service';
 import {ActivatedRoute, Router, Routes} from '@angular/router';
-import {BrAPIDetailResponse} from '../../call-models/response/brAPIDetailResponse';
-import {IPost} from '../../fetch-services/Ipost';
-import {delay, map} from 'rxjs/operators';
+import {StudyService} from '../../call-services/study/study-service';
 
 @Component({
   selector: 'app-trial',
@@ -18,13 +16,15 @@ export class TrialComponent implements OnInit {
   checkboxes = [];
   serversService: ServersService;
   trialService: TrialService;
+  studyService: StudyService;
   trials: Trial[];
   globals: Globals;
 
-  constructor(trialService: TrialService, serversService: ServersService, globals: Globals, private fetchBrapiResult: FetchBrapiResultService, private routes: ActivatedRoute) {
+  constructor(trialService: TrialService, serversService: ServersService, globals: Globals, private fetchBrapiResult: FetchBrapiResultService, private routes: ActivatedRoute, studyService: StudyService) {
     this.trialService = trialService;
     this.serversService = serversService;
     this.globals = globals;
+    this.studyService = studyService;
   }
 
   ngOnInit() {
@@ -33,9 +33,26 @@ export class TrialComponent implements OnInit {
         trialName: trial.trialName,
         commonCropName: trial.commonCropName,
         programName: trial.programName,
+        studies: trial.studies,
         selected: false
       });
     }
-
   }
+
+  showStudies() {
+    const resultStudies = this.checkboxes.filter((checkbox) => {
+      return checkbox.selected;
+    })
+      .map((checkbox) => {
+        this.trialService.getTrialsByCommonCropName(this.globals.selectedServer, checkbox.commonCropName);
+        return checkbox.studies;
+      });
+    for (const trials of resultStudies) {
+      for (let i = 0; i < trials.length; i++) {
+        this.studyService.getStudyByStudyDbId(this.globals.selectedServer, trials[i].studyDbId);
+        this.globals.studyDbId.push(trials[i].studyDbId);
+      }
+    }
+  }
+
 }

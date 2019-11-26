@@ -15,7 +15,7 @@ export class TrialsResolve implements Resolve<any> {
 
   resolve() {
     this.trialService.getAllTrials(this.globals.selectedServer).subscribe(call => {
-      this.trialService.pushTrials(call);
+      this.trialService.pushAllTrials(call);
     });
     return this.trialService.getAllTrials(this.globals.selectedServer);
   }

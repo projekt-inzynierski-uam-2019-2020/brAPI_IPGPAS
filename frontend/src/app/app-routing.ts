@@ -21,11 +21,12 @@ const routes: Routes = [
   {path: 'servers', component: ServerPageComponent},
   {path: 'servers/data', component: ServerDataComponent},
   {path: 'databases', component: DatabasesPageComponent},
-  {path: 'servers/study', component: StudyComponent},
+ //  {path: 'servers/study', component: StudyComponent},
   {path: 'servers/trials', component: TrialsComponent},
   {path: 'servers/seasons', component: SeasonsComponent},
   {path: 'admin/page', component: AdminMainPageComponent},
   {path: 'servers/trial', component: TrialComponent, resolve: {dataResolve: TrialsResolve}},
+  {path: 'servers/study', component: StudyComponent},
   {path: '', component: HomePageComponent},
 
   {path: '**', component: HomePageComponent}

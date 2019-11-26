@@ -13,7 +13,6 @@ import {DatabasesPageComponent} from './databases-page/databases-page.component'
 import {ServerDataComponent} from './server-data-page/server-data.component';
 import {ServerPageComponent} from './server-page/server-page.component';
 import {HttpClientModule} from '@angular/common/http';
-import {StudyComponent} from './calls-components/study/study.component';
 import {TrialsComponent} from './calls-components/trials/trials.component';
 import {Servers} from './calls/server';
 import {SeasonsComponent} from './calls-components/seasons/seasons.component';
@@ -30,6 +29,8 @@ import {ServersService} from './servers-services/servers-service';
 import {FetchBrapiResultService} from './fetch-services/fetch-brapi-result-service';
 import {RouterModule} from '@angular/router';
 import {TrialsResolve} from './call-services/trial/trials-resolve.service';
+import {StudyComponent} from './analytics-components/study/study.component';
+import {StudyService} from './call-services/study/study-service';
 
 @NgModule({
   declarations: [
@@ -58,11 +59,12 @@ import {TrialsResolve} from './call-services/trial/trials-resolve.service';
       {path: 'servers', component: ServerPageComponent},
       {path: 'servers/data', component: ServerDataComponent},
       {path: 'databases', component: DatabasesPageComponent},
-      {path: 'servers/study', component: StudyComponent},
+    //  {path: 'servers/study', component: StudyComponent},
       {path: 'servers/trials', component: TrialsComponent},
       {path: 'servers/seasons', component: SeasonsComponent},
       {path: 'admin/page', component: AdminMainPageComponent},
       {path: 'servers/trial', component: TrialComponent, resolve: {dataResolve: TrialsResolve}},
+      {path: 'servers/study', component: StudyComponent},
       {path: '', component: HomePageComponent},
 
       {path: '**', component: HomePageComponent}]),
@@ -74,7 +76,7 @@ import {TrialsResolve} from './call-services/trial/trials-resolve.service';
     NgbModule,
   ],
   // tslint:disable-next-line:max-line-length
-  providers: [ServersFetchingService, Servers, ServerPageComponent, Globals, TrialService, ServersService, TrialsResolve, FetchBrapiResultService, TrialsResolve],
+  providers: [ServersFetchingService, Servers, ServerPageComponent, Globals, TrialService, ServersService, TrialsResolve, FetchBrapiResultService, TrialsResolve, StudyService],
   bootstrap: [AppComponent],
 
 })

@@ -19,4 +19,7 @@ export class Globals {
   test = [];
   tableList = [];
   selectedServer;
+  studyDbId = [];
+  studyArray = [];
+  commonCropsArray = [];
 }
