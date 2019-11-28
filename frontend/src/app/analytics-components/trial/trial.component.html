@@ -68,7 +68,13 @@
         <tbody>
         <tr *ngFor="let trialCheckbox of this.trialCheckboxes; let i = index">
           <td>
-            <input type="checkbox">
+            <input
+              [(ngModel)]="trialCheckbox.selected"
+              type="checkbox"
+              id="{{i}}"
+              name="num"
+              checked="checked"
+              >
           </td>
           <td>{{ trialCheckbox.trial.trialName }}</td>
           <td>{{ trialCheckbox.trial.programName }}</td>
