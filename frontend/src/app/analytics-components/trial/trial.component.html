@@ -1,0 +1,49 @@
+<div class="filters">
+  <div class="filters__header">
+    <div class="filters__header--back">
+      <div class="info" routerLink="../">
+        <img  src="../../assets/back.png" alt="Back">
+        <h4 class="back__title">Servers</h4>
+      </div>
+      <div class="filters__header--separator"></div>
+      <h2 class="filters__header--title">Choose filters</h2>
+    </div>
+    <button
+      href="#"
+      class="btn filters__header--button"
+      (click)="setSelectedServerTrials()"
+      routerLink="/servers/study"
+    >
+      Accept
+      <img src="../../assets/next.png" alt="Next">
+    </button>
+  </div>
+    <div class="trials">
+      <div class="filters__container&#45;&#45;card"
+           *ngFor="let trialCheckbox of this.trialCheckboxes; let i = index">
+        <input
+          class="filters__container&#45;&#45;card-checkbox"
+          [(ngModel)]="trialCheckbox.selected"
+          type="checkbox"
+          id="{{i}}"
+          name="num"
+          checked="checked"
+        />
+        <div class="filters__container&#45;&#45;card-content">
+          <label for="{{i}}">
+            <div class="header">
+              <h3>{{ trialCheckbox.trial.trialName }}</h3>
+              <div class="row mt-4">
+                <h5>Program Name:</h5>
+                <h5 class="bold">{{ trialCheckbox.trial.programName }}</h5>
+              </div>
+              <div class="row">
+                <h5>Examined Crop:</h5>
+                <h5 class="bold">{{trialCheckbox.trial.commonCropName}}</h5>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>

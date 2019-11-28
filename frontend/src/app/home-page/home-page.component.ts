@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import Parallax from 'parallax-js';
 import {Globals} from '../globals';
+import {TrialService} from '../call-services/trial/trial-service';
 
 @Component({
   selector: 'app-home-page',
@@ -10,7 +11,9 @@ import {Globals} from '../globals';
 export class HomePageComponent implements OnInit {
 
   globals: Globals;
-  constructor(public globalss: Globals) { }
+
+
+  constructor(public globalss: Globals, public trialService: TrialService) { }
 
   ngOnInit() {
     this.globals = this.globalss;
@@ -19,6 +22,7 @@ export class HomePageComponent implements OnInit {
     const parallaxInstance = new Parallax(scene, {
       relativeInput: true,
     });
+
   }
 
 }
