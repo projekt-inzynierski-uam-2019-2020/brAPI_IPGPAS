@@ -50,8 +50,6 @@ import {StudyService} from './call-services/study/study-service';
     HttpClientModule,
     CommonModule,
     RouterModule.forRoot([ {path: 'home', component: HomePageComponent},
-      {path: 'login', component: LoginPageComponent},
-      {path: 'registration', component: RegistrationPageComponent},
       {path: 'servers', component: ServerPageComponent},
       {path: 'servers/data', component: ServerDataComponent},
       {path: 'databases', component: DatabasesPageComponent},
