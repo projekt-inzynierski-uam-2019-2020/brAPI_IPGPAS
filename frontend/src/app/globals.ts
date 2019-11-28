@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import {ServerTrial} from './analytics-components/trial/serverTrial';
+import {ServerStudy} from './analytics-components/study/serverStudy';
 
 @Injectable()
 export class Globals {
   role = 'test';
-  selectedServers= [];
+  selectedServers: string[] = [];
   serversArray2 = [];
-  date = [];
   trialName = [];
   programName = [];
   commonCropName = [];
@@ -15,11 +16,10 @@ export class Globals {
   locationDbId = [];
   studiesArray = [];
   locationsArray = [];
-  testArray = [];
   test = [];
-  tableList = [];
   selectedServer;
   studyDbId = [];
-  studyArray = [];
   commonCropsArray = [];
+  selectedServerTrials: ServerTrial[] = [];
+  selectedServerStudies: ServerStudy[] = [];
 }

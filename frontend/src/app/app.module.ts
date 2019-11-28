@@ -63,7 +63,7 @@ import {StudyService} from './call-services/study/study-service';
       {path: 'servers/trials', component: TrialsComponent},
       {path: 'servers/seasons', component: SeasonsComponent},
       {path: 'admin/page', component: AdminMainPageComponent},
-      {path: 'servers/trial', component: TrialComponent, resolve: {dataResolve: TrialsResolve}},
+      {path: 'servers/trial', component: TrialComponent, resolve: TrialsResolve},
       {path: 'servers/study', component: StudyComponent},
       {path: '', component: HomePageComponent},
 
