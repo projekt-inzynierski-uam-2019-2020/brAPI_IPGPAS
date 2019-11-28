@@ -5,7 +5,7 @@ import {BrApiDetailPayloadResponse} from './BrApiDetailPayloadResponse';
 
 
 @Injectable({
-  providedIn: 'root'  // <- ADD THIS
+  providedIn: 'root'
 })
 export class CallsService {
 

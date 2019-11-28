@@ -2,7 +2,7 @@ import {Component, Inject, OnInit, VERSION} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {debounceTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-import {ServersService} from '../services/servers-service/servers.service';
+import {ServersFetchingService} from '../services/servers-service/servers-fetching.service';
 import {Server} from '../services/servers-service/servers';
 
 
@@ -69,7 +69,7 @@ export class AdminMainPageComponent implements OnInit {
     this._success.next(`${new Date()} - The server has been added`);
   }
 
-  constructor(private modalService: NgbModal, private serverService: ServersService) {
+  constructor(private modalService: NgbModal, private serverService: ServersFetchingService) {
   }
 
   open(content) {

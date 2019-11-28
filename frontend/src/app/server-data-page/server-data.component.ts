@@ -111,7 +111,6 @@ export class ServerDataComponent implements OnInit {
 
   filterButton() {
     console.log(this.globals.locationsArray);
-    console.log(this.globals.serversArray);
     console.log(this.global.studiesArray[0].studyName);
     for (let i = 0; i < this.globals.locationDbId.length; i++) {
       this.filtersCheckboxes.push({
