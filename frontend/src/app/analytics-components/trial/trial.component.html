@@ -6,20 +6,31 @@
         <h4 class="back__title">Servers</h4>
       </div>
       <div class="filters__header--separator"></div>
-      <h2 class="filters__header--title">Choose filters</h2>
+      <h2 class="filters__header--title">Trials</h2>
     </div>
-    <button
+    <div class="row">
+      <div class="btn-group">
+        <button type="button" class="optional" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Optional filters
+          <img class="image__optional" src="../../assets/next.png" alt="Next">
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Common Crop Name</a>
+        </div>
+      </div>
+      <button
       href="#"
-      class="btn filters__header--button"
+      class="btn filters__header--button-next m-3"
       (click)="setSelectedServerTrials()"
       routerLink="/servers/study"
     >
       Accept
       <img src="../../assets/next.png" alt="Next">
     </button>
+    </div>
   </div>
     <div class="trials">
-      <div class="filters__container&#45;&#45;card"
+      <!--<div class="filters__container&#45;&#45;card"
            *ngFor="let trialCheckbox of this.trialCheckboxes; let i = index">
         <input
           class="filters__container&#45;&#45;card-checkbox"
@@ -44,6 +55,26 @@
             </div>
           </label>
         </div>
-      </div>
+      </div>-->
+      <table class="table table-striped table-dark table-responsive-lg" >
+        <thead>
+        <tr>
+          <th><input type="checkbox"></th>
+          <th>Trial Name</th>
+          <th>Common Crop Name</th>
+          <th>Program</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let trialCheckbox of this.trialCheckboxes; let i = index">
+          <td>
+            <input type="checkbox">
+          </td>
+          <td>{{ trialCheckbox.trial.trialName }}</td>
+          <td>{{ trialCheckbox.trial.programName }}</td>
+          <td>{{trialCheckbox.trial.commonCropName}}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
