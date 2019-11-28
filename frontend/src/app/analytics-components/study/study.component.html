@@ -12,66 +12,34 @@
       href="#"
       class="btn filters__header--button"
       routerLink="/servers/study"
+      (click)="setSelectedServerStudies()"
     >
       Accept
       <img src="../../assets/next.png" alt="Next">
     </button>
   </div>
-    <div *ngIf="isQuestion" class="card" style="width: 25rem;">
-      <div class="card-body" style="text-align: center; display: block; margin: 0 auto">
-        <h5 class="card-title">Do you want to filter trials by commonCropsName?</h5>
-        <button class="btn btn-success" style="width: 5rem; margin-right: 1rem" (click)="filterByCommonCrops()">Yes</button>
-        <button class="btn btn-danger"   style="width: 5rem; margin-left: 1rem" (click)="function()">No</button>
-      </div>
-    </div>
-  <div *ngIf="isShowStudies" class="trials">
+  <div class="trials">
     <div class="filters__container&#45;&#45;card"
-         *ngFor="let study of this.globals.studyArray; let i = index">
+         *ngFor="let studyCheckbox of this.studyCheckboxes; let i = index">
       <input
         class="filters__container&#45;&#45;card-checkbox"
-        [(ngModel)]="checkboxes[i].selected"
+        [(ngModel)]="studyCheckbox.selected"
         type="checkbox"
-        id="{{ checkboxes[i].studyName }}{{i}}"
+        id="{{i}}"
         name="num"
         checked="checked"
       />
       <div class="filters__container&#45;&#45;card-content">
-        <label for="{{ checkboxes[i].studyName }}{{i}}">
+        <label for="{{i}}">
           <div class="header">
-            <h3>{{checkboxes[i].studyName}}</h3>
+            <h3>{{studyCheckbox.study.studyName}}</h3>
             <div class="row mt-4">
               <h5>Program Name:</h5>
-              <h5 class="bold">{{checkboxes[i].programName}}</h5>
+              <h5 class="bold">{{studyCheckbox.study.programName}}</h5>
             </div>
             <div class="row">
               <h5>Examined Crop:</h5>
-              <h5 class="bold">{{checkboxes[i].commonCropName}}</h5>
-            </div>
-          </div>
-        </label>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="isShowCommon" class="trials">
-    <div class="filters__container&#45;&#45;card"
-         *ngFor="let study of this.globals.commonCropsArray; let i = index">
-      <input
-        class="filters__container&#45;&#45;card-checkbox"
-        [(ngModel)]="checkboxes[i].selected"
-        type="checkbox"
-        id="{{ checkboxes[i].commonCropName }}{{i}}"
-        name="num"
-        checked="checked"
-      />
-      <div class="filters__container&#45;&#45;card-content">
-        <label for="{{ checkboxes[i].commonCropName }}{{i}}">
-          <div class="header">
-            <h3>{{checkboxes[i].commonCropName}}</h3>
-            <div class="row mt-4">
-              <h5>Program Name:</h5>
-              <h5 class="bold">{{checkboxes[i].studyName}}</h5>
-            </div>
-            <div class="row">
+              <h5 class="bold">{{studyCheckbox.study.commonCropName}}</h5>
             </div>
           </div>
         </label>

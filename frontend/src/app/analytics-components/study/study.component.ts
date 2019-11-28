@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Globals} from '../../globals';
+import {Study} from '../../call-models/study';
+import {StudyCheckbox} from './studyCheckbox';
+import {StudyService} from '../../call-services/study/study-service';
+import {ServerStudy} from './serverStudy';
 
 @Component({
   selector: 'app-study',
@@ -7,43 +11,48 @@ import {Globals} from '../../globals';
   styleUrls: ['./study.component.scss']
 })
 export class StudyComponent implements OnInit {
-  checkboxes = [];
-  globals: Globals
-  isShowStudies = false;
-  isShowCommon = false;
-  isQuestion = true;
+  globals: Globals;
+  studyCheckboxes: StudyCheckbox[] = [];
+  serverStudy: ServerStudy[] = [];
 
-  constructor(globals: Globals) {
+  studyService: StudyService;
+
+  constructor(globals: Globals, studyService: StudyService) {
     this.globals = globals;
+    this.studyService = studyService;
   }
 
   ngOnInit() {
+    this.fetchStudiesFromSelectedServerTrials();
   }
 
-  function() {
-    this.isShowStudies = true;
-    this.isQuestion = false;
-    for ( const study of this.globals.studyArray) {
-      this.checkboxes.push({
-        commonCropName: study.commonCropName,
-        programName: study.programName,
-        studyName: study.studyName,
-        selected: false
-      });
-    }
+  fetchStudiesFromSelectedServerTrials() {
+    this.globals.selectedServerTrials.map(selectedTrial => this.studyService.getStudyByTrialDbId(selectedTrial.serverUrl, selectedTrial.trial.trialDbId)
+      .subscribe(fetchedStudies => {
+        this.setStudyCheckboxes(fetchedStudies);
+        this.setServerStudies(selectedTrial.serverUrl, fetchedStudies);
+      }));
   }
 
-  filterByCommonCrops(){
-    this.isShowCommon = true;
-    this.isQuestion = false;
-    for ( const study of this.globals.commonCropsArray) {
-      this.checkboxes.push({
-        commonCropName: study.commonCropName,
-        programName: study.programName,
-        studyName: study.studyName,
-        selected: false
+  setStudyCheckboxes(studies: Study[]) {
+    studies.map(study => this.studyCheckboxes.push({study: study, selected: false}));
+  }
+
+  setServerStudies(serverUrl: string, studies: Study[]) {
+    studies.map(study => this.serverStudy.push({serverUrl: serverUrl, study: study}));
+  }
+
+  setSelectedServerStudies() {
+    const selectedStudies = this.studyCheckboxes.filter(studyCheckbox => studyCheckbox.selected).map(studyCheckbox => studyCheckbox.study);
+    this.globals.selectedServerStudies = this.serverStudy
+      .filter(serverStudy => {
+        for (const selectedStudy of selectedStudies) {
+          if (Object.is(serverStudy.study, selectedStudy)) {
+            return true;
+          }
+        }
       });
-    }
+    console.log(this.globals.selectedServerStudies);
   }
 
 }
