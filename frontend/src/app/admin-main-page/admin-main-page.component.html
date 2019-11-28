@@ -1,56 +1,65 @@
 <div class="admin">
+  <div class="admin__header">
+    <div class="admin__header--back">
+      <h2 class="admin__header--title">Welcome to admin panel!</h2>
+    </div>
+    <button class="btn btn-outline-dark" (click)="open(content) ">
+      Add new server
+    </button>
+  </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add server</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div style="" class="form-group">
+          <input
+            type="text"
+            placeholder="Enter Server name:"
+            autocomplete="off"
+            name="something"
+            [(ngModel)]="server.name"
+          />
+          <input
+            type="text"
+            placeholder="Enter Server link:"
+            name="something"
+            [(ngModel)]="server.ipAddress"
+            #check
+          />
+          <input
+            type="text"
+            placeholder="Enter Server description:"
+            name="something"
+            [(ngModel)]="server.description"
+          />
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer" style="width: 100%">
+      <button
+        type="button"
+        class="btn btn-success"
+        [disabled]="!server.name || !server.ipAddress || !server.description"
+        (click)="modal.close('Save click') || this.createServer() || changeSuccessMessage()"
+      >
+        Add server
+      </button>
+    </div>
+  </ng-template>
+
   <div class="admin__server-dialog">
-    <ng-template #content let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">ADD SERVER</h4>
-        <button
-          type="button"
-          class="close"
-          aria-label="Close"
-          (click)="modal.dismiss('Cross click')"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div style="" class="form-group">
-            <input
-              type="text"
-              placeholder="Enter Server name:"
-              autocomplete="off"
-              name="something"
-              [(ngModel)]="server.name"
-            />
-            <input
-              type="text"
-              placeholder="Enter Server link:"
-              name="something"
-              [(ngModel)]="server.ipAddress"
-              #check
-            />
-            <input
-              type="text"
-              placeholder="Enter Server description:"
-              name="something"
-              [(ngModel)]="server.description"
-            />
-          </div>
-        </form>
-      </div>
-
-      <div class="modal-footer" style="width: 100%">
-        <button
-          type="button"
-          class="btn btn-success"
-          [disabled]="!server.name || !server.ipAddress || !server.description"
-          (click)="modal.close('Save click') || this.createServer() || changeSuccessMessage()"
-        >
-          ADD SERVER
-        </button>
-      </div>
-    </ng-template>
-
 
     <ng-template #content2 let-modal>
       <div class="modal-header">
@@ -111,27 +120,29 @@
     >
   </div>
 
-  <button class="btn btn-outline-dark" (click)="open(content) ">
-    ADD NEW SERVER
-  </button>
-
-
-  <table style="margin: 3rem auto 0 auto;width:80%; align: right; float: right; right: 0" class="table table-striped" >
-    <thead>
-    <tr>
-      <th>Server Name</th>
-      <th>Server Link</th>
-      <th>Description</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let server of servers">
-      <td>{{server.name}}</td>
-      <td>{{server.ipAddress}}</td>
-      <td>{{server.description}}</td>
-      <td style="width: 15rem"><button class="btn btn-danger" (click)="deleteUser(server)"  style="float:left;" > Delete Server</button><button class="btn btn-info" (click)="open(content2) || updateInfo(server)" style="float:left; margin-left: 1rem">Edit</button></td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="admin__container">
+    <table class="table table-striped table-responsive-lg" >
+      <thead>
+      <tr>
+        <th>Server Name</th>
+        <th>Server Link</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let server of servers">
+        <td>{{server.name}}</td>
+        <td>{{server.ipAddress}}</td>
+        <td>{{server.description}}</td>
+        <td style="width: 15rem">
+          <div class="row flex-nowrap">
+            <button class="btn btn-info" (click)="open(content2) || updateInfo(server)">Edit</button>
+            <button class="btn btn-danger" (click)="deleteUser(server)"> Delete Server</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
