@@ -11,7 +11,7 @@
     <button
       href="#"
       class="btn filters__header--button"
-      (click)="showStudies()"
+      (click)="setSelectedServerTrials()"
       routerLink="/servers/study"
     >
       Accept
@@ -20,26 +20,26 @@
   </div>
     <div class="trials">
       <div class="filters__container&#45;&#45;card"
-           *ngFor="let trial of this.routes.snapshot.data.dataResolve.data; let i = index">
+           *ngFor="let trialCheckbox of this.trialCheckboxes; let i = index">
         <input
           class="filters__container&#45;&#45;card-checkbox"
-          [(ngModel)]="checkboxes[i].selected"
+          [(ngModel)]="trialCheckbox.selected"
           type="checkbox"
-          id="{{ checkboxes[i].trialName }}{{i}}"
+          id="{{i}}"
           name="num"
           checked="checked"
         />
         <div class="filters__container&#45;&#45;card-content">
-          <label for="{{ checkboxes[i].trialName }}{{i}}">
+          <label for="{{i}}">
             <div class="header">
-              <h3>{{checkboxes[i].trialName}}</h3>
+              <h3>{{ trialCheckbox.trial.trialName }}</h3>
               <div class="row mt-4">
                 <h5>Program Name:</h5>
-                <h5 class="bold">{{checkboxes[i].programName}}</h5>
+                <h5 class="bold">{{ trialCheckbox.trial.programName }}</h5>
               </div>
               <div class="row">
                 <h5>Examined Crop:</h5>
-                <h5 class="bold">{{checkboxes[i].commonCropName}}</h5>
+                <h5 class="bold">{{trialCheckbox.trial.commonCropName}}</h5>
               </div>
             </div>
           </label>
@@ -47,4 +47,3 @@
       </div>
     </div>
   </div>
-
