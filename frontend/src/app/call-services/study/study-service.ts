@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {FetchBrapiResultService} from '../../fetch-services/fetch-brapi-result-service';
 import {Globals} from '../../globals';
 import {DetailResult} from '../../call-models/response/detailResult';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class StudyService {
@@ -20,21 +21,11 @@ export class StudyService {
   }
 
   getStudyByStudyDbId(brAPIServerUrl: string, studyDbId: string) {
-    this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies?studyDbId=' + studyDbId).subscribe(result => {
-      this.pushStudies(result);
-      return this.globals.studyArray;
-    });
+    return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies?studyDbId=' + studyDbId).pipe(map(result => result.data));
   }
 
-  pushStudies(studies: DetailResult) {
-    for ( const study of studies.data) {
-      this.globals.studyArray.push({
-        commonCropName: study.commonCropName,
-        trialName: study.trialName,
-        programName: study.programName,
-        studyName: study.studyName
-      });
-    }
-    return this.globals.studyArray;
+  getStudyByTrialDbId(brAPIServerUrl: string, trialDbId: string) {
+    return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies?trialDbId=' + trialDbId).pipe(map(result => result.data));
   }
+
 }
