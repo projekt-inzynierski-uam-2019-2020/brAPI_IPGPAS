@@ -4,9 +4,10 @@ import {Study} from '../../call-models/study';
 import {StudyCheckbox} from './studyCheckbox';
 import {StudyService} from '../../call-services/study/study-service';
 import {ServerStudy} from './serverStudy';
-import {st} from '@angular/core/src/render3';
 import {LocationStudy} from './locationStudy';
-import {ServerTrial} from '../trial/serverTrial';
+import {SeasonStudy} from './seasonStudy';
+import {StudyForSeasons} from './studyForSeasons';
+import {SeasonCheckbox} from './seasonCheckbox';
 
 @Component({
   selector: 'app-study',
@@ -17,15 +18,20 @@ export class StudyComponent implements OnInit {
   globals: Globals;
   studyCheckboxes: StudyCheckbox[] = [];
   studyLocationCheckboxes: StudyCheckbox[] = [];
+  studySeasonCheckboxes: SeasonCheckbox[] = [];
   serverStudy: ServerStudy[] = [];
   locationStudy: LocationStudy[] = [];
+  seasonStudy: SeasonStudy[] = [];
+  studyForSeasons = [];
 
   studyService: StudyService;
   selectedLocationStudy: LocationStudy[] = [];
+  selectedSeasonStudy: SeasonStudy[] = [];
+
 
   isShowAllStudies = true;
   isLocationFilterShow = false;
-
+  isShowSeasons = false;
 
 
   constructor(globals: Globals, studyService: StudyService) {
@@ -40,6 +46,7 @@ export class StudyComponent implements OnInit {
   fetchStudiesFromSelectedServerTrials() {
     this.globals.selectedServerTrials.map(selectedTrial => this.studyService.getStudyByTrialDbId(selectedTrial.serverUrl, selectedTrial.trial.trialDbId)
       .subscribe(fetchedStudies => {
+        console.log(fetchedStudies);
         this.setStudyCheckboxes(fetchedStudies);
         this.setServerStudies(selectedTrial.serverUrl, fetchedStudies);
 
@@ -52,6 +59,7 @@ export class StudyComponent implements OnInit {
 
   setServerStudies(serverUrl: string, studies: Study[]) {
     studies.map(study => this.serverStudy.push({serverUrl: serverUrl, study: study}));
+    studies.map(study => this.studyForSeasons.push({study: study}));
 
     for (const study of this.serverStudy) {
       if (!this.locationStudy.some((item) => item.study.locationName === study.study.locationName)) {
@@ -61,6 +69,22 @@ export class StudyComponent implements OnInit {
         }
       }
     }
+
+    for (const study of this.studyForSeasons) {
+      if (study.study.seasons) {
+        for (const season of study.study.seasons) {
+          if (!this.seasonStudy.some((item) => item.study === study)) {
+            console.log(season.year);
+            this.seasonStudy.push({season: season, year: season.year, study: study, serverUrl: serverUrl});
+            if (!this.studySeasonCheckboxes.some((item) => item.season.year === season.year)) {
+              this.studySeasonCheckboxes.push({study: study, selected: false, season: season});
+            }
+          }
+        }
+      }
+    }
+    console.log(this.seasonStudy);
+
   }
 
   setSelectedServerStudies() {
@@ -78,7 +102,6 @@ export class StudyComponent implements OnInit {
   // functions for filter for Location
 
   showLocations() {
-    this.studyCheckboxes = [];
     this.isShowAllStudies = false;
     this.isLocationFilterShow = true;
 
@@ -86,6 +109,7 @@ export class StudyComponent implements OnInit {
 
   setLocationStudy() {
     this.isShowAllStudies = true;
+    this.isShowSeasons = false;
     this.isLocationFilterShow = false;
     this.studyCheckboxes = [];
     const selectedLocation = this.studyLocationCheckboxes.filter(studyLocationCheckboxes => studyLocationCheckboxes.selected).map(studyLocationCheckboxes => studyLocationCheckboxes.study);
@@ -107,5 +131,39 @@ export class StudyComponent implements OnInit {
       }
     }
   }
+
+  showSeasons() {
+    this.isShowAllStudies = false;
+    this.isLocationFilterShow = false;
+    this.isShowSeasons = true;
+  }
+
+  setSeasonStudy(){
+    this.isShowAllStudies = true;
+    this.isLocationFilterShow = false;
+    this.isShowSeasons = false;
+    this.studyCheckboxes = [];
+    const selectedLocation = this.studySeasonCheckboxes.filter(studySeasonCheckboxes => studySeasonCheckboxes.selected).map(studySeasonCheckboxes => studySeasonCheckboxes.study);
+
+    this.selectedSeasonStudy = this.seasonStudy
+      .filter(location => {
+        for (const locationStudyy of selectedLocation) {
+          if (Object.is(location.study, locationStudyy)) {
+            return true;
+          }
+        }
+      });
+
+
+    for (const study of this.seasonStudy) {
+      if (this.selectedSeasonStudy.some((item) => item.season.year === study.season.year)) {
+        if (!this.studyCheckboxes.some((item) => item.study === study.study)) {
+          this.studyCheckboxes.push({study: study.study, selected: false});
+          console.log(this.studyCheckboxes);
+        }
+      }
+    }
+  }
+
 
 }

@@ -8,8 +8,10 @@
       <div class="filters__header--separator"></div>
       <h2 class="filters__header--title">Choose filters</h2>
     </div>
-    <button class="btn filters__header--button" (click)="showLocations()">Optional Filters</button>
-    <button class="btn filters__header--button" (click)="setLocationStudy()">Accept Filters</button>
+    <button class="btn filters__header--button" (click)="showLocations()">Optional Loc Filters</button>
+    <button class="btn filters__header--button" (click)="setLocationStudy()">Accept Loc Filters</button>
+    <button class="btn filters__header--button" (click)="showSeasons()">Optional Seas Filters</button>
+     <button class="btn filters__header--button" (click)="setSeasonStudy()">Accept Seas Filters</button>
 
     <button
       href="#"
@@ -71,6 +73,40 @@
         <label for="{{studyLocationCheckbox}}{{i}}">
           <div class="header">
             <h3>{{studyLocationCheckbox.study.locationName}}</h3>
+            <div class="row mt-4">
+              <h5></h5>
+
+            </div>
+            <div class="row">
+              <h5></h5>
+              <h5 class="bold"></h5>
+            </div>
+            <div class="row">
+              <h5></h5>
+              <h5 class="bold"></h5>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="isShowSeasons" class="trials">
+    <div class="filters__container&#45;&#45;card"
+         *ngFor="let studySeasonCheckbox of this.studySeasonCheckboxes; let i = index">
+      <input
+        class="filters__container&#45;&#45;card-checkbox"
+        [(ngModel)]="studySeasonCheckbox.selected"
+        type="checkbox"
+        id="{{studySeasonCheckbox}}{{i}}"
+        name="num"
+        checked="checked"
+      />
+      <div class="filters__container&#45;&#45;card-content">
+        <label for="{{studySeasonCheckbox}}{{i}}">
+          <div class="header">
+            <h3>{{studySeasonCheckbox.season.year}}</h3>
             <div class="row mt-4">
               <h5></h5>
 
