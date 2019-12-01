@@ -5,6 +5,8 @@ import {StudyCheckbox} from './studyCheckbox';
 import {StudyService} from '../../call-services/study/study-service';
 import {ServerStudy} from './serverStudy';
 import {st} from '@angular/core/src/render3';
+import {LocationStudy} from './locationStudy';
+import {ServerTrial} from '../trial/serverTrial';
 
 @Component({
   selector: 'app-study',
@@ -16,11 +18,13 @@ export class StudyComponent implements OnInit {
   studyCheckboxes: StudyCheckbox[] = [];
   studyLocationCheckboxes: StudyCheckbox[] = [];
   serverStudy: ServerStudy[] = [];
-  filteredStudiesByLocation: ServerStudy[] = [];
+  locationStudy: LocationStudy[] = [];
 
   studyService: StudyService;
-  locationFilterSelected = false;
-  showAllStudiesWithoutFilter = true;
+  selectedLocationStudy: LocationStudy[] = [];
+
+  isShowAllStudies = true;
+  isLocationFilterShow = false;
 
 
 
@@ -38,7 +42,6 @@ export class StudyComponent implements OnInit {
       .subscribe(fetchedStudies => {
         this.setStudyCheckboxes(fetchedStudies);
         this.setServerStudies(selectedTrial.serverUrl, fetchedStudies);
-        console.log(fetchedStudies);
 
       }));
   }
@@ -49,6 +52,15 @@ export class StudyComponent implements OnInit {
 
   setServerStudies(serverUrl: string, studies: Study[]) {
     studies.map(study => this.serverStudy.push({serverUrl: serverUrl, study: study}));
+
+    for (const study of this.serverStudy) {
+      if (!this.locationStudy.some((item) => item.study.locationName === study.study.locationName)) {
+        if (study.study.locationName) {
+          this.locationStudy.push({locationName: study.study.locationName, study: study.study, serverUrl: study.serverUrl});
+          this.studyLocationCheckboxes.push({study: study.study, selected: false});
+        }
+      }
+    }
   }
 
   setSelectedServerStudies() {
@@ -63,41 +75,37 @@ export class StudyComponent implements OnInit {
       });
   }
 
-  // functions for filter by LocationDbId
+  // functions for filter for Location
 
-  setFilterByLocation() {
-    this.locationFilterSelected = true;
-    this.showAllStudiesWithoutFilter = false;
-     this.fetchStudiesByStudyDbIdFromSelectedServerTrials();
+  showLocations() {
+    this.studyCheckboxes = [];
+    this.isShowAllStudies = false;
+    this.isLocationFilterShow = true;
+
   }
 
-  fetchStudiesByStudyDbIdFromSelectedServerTrials() {
-     this.globals.selectedServerTrials.map(selectedTrial => this.studyService.getStudyByStudyDbId(selectedTrial.serverUrl, selectedTrial.trial.studyDbId)
-      .subscribe(fetchedStudies => {
-        // this.setStudyLocationCheckboxes(fetchedStudies);
-       this.setServerStudiesLocation(selectedTrial.serverUrl, fetchedStudies);
-      }));
-  }
+  setLocationStudy() {
+    this.isShowAllStudies = true;
+    this.isLocationFilterShow = false;
+    this.studyCheckboxes = [];
+    const selectedLocation = this.studyLocationCheckboxes.filter(studyLocationCheckboxes => studyLocationCheckboxes.selected).map(studyLocationCheckboxes => studyLocationCheckboxes.study);
 
- /* setStudyLocationCheckboxes(studies: Study[]) {
-    for (const study of studies) {
-      if (!this.filteredStudiesByLocation.some((item) => item.study.locationName === study.locationName)) {
-        studies.map(locationStudy => this.studyLocationCheckboxes.push({study: locationStudy, selected: false}));
+    this.selectedLocationStudy = this.locationStudy
+      .filter(location => {
+        for (const locationStudyy of selectedLocation) {
+          if (Object.is(location.study, locationStudyy)) {
+            return true;
+          }
+        }
+      });
 
+    for (const study of this.serverStudy) {
+      if (this.selectedLocationStudy.some((item) => item.locationName === study.study.locationName)) {
+        if (!this.studyCheckboxes.some((item) => item.study === study.study)) {
+          this.studyCheckboxes.push({study: study.study, selected: false});
+        }
       }
     }
-    console.log(this.studyLocationCheckboxes);
-  }*/
-
-  setServerStudiesLocation(serverUrl: string, studies: Study[]) {
-    for (const study of studies) {
-      if (!this.filteredStudiesByLocation.some((item) => item.study.locationName === study.locationName)) {
-        this.filteredStudiesByLocation.push({serverUrl: serverUrl, study: study});
-      }
-    }
-    console.log(this.filteredStudiesByLocation);
   }
-
-
 
 }

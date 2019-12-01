@@ -8,7 +8,9 @@
       <div class="filters__header--separator"></div>
       <h2 class="filters__header--title">Choose filters</h2>
     </div>
-    <button class="btn filters__header--button" (click)="setFilterByLocation()">Optional Filters</button>
+    <button class="btn filters__header--button" (click)="showLocations()">Optional Filters</button>
+    <button class="btn filters__header--button" (click)="setLocationStudy()">Accept Filters</button>
+
     <button
       href="#"
       class="btn filters__header--button"
@@ -19,7 +21,7 @@
       <img src="../../assets/next.png" alt="Next">
     </button>
   </div>
-  <div class="trials">
+  <div *ngIf="isShowAllStudies" class="trials">
     <div class="filters__container&#45;&#45;card"
          *ngFor="let studyCheckbox of this.studyCheckboxes; let i = index">
       <input
@@ -33,19 +35,53 @@
       <div class="filters__container&#45;&#45;card-content">
         <label for="{{i}}">
           <div class="header">
-            <h3 *ngIf="showAllStudiesWithoutFilter">{{studyCheckbox.study.studyName}}</h3>
-            <h3 *ngIf="locationFilterSelected">{{studyCheckbox.study.locationName}}</h3>
+            <h3>{{studyCheckbox.study.studyName}}</h3>
+
             <div class="row mt-4">
               <h5>Program Name:</h5>
               <h5 class="bold">{{studyCheckbox.study.programName}}</h5>
             </div>
             <div class="row">
-              <h5>Examined Crop:</h5>
-              <h5 class="bold">{{studyCheckbox.study.commonCropName}}</h5>
+              <h5>Location Name:</h5>
+              <h5 class="bold">{{studyCheckbox.study.locationName}}</h5>
             </div>
             <div class="row">
               <h5>Examined Crop:</h5>
-              <h5 class="bold" *ngIf="locationFilterSelected">{{studyCheckbox.study.studyName}}</h5>
+              <h5 class="bold">{{studyCheckbox.study.studyName}}</h5>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="isLocationFilterShow" class="trials">
+    <div class="filters__container&#45;&#45;card"
+         *ngFor="let studyLocationCheckbox of this.studyLocationCheckboxes; let i = index">
+      <input
+        class="filters__container&#45;&#45;card-checkbox"
+        [(ngModel)]="studyLocationCheckbox.selected"
+        type="checkbox"
+        id="{{studyLocationCheckbox}}{{i}}"
+        name="num"
+        checked="checked"
+      />
+      <div class="filters__container&#45;&#45;card-content">
+        <label for="{{studyLocationCheckbox}}{{i}}">
+          <div class="header">
+            <h3>{{studyLocationCheckbox.study.locationName}}</h3>
+            <div class="row mt-4">
+              <h5></h5>
+
+            </div>
+            <div class="row">
+              <h5></h5>
+              <h5 class="bold"></h5>
+            </div>
+            <div class="row">
+              <h5></h5>
+              <h5 class="bold"></h5>
             </div>
           </div>
         </label>
