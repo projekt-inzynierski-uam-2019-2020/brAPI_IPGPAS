@@ -137,112 +137,158 @@
     }
   }
 
-  &__container {
+  .optionalFilters{
+    display: flex;
+    justify-content: space-between;
+    flex-flow: wrap;
+    margin: auto 60px;
+    flex-wrap: nowrap;
 
+    &__container{
+      display: -webkit-box;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      margin: auto 20px;
 
-    .trials{
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      flex-flow: wrap;
-      margin: auto 60px;
-
-      .table{
-        margin: 3rem auto 0 auto;
-        width: 100%;
-        align: right;
-        float: right;
-        right: 0;
-
-        .btn-info{
-          float: left;
-          background-color: #5E8CB7;
-          border-radius: 2px;
-          min-width: 55px;
-        }
-
-        .btn-danger{
-          float:left;
-          margin-left: 1rem;
-          background-color: #BA4747;
-          border-radius: 2px;
-          min-width: 125px;
-        }
-      }
-    }
-
-      &-checkbox {
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        visibility: hidden;
-
-        ~ .filters__container--card-content {
-          transition: all 500ms ease-out;
-
-          * {
-            cursor: pointer;
-          }
-
-          h3 {
-            text-align: center;
-          }
-
-          h5 {
-            text-align: center;
-            font-weight: 400;
-          }
-
-          p {
-            margin-top: 1rem;
-            font-size: 12px;
-            font-family: 'Roboto';
-            color: #66707A;
-            text-align: left;
-            margin-left: 25px;
-          }
-
-        }
-        &:checked ~ .filters__container--card-content {
-
-          h3{
-            transition: all 500ms ease-out;
-          }
-          background-color: #7b7b7b;
-        }
-
-      }
-
-    .showMore{
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      margin-right: 50px;
-
-      &__button, btn{
+      &--item{
+        margin: auto 20px;
         color: #FFFFFF;
         font-family: 'Roboto';
-        font-size: 20px;
-      }
+        font-size: 15px;
 
-      .btn:focus,.btn:active {
-        outline: none !important;
-        box-shadow: none;
+        input{
+          margin-right: 5px;
+        }
       }
     }
 
-    .studyFilters{
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      flex-flow: wrap;
-      margin: auto 60px;
-      padding: 0 0 2rem 0;
+    &__filter{
+      width: 100px;
+      min-width: 70px;
+      height: 50px;
+      background-color: #139553;
+      color: #FFFFFF;
+      border-radius: 2px;
+      padding: 5px;
+      box-shadow: none;
+      outline: none;
+      border-width: 0;
 
-      .filters__container--card-content{
-        height: 80px;
+      &:active, &:focus{
+        box-shadow: none;
+        outline: none;
+        border-width: 0;
       }
+
+      &:hover{
+        background-color: #126e3a;
+      }
+    }
+  }
+
+  .trials{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-flow: wrap;
+    margin: auto 60px;
+    margin-bottom: 50px;
+
+    .table{
+      margin: 3rem auto 0 auto;
+      width: 100%;
+      align: right;
+      float: right;
+      right: 0;
+
+      .btn-info{
+        float: left;
+        background-color: #5E8CB7;
+        border-radius: 2px;
+        min-width: 55px;
+      }
+
+      .btn-danger{
+        float:left;
+        margin-left: 1rem;
+        background-color: #BA4747;
+        border-radius: 2px;
+        min-width: 125px;
+      }
+    }
+  }
+
+    &-checkbox {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      visibility: hidden;
+
+      ~ .filters__container--card-content {
+        transition: all 500ms ease-out;
+
+        * {
+          cursor: pointer;
+        }
+
+        h3 {
+          text-align: center;
+        }
+
+        h5 {
+          text-align: center;
+          font-weight: 400;
+        }
+
+        p {
+          margin-top: 1rem;
+          font-size: 12px;
+          font-family: 'Roboto';
+          color: #66707A;
+          text-align: left;
+          margin-left: 25px;
+        }
+
+      }
+      &:checked ~ .filters__container--card-content {
+
+        h3{
+          transition: all 500ms ease-out;
+        }
+        background-color: #7b7b7b;
+      }
+
+    }
+
+  .showMore{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 50px;
+
+    &__button, btn{
+      color: #FFFFFF;
+      font-family: 'Roboto';
+      font-size: 20px;
+    }
+
+    .btn:focus,.btn:active {
+      outline: none !important;
+      box-shadow: none;
+    }
+  }
+
+  .studyFilters{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-flow: wrap;
+    margin: auto 60px;
+    padding: 0 0 2rem 0;
+
+    .filters__container--card-content{
+      height: 80px;
     }
   }
 }

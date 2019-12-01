@@ -21,31 +21,7 @@ export class TrialService {
   }
 
   getTrialsByCommonCropName(brAPIServerUrl: string, commonCropName: string) {
-    this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/trials?commonCropName=' + commonCropName).subscribe(result => {
-      this.pushCommonCrops(result);
-    });
-   return this.globals.commonCropsArray;
-  }
-
-  pushAllTrials(trials: DetailResult) {
-    for ( const trial of trials.data) {
-      this.globals.trialsArray.push({
-        commonCropName: trial.commonCropName,
-        trialName: trial.trialName,
-        programName: trial.programName
-      });
-    }
-    return this.globals.trialsArray;
-  }
-
-  pushCommonCrops(commonCrops: DetailResult) {
-    for ( const commonCrop of commonCrops.data) {
-      this.globals.commonCropsArray.push({
-        commonCropName: commonCrop.commonCropName,
-        programName: commonCrop.programName
-      });
-    }
-    return this.globals.commonCropsArray;
+    return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/trials?commonCropName=' + commonCropName).pipe(map(result => result.data));
   }
 
 
