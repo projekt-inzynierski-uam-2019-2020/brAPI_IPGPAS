@@ -155,11 +155,15 @@ export class StudyComponent implements OnInit {
       });
 
 
-    for (const study of this.seasonStudy) {
-      if (this.selectedSeasonStudy.some((item) => item.season.year === study.season.year)) {
-        if (!this.studyCheckboxes.some((item) => item.study === study.study)) {
-          this.studyCheckboxes.push({study: study.study, selected: false});
-          console.log(this.studyCheckboxes);
+    for (const study of this.studyForSeasons) {
+      for (const season of study.study.seasons) {
+        console.log(season);
+        console.log(this.selectedSeasonStudy);
+        if (this.selectedSeasonStudy.some((item) => item.season === season)) {
+          if (!this.studyCheckboxes.some((item) => item.study === study.study)) {
+            this.studyCheckboxes.push({study: study.study, selected: false});
+            console.log(this.studyCheckboxes);
+          }
         }
       }
     }
