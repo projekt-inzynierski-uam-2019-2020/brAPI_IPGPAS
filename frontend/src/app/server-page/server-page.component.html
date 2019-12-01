@@ -18,7 +18,11 @@
     </button>
   </div>
   <div class="servers__container">
-    <div class="servers__container&#45;&#45;card" *ngFor="let server of servers;let i = index ">
+    <div class="servers__container--counter">
+      <h3>Results found:</h3>
+      <h3>6</h3>
+    </div>
+    <div class="servers__container&#45;&#45;card col-xl-4 col-lg-6 " *ngFor="let server of servers;let i = index ">
       <input
         class="servers__container&#45;&#45;card-checkbox"
         [(ngModel)]="checkboxes[i].selected"
@@ -29,15 +33,16 @@
       />
       <div class="servers__container&#45;&#45;card-content">
         <label for="{{ checkboxes[i].value }}">
-          <div class="header">
+          <div class="row m-0 pl-3 pr-3 justify-content-between">
             <h3>{{server.name}}</h3>
-            <div class="separator"></div>
-            <h5>{{server.ipAddress}}</h5>
+            <h3 class="tooltip">{{server.name}}</h3>
+            <i class="fas fa-check"></i>
           </div>
-          <p class="small-meta dim">
-            {{server.description}}
-          </p>
-
+          <div class="separator"></div>
+          <div class="row m-0 pl-3 pr-3"><h5>{{server.ipAddress}}</h5></div>
+          <h5 class="tooltip">{{server.ipAddress}}</h5>
+          <div class="row m-0 pl-3 pr-3"><p class="small-meta dim">{{server.description}}</p></div>
+          <p class="small-meta dim tooltip">{{server.description}}</p>
         </label>
       </div>
     </div>

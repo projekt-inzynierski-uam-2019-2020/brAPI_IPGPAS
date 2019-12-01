@@ -24,6 +24,7 @@ export class TrialComponent implements OnInit {
   isCropFilter = false;
   isShowStudies = true;
   selectedServerCommonCropsTrials: ServerTrial[] = [];
+  optionalFiltersShow = false;
 
 
   trialService: TrialService;
@@ -86,7 +87,7 @@ export class TrialComponent implements OnInit {
     console.log(this.globals.selectedServerTrials);
   }
 
-  filterCommonCropName() {
+  /*filterCommonCropName() {
     this.trialCheckboxes = [];
     this.isCropFilter = true;
     this.isShowStudies = false;
@@ -99,7 +100,7 @@ export class TrialComponent implements OnInit {
           this.trialsForFilteredCommonCrop.push({trials: trials, serverUrl: serverUrlTrials.serverUrl});
         }
       })));
-  }
+  }*/
 
 
   setSelectedCrops() {

@@ -33,6 +33,9 @@ export class StudyComponent implements OnInit {
   isLocationFilterShow = false;
   isShowSeasons = false;
 
+  locationFiltersShow = false;
+  seasonFiltersShow = false;
+
 
   constructor(globals: Globals, studyService: StudyService) {
     this.globals = globals;

@@ -6,24 +6,59 @@
         <h4 class="back__title">Servers</h4>
       </div>
       <div class="filters__header--separator"></div>
-      <h2 class="filters__header--title">Choose filters</h2>
+      <h2 class="filters__header--title">Studies</h2>
     </div>
-    <button class="btn filters__header--button" (click)="showLocations()">Optional Loc Filters</button>
-    <button class="btn filters__header--button" (click)="setLocationStudy()">Accept Loc Filters</button>
-    <button class="btn filters__header--button" (click)="showSeasons()">Optional Seas Filters</button>
-     <button class="btn filters__header--button" (click)="setSeasonStudy()">Accept Seas Filters</button>
-
-    <button
-      href="#"
-      class="btn filters__header--button"
-      routerLink="/servers/study"
-      (click)="setSelectedServerStudies()"
-    >
-      Accept
-      <img src="../../assets/next.png" alt="Next">
-    </button>
+    <div class="row">
+      <button href="#" (click)="locationFiltersShow = !locationFiltersShow; seasonFiltersShow = false" class="btn m-3 filters__header--button">Location Filters</button>
+      <button href="#" (click)="seasonFiltersShow = !seasonFiltersShow; locationFiltersShow = false" class="btn m-3 filters__header--button">Season Filters</button>
+      <button
+        href="#"
+        class="btn m-3 filters__header--button"
+        routerLink="/servers/study"
+        (click)="setSelectedServerStudies()"
+      >
+        Accept
+        <img src="../../assets/next.png" alt="Next">
+      </button>
+    </div>
   </div>
-  <div *ngIf="isShowAllStudies" class="trials">
+  <div *ngIf="locationFiltersShow" class="optionalFilters">
+    <div class="optionalFilters__container">
+      <div class="optionalFilters__container--item" *ngFor="let studyLocationCheckbox of this.studyLocationCheckboxes; let i = index">
+        <input
+          [(ngModel)]="studyLocationCheckbox.selected"
+          type="checkbox"
+          id="{{studyLocationCheckbox}}{{i}}"
+          name="num"
+          checked="checked"
+        >
+        <label for="{{studyLocationCheckbox}}{{i}}">{{studyLocationCheckbox.study.locationName}}</label>
+      </div>
+    </div>
+    <button
+      (click)="setLocationStudy()"
+      class="optionalFilters__filter">Filter</button>
+  </div>
+  <div *ngIf="seasonFiltersShow" class="optionalFilters">
+    <div class="optionalFilters__container">
+      <div class="optionalFilters__container--item" *ngFor="let studySeasonCheckbox of this.studySeasonCheckboxes; let i = index">
+        <input
+          [(ngModel)]="studySeasonCheckbox.selected"
+          type="checkbox"
+          id="{{studySeasonCheckbox}}{{i}}"
+          name="num"
+          checked="checked"
+        >
+        <label for="{{studySeasonCheckbox}}{{i}}">{{studySeasonCheckbox.season.year}}</label>
+      </div>
+    </div>
+    <button
+      (click)="setSeasonStudy()"
+      class="optionalFilters__filter">Filter</button>
+  </div>
+
+
+  <!--<div *ngIf="isShowAllStudies" class="study">
     <div class="filters__container&#45;&#45;card"
          *ngFor="let studyCheckbox of this.studyCheckboxes; let i = index">
       <input
@@ -55,74 +90,35 @@
         </label>
       </div>
     </div>
-  </div>
+  </div>-->
 
-
-  <div *ngIf="isLocationFilterShow" class="trials">
-    <div class="filters__container&#45;&#45;card"
-         *ngFor="let studyLocationCheckbox of this.studyLocationCheckboxes; let i = index">
-      <input
-        class="filters__container&#45;&#45;card-checkbox"
-        [(ngModel)]="studyLocationCheckbox.selected"
-        type="checkbox"
-        id="{{studyLocationCheckbox}}{{i}}"
-        name="num"
-        checked="checked"
-      />
-      <div class="filters__container&#45;&#45;card-content">
-        <label for="{{studyLocationCheckbox}}{{i}}">
-          <div class="header">
-            <h3>{{studyLocationCheckbox.study.locationName}}</h3>
-            <div class="row mt-4">
-              <h5></h5>
-
-            </div>
-            <div class="row">
-              <h5></h5>
-              <h5 class="bold"></h5>
-            </div>
-            <div class="row">
-              <h5></h5>
-              <h5 class="bold"></h5>
-            </div>
-          </div>
-        </label>
-      </div>
-    </div>
-  </div>
-
-
-  <div *ngIf="isShowSeasons" class="trials">
-    <div class="filters__container&#45;&#45;card"
-         *ngFor="let studySeasonCheckbox of this.studySeasonCheckboxes; let i = index">
-      <input
-        class="filters__container&#45;&#45;card-checkbox"
-        [(ngModel)]="studySeasonCheckbox.selected"
-        type="checkbox"
-        id="{{studySeasonCheckbox}}{{i}}"
-        name="num"
-        checked="checked"
-      />
-      <div class="filters__container&#45;&#45;card-content">
-        <label for="{{studySeasonCheckbox}}{{i}}">
-          <div class="header">
-            <h3>{{studySeasonCheckbox.season.year}}</h3>
-            <div class="row mt-4">
-              <h5></h5>
-
-            </div>
-            <div class="row">
-              <h5></h5>
-              <h5 class="bold"></h5>
-            </div>
-            <div class="row">
-              <h5></h5>
-              <h5 class="bold"></h5>
-            </div>
-          </div>
-        </label>
-      </div>
-    </div>
+  <div *ngIf="isShowAllStudies" class="study">
+    <table class="table table-striped table-dark table-responsive-lg" >
+      <thead>
+      <tr>
+        <th><input type="checkbox"></th>
+        <th>Study Name</th>
+        <th>Location Name</th>
+        <th>Program</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let studyCheckbox of this.studyCheckboxes; let i = index">
+        <td>
+          <input
+            [(ngModel)]="studyCheckbox.selected"
+            type="checkbox"
+            id="{{i}}"
+            name="num"
+            checked="checked"
+          >
+        </td>
+        <td>{{ studyCheckbox.study.studyName }}</td>
+        <td>{{ studyCheckbox.study.programName }}</td>
+        <td>{{ studyCheckbox.study.locationName }}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
