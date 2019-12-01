@@ -8,6 +8,7 @@
       <div class="filters__header--separator"></div>
       <h2 class="filters__header--title">Choose filters</h2>
     </div>
+    <button class="btn filters__header--button" (click)="setFilterByLocation()">Optional Filters</button>
     <button
       href="#"
       class="btn filters__header--button"
@@ -32,7 +33,8 @@
       <div class="filters__container&#45;&#45;card-content">
         <label for="{{i}}">
           <div class="header">
-            <h3>{{studyCheckbox.study.studyName}}</h3>
+            <h3 *ngIf="showAllStudiesWithoutFilter">{{studyCheckbox.study.studyName}}</h3>
+            <h3 *ngIf="locationFilterSelected">{{studyCheckbox.study.locationName}}</h3>
             <div class="row mt-4">
               <h5>Program Name:</h5>
               <h5 class="bold">{{studyCheckbox.study.programName}}</h5>
@@ -40,6 +42,10 @@
             <div class="row">
               <h5>Examined Crop:</h5>
               <h5 class="bold">{{studyCheckbox.study.commonCropName}}</h5>
+            </div>
+            <div class="row">
+              <h5>Examined Crop:</h5>
+              <h5 class="bold" *ngIf="locationFilterSelected">{{studyCheckbox.study.studyName}}</h5>
             </div>
           </div>
         </label>
