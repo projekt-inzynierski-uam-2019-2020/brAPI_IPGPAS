@@ -1,4 +1,6 @@
-package org.brapi_igpas.brapi.response.metadata;
+package org.planth_pheno_analytics.brapi.api.response.metadata;
+
+import org.springframework.data.domain.Page;
 
 import java.util.Objects;
 
@@ -8,46 +10,39 @@ public class Pagination {
     private long totalCount;
     private int totalPages;
 
-    public Pagination() {
-    }
-
-    public Pagination(int currentPage, int pageSize, long totalCount, int totalPages) {
+    private Pagination(int currentPage, int pageSize, long totalCount, int totalPages) {
         this.currentPage = currentPage;
         this.pageSize = pageSize;
         this.totalCount = totalCount;
         this.totalPages = totalPages;
+    }
+
+    public static Pagination of(int currentPage, int pageSize, int totalCount, int totalPages) {
+        return new Pagination(currentPage, pageSize, totalCount, totalPages);
+    }
+
+    public static Pagination of(Page page) {
+        return new Pagination(page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages());
+    }
+
+    public static Pagination empty() {
+        return new Pagination(0, 0, 0, 0);
     }
 
     public long getTotalCount() {
         return totalCount;
     }
 
-    public void setTotalCount(long totalCount) {
-        this.totalCount = totalCount;
-    }
-
     public int getPageSize() {
         return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
     }
 
     public int getTotalPages() {
         return totalPages;
     }
 
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
-    }
-
     public int getCurrentPage() {
         return currentPage;
-    }
-
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
     }
 
     @Override

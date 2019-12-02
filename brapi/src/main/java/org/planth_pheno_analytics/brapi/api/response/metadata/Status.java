@@ -1,4 +1,4 @@
-package org.brapi_igpas.brapi.response.metadata;
+package org.planth_pheno_analytics.brapi.api.response.metadata;
 
 public class Status {
     public static final String MESSAGETYPE_LOG_INFO = "INFO";
