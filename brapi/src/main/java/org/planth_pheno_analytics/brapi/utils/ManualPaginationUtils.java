@@ -1,4 +1,4 @@
-package org.planth_pheno_analytics.brapi.api.calls;
+package org.planth_pheno_analytics.brapi.utils;
 
 import org.planth_pheno_analytics.brapi.api.response.metadata.Pagination;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class ManualPaginationUtils {
 
-    Pagination getPagination(int totalCount, int page, int pageSize) {
+    public Pagination getPagination(int totalCount, int page, int pageSize) {
         int totalPages = getTotalPages(totalCount, pageSize);
         return Pagination.of(page, pageSize, totalCount, totalPages);
     }
@@ -22,7 +22,7 @@ public class ManualPaginationUtils {
         return elementsSize / pageSize + ((elementsSize % pageSize == 0) ? 0 : remainderPage);
     }
 
-    <T> List<T> paginateList(List<T> list, int page, int pageSize) {
+    public <T> List<T> paginateList(List<T> list, int page, int pageSize) {
         int fromIndex = page * pageSize;
         int elementsSize = list.size();
 

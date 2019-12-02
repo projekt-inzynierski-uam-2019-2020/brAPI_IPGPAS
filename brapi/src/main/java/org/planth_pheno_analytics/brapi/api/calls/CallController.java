@@ -4,6 +4,7 @@ import org.planth_pheno_analytics.brapi.annotation.BrAPIController;
 import org.planth_pheno_analytics.brapi.api.BrAPIResponse;
 import org.planth_pheno_analytics.brapi.api.response.BrAPIDetailResponse;
 import org.planth_pheno_analytics.brapi.api.response.metadata.Pagination;
+import org.planth_pheno_analytics.brapi.utils.ManualPaginationUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 

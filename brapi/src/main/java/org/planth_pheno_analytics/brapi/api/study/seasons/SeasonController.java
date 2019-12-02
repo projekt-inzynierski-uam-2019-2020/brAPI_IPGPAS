@@ -5,10 +5,8 @@ import org.planth_pheno_analytics.brapi.api.BrAPIResponse;
 import org.planth_pheno_analytics.brapi.api.response.BrAPIDetailResponse;
 import org.planth_pheno_analytics.brapi.api.response.metadata.Pagination;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

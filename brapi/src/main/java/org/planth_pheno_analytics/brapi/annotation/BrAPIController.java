@@ -9,8 +9,8 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Validated
 @RestController
+@Validated
 @RequestMapping("/brapi/v1")
 public @interface BrAPIController {
 }
