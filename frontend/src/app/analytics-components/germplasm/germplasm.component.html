@@ -17,4 +17,31 @@
         <img src="../../assets/next.png" alt="Next">
       </button>
     </div>
+  <div  class="study">
+    <table class="table table-striped table-dark table-responsive-lg" >
+      <thead>
+      <tr>
+        <th><input type="checkbox"></th>
+        <th>Germplasm Name</th>
+        <th>Study Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let germplasmCheckbox of this.germplasmCheckboxes; let i = index">
+        <td>
+          <input
+            [(ngModel)]="germplasmCheckbox.selected"
+            type="checkbox"
+            id="{{i}}"
+            name="num"
+            checked="checked"
+          >
+        </td>
+        <td>{{ germplasmCheckbox.germplasm.germplasmName }}</td>
+        <td>{{ germplasmCheckbox.study.studyName }}</td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
