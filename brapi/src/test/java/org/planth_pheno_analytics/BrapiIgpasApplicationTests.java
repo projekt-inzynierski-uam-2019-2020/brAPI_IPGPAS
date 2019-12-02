@@ -1,4 +1,4 @@
-package org.brapi_igpas;
+package org.planth_pheno_analytics;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package org.brapi_igpas;
+package org.planth_pheno_analytics;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
