@@ -1,4 +1,4 @@
-package org.brapi_igpas.brapi.validator;
+package org.planth_pheno_analytics.brapi.validator;
 
 public class ParameterValidator {
     public static boolean isParameterPresent(String parameter) {
