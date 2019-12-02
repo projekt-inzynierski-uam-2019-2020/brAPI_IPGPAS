@@ -1,47 +1,34 @@
 <div class="filters">
   <div class="filters__header">
     <div class="filters__header--back">
-      <div class="info" routerLink="../">
+      <div class="info" routerLink="../study">
         <img  src="../../assets/back.png" alt="Back">
-        <h4 class="back__title">Servers</h4>
+        <h4 class="back__title">Studies</h4>
       </div>
       <div class="filters__header--separator"></div>
-      <h2 class="filters__header--title">Trials</h2>
+      <h2 class="filters__header--title">Germplasm</h2>
     </div>
-      <button
-        href="#"
-        class="btn filters__header--button-next m-3"
-        routerLink="/servers/study"
-      >
-        Accept
-        <img src="../../assets/next.png" alt="Next">
-      </button>
+  </div>
+  <div>
+    <div class="filters__counter">
+      <h3>Results found:</h3>
+      <h3>46</h3>
     </div>
-  <div  class="study">
-    <table class="table table-striped table-dark table-responsive-lg" >
-      <thead>
-      <tr>
-        <th><input type="checkbox"></th>
-        <th>Germplasm Name</th>
-        <th>Study Name</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let germplasmCheckbox of this.germplasmCheckboxes; let i = index">
-        <td>
-          <input
-            [(ngModel)]="germplasmCheckbox.selected"
-            type="checkbox"
-            id="{{i}}"
-            name="num"
-            checked="checked"
-          >
-        </td>
-        <td>{{ germplasmCheckbox.germplasm.germplasmName }}</td>
-        <td>{{ germplasmCheckbox.study.studyName }}</td>
-
-      </tr>
-      </tbody>
-    </table>
+    <div class="germplasm">
+      <table class="table table-striped table-dark table-responsive-lg" >
+        <thead>
+        <tr>
+          <td>Gerplasm Name / Study Name</td>
+          <td *ngFor="let germplasmCheckbox of this.germplasmCheckboxes; let i = index">{{ germplasmCheckbox.study.studyName }}</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let germplasmCheckbox of this.germplasmCheckboxes; let i = index">
+          <td>{{ germplasmCheckbox.germplasm.germplasmName }}</td>
+          <td *ngFor="let germplasmCheckbox of this.germplasmCheckboxes; let i = index">{{ germplasmCheckbox.study.studyName }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

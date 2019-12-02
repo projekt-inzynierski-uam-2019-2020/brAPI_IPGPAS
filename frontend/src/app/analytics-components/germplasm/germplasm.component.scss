@@ -137,6 +137,31 @@
     }
   }
 
+  &__counter{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-left: 60px;
+    margin-right: 60px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    font-family: 'Roboto';
+    font-weight: 300;
+    color: #FFFFFF;
+    font-size: 24px;
+
+    h3{
+      font-family: 'Roboto';
+      font-weight: 300;
+      color: #FFFFFF;
+      font-size: 24px;
+
+      &:first-child{
+        margin-right: 10px;
+      }
+    }
+  }
+
   .optionalFilters{
     display: flex;
     justify-content: space-between;
@@ -186,7 +211,7 @@
     }
   }
 
-  .trials{
+  .germplasm{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
