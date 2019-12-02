@@ -1,4 +1,6 @@
-package org.brapi_igpas.igpas.entity;
+package org.planth_pheno_analytics.data.entity;
+
+import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,34 +10,23 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "values")
-public class ValuesEntity {
+public class ValueEntity implements Identifiable<Integer> {
     @Id
-    private long id;
+    private Integer id;
     private String value;
     @Column(name = "study_id")
-    private long studyId;
+    private Integer studyId;
     @Column(name = "attribute_id")
-    private int attributeId;
+    private Integer attributeId;
 
-    public ValuesEntity() {
+    public ValueEntity() {
     }
 
-    public ValuesEntity(long id, String value) {
-        this();
-        this.id = id;
-        this.value = value;
-    }
-
-    public ValuesEntity(long id, String value, long studyId) {
-        this(id, value);
-        this.studyId = studyId;
-    }
-
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -47,19 +38,19 @@ public class ValuesEntity {
         this.value = value;
     }
 
-    public long getStudyId() {
+    public Integer getStudyId() {
         return studyId;
     }
 
-    public void setStudyId(long studyId) {
+    public void setStudyId(Integer studyId) {
         this.studyId = studyId;
     }
 
-    public int getAttributeId() {
+    public Integer getAttributeId() {
         return attributeId;
     }
 
-    public void setAttributeId(int attributeId) {
+    public void setAttributeId(Integer attributeId) {
         this.attributeId = attributeId;
     }
 
@@ -67,7 +58,7 @@ public class ValuesEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ValuesEntity that = (ValuesEntity) o;
+        ValueEntity that = (ValueEntity) o;
         return Objects.equals(value, that.value);
     }
 

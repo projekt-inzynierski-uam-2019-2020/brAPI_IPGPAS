@@ -1,4 +1,6 @@
-package org.brapi_igpas.igpas.entity;
+package org.planth_pheno_analytics.data.entity;
+
+import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,9 +9,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "attributes")
-public class AttributesEntity {
+public class AttributeEntity implements Identifiable<Integer> {
     @Id
-    private int id;
+    private Integer id;
     private String name;
     @Column(name = "display_position")
     private int displayPosition;
@@ -20,14 +22,14 @@ public class AttributesEntity {
     @Column(name = "attribute_group_id")
     private int attributeGroupId;
 
-    public AttributesEntity() {
+    public AttributeEntity() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
