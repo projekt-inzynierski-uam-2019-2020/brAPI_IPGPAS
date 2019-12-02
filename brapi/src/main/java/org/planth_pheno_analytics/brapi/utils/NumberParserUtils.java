@@ -1,4 +1,4 @@
-package org.brapi_igpas.brapi.utils;
+package org.planth_pheno_analytics.brapi.utils;
 
 public class NumberParserUtils {
     public static Long safeParseLong(String param) {
