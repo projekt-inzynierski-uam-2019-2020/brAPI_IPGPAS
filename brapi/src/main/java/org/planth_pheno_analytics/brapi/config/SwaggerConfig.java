@@ -1,4 +1,4 @@
-package org.brapi_igpas.config;
+package org.planth_pheno_analytics.brapi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
