@@ -1,4 +1,4 @@
-package org.brapi_igpas.brapi.calls.seasons;
+package org.planth_pheno_analytics.brapi.api.study.seasons;
 
 import java.util.Objects;
 
