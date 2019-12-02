@@ -29,27 +29,45 @@
   </div>
   <div>
     <div *ngIf="optionalFiltersShow" class="optionalFilters">
+      <h3 class="optionalFilters__label">Filter by Common Crop Name</h3>
       <div class="optionalFilters__container">
         <div class="optionalFilters__container--item" *ngFor="let trialCommonCropCheckbox of this.trialCommonCropCheckboxes; let i = index">
-          <input
-            [(ngModel)]="trialCommonCropCheckbox.selected"
-            type="checkbox"
-            id="{{trialCommonCropCheckbox}}{{i}}"
-            name="num"
-            checked="checked"
-          >
-          <label for="{{trialCommonCropCheckbox}}{{i}}">{{trialCommonCropCheckbox.trial.commonCropName}}</label>
+          <label class="checkbox" for="{{trialCommonCropCheckbox}}{{i}}">
+            <input
+              [(ngModel)]="trialCommonCropCheckbox.selected"
+              type="checkbox"
+              id="{{trialCommonCropCheckbox}}{{i}}"
+              name="num"
+              checked="checked"
+              class="checkbox__input"
+            >
+            <span class="checkbox__box"></span>
+            {{trialCommonCropCheckbox.trial.commonCropName}}
+          </label>
         </div>
+        <button
+          (click)="setSelectedCrops()"
+          class="optionalFilters__filter">Filter</button>
       </div>
-      <button
-        (click)="setSelectedCrops()"
-        class="optionalFilters__filter">Filter</button>
+    </div>
+    <div class="filters__counter">
+      <h3>Results found:</h3>
+      <h3>46</h3>
     </div>
     <div *ngIf="isShowStudies" class="trials">
       <table class="table table-striped table-dark table-responsive-lg" >
         <thead>
         <tr>
-          <th><input type="checkbox"></th>
+          <th><label class="checkbox" for="all">
+            <input
+              type="checkbox"
+              id="all"
+              name="num"
+              checked="checked"
+              class="checkbox__input"
+            >
+            <span class="checkbox__box"></span>
+          </label></th>
           <th>Trial Name</th>
           <th>Common Crop Name</th>
           <th>Program</th>
@@ -58,17 +76,21 @@
         <tbody>
         <tr *ngFor="let trialCheckbox of this.trialCheckboxes; let i = index">
           <td>
-            <input
-              [(ngModel)]="trialCheckbox.selected"
-              type="checkbox"
-              id="{{i}}"
-              name="num"
-              checked="checked"
+            <label class="checkbox" for="{{i}}">
+              <input
+                [(ngModel)]="trialCheckbox.selected"
+                type="checkbox"
+                id="{{i}}"
+                name="num"
+                checked="checked"
+                class="checkbox__input"
               >
+              <span class="checkbox__box"></span>
+            </label>
           </td>
           <td>{{ trialCheckbox.trial.trialName }}</td>
-          <td>{{ trialCheckbox.trial.programName }}</td>
           <td>{{trialCheckbox.trial.commonCropName}}</td>
+          <td>{{ trialCheckbox.trial.programName }}</td>
         </tr>
         </tbody>
       </table>
