@@ -1,4 +1,4 @@
-package org.brapi_igpas.brapi.annotation;
+package org.planth_pheno_analytics.brapi.annotation;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
