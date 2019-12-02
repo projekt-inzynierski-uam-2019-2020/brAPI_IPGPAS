@@ -1,4 +1,4 @@
-package org.brapi_igpas.brapi.calls.calls;
+package org.planth_pheno_analytics.brapi.api.calls;
 
 import java.util.List;
 

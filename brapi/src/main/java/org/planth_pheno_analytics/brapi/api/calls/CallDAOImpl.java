@@ -1,4 +1,4 @@
-package org.brapi_igpas.brapi.calls.calls;
+package org.planth_pheno_analytics.brapi.api.calls;
 
 import org.springframework.stereotype.Repository;
 
@@ -26,14 +26,12 @@ public class CallDAOImpl implements CallDAO {
         CALLS.add(new Call.Builder("seasons")
                 .withDataTypeJson()
                 .withMethodGet()
-                .withVersionOneTwo()
                 .withVersionOneThree()
                 .build());
 
         CALLS.add(new Call.Builder("germplasm")
                 .withDataTypeJson()
                 .withMethodGet()
-                .withVersionOneTwo()
                 .withVersionOneThree()
                 .build());
 
