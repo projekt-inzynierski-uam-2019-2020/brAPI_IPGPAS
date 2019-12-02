@@ -29,6 +29,8 @@ import {RouterModule} from '@angular/router';
 import {TrialsResolve} from './call-services/trial/trials-resolve.service';
 import {StudyComponent} from './analytics-components/study/study.component';
 import {StudyService} from './call-services/study/study-service';
+import { GermplasmComponent } from './analytics-components/germplasm/germplasm.component';
+import {GermplasmService} from './call-services/germplasm/germplasm-service';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import {StudyService} from './call-services/study/study-service';
     SeasonsComponent,
     AdminMainPageComponent,
     TrialsComponent,
-    TrialComponent
+    TrialComponent,
+    GermplasmComponent
   ],
   imports: [
     HttpClientModule,
@@ -58,6 +61,7 @@ import {StudyService} from './call-services/study/study-service';
       {path: 'admin/page', component: AdminMainPageComponent},
       {path: 'servers/trial', component: TrialComponent, resolve: TrialsResolve},
       {path: 'servers/study', component: StudyComponent},
+      {path: 'servers/germplasm', component: GermplasmComponent},
       {path: '', component: HomePageComponent},
 
       {path: '**', component: HomePageComponent}]),
@@ -69,7 +73,7 @@ import {StudyService} from './call-services/study/study-service';
     NgbModule,
   ],
   // tslint:disable-next-line:max-line-length
-  providers: [ServersFetchingService, Servers, ServerPageComponent, Globals, TrialService, ServersService, TrialsResolve, FetchBrapiResultService, TrialsResolve, StudyService],
+  providers: [ServersFetchingService, Servers, ServerPageComponent, Globals, TrialService, ServersService, TrialsResolve, FetchBrapiResultService, TrialsResolve, StudyService, GermplasmService],
   bootstrap: [AppComponent],
 
 })
