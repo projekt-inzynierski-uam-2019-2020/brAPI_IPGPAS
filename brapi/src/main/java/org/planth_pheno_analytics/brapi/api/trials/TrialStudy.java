@@ -1,4 +1,6 @@
-package org.brapi_igpas.brapi.calls.trials;
+package org.planth_pheno_analytics.brapi.api.trials;
+
+import java.util.Objects;
 
 public class TrialStudy {
     private String locationDbId;
@@ -39,5 +41,21 @@ public class TrialStudy {
 
     public void setStudyName(String studyName) {
         this.studyName = studyName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TrialStudy that = (TrialStudy) o;
+        return Objects.equals(locationDbId, that.locationDbId) &&
+                Objects.equals(locationName, that.locationName) &&
+                Objects.equals(studyDbId, that.studyDbId) &&
+                Objects.equals(studyName, that.studyName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(locationDbId, locationName, studyDbId, studyName);
     }
 }

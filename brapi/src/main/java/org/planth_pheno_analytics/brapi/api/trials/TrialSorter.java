@@ -1,17 +1,18 @@
-package org.brapi_igpas.brapi.calls.trials;
+package org.planth_pheno_analytics.brapi.api.trials;
 
+import org.planth_pheno_analytics.brapi.api.Sorter;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static org.brapi_igpas.brapi.utils.NumberParserUtils.safeParseLong;
+import static org.planth_pheno_analytics.brapi.utils.NumberParserUtils.safeParseLong;
 
 @Service
-public class TrialSorter {
+public class TrialSorter extends Sorter<Trial> {
 
-    List<Trial> sortBy(List<Trial> trials, String sortBy) {
+    @Override
+    protected List<Trial> sortBy(List<Trial> trials, String sortBy) {
         switch (sortBy) {
             case "trialDbId":
                 trials.sort(Comparator.comparing(
@@ -42,13 +43,6 @@ public class TrialSorter {
                 trials.sort(Comparator.comparing(Trial::getEndDate, Comparator.nullsLast(Comparator.naturalOrder())
                 ));
                 break;
-        }
-        return trials;
-    }
-
-    List<Trial> sortOrder(List<Trial> trials, String sortOrder) {
-        if (sortOrder.equalsIgnoreCase("DESC")) {
-            Collections.reverse(trials);
         }
         return trials;
     }

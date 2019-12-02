@@ -1,5 +1,6 @@
-package org.brapi_igpas.brapi.calls.trials;
+package org.planth_pheno_analytics.brapi.api.trials;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Trial {
@@ -16,6 +17,7 @@ public class Trial {
     private String trialName;
 
     public Trial() {
+        studies = new ArrayList<>();
     }
 
     public boolean isActive() {

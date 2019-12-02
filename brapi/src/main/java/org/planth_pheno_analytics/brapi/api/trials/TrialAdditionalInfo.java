@@ -1,4 +1,4 @@
-package org.brapi_igpas.brapi.calls.trials;
+package org.planth_pheno_analytics.brapi.api.trials;
 
 public class TrialAdditionalInfo {
     private String description;
