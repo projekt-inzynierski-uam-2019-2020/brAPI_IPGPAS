@@ -3,6 +3,7 @@ import {Globals} from '../../globals';
 import {GermplasmService} from '../../call-services/germplasm/germplasm-service';
 import {Germplasm} from '../../call-models/germplasm';
 import {GermplasmCheckbox} from './germplasmCheckbox';
+import {Study} from '../../call-models/study';
 
 @Component({
   selector: 'app-germplasm',
@@ -25,26 +26,18 @@ export class GermplasmComponent implements OnInit {
   }
 
   fetchGermplasmFromSelectedServerStudies() {
-    console.log(this.globals.selectedServerStudies);
     this.globals.selectedServerStudies.map(selectedStudy => this.germplasmService.getGermplasmByStudyDbId(selectedStudy.serverUrl, selectedStudy.study.studyDbId)
       .subscribe(fetchedGermplasm => {
-        console.log(fetchedGermplasm);
-        this.setGermplasmCheckboxes(fetchedGermplasm);
+        console.log(selectedStudy);
+        this.setGermplasmCheckboxes(fetchedGermplasm, selectedStudy.study);
       }));
   }
 
-  setGermplasmCheckboxes(germplasms: Germplasm[]) {
+  setGermplasmCheckboxes(germplasms: Germplasm[], study: Study) {
 
-    console.log(this.globals.selectedServerStudies);
-    for (const selectedServer of this.globals.selectedServerStudies){
       for (const germplasm of germplasms) {
-        if (!this.germplasmCheckboxes.some((item) => item.germplasm.germplasmDbId === germplasm.germplasmDbId && item.study.studyName === selectedServer.study.studyName)) {
-          this.germplasmCheckboxes.push({germplasm: germplasm, selected: false, study: selectedServer.study});
+          this.germplasmCheckboxes.push({germplasm: germplasm, selected: false, study: study});
         }
-      }
-    }
-
-    console.log(this.germplasmCheckboxes);
   }
 
 
