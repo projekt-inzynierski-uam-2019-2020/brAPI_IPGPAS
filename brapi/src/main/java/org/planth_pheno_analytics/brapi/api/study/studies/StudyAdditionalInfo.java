@@ -1,10 +1,10 @@
-package org.brapi_igpas.brapi.calls.studies;
+package org.planth_pheno_analytics.brapi.api.study.studies;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudyAdditionalInfo {
-    private String description = "";
+    private String description;
     private List<String> volumes;
     private List<String> typesOfFertiliser;
     private List<String> sowingDensities;
@@ -28,29 +28,29 @@ public class StudyAdditionalInfo {
     private List<String> amountOfFertiliser;
     private List<String> airHumidity;
 
-    public StudyAdditionalInfo() {
-        volumes = new ArrayList<>();
-        typesOfFertiliser = new ArrayList<>();
-        sowingDensities = new ArrayList<>();
-        plotSizes = new ArrayList<>();
-        pH = new ArrayList<>();
-        numberOfPlantsPerContainer = new ArrayList<>();
-        nightTemperatures = new ArrayList<>();
-        nBeforeFertilisation = new ArrayList<>();
-        lengthOfLightPeriods = new ArrayList<>();
-        irrigationTypes = new ArrayList<>();
-        frequencies = new ArrayList<>();
-        factors = new ArrayList<>();
-        experimentalUnits = new ArrayList<>();
-        dayTemperatures = new ArrayList<>();
-        dailyPhotonFluxes = new ArrayList<>();
-        containerVolumes = new ArrayList<>();
-        containerTypes = new ArrayList<>();
-        containerDimensions = new ArrayList<>();
-        characteristics = new ArrayList<>();
-        assayTypes = new ArrayList<>();
-        amountOfFertiliser = new ArrayList<>();
-        airHumidity = new ArrayList<>();
+    StudyAdditionalInfo() {
+        this.volumes = new ArrayList<>();
+        this.typesOfFertiliser = new ArrayList<>();
+        this.sowingDensities = new ArrayList<>();
+        this.plotSizes = new ArrayList<>();
+        this.pH = new ArrayList<>();
+        this.numberOfPlantsPerContainer = new ArrayList<>();
+        this.nightTemperatures = new ArrayList<>();
+        this.nBeforeFertilisation = new ArrayList<>();
+        this.lengthOfLightPeriods = new ArrayList<>();
+        this.irrigationTypes = new ArrayList<>();
+        this.frequencies = new ArrayList<>();
+        this.factors = new ArrayList<>();
+        this.experimentalUnits = new ArrayList<>();
+        this.dayTemperatures = new ArrayList<>();
+        this.dailyPhotonFluxes = new ArrayList<>();
+        this.containerVolumes = new ArrayList<>();
+        this.containerTypes = new ArrayList<>();
+        this.containerDimensions = new ArrayList<>();
+        this.characteristics = new ArrayList<>();
+        this.assayTypes = new ArrayList<>();
+        this.amountOfFertiliser = new ArrayList<>();
+        this.airHumidity = new ArrayList<>();
     }
 
     public String getDescription() {

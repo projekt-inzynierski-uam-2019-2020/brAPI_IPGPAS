@@ -1,6 +1,6 @@
-package org.brapi_igpas.brapi.calls.studies;
+package org.planth_pheno_analytics.brapi.api.study.studies;
 
-import org.brapi_igpas.brapi.calls.seasons.Season;
+import org.planth_pheno_analytics.brapi.api.study.seasons.Season;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +29,7 @@ public class Study {
     public Study() {
         seasons = new ArrayList<>();
     }
+
     // isActive
     public String getActive() {
         return active;
