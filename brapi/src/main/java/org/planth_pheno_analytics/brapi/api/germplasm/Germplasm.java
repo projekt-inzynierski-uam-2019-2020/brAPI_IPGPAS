@@ -1,6 +1,6 @@
-package org.brapi_igpas.brapi.calls.germplasm;
+package org.planth_pheno_analytics.brapi.api.germplasm;
 
-import org.brapi_igpas.brapi.calls.germplasm.taxonId.TaxonId;
+import org.planth_pheno_analytics.brapi.germplasm.taxonId.TaxonId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,15 +35,10 @@ public class Germplasm {
     private List<String> typeOfGermplasmStorageCode;
 
     public Germplasm() {
-        taxonIds = new ArrayList<>();
-    }
-
-    public Germplasm(String commonCropName, String germplasmDbId, String germplasmName, String germplasmPUI) {
-        this();
-        this.commonCropName = commonCropName;
-        this.germplasmDbId = germplasmDbId;
-        this.germplasmName = germplasmName;
-        this.germplasmPUI = germplasmPUI;
+        this.donors = new ArrayList<>();
+        this.synonyms = new ArrayList<>();
+        this.taxonIds = new ArrayList<>();
+        this.typeOfGermplasmStorageCode = new ArrayList<>();
     }
 
     public String getAccessionNumber() {

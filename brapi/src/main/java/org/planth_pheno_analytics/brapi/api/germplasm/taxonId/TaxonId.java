@@ -1,4 +1,4 @@
-package org.brapi_igpas.brapi.calls.germplasm.taxonId;
+package org.planth_pheno_analytics.brapi.germplasm.taxonId;
 
 import java.util.Objects;
 
