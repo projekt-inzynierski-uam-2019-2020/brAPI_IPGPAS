@@ -18,15 +18,13 @@ export class TrialComponent implements OnInit {
   serverTrial: ServerTrial[] = [];
   serverUniqCommonTrial: ServerTrial[] = [];
   serverTrials: ServerTrials[] = [];
-  filterByCommonCrop: ServerTrial[] = [];
-  trialsForFilteredCommonCrop: ServerTrials[] = [];
+
   trials = [];
   isCropFilter = false;
   isShowStudies = true;
   selectedServerCommonCropsTrials: ServerTrial[] = [];
   optionalFiltersShow = false;
   isShow = true;
-
 
   trialService: TrialService;
 
@@ -52,6 +50,7 @@ export class TrialComponent implements OnInit {
   }
 
   setTrialCheckboxes(trials: Trial[]) {
+
     trials.map(trial => this.trialCheckboxes.push({trial: trial, selected: false}));
 
   }
@@ -89,7 +88,6 @@ export class TrialComponent implements OnInit {
         }
 
       });
-    console.log(this.globals.selectedServerTrials);
   }
 
 
