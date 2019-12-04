@@ -31,19 +31,21 @@
     <div *ngIf="optionalFiltersShow" class="optionalFilters">
       <h3 class="optionalFilters__label">Filter by Common Crop Name</h3>
       <div class="optionalFilters__container">
-        <div class="optionalFilters__container--item" *ngFor="let trialCommonCropCheckbox of this.trialCommonCropCheckboxes; let i = index">
-          <label class="checkbox" for="{{trialCommonCropCheckbox}}{{i}}">
-            <input
-              [(ngModel)]="trialCommonCropCheckbox.selected"
-              type="checkbox"
-              id="{{trialCommonCropCheckbox}}{{i}}"
-              name="num"
-              checked="checked"
-              class="checkbox__input"
-            >
-            <span class="checkbox__box"></span>
-            {{trialCommonCropCheckbox.trial.commonCropName}}
-          </label>
+        <div class="optionalFilters__container--content">
+          <div class="optionalFilters__container--item" *ngFor="let trialCommonCropCheckbox of this.trialCommonCropCheckboxes; let i = index">
+            <label class="checkbox" for="{{trialCommonCropCheckbox}}{{i}}">
+              <input
+                [(ngModel)]="trialCommonCropCheckbox.selected"
+                type="checkbox"
+                id="{{trialCommonCropCheckbox}}{{i}}"
+                name="num"
+                checked="checked"
+                class="checkbox__input"
+              >
+              <span class="checkbox__box"></span>
+              {{trialCommonCropCheckbox.trial.commonCropName}}
+            </label>
+          </div>
         </div>
         <button
           (click)="setSelectedCrops()"

@@ -12,6 +12,7 @@
     color: #ffffff;
     font-family: 'Saira';
     margin-bottom: 30px;
+    margin-left: -15px;
 
     &:active, &:focus, &:hover{
       outline: none;
@@ -100,6 +101,7 @@
     &__logo {
       float: left;
       margin-top: 10px;
+      margin-left: 0;
 
       &--upper{
         font-size: 20px;

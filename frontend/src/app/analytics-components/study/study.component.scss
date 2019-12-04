@@ -160,13 +160,19 @@
     &__container{
       display: flex;
       flex-wrap: nowrap;
-      overflow-x: auto;
-      margin: auto 20px;
       -webkit-box-orient: horizontal;
       -webkit-box-direction: normal;
       flex-direction: row;
       -webkit-box-pack: justify;
       justify-content: space-between;
+
+      &--content{
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        margin-right: 20px;
+        overflow-x: auto;
+      }
 
       &--item{
         margin: auto 20px;
@@ -365,6 +371,7 @@
     display: inline-block;
     cursor: pointer;
     margin-bottom: 0;
+    white-space: nowrap;
 
     &:hover .checkbox__box{
       border: 2px solid #139553;
