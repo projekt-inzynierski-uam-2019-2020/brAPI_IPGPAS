@@ -18,14 +18,12 @@ export class TrialComponent implements OnInit {
   serverTrial: ServerTrial[] = [];
   serverUniqCommonTrial: ServerTrial[] = [];
   serverTrials: ServerTrials[] = [];
-  filterByCommonCrop: ServerTrial[] = [];
-  trialsForFilteredCommonCrop: ServerTrials[] = [];
+
   trials = [];
   isCropFilter = false;
   isShowStudies = true;
   selectedServerCommonCropsTrials: ServerTrial[] = [];
   optionalFiltersShow = false;
-
 
   trialService: TrialService;
 
@@ -47,6 +45,7 @@ export class TrialComponent implements OnInit {
   }
 
   setTrialCheckboxes(trials: Trial[]) {
+
     trials.map(trial => this.trialCheckboxes.push({trial: trial, selected: false}));
 
   }
@@ -84,23 +83,8 @@ export class TrialComponent implements OnInit {
         }
 
       });
-    console.log(this.globals.selectedServerTrials);
   }
 
-  /*filterCommonCropName() {
-    this.trialCheckboxes = [];
-    this.isCropFilter = true;
-    this.isShowStudies = false;
-
-    this.serverTrials.map(serverUrlTrials => serverUrlTrials.trials.map(trial => this.trialService.getTrialsByCommonCropName(serverUrlTrials.serverUrl, trial.commonCropName)
-      .subscribe(trials => {
-
-        if (!this.filterByCommonCrop.some((item) => item.trial.commonCropName === trial.commonCropName)) {
-          this.filterByCommonCrop.push({trial: trial, serverUrl: serverUrlTrials.serverUrl});
-          this.trialsForFilteredCommonCrop.push({trials: trials, serverUrl: serverUrlTrials.serverUrl});
-        }
-      })));
-  }*/
 
 
   setSelectedCrops() {
