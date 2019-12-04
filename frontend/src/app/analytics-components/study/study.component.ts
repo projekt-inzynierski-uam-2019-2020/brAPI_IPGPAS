@@ -31,12 +31,15 @@ export class StudyComponent implements OnInit {
 
 
 
+
   isShowAllStudies = true;
   isLocationFilterShow = false;
   isShowSeasons = false;
 
   locationFiltersShow = false;
   seasonFiltersShow = false;
+
+  isShow = true;
 
 
   constructor(globals: Globals, studyService: StudyService) {
@@ -53,6 +56,10 @@ export class StudyComponent implements OnInit {
       .subscribe(fetchedStudies => {
         this.setStudyCheckboxes(fetchedStudies);
         this.setServerStudies(selectedTrial.serverUrl, fetchedStudies);
+        if (selectedTrial === this.globals.selectedServerTrials[length]) {
+          this.isShow = false;
+          console.log(this.isShow);
+        }
       }));
 
   }
