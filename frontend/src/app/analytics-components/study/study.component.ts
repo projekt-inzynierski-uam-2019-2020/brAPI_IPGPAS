@@ -8,6 +8,7 @@ import {LocationStudy} from './locationStudy';
 import {SeasonStudy} from './seasonStudy';
 import {StudyForSeasons} from './studyForSeasons';
 import {SeasonCheckbox} from './seasonCheckbox';
+import index from '@angular/cli/lib/cli';
 
 @Component({
   selector: 'app-study',
@@ -27,6 +28,7 @@ export class StudyComponent implements OnInit {
   studyService: StudyService;
   selectedLocationStudy: LocationStudy[] = [];
   selectedSeasonStudy: SeasonStudy[] = [];
+
 
 
   isShowAllStudies = true;
@@ -51,8 +53,8 @@ export class StudyComponent implements OnInit {
       .subscribe(fetchedStudies => {
         this.setStudyCheckboxes(fetchedStudies);
         this.setServerStudies(selectedTrial.serverUrl, fetchedStudies);
-
       }));
+
   }
 
   setStudyCheckboxes(studies: Study[]) {
