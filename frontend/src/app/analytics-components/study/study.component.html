@@ -9,8 +9,8 @@
       <h2 class="filters__header--title">Studies</h2>
     </div>
     <div class="row">
-      <button href="#" (click)="locationFiltersShow = !locationFiltersShow; seasonFiltersShow = false" class="btn m-3 filters__header--filter">Location Filter</button>
-      <button href="#" (click)="seasonFiltersShow = !seasonFiltersShow; locationFiltersShow = false" class="btn m-3 filters__header--filter">Season Filter</button>
+      <button href="#" (click)="locationFiltersShow = !locationFiltersShow" class="btn m-3 filters__header--filter">Location Filter</button>
+      <button href="#" (click)="seasonFiltersShow = !seasonFiltersShow" class="btn m-3 filters__header--filter">Season Filter</button>
       <button
         href="#"
         class="btn m-3 filters__header--button"
@@ -106,7 +106,7 @@
 
   <div class="filters__counter">
     <h3>Results found:</h3>
-    <h3>{{studyCheckboxes.length}}</h3>
+    <h3>46</h3>
   </div>
 
   <div *ngIf="isShowAllStudies" class="study">
@@ -125,7 +125,7 @@
         </label></th>
         <th>Study Name</th>
         <th>Location Name</th>
-        <th>Program</th>
+        <th>Documentation URL</th>
       </tr>
       </thead>
       <tbody>
@@ -145,7 +145,7 @@
         </td>
         <td>{{ studyCheckbox.study.studyName }}</td>
         <td>{{ studyCheckbox.study.locationName }}</td>
-        <td>{{ studyCheckbox.study.programName }}</td>
+        <td>{{ studyCheckbox.study.documentationURL }}</td>
       </tr>
       </tbody>
     </table>

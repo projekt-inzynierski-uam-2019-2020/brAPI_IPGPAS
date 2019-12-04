@@ -15,17 +15,28 @@
         <thead>
         <tr>
           <td></td>
-          <td *ngFor="let germplasmCheckbox of this.germplasmCheckboxes; let i = index">x</td>
+          <td *ngFor="let studyColumn of this.studyColumns; let i = index">
+            <label class="checkbox" for="{{i}}">
+              <input
+                type="checkbox"
+                id="{{i}}"
+                name="num"
+                checked="checked"
+                class="checkbox__input"
+              >
+              <span class="checkbox__box"></span>
+            </label>
+          </td>
         </tr>
-        <tr>
-          <td>Gerplasm Name / Study Name</td>
+        <tr class="table__study" >
+          <td class="table__header"><p class="table__header--top">Study Name</p><p class="table__header--line"></p><p class="table__header--bottom">Gerplasm Name</p></td>
           <td *ngFor="let studyColumn of this.studyColumns; let i = index">{{ studyColumn.study.studyName }}</td>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let germ of this.germplasm; let i = index">
           <td>{{ germ.germplasmName }}</td>
-          <td *ngFor="let studyColumn of this.studyColumns"><p *ngIf="checkGermplasmFunction(studyColumn, germ)">x</p>
+          <td *ngFor="let studyColumn of this.studyColumns"><p *ngIf="checkGermplasmFunction(studyColumn, germ)"><i class="fas fa-check"></i></p>
           </td>
         </tr>
         </tbody>

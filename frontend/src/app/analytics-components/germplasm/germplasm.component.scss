@@ -218,6 +218,7 @@
     flex-flow: wrap;
     margin: auto 60px;
     margin-bottom: 50px;
+    overflow-x: auto;
 
     .table{
       margin: 3rem auto 0 auto;
@@ -225,6 +226,59 @@
       align: right;
       float: right;
       right: 0;
+
+      td{
+        text-align: center;
+      }
+
+      &__analyze{
+        width: 120px;
+        min-width: 120px;
+        border-radius: 2px;
+        background-color: transparent;
+        border: 2px solid #FFFFFF;
+        color: #FFFFFF;
+        font-family: 'Roboto';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+
+        &:focus, &:active{
+          outline: none;
+          box-shadow: none;
+        }
+
+        .fa-chart-bar{
+          font-size: 22px;
+          margin-left: 10px;
+        }
+
+        &:hover{
+          background-color: #139553;
+          border-color: #139553;
+          color: #FFFFFF;
+          cursor: pointer;
+        }
+      }
+
+      &__study{
+        max-height: 20px;
+        vertical-align: center;
+
+        td{
+          vertical-align: middle;
+        }
+      }
+
+      p{
+        margin-bottom: 0;
+      }
+
+      .fa-check{
+        font-size: 25px;
+        color: #139553;
+      }
 
       .btn-info{
         float: left;
@@ -239,6 +293,29 @@
         background-color: #BA4747;
         border-radius: 2px;
         min-width: 125px;
+      }
+
+      &__header{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        &--top{
+          padding-left: 100px;
+          white-space: nowrap;
+        }
+
+        &--line{
+          border-bottom: 1px solid #FFFFFF;
+          width: 100px;
+          transform: rotate(30deg);
+          margin: auto;
+        }
+
+        &--bottom{
+          padding-right: 100px;
+          white-space: nowrap;
+        }
       }
     }
   }
@@ -314,6 +391,53 @@
 
     .filters__container--card-content{
       height: 80px;
+    }
+  }
+
+  .checkbox{
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 0;
+    white-space: nowrap;
+
+    &:hover .checkbox__box{
+      border: 2px solid #139553;
+    }
+
+    &__box{
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #B5B5B5;
+      border-radius: 0.15rem;
+      margin-bottom: -0.25rem;
+      transition: all 0.35s ease;
+    }
+
+    &__input{
+      display: none;
+    }
+
+    &__input:checked + .checkbox__box{
+      border: 2px solid #139553;
+      background: #139553;
+    }
+
+    &__input:checked + .checkbox__box:after{
+      content: "";
+      display: block;
+      width: 0.5rem;
+      height: 0.9rem;
+      border: 4px solid white;
+      border-width: 0 3px 3px 0;
+      border-radius: 0.1rem;
+      transform: rotate(45deg);
+      margin-left: 0.25rem;
+      margin-top: -0.05rem;
+    }
+
+    &__input:active + .checkbox__box{
+      box-shadow: 0 0 4px #139553;
     }
   }
 }
