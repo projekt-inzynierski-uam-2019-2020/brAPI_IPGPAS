@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Globals} from '../../globals';
 import {GermplasmService} from '../../call-services/germplasm/germplasm-service';
 import {Germplasm} from '../../call-models/germplasm';
@@ -42,13 +42,18 @@ export class GermplasmComponent implements OnInit {
     for (const germplasm of germplasms) {
       this.germplasmCheckboxes.push({germplasm: germplasm, selected: false, study: study});
 
-      if(!this.germplasm.some((item) => item.germplasmDbId === germplasm.germplasmDbId)) {
+      if (!this.germplasm.some((item) => item.germplasmDbId === germplasm.germplasmDbId)) {
         this.germplasm.push(germplasm);
       }
     }
+  }
 
-    console.log(this.studyColumns);
-    console.log(this.germplasm);
+  checkGermplasmFunction(studyColumn: StudyColumn, germplasm: Germplasm) {
+      for (const germplasmFroStudy of studyColumn.germplasm) {
+        if (germplasm.germplasmName === germplasmFroStudy.germplasmName) {
+          return true;
+        }
+    }
   }
 
 
