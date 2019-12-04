@@ -24,6 +24,7 @@ export class TrialComponent implements OnInit {
   isShowStudies = true;
   selectedServerCommonCropsTrials: ServerTrial[] = [];
   optionalFiltersShow = false;
+  isShow = true;
 
   trialService: TrialService;
 
@@ -41,6 +42,10 @@ export class TrialComponent implements OnInit {
       .subscribe(fetchedTrials => {
         this.setTrialCheckboxes(fetchedTrials);
         this.setServerTrials(serverUrl, fetchedTrials);
+        if (serverUrl === this.globals.selectedServers[length]) {
+          console.log('TRUE');
+          this.isShow = false;
+        }
       }));
   }
 
@@ -84,7 +89,6 @@ export class TrialComponent implements OnInit {
 
       });
   }
-
 
 
   setSelectedCrops() {
