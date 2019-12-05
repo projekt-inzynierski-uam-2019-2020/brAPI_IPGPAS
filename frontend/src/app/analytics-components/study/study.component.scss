@@ -210,6 +210,23 @@
     }
   }
 
+  .loading{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__loader{
+      width: 200px;
+      height: 200px;
+    }
+  }
+
   .study{
     display: flex;
     justify-content: space-between;

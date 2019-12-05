@@ -38,6 +38,8 @@ export class StudyComponent implements OnInit {
   locationFiltersShow = false;
   seasonFiltersShow = false;
 
+  isLoading = true;
+
 
   constructor(globals: Globals, studyService: StudyService) {
     this.globals = globals;
@@ -53,6 +55,9 @@ export class StudyComponent implements OnInit {
       .subscribe(fetchedStudies => {
         this.setStudyCheckboxes(fetchedStudies);
         this.setServerStudies(selectedTrial.serverUrl, fetchedStudies);
+        if (selectedTrial === this.globals.selectedServerTrials[length]) {
+          this.isLoading = false;
+        }
       }));
 
   }

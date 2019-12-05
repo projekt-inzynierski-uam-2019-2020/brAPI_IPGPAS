@@ -32,7 +32,7 @@ export class ServerPageComponent implements OnInit {
   checkName = [];
   globals: Globals;
   isLocation = false;
-
+  isLoading = true;
 
   checkboxes = [
   ];
@@ -46,6 +46,7 @@ export class ServerPageComponent implements OnInit {
         for (const server of this.servers) {
           this.checkboxes.push({value: server.ipAddress, selected: false});
         }
+        this.isLoading = false;
 
       });
 

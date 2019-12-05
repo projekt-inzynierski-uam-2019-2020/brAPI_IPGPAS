@@ -19,6 +19,8 @@ export class GermplasmComponent implements OnInit {
   studyColumns: StudyColumn[] = [];
   germplasm: Germplasm[] = [];
 
+  isLoading = true;
+
   constructor(globals: Globals, germplasmService: GermplasmService) {
     this.globals = globals;
     this.germplasmService = germplasmService;
@@ -32,6 +34,9 @@ export class GermplasmComponent implements OnInit {
     this.globals.selectedServerStudies.map(selectedStudy => this.germplasmService.getGermplasmByStudyDbId(selectedStudy.serverUrl, selectedStudy.study.studyDbId)
       .subscribe(fetchedGermplasm => {
         this.setGermplasmCheckboxes(fetchedGermplasm, selectedStudy.study);
+        if (selectedStudy === this.globals.selectedServerStudies[length]) {
+          this.isLoading = false;
+        }
       }));
   }
 
