@@ -41,6 +41,12 @@ public class CallDAOImpl implements CallDAO {
                 .withVersionOneThree()
                 .build());
 
+        CALLS.add(new Call.Builder("studies/{studyDbId}/germplasm")
+                .withDataTypeJson()
+                .withMethodGet()
+                .withVersionOneThree()
+                .build());
+
         CALLS.add(new Call.Builder("trials")
                 .withDataTypeJson()
                 .withMethodGet()
@@ -48,7 +54,7 @@ public class CallDAOImpl implements CallDAO {
                 .build());
     }
 
-    public List<Call> getAll() {
+    public List<Call> getCalls() {
         return CALLS;
     }
 }

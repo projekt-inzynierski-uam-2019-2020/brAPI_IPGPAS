@@ -18,7 +18,7 @@ public class CallServiceImpl implements CallService {
 
     @Override
     public List<Call> getFilteredCalls(String dataType) {
-        Stream<Call> callStream = callDAO.getAll().stream();
+        Stream<Call> callStream = callDAO.getCalls().stream();
         if (isParameterPresent(dataType)) {
             callStream = callStream.filter(call -> call.getDataTypes().contains(dataType));
         }
