@@ -1,39 +1,81 @@
 import {Component, OnInit} from '@angular/core';
-import {Server} from '../calls/server';
+
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {style} from '@angular/animations';
-
+import {ServersService} from '../services/servers-service/servers.service';
+import {Server} from '../services/servers-service/servers';
+import { Servers } from '../calls/server';
+import {BrApiDetailPayloadResponse} from '../calls/BrApiDetailPayloadResponse';
+import {HttpClient} from '@angular/common/http';
+import {CallsService} from '../calls/calls.service';
+import {ServerDataComponent} from '../server-data-page/server-data.component';
+import {Globals} from '../globals';
+import {routing} from '../app-routing';
 
 @Component({
   selector: 'app-server-page',
   templateUrl: './server-page.component.html',
   styleUrls: ['./server-page.component.scss']
 })
-export class ServerPageComponent {
+export class ServerPageComponent implements OnInit {
   isActive = false;
+  isDisplay = false;
+  servers: Server[];
+  server: Server = new Server();
+  serverName: string;
+  lengthCalls: number;
+  serversArray = ['https://test-server.brapi.org/brapi/v1/trials', 'https://yambase.org/brapi/v1/trials']
+  serversArrayT = [];
+  trialName = [];
+  programName = [];
+  brApiDetailPayloadResponse: BrApiDetailPayloadResponse;
+  checkName = [];
+  globals: Globals;
+  isLocation = false;
+
+
   checkboxes = [
-    {
-      value: 'https://test-server.brapi.org/',
-      selected: false
-    },
-    {
-      value: 'http://35.242.244.53:8080',
-      selected: false
-    },
   ];
 
-
-  constructor(private server: Server, private formBuilder: FormBuilder) {
+  ngOnInit(): void {
+    this.globals = this.global;
+    console.log(this.globals.role);
+    this.serverService.getAllServers()
+      .subscribe(data => {
+        this.servers = data;
+        for (let i = 0; i < this.servers.length; i++) {
+          this.checkboxes.push({value: this.servers[i].ipAddress, selected: false});
+        }
+      });
   }
 
+
+  constructor(private formBuilder: FormBuilder, private serverService: ServersService,  private http: HttpClient, private  callService: CallsService, private serverss: Servers, public global: Globals) {
+  }
+
+
+
   public getSelected() {
-    let result = this.checkboxes.filter((ch) => {
+    const result = this.checkboxes.filter((ch) => {
       return ch.selected;
     })
       .map((ch) => {
         return ch.value;
       });
-    console.log(result);
+
+    for (let i = 0; i < result.length; i++) {
+      this.globals.serversArray.push(result[i]);
+      this.globals.serversArray2.push(result[i]);
+    }
+    console.log(this.globals.serversArray[1]);
+    this.getServerList(result);
+    this.serverss.getSelectedCall();
+    this.serverss.getServerList(result);
+    this.serverss.getSelectedCallStudies();
+    this.isDisplay = true;
+
+    console.log(this.globals.trialName[1]);
+
   }
   public toggleStyle(id) {
     const card = document.getElementById(`card${ id }`);
@@ -61,5 +103,35 @@ export class ServerPageComponent {
       console.log('non active' + id);
       this.isActive = !this.isActive;
     }
+  }
+
+
+  putArray(brApiDetailPayloadResponse) {
+    console.log(brApiDetailPayloadResponse);
+    for(let i = 0; i < this.serversArrayT.length; i++) {
+      for (let j = 0; j < this.getCallsLength(); j++) {
+        this.trialName.push(this.brApiDetailPayloadResponse.result.data[j].trialName);
+        this.programName.push(this.brApiDetailPayloadResponse.result.data[j].programName);
+      }
+    }
+    return this.trialName;
+  }
+
+  getArray() {
+    // console.log(this.trialName[1]);
+    for(let i = 0; i < this.trialName.length; i++){
+      console.log(this.trialName[i]);
+    }
+  }
+
+  getCallsLength() {
+    this.lengthCalls = this.brApiDetailPayloadResponse.result.data.length;
+    return this.lengthCalls;
+  }
+
+
+  getServerList(listServers) {
+    this.serversArrayT = listServers;
+    console.log(this.serversArrayT);
   }
 }

@@ -15,13 +15,15 @@ import {ServerPageComponent} from './server-page/server-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import {StudyComponent} from './calls-components/study/study.component';
 import {TrialsComponent} from './calls-components/trials/trials.component';
-import {Server} from './calls/server';
+import {Servers} from './calls/server';
 import {SeasonsComponent} from './calls-components/seasons/seasons.component';
 import {ChartsModule} from 'ng2-charts-x';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AdminMainPageComponent} from './admin-main-page/admin-main-page.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ServersService} from './services/servers-service/servers.service';
+import {Globals} from './globals';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     NgbModule,
   ],
-  providers: [Server],
+  providers: [ServersService, Servers, ServerPageComponent, Globals],
   bootstrap: [AppComponent],
 
 })

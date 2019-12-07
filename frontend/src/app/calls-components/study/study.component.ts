@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {CallsService} from '../../calls/calls.service';
 import {BrApiDetailPayloadResponse} from '../../calls/BrApiDetailPayloadResponse';
 import {Chart} from 'chart.js';
-import {Server} from '../../calls/server';
 import * as jsPDF from 'jspdf';
 import {ChartService} from '../../services/chart-service/chart-service';
 import {PdfService} from '../../services/pdf-service/pdf-service';
@@ -28,22 +27,14 @@ export class StudyComponent implements OnInit {
   public pieChartType: string = 'pie';
   doc = new jsPDF();
 
-  constructor(private callsService: CallsService, private server: Server, private chartService: ChartService, private pdfService: PdfService) {
+  constructor(private callsService: CallsService,  private chartService: ChartService, private pdfService: PdfService) {
   }
 
   ngOnInit() {
-    this.getSelectedCall();
+
   }
 
 
-  getSelectedCall() {
-    return this.callsService.getSelectedCall(this.server.serverName + 'studies')
-      .subscribe(
-        calls => {
-          this.brApiDetailPayloadResponse = calls;
-        }
-      );
-  }
 
   getUniqCommonCropNames() {
     this.cropNames = [];
