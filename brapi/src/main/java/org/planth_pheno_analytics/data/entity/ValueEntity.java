@@ -1,7 +1,5 @@
 package org.planth_pheno_analytics.data.entity;
 
-import org.springframework.hateoas.Identifiable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "values")
-public class ValueEntity implements Identifiable<Integer> {
+public class ValueEntity {
     @Id
     private Integer id;
     private String value;
@@ -20,6 +18,11 @@ public class ValueEntity implements Identifiable<Integer> {
     private Integer attributeId;
 
     public ValueEntity() {
+    }
+
+    public ValueEntity(Integer id, String value) {
+        this.id = id;
+        this.value = value;
     }
 
     public Integer getId() {
@@ -64,7 +67,6 @@ public class ValueEntity implements Identifiable<Integer> {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(value);
     }
 }

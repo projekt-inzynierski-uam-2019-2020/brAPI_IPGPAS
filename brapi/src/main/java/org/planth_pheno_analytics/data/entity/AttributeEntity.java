@@ -1,7 +1,5 @@
 package org.planth_pheno_analytics.data.entity;
 
-import org.springframework.hateoas.Identifiable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "attributes")
-public class AttributeEntity implements Identifiable<Integer> {
+public class AttributeEntity {
     @Id
     private Integer id;
     private String name;
