@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class SeasonMapper {
 
-    Season mapToSeason(ValueEntity projection) {
+    Season mapToSeason(ValueEntity entity) {
         Season season = new Season();
-        season.setSeason(projection.getValue());
-        season.setSeasonDbId(String.valueOf(projection.getId()));
-        season.setYear(projection.getValue());
+        season.setSeason(entity.getValue());
+        season.setSeasonDbId(String.valueOf(entity.getId()));
+        season.setYear(entity.getValue());
         return season;
     }
 
