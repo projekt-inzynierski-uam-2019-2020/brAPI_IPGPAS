@@ -15,10 +15,9 @@ public interface ValueEntityRepository extends CrudRepository<ValueEntity, Integ
     @Query("select distinct v.value from ValueEntity v join AttributeEntity a on v.attributeId = a.id where a.displayedName=(:displayedName)")
     Optional<String> getValueByAttributeDisplayedName(@Param("displayedName") String displayedName);
 
-    @Query("select distinct v.value from ValueEntity v join AttributeEntity a on v.attributeId = a.id where a.displayedName=(:displayedName) and v.studyId=(:studyId)")
-    Optional<String> getValueByAttributeDisplayedNameAndStudyId(@Param("displayedName") String displayedName,@Param("studyId") Integer studyId);
+    @Query("select distinct v.value from ValueEntity v join AttributeEntity a on v.attributeId = a.id where a.displayedName=(:displayedName) and v.studyId=(:studyDbId)")
+    Optional<String> getValueByAttributeDisplayedNameAndStudyId(@Param("displayedName") String displayedName, @Param("studyDbId") Integer studyDbId);
 
-    @Query("select distinct v.value from ValueEntity v join AttributeEntity a on v.attributeId = a.id where a.displayedName=(:displayedName) and v.studyId=(:studyId)")
-    List<String> getAllValuesByAttributeDisplayedNameAndStudyId(@Param("displayedName") String displayedName, @Param("studyId") Integer studyId);
-
+    @Query("select distinct v.value from ValueEntity v join AttributeEntity a on v.attributeId = a.id where a.displayedName=(:displayedName) and v.studyId=(:studyDbId)")
+    List<String> getAllValuesByAttributeDisplayedNameAndStudyId(@Param("displayedName") String displayedName, @Param("studyDbId") Integer studyDbId);
 }
