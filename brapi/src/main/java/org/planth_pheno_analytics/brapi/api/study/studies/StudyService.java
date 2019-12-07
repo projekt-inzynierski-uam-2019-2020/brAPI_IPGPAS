@@ -5,9 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 public interface StudyService {
-    Page<Study> getPagedStudies(Pageable pageable);
-    Page<Germplasm> getPagedStudiesGermplasmsByStudyId(String studyDbId, Pageable pageable);
+    List<Study> getFilteredStudies(StudyCriteria studyCriteria);
+    Page<Germplasm> getPagedStudiesGermplasmsByStudyDbId(String studyDbId, Pageable pageable);
+    Map<String, List<?>> getStudiesTableResult(String studyDbId, String format);
     List<Study> getStudiesWithTrialDbId(Integer trialDbId);
 }

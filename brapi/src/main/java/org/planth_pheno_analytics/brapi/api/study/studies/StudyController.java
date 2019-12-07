@@ -2,9 +2,10 @@ package org.planth_pheno_analytics.brapi.api.study.studies;
 
 import org.planth_pheno_analytics.brapi.annotation.BrAPIController;
 import org.planth_pheno_analytics.brapi.api.BrAPIResponse;
+import org.planth_pheno_analytics.brapi.api.criteria.PaginationCriteria;
 import org.planth_pheno_analytics.brapi.api.germplasm.Germplasm;
 import org.planth_pheno_analytics.brapi.api.response.BrAPIDetailResponse;
-import org.planth_pheno_analytics.brapi.api.response.metadata.Pagination;
+import org.planth_pheno_analytics.brapi.api.response.BrAPIMasterDetailResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @BrAPIController
 public class StudyController {
@@ -23,24 +25,25 @@ public class StudyController {
 
     @GetMapping("/studies")
     @ResponseStatus(HttpStatus.OK)
-    public BrAPIResponse getBrAPIStudies(@Valid StudyFilterCriteria filterCriteria, Pageable pageable) {
-        final Page<Study> resultPage = studyService.getPagedStudies(pageable);
-
-        final Pagination pagination = Pagination.of(resultPage);
-        final List<Study> resultData = resultPage.getContent();
-
-        return new BrAPIDetailResponse(pagination, resultData);
+    public BrAPIResponse getBrAPIStudies(@Valid StudyCriteria studyCriteria,
+                                         @Valid PaginationCriteria paginationCriteria) {
+        final List<Study> filteredData = studyService.getFilteredStudies(studyCriteria);
+        return new BrAPIDetailResponse(filteredData, paginationCriteria.getPage(), paginationCriteria.getPageSize());
     }
 
     @GetMapping("/studies/{studyDbId}/germplasm")
     @ResponseStatus(HttpStatus.OK)
-    public BrAPIResponse getBrAPIStudiesGermplasmsByStudyId(@PathVariable("studyDbId") String studyDbId, Pageable pageable) {
-        final Page<Germplasm> resultPage = studyService.getPagedStudiesGermplasmsByStudyId(studyDbId, pageable);
+    public BrAPIResponse getBrAPIStudiesGermplasmsByStudyDbId(@PathVariable("studyDbId") String studyDbId, Pageable pageable) {
+        final Page<Germplasm> resultPage = studyService.getPagedStudiesGermplasmsByStudyDbId(studyDbId, pageable);
+        return new BrAPIDetailResponse(resultPage);
+    }
 
-        final Pagination pagination = Pagination.of(resultPage);
-        final List<Germplasm> resultData = resultPage.getContent();
-
-        return new BrAPIDetailResponse(pagination, resultData);
+    @GetMapping("/studies/{studyDbId}/table")
+    @ResponseStatus(HttpStatus.OK)
+    public BrAPIResponse getBrAPIStudiesTableByStudyDbId(@PathVariable("studyDbId") String studyDbId,
+                                                         @RequestParam("format") String format) {
+        final Map<String, List<?>> result = studyService.getStudiesTableResult(studyDbId, format);
+        return new BrAPIMasterDetailResponse(result);
     }
 
     /*
