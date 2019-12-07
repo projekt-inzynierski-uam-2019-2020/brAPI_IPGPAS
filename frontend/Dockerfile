@@ -8,5 +8,6 @@ RUN ng build
 
 FROM httpd:2.4
 COPY --from=0 /root/brapi-frontend-app/dist/frontend/. /usr/local/apache2/htdocs
+COPY apache/httpd.conf /usr/local/apache2/conf
 EXPOSE 80
 CMD ["httpd-foreground"]
