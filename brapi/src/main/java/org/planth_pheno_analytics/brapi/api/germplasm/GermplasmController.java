@@ -2,10 +2,8 @@ package org.planth_pheno_analytics.brapi.api.germplasm;
 
 import org.planth_pheno_analytics.brapi.annotation.BrAPIController;
 import org.planth_pheno_analytics.brapi.api.BrAPIResponse;
+import org.planth_pheno_analytics.brapi.api.criteria.PaginationCriteria;
 import org.planth_pheno_analytics.brapi.api.response.BrAPIDetailResponse;
-import org.planth_pheno_analytics.brapi.api.response.metadata.Pagination;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +20,9 @@ public class GermplasmController {
 
     @GetMapping("/germplasm")
     @ResponseStatus(HttpStatus.OK)
-    public BrAPIResponse getBrAPIGermplasm(@Valid GermplasmFilterCriteria filterCriteria, Pageable pageable) {
-        final Page<Germplasm> resultPage = germplasmService.getPagedGermplasms(pageable);
-
-        final Pagination pagination = Pagination.of(resultPage);
-        final List<Germplasm> resultData = resultPage.getContent();
-
-        return new BrAPIDetailResponse(pagination, resultData);
+    public BrAPIResponse getBrAPIGermplasm(@Valid GermplasmCriteria germplasmCriteria,
+                                           @Valid PaginationCriteria paginationCriteria) {
+        final List<Germplasm> filteredData = germplasmService.getFilteredGermplasms(germplasmCriteria);
+        return new BrAPIDetailResponse(filteredData, paginationCriteria.getPage(), paginationCriteria.getPageSize());
     }
 }
