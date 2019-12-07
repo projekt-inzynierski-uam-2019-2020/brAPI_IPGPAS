@@ -2,7 +2,7 @@ package org.planth_pheno_analytics.brapi.api.germplasm;
 
 import javax.validation.constraints.Size;
 
-public class GermplasmFilterCriteria {
+public class GermplasmCriteria {
 
     @Size(max = 150, message = "germplasmPUI value is too long")
     private final String germplasmPUI;
@@ -13,7 +13,7 @@ public class GermplasmFilterCriteria {
     @Size(max = 150, message = "commoncropname value is too long")
     private final String commonCropName;
 
-    public GermplasmFilterCriteria(String germplasmPUI, String germplasmDbId, String germplasmName, String commonCropName) {
+    public GermplasmCriteria(String germplasmPUI, String germplasmDbId, String germplasmName, String commonCropName) {
         this.germplasmPUI = germplasmPUI;
         this.germplasmDbId = germplasmDbId;
         this.germplasmName = germplasmName;

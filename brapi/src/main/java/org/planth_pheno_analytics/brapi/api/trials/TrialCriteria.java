@@ -2,7 +2,7 @@ package org.planth_pheno_analytics.brapi.api.trials;
 
 import javax.validation.constraints.Size;
 
-public class TrialFilterCriteria {
+public class TrialCriteria {
 
     @Size(max = 150, message = "commoncropname value is too long")
     private final String commonCropName;
@@ -13,7 +13,7 @@ public class TrialFilterCriteria {
     @Size(max = 5, message = "active value is too long")
     private final String active;
 
-    public TrialFilterCriteria(String commonCropName, String programDbId, String locationDbId, String active) {
+    public TrialCriteria(String commonCropName, String programDbId, String locationDbId, String active) {
         this.commonCropName = commonCropName;
         this.programDbId = programDbId;
         this.locationDbId = locationDbId;
