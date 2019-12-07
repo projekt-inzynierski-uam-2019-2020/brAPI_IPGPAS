@@ -4,26 +4,22 @@ import org.planth_pheno_analytics.brapi.api.BrAPIResponse;
 import org.planth_pheno_analytics.brapi.api.response.metadata.Metadata;
 import org.planth_pheno_analytics.brapi.api.response.metadata.Pagination;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class BrAPIMasterDetailResponse extends BrAPIResponse {
-    private Map<String, ?> result;
+    private Map<String, List<?>> result;
 
-    public BrAPIMasterDetailResponse() {
+    public BrAPIMasterDetailResponse(Map<String, List<?>> result) {
         super(new Metadata.Builder()
                 .withPagination(Pagination.empty())
                 .build());
-        result = new HashMap<>();
-    }
-
-    public Map<String, ?> getResult() {
-        return result;
-    }
-
-    public void setResult(Map<String, ?> result) {
         this.result = result;
+    }
+
+    public Map<String, List<?>> getResult() {
+        return result;
     }
 
     @Override

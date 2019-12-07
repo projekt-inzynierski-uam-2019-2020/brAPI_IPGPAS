@@ -17,7 +17,7 @@ public class Pagination {
         this.totalPages = totalPages;
     }
 
-    public static Pagination of(int currentPage, int pageSize, int totalCount, int totalPages) {
+    public static Pagination of(int currentPage, int pageSize, long totalCount, int totalPages) {
         return new Pagination(currentPage, pageSize, totalCount, totalPages);
     }
 
