@@ -25,4 +25,6 @@ services:
     build: ./frontend
     ports:
       - "81:80"
+    links:
+      - adminapp:api.admin.local
   
