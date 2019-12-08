@@ -1,6 +1,6 @@
 const Server = require("../models/serverModel");
 
-exports.get_servers = (req, res) => {
+exports.get_servers = (req, res, next) => {
   Server.find({}, (err, servers) => {
     if (err) {
       return next(err);
@@ -9,7 +9,7 @@ exports.get_servers = (req, res) => {
   });
 };
 
-exports.get_server = (req, res) => {
+exports.get_server = (req, res, next) => {
   Server.findById(req.params.id, (err, server) => {
     if (err) {
       return next(err);
@@ -18,7 +18,7 @@ exports.get_server = (req, res) => {
   });
 };
 
-exports.create_server = (req, res) => {
+exports.create_server = (req, res, next) => {
   let server = new Server({
     name: req.body.name,
     ipAddress: req.body.ipAddress,
@@ -33,7 +33,7 @@ exports.create_server = (req, res) => {
   });
 };
 
-exports.update_server = (req, res) => {
+exports.update_server = (req, res, next) => {
   Server.findByIdAndUpdate(req.params.id, { $set: req.body }, err => {
     if (err) {
       return next(err);
@@ -42,7 +42,7 @@ exports.update_server = (req, res) => {
   });
 };
 
-exports.delete_server = (req, res) => {
+exports.delete_server = (req, res, next) => {
   Server.findByIdAndRemove(req.params.id, err => {
     if (err) {
       return next(err);
