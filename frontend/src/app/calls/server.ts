@@ -25,29 +25,7 @@ export class Servers {
   constructor(private http: HttpClient, private  callService: CallsService, private globals: Globals) {
   }
 
-  getSelectedCall() {
-    this.global = this.globals;
 
-    this.serversArrayT = this.global.serversArray;
-    console.log('check 2' + this.serversArrayT);
-    for (let i = 0; i < this.global.serversArray.length; i++) {
-      this.serversArrayT[i] = this.serversArrayT[i] + 'trials';
-      console.log(this.serversArrayT[i]);
-
-    }
-    for (let i = 0; i < this.serversArrayT.length; i++) {
-      this.callService.getSelectedCall(this.serversArrayT[i])
-        .subscribe(
-          call => {
-            this.brApiDetailPayloadResponse = call;
-            console.log('check' + this.brApiDetailPayloadResponse)
-            this.putArray(this.brApiDetailPayloadResponse);
-            this.getArray();
-            console.log("Test1" + this.globals.serverArray.length);
-          }
-        );
-    }
-  }
 
   getSelectedCallStudies() {
     this.global = this.globals;
@@ -123,24 +101,6 @@ export class Servers {
 
     console.log(this.globals.studiesArray);
 
-  }
-
-  putArray(brApiDetailPayloadResponse) {
-    console.log(this.global.serversArray[0].id);
-    console.log(this.getCallsLength());
-    for (let i = 0; i < this.globals.serversArray.length; i++) {
-      for (let j = 0; j < this.getCallsLength(); j++) {
-          this.globals.serverArray.push({
-            trialName: this.brApiDetailPayloadResponse.result.data[j].trialName,
-            commonCropName: this.brApiDetailPayloadResponse.result.data[j].commonCropName,
-            programName: this.brApiDetailPayloadResponse.result.data[j].programName,
-            studyDbId: this.brApiDetailPayloadResponse.result.data[j].studies,
-            locationDbId: this.brApiDetailPayloadResponse.result.data[j].studies,
-          });
-      }
-    }
-    console.log(this.globals.serverArray);
-    return this.globals.trialName;
   }
 
   getArray() {

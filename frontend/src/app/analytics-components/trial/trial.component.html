@@ -1,0 +1,104 @@
+<div class="filters">
+  <div class="filters__header">
+    <div class="filters__header--back">
+      <div class="info" routerLink="../">
+        <img  src="../../assets/back.png" alt="Back">
+        <h4 class="back__title">Servers</h4>
+      </div>
+      <div class="filters__header--separator"></div>
+      <h2 class="filters__header--title">Trials</h2>
+    </div>
+    <div class="row">
+      <button
+        href="#"
+        class="btn filters__header--button-filter m-3"
+        (click)="optionalFiltersShow = !optionalFiltersShow"
+      >
+        Crop Filter
+      </button>
+      <button
+      href="#"
+      class="btn filters__header--button-next m-3"
+      (click)="setSelectedServerTrials()"
+      routerLink="/servers/study"
+    >
+      Accept
+      <img src="../../assets/next.png" alt="Next">
+    </button>
+    </div>
+  </div>
+  <div *ngIf="isLoading" class="loading">
+    <img src="../../../assets/loader.gif" class="loading__loader" alt="Loading...">
+  </div>
+  <div *ngIf="!isLoading">
+    <div *ngIf="optionalFiltersShow" class="optionalFilters">
+      <h3 class="optionalFilters__label">Filter by Common Crop Name</h3>
+      <div class="optionalFilters__container">
+        <div class="optionalFilters__container--content">
+          <div class="optionalFilters__container--item" *ngFor="let trialCommonCropCheckbox of this.trialCommonCropCheckboxes; let i = index">
+            <label class="checkbox" for="{{trialCommonCropCheckbox}}{{i}}">
+              <input
+                [(ngModel)]="trialCommonCropCheckbox.selected"
+                type="checkbox"
+                id="{{trialCommonCropCheckbox}}{{i}}"
+                name="num"
+                checked="checked"
+                class="checkbox__input"
+              >
+              <span class="checkbox__box"></span>
+              {{trialCommonCropCheckbox.trial.commonCropName}}
+            </label>
+          </div>
+        </div>
+        <button
+          (click)="setSelectedCrops()"
+          class="optionalFilters__filter">Filter</button>
+      </div>
+    </div>
+    <div class="filters__counter">
+      <h3>Results found:</h3>
+      <h3>{{trialCheckboxes.length}}</h3>
+    </div>
+    <div *ngIf="isShowStudies" class="trials">
+      <table class="table table-striped table-dark table-responsive-lg" >
+        <thead>
+        <tr>
+          <th><label class="checkbox" for="all">
+            <input
+              type="checkbox"
+              id="all"
+              name="num"
+              checked="checked"
+              class="checkbox__input"
+            >
+            <span class="checkbox__box"></span>
+          </label></th>
+          <th>Trial Name</th>
+          <th>Examined Crop</th>
+          <th>Program</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let trialCheckbox of this.trialCheckboxes; let i = index">
+          <td>
+            <label class="checkbox" for="{{i}}">
+              <input
+                [(ngModel)]="trialCheckbox.selected"
+                type="checkbox"
+                id="{{i}}"
+                name="num"
+                class="checkbox__input"
+              >
+              <span class="checkbox__box"></span>
+            </label>
+          </td>
+          <td>{{ trialCheckbox.trial.trialName }}</td>
+          <td>{{trialCheckbox.trial.commonCropName}}</td>
+          <td>{{ trialCheckbox.trial.programName }}</td>
+        </tr>
+        </tbody>
+      </table>
+
+  </div>
+</div>
+</div>

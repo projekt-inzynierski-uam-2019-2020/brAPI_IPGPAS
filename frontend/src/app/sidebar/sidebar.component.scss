@@ -12,6 +12,7 @@
     color: #ffffff;
     font-family: 'Saira';
     margin-bottom: 30px;
+    margin-left: -15px;
 
     &:active, &:focus, &:hover{
       outline: none;
@@ -100,6 +101,7 @@
     &__logo {
       float: left;
       margin-top: 10px;
+      margin-left: 0;
 
       &--upper{
         font-size: 20px;
@@ -149,5 +151,84 @@
     outline: none;
     border-left: none;
     border-bottom: 2px solid #139553;
+  }
+}
+
+.modal-header{
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.modal-footer{
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+
+  .btn-outline-dark{
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+    padding: 10px 30px;
+
+    &:hover{
+      background-color: #139553;
+      border-color: #139553;
+    }
+  }
+}
+
+.modal-content{
+
+}
+
+.modal-header, .modal-body, .modal-footer{
+  background-color: #3F4347;
+  color: #FFFFFF;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  border: none;
+  outline: none;
+}
+
+.close{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #FFFFFF;
+
+  &:focus{
+    border: none;
+    outline: none;
+  }
+}
+
+.modal-title{
+  margin: auto;
+  text-align: center;
+  font-family: 'Roboto';
+  font-size: 40px;
+}
+
+.modal-body{
+  color: #FFFFFF;
+  font-family: 'Roboto';
+  font-size: 18px;
+
+  .form-group{
+    margin-top: 20px;
+  }
+
+  .form-control{
+    color: #FFFFFF;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #FFFFFF;
+
+    &:focus, &:active{
+      outline: none;
+      border: none;
+      border-bottom: 1px solid #FFFFFF;
+      box-shadow: none;
+    }
   }
 }

@@ -12,24 +12,87 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <ul style="padding: 0" class="navbar-nav mr-auto flex-column">
-        <li class="nav-item sidebar__navigation--item" routerLink="/login" routerLinkActive="active" >
+        <li class="nav-item sidebar__navigation--item" (click)="open(logIn)" routerLinkActive="active" >
           <a class="nav-link">Log in</a>
         </li>
-        <li class="nav-item sidebar__navigation--item" routerLink="registration" routerLinkActive="active" >
+        <li class="nav-item sidebar__navigation--item" (click)="open(signUp)" routerLinkActive="active" >
           <a class="nav-link">Sign up</a>
         </li>
-        <li class="nav-item sidebar__navigation--item" routerLink="/servers" routerLinkActive="active" >
-          <a class="nav-link">Analytics</a>
+        <li class="nav-item sidebar__navigation--item" routerLink="/" routerLinkActive="active" >
+          <a class="nav-link">Server status</a>
         </li>
       </ul>
     </div>
   </nav>
-  <!--<nav class="nav-collapse sidebar__navigation">
-    <ul class="nav" style="padding: 0">
-      <li class="sidebar__navigation&#45;&#45;item" routerLinkActive="active" routerLink="/login"><a>Log in</a></li>
-      <li class="sidebar__navigation&#45;&#45;item" routerLinkActive="active" routerLink="registration"><a>Sign up</a></li>
-      <li class="sidebar__navigation&#45;&#45;item" routerLinkActive="active" routerLink="/servers"><a>Analytics</a></li>
-    </ul>
 
-  </nav>-->
+
+  <ng-template #logIn let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="logInTitle">Log in</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="email1">Email:</label>
+          <div class="input-group">
+            <input type="email" class="form-control" id="email1" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password1">Password:</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="password1" aria-describedby="emailHelp" placeholder="Enter password">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Log in</button>
+    </div>
+  </ng-template>
+
+
+  <ng-template #signUp let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="signUpTitle">Sign up</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <div class="input-group">
+            <input type="email" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="surname">Surname:</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="surname" aria-describedby="emailHelp" placeholder="Enter surname">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email2">Email:</label>
+          <div class="input-group">
+            <input type="email" class="form-control" id="email2" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password2">Password:</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="password2" aria-describedby="emailHelp" placeholder="Enter password">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Sign up</button>
+    </div>
+  </ng-template>
+
 </div>
