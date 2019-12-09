@@ -9,7 +9,7 @@ const httpOptions = {
 
 @Injectable()
 export class ServersFetchingService {
-  private serversUrl = 'http://localhost:3000/servers';
+  private serversUrl = 'https://teamprojectuam.tk/api/servers';
 
   constructor(private http: HttpClient) {
   }
