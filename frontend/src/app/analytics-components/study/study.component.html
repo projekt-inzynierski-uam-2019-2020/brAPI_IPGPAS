@@ -33,7 +33,7 @@
               type="checkbox"
               id="{{studyLocationCheckbox}}{{i}}"
               name="num"
-              checked="checked"
+              checked = "checked"
               class="checkbox__input"
             >
               <span class="checkbox__box"></span>
@@ -87,7 +87,7 @@
             type="checkbox"
             id="all"
             name="num"
-            checked="checked"
+            [(ngModel)]="isChecked" (change)="checkValue(isChecked?'checked':'B')"
             class="checkbox__input"
           >
           <span class="checkbox__box"></span>

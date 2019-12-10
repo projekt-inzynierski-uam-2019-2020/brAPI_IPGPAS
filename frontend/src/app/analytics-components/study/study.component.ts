@@ -39,6 +39,7 @@ export class StudyComponent implements OnInit {
   seasonFiltersShow = false;
 
   isLoading = true;
+  isChecked = false;
 
 
   constructor(globals: Globals, studyService: StudyService) {
@@ -51,11 +52,13 @@ export class StudyComponent implements OnInit {
   }
 
   fetchStudiesFromSelectedServerTrials() {
+    let loadingCounter = 0;
     this.globals.selectedServerTrials.map(selectedTrial => this.studyService.getStudyByTrialDbId(selectedTrial.serverUrl, selectedTrial.trial.trialDbId)
       .subscribe(fetchedStudies => {
         this.setStudyCheckboxes(fetchedStudies);
         this.setServerStudies(selectedTrial.serverUrl, fetchedStudies);
-        if (selectedTrial === this.globals.selectedServerTrials[length]) {
+        loadingCounter =  loadingCounter + 1;
+        if (loadingCounter === this.globals.selectedServerTrials.length) {
           this.isLoading = false;
         }
       }));
@@ -173,6 +176,18 @@ export class StudyComponent implements OnInit {
             }
           }
 
+      }
+    }
+  }
+
+  checkValue(event: any) {
+    if (event === 'checked') {
+      for (const trialBox of this.studyCheckboxes) {
+        trialBox.selected = true;
+      }
+    } else {
+      for (const trialBox of this.studyCheckboxes) {
+        trialBox.selected = false;
       }
     }
   }

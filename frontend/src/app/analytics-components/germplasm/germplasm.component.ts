@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Globals} from '../../globals';
 import {GermplasmService} from '../../call-services/germplasm/germplasm-service';
 import {Germplasm} from '../../call-models/germplasm';
-import {GermplasmCheckbox} from './germplasmCheckbox';
+import {GermplasmCheckboxes} from './germplasmCheckbox';
 import {Study} from '../../call-models/study';
 import {StudyColumn} from './StudyColumn';
 
@@ -15,8 +15,9 @@ export class GermplasmComponent implements OnInit {
 
   globals: Globals;
   germplasmService: GermplasmService;
-  germplasmCheckboxes: GermplasmCheckbox[] = [];
+  germplasmCheckboxes: GermplasmCheckboxes[] = [];
   studyColumns: StudyColumn[] = [];
+  studyIdColumns = [];
   germplasm: Germplasm[] = [];
 
   isLoading = true;
@@ -56,9 +57,14 @@ export class GermplasmComponent implements OnInit {
   checkGermplasmFunction(studyColumn: StudyColumn, germplasm: Germplasm) {
       for (const germplasmFroStudy of studyColumn.germplasm) {
         if (germplasm.germplasmName === germplasmFroStudy.germplasmName) {
+          if(! this.studyIdColumns.some(item => item === studyColumn.study.studyDbId)) {
+            this.studyIdColumns.push(studyColumn.study.studyDbId);
+            console.log(studyColumn.study.studyDbId);
+          }
           return true;
         }
     }
+
   }
 
 
