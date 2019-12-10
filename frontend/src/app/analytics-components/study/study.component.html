@@ -16,6 +16,7 @@
         class="btn m-3 filters__header--button"
         routerLink="/servers/germplasm"
         (click)="setSelectedServerStudies()"
+        [disabled]="isLoading || !this.studyCheckboxes.length > 0"
       >
         Accept
         <img src="../../assets/next.png" alt="Next">
