@@ -9,6 +9,7 @@ import {SeasonStudy} from './seasonStudy';
 import {StudyForSeasons} from './studyForSeasons';
 import {SeasonCheckbox} from './seasonCheckbox';
 import index from '@angular/cli/lib/cli';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-study',
@@ -42,7 +43,7 @@ export class StudyComponent implements OnInit {
   isChecked = false;
 
 
-  constructor(globals: Globals, studyService: StudyService) {
+  constructor(globals: Globals, studyService: StudyService, private router: Router) {
     this.globals = globals;
     this.studyService = studyService;
   }
@@ -110,6 +111,8 @@ export class StudyComponent implements OnInit {
         }
       });
     console.log(this.globals.selectedServerStudies);
+
+    this.globals.selectedServerStudies.length > 0 ? this.router.navigate(['/servers/germplasm']) : alert('You have to select study first.');
   }
 
   // functions for filter for Location

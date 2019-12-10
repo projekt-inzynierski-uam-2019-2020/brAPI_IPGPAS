@@ -11,6 +11,7 @@ import {CallsService} from '../calls/calls.service';
 import {ServerDataComponent} from '../server-data-page/server-data.component';
 import {Globals} from '../globals';
 import {routing} from '../app-routing';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-server-page',
@@ -53,11 +54,12 @@ export class ServerPageComponent implements OnInit {
   }
 
 
-  constructor(private formBuilder: FormBuilder, private serverService: ServersFetchingService, private http: HttpClient, private  callService: CallsService, private serverss: Servers, public global: Globals) {
+  constructor(private formBuilder: FormBuilder, private serverService: ServersFetchingService, private http: HttpClient, private  callService: CallsService, private serverss: Servers, public global: Globals, private router: Router) {
   }
 
 
   public getSelected() {
+    this.globals.selectedServers = [];
     const result = this.checkboxes.filter((checkbox) => checkbox.selected)
       .map((checkbox) => {
         return checkbox.value;
@@ -75,6 +77,8 @@ export class ServerPageComponent implements OnInit {
     this.isDisplay = true;
 
     console.log(this.globals.trialName[1]);
+
+    this.globals.selectedServers.length > 0 ?  this.router.navigate(['/servers/trial']) : alert('You have to select server first.');
 
   }
   public toggleStyle(id) {
