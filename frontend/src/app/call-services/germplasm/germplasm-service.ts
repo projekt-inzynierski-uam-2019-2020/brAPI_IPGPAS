@@ -19,4 +19,9 @@ export class GermplasmService {
     return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies/' + studyDbId + '/germplasm').pipe(map(result => result.data));
   }
 
+  getVariablesByStudyDbId(brAPIServerUrl: string, studyDbId: string){
+    return this.fetchBrApiResponseService.getTableVariables(brAPIServerUrl + '/brapi/v1/studies/' + studyDbId + '/table?format=csv');
+  }
+
+
 }

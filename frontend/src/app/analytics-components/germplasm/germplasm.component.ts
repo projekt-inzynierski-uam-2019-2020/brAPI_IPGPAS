@@ -5,6 +5,9 @@ import {Germplasm} from '../../call-models/germplasm';
 import {GermplasmCheckboxes} from './germplasmCheckbox';
 import {Study} from '../../call-models/study';
 import {StudyColumn} from './StudyColumn';
+import {StudyCheckboxes} from './studyCheckboxes';
+import {StudySelected} from './studySelected';
+import {ServerStudy} from './serverStudy';
 
 @Component({
   selector: 'app-germplasm',
@@ -19,6 +22,9 @@ export class GermplasmComponent implements OnInit {
   studyColumns: StudyColumn[] = [];
   studyIdColumns = [];
   germplasm: Germplasm[] = [];
+  studySelectedId: StudyCheckboxes[] = [];
+  test: StudySelected[] = [];
+  serverStudy: ServerStudy[] = [];
 
   isLoading = true;
 
@@ -34,16 +40,18 @@ export class GermplasmComponent implements OnInit {
   fetchGermplasmFromSelectedServerStudies() {
     this.globals.selectedServerStudies.map(selectedStudy => this.germplasmService.getGermplasmByStudyDbId(selectedStudy.serverUrl, selectedStudy.study.studyDbId)
       .subscribe(fetchedGermplasm => {
-        this.setGermplasmCheckboxes(fetchedGermplasm, selectedStudy.study);
+        console.log(fetchedGermplasm);
+        this.setGermplasmCheckboxes(fetchedGermplasm, selectedStudy.study, selectedStudy.serverUrl) ;
         if (selectedStudy === this.globals.selectedServerStudies[length]) {
           this.isLoading = false;
         }
       }));
   }
 
-  setGermplasmCheckboxes(germplasms: Germplasm[], study: Study) {
+  setGermplasmCheckboxes(germplasms: Germplasm[], study: Study, serverUrl: string) {
 
-    this.studyColumns.push({germplasm: germplasms, study: study});
+    this.serverStudy.push({serverUrl: serverUrl, study: study});
+    this.studyColumns.push({germplasm: germplasms, study: study, selected: false});
 
     for (const germplasm of germplasms) {
       this.germplasmCheckboxes.push({germplasm: germplasm, selected: false, study: study});
@@ -55,16 +63,29 @@ export class GermplasmComponent implements OnInit {
   }
 
   checkGermplasmFunction(studyColumn: StudyColumn, germplasm: Germplasm) {
-      for (const germplasmFroStudy of studyColumn.germplasm) {
-        if (germplasm.germplasmName === germplasmFroStudy.germplasmName) {
-          if(! this.studyIdColumns.some(item => item === studyColumn.study.studyDbId)) {
-            this.studyIdColumns.push(studyColumn.study.studyDbId);
-            console.log(studyColumn.study.studyDbId);
-          }
-          return true;
-        }
+    for (const germplasmFroStudy of studyColumn.germplasm) {
+      if (germplasm.germplasmName === germplasmFroStudy.germplasmName) {
+        this.studySelectedId.push({studyName: studyColumn.study.studyName, studyDbId: studyColumn.study.studyDbId});
+        return true;
+      }
     }
 
+
+  }
+
+  setSelectedGermplasms() {
+    const selectedStudies = this.studyColumns.filter(studyColumns => studyColumns.selected).map(studyColumns => studyColumns.study);
+
+      this.globals.selectedGermplasms = this.serverStudy
+        .filter(serverStudy => {
+          for (const selectedStudy of selectedStudies) {
+            if (Object.is(serverStudy.study, selectedStudy)) {
+              return true;
+            }
+        }
+    });
+
+    console.log(this.globals.selectedGermplasms);
   }
 
 

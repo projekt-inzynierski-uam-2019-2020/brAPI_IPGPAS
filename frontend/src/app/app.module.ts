@@ -31,6 +31,7 @@ import {StudyComponent} from './analytics-components/study/study.component';
 import {StudyService} from './call-services/study/study-service';
 import { GermplasmComponent } from './analytics-components/germplasm/germplasm.component';
 import {GermplasmService} from './call-services/germplasm/germplasm-service';
+import { VariablesComponent } from './analytics-components/variables/variables.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {GermplasmService} from './call-services/germplasm/germplasm-service';
     AdminMainPageComponent,
     TrialsComponent,
     TrialComponent,
-    GermplasmComponent
+    GermplasmComponent,
+    VariablesComponent
   ],
   imports: [
     HttpClientModule,
@@ -62,6 +64,7 @@ import {GermplasmService} from './call-services/germplasm/germplasm-service';
       {path: 'servers/trial', component: TrialComponent, resolve: TrialsResolve},
       {path: 'servers/study', component: StudyComponent},
       {path: 'servers/germplasm', component: GermplasmComponent},
+      {path: 'servers/variables', component: VariablesComponent},
       {path: '', component: HomePageComponent},
 
       {path: '**', component: HomePageComponent}]),

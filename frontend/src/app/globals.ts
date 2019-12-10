@@ -22,4 +22,5 @@ export class Globals {
   commonCropsArray = [];
   selectedServerTrials: ServerTrial[] = [];
   selectedServerStudies: ServerStudy[] = [];
+  selectedGermplasms: ServerStudy[] = [];
 }

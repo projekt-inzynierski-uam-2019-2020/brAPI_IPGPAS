@@ -112,14 +112,6 @@ export class StudyComponent implements OnInit {
     console.log(this.globals.selectedServerStudies);
   }
 
-  // functions for filter for Location
-
-  showLocations() {
-    this.isShowAllStudies = false;
-    this.isLocationFilterShow = true;
-
-  }
-
   setLocationStudy() {
     this.isShowAllStudies = true;
     this.isShowSeasons = false;

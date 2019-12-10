@@ -89,9 +89,6 @@ export class TrialComponent implements OnInit {
   setSelectedServerTrials() {
     const selectedTrials = this.trialCheckboxes.filter(trialCheckbox => trialCheckbox.selected).map(trialCheckbox => trialCheckbox.trial);
 
-    console.log(selectedTrials);
-    console.log(this.serverTrial);
-
     this.globals.selectedServerTrials = this.serverTrial
       .filter(serverTrial => {
         for (const selectedTrial of selectedTrials) {
