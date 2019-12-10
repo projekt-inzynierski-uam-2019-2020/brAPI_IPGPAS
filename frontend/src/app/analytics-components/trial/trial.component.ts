@@ -5,6 +5,7 @@ import {Globals} from '../../globals';
 import {TrialCheckbox} from './trialCheckbox';
 import {ServerTrial} from './serverTrial';
 import {ServerTrials} from './serverTrials';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-trial',
@@ -29,7 +30,7 @@ export class TrialComponent implements OnInit {
 
   trialService: TrialService;
 
-  constructor(globals: Globals, trialService: TrialService) {
+  constructor(globals: Globals, trialService: TrialService, private router: Router) {
     this.globals = globals;
     this.trialService = trialService;
   }
@@ -99,6 +100,8 @@ export class TrialComponent implements OnInit {
         }
 
       });
+
+    this.globals.selectedServerTrials.length > 0 ? this.router.navigate(['/servers/study']) : alert('You have to select trial first.');
   }
 
 

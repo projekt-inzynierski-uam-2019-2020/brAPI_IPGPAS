@@ -20,7 +20,7 @@
       href="#"
       class="btn filters__header--button-next m-3"
       (click)="setSelectedServerTrials()"
-      routerLink="/servers/study"
+      [disabled]="isLoading || !this.trialCheckboxes.length > 0"
     >
       Accept
       <img src="../../assets/next.png" alt="Next">

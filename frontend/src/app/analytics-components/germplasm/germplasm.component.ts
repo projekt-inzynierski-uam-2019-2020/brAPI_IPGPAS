@@ -40,7 +40,6 @@ export class GermplasmComponent implements OnInit {
   fetchGermplasmFromSelectedServerStudies() {
     this.globals.selectedServerStudies.map(selectedStudy => this.germplasmService.getGermplasmByStudyDbId(selectedStudy.serverUrl, selectedStudy.study.studyDbId)
       .subscribe(fetchedGermplasm => {
-        console.log(fetchedGermplasm);
         this.setGermplasmCheckboxes(fetchedGermplasm, selectedStudy.study, selectedStudy.serverUrl) ;
         if (selectedStudy === this.globals.selectedServerStudies[length]) {
           this.isLoading = false;
@@ -85,7 +84,6 @@ export class GermplasmComponent implements OnInit {
         }
     });
 
-    console.log(this.globals.selectedGermplasms);
   }
 
 
