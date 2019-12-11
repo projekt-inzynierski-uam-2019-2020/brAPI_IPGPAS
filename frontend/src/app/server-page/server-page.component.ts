@@ -11,6 +11,7 @@ import {CallsService} from '../calls/calls.service';
 import {ServerDataComponent} from '../server-data-page/server-data.component';
 import {Globals} from '../globals';
 import {routing} from '../app-routing';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-server-page',
@@ -39,7 +40,6 @@ export class ServerPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.globals = this.global;
-    console.log(this.globals.role);
     this.serverService.getAllServers()
       .subscribe(data => {
         this.servers = data;
@@ -53,11 +53,12 @@ export class ServerPageComponent implements OnInit {
   }
 
 
-  constructor(private formBuilder: FormBuilder, private serverService: ServersFetchingService, private http: HttpClient, private  callService: CallsService, private serverss: Servers, public global: Globals) {
+  constructor(private formBuilder: FormBuilder, private serverService: ServersFetchingService, private http: HttpClient, private  callService: CallsService, private serverss: Servers, public global: Globals, private router: Router) {
   }
 
 
   public getSelected() {
+    this.globals.selectedServers = [];
     const result = this.checkboxes.filter((checkbox) => checkbox.selected)
       .map((checkbox) => {
         return checkbox.value;
@@ -68,55 +69,16 @@ export class ServerPageComponent implements OnInit {
       this.globals.selectedServers.push(result[i]);
       this.globals.serversArray2.push(result[i]);
     }
-    console.log(this.globals.selectedServers);
     this.getServerList(result);
     this.serverss.getServerList(result);
     this.serverss.getSelectedCallStudies();
     this.isDisplay = true;
 
-    console.log(this.globals.trialName[1]);
+
+    this.globals.selectedServers.length > 0 ? this.router.navigate(['/servers/trial']) : alert('You have to select server first.');
 
   }
-  public toggleStyle(id) {
-    const card = document.getElementById(`card${ id }`);
-    const header = document.getElementById(`card-header${ id }`);
-    const body = document.getElementById(`card-body${ id }`);
 
-    if (this.isActive) {
-      card.style.boxShadow = '0px 10px 20px rgba(0, 0, 0, 0.7)';
-      header.style.backgroundColor = '#B6844A';
-      body.style.backgroundColor = '#F5E0B7';
-      this.checkboxes[id].selected = true;
-      console.log('active' + id);
-      this.isActive = !this.isActive;
-    } else {
-      card.style.boxShadow = 'none';
-      header.style.backgroundColor = '#858585';
-      body.style.backgroundColor = '#FFFFFF';
-      this.checkboxes[id].selected = false;
-      console.log('non active' + id);
-      this.isActive = !this.isActive;
-    }
-  }
-
-
-  putArray(brApiDetailPayloadResponse) {
-    console.log(brApiDetailPayloadResponse);
-    for(let i = 0; i < this.serversArrayT.length; i++) {
-      for (let j = 0; j < this.getCallsLength(); j++) {
-        this.trialName.push(this.brApiDetailPayloadResponse.result.data[j].trialName);
-        this.programName.push(this.brApiDetailPayloadResponse.result.data[j].programName);
-      }
-    }
-    return this.trialName;
-  }
-
-  getArray() {
-    // console.log(this.trialName[1]);
-    for(let i = 0; i < this.trialName.length; i++){
-      console.log(this.trialName[i]);
-    }
-  }
 
   getCallsLength() {
     this.lengthCalls = this.brApiDetailPayloadResponse.result.data.length;
@@ -126,6 +88,5 @@ export class ServerPageComponent implements OnInit {
 
   getServerList(listServers) {
     this.serversArrayT = listServers;
-    console.log(this.serversArrayT);
   }
 }

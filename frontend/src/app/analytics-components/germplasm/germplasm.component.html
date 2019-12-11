@@ -8,6 +8,17 @@
       <div class="filters__header--separator"></div>
       <h2 class="filters__header--title">Germplasm</h2>
     </div>
+    <div class="row">
+      <button
+        href="#"
+        class="btn m-3 filters__header--button"
+        routerLink="/servers/variables"
+        (click)="setSelectedGermplasms()"
+      >
+        Next
+        <img src="../../assets/next.png" alt="Next">
+      </button>
+    </div>
   </div>
   <div *ngIf="isLoading" class="loading">
     <img src="../../../assets/loader.gif" class="loading__loader" alt="Loading...">
@@ -24,7 +35,7 @@
                 type="checkbox"
                 id="{{i}}"
                 name="num"
-                checked="checked"
+                [(ngModel)]="studyColumn.selected"
                 class="checkbox__input"
               >
               <span class="checkbox__box"></span>

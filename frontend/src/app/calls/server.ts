@@ -20,7 +20,6 @@ export class Servers {
   brApiDetailPayloadResponse2: BrApiDetailPayloadResponse;
   brApiDetailPayloadResponse3: BrApiDetailPayloadResponse;
   global: Globals;
-  studiesArray = [];
 
   constructor(private http: HttpClient, private  callService: CallsService, private globals: Globals) {
   }
@@ -29,44 +28,34 @@ export class Servers {
 
   getSelectedCallStudies() {
     this.global = this.globals;
-    console.log(this.globals.studiesIdArray);
     for (let i = 0; i < this.globals.studiesIdArray.length; i++) {
       this.testArray[i] = this.globals.serversArray2 + 'studies' + '?studyDbId=' + this.globals.studiesIdArray[i];
-      console.log(this.testArray[i]);
     }
     for (let i = 0; i < this.globals.studiesIdArray.length; i++) {
-      console.log(this.testArray[i]);
       this.callService.getSelectedCall(this.testArray[i])
         .subscribe(
           call => {
             this.brApiDetailPayloadResponse2 = call;
-            console.log(this.brApiDetailPayloadResponse2);
             this.putStudiesArray(this.brApiDetailPayloadResponse2);
           }
         );
     }
-    console.log(this.brApiDetailPayloadResponse2);
   }
 
   getSelectedCallLocation() {
     this.global = this.globals;
-    console.log(this.globals.locationDbId);
     for (let i = 0; i < this.globals.locationDbId.length; i++) {
       this.testLocationArray[i] = this.globals.serversArray2 + 'studies' + '?locationDbId=' + this.globals.locationDbId[i];
-      console.log(this.testArray[i]);
     }
     for (let i = 0; i < this.globals.locationDbId.length; i++) {
-      console.log(this.testLocationArray[i]);
       this.callService.getSelectedCall(this.testLocationArray[i])
         .subscribe(
           call => {
             this.brApiDetailPayloadResponse3 = call;
-            console.log(this.brApiDetailPayloadResponse3);
             this.putLocationArray(this.brApiDetailPayloadResponse3);
           }
         );
     }
-    console.log(this.brApiDetailPayloadResponse2);
   }
 
 
@@ -82,7 +71,6 @@ export class Servers {
     }
 
 
-    console.log(this.globals.studiesArray);
 
   }
 
@@ -99,7 +87,6 @@ export class Servers {
       }
 
 
-    console.log(this.globals.studiesArray);
 
   }
 
@@ -113,7 +100,6 @@ export class Servers {
 
   getServerList(listServers) {
     this.serversArrayT = listServers;
-    console.log(this.serversArrayT);
   }
 
   pushLength() {

@@ -20,7 +20,7 @@
       href="#"
       class="btn filters__header--button-next m-3"
       (click)="setSelectedServerTrials()"
-      routerLink="/servers/study"
+      [disabled]="isLoading || !this.trialCheckboxes.length > 0"
     >
       Accept
       <img src="../../assets/next.png" alt="Next">
@@ -68,7 +68,7 @@
               type="checkbox"
               id="all"
               name="num"
-              checked="checked"
+              [(ngModel)]="isChecked" (change)="checkValue(isChecked?'checked':'B')"
               class="checkbox__input"
             >
             <span class="checkbox__box"></span>

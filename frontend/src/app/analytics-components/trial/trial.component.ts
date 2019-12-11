@@ -5,6 +5,7 @@ import {Globals} from '../../globals';
 import {TrialCheckbox} from './trialCheckbox';
 import {ServerTrial} from './serverTrial';
 import {ServerTrials} from './serverTrials';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-trial',
@@ -25,10 +26,11 @@ export class TrialComponent implements OnInit {
   selectedServerCommonCropsTrials: ServerTrial[] = [];
   optionalFiltersShow = false;
   isLoading = true;
+  isChecked = false;
 
   trialService: TrialService;
 
-  constructor(globals: Globals, trialService: TrialService) {
+  constructor(globals: Globals, trialService: TrialService, private router: Router) {
     this.globals = globals;
     this.trialService = trialService;
   }
@@ -38,14 +40,28 @@ export class TrialComponent implements OnInit {
   }
 
   fetchTrialsFromSelectedServers() {
+    let loadingCounter = 0;
     this.globals.selectedServers.map(serverUrl => this.trialService.getAllTrials(serverUrl)
       .subscribe(fetchedTrials => {
         this.setTrialCheckboxes(fetchedTrials);
         this.setServerTrials(serverUrl, fetchedTrials);
-        if (serverUrl === this.globals.selectedServers[length]) {
+        loadingCounter =  loadingCounter + 1;
+        if (loadingCounter === this.globals.selectedServers.length) {
           this.isLoading = false;
         }
       }));
+  }
+
+  checkValue(event: any) {
+    if (event === 'checked') {
+      for (const trialBox of this.trialCheckboxes) {
+        trialBox.selected = true;
+      }
+    } else {
+      for (const trialBox of this.trialCheckboxes) {
+        trialBox.selected = false;
+      }
+    }
   }
 
   setTrialCheckboxes(trials: Trial[]) {
@@ -61,10 +77,10 @@ export class TrialComponent implements OnInit {
 
     for (const trial of trials) {
       if (!this.serverUniqCommonTrial.some((item) => item.trial.commonCropName === trial.commonCropName)) {
-      if (trial.commonCropName) {
-        this.serverUniqCommonTrial.push({trial: trial, serverUrl: serverUrl});
-        this.trialCommonCropCheckboxes.push({trial: trial, selected: false});
-      }
+        if (trial.commonCropName) {
+          this.serverUniqCommonTrial.push({trial: trial, serverUrl: serverUrl});
+          this.trialCommonCropCheckboxes.push({trial: trial, selected: false});
+        }
       }
     }
 
@@ -73,9 +89,6 @@ export class TrialComponent implements OnInit {
 
   setSelectedServerTrials() {
     const selectedTrials = this.trialCheckboxes.filter(trialCheckbox => trialCheckbox.selected).map(trialCheckbox => trialCheckbox.trial);
-
-    console.log(selectedTrials);
-    console.log(this.serverTrial);
 
     this.globals.selectedServerTrials = this.serverTrial
       .filter(serverTrial => {
@@ -87,6 +100,8 @@ export class TrialComponent implements OnInit {
         }
 
       });
+
+    this.globals.selectedServerTrials.length > 0 ? this.router.navigate(['/servers/study']) : alert('You have to select trial first.');
   }
 
 
