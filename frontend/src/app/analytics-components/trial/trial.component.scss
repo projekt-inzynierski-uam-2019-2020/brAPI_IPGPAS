@@ -10,7 +10,7 @@
   top: 0;
   background-color: #3F4347;
   padding-left: 15vw;
-  overflow-x: hidden;
+  overflow: hidden;
 
 
   &__header {
@@ -257,6 +257,8 @@
     flex-flow: wrap;
     margin: auto 60px;
     margin-bottom: 50px;
+    max-height: 60vh;
+    overflow-y: auto;
 
     .table{
       margin: 3rem auto 0 auto;

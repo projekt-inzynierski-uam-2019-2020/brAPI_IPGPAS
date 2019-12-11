@@ -18,9 +18,7 @@
       Next <img src="../../assets/next.png" alt="Next">
     </button>
   </div>
-  <div *ngIf="isLoading" class="loading">
-    <img src="../../../assets/loader.gif" class="loading__loader" alt="Loading...">
-  </div>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <div *ngIf="!isLoading" class="servers__container">
     <div class="servers__container--counter">
       <h3>Results found:</h3>

@@ -32,6 +32,7 @@ import {StudyService} from './call-services/study/study-service';
 import { GermplasmComponent } from './analytics-components/germplasm/germplasm.component';
 import {GermplasmService} from './call-services/germplasm/germplasm-service';
 import { VariablesComponent } from './analytics-components/variables/variables.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { VariablesComponent } from './analytics-components/variables/variables.c
     TrialsComponent,
     TrialComponent,
     GermplasmComponent,
-    VariablesComponent
+    VariablesComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     HttpClientModule,

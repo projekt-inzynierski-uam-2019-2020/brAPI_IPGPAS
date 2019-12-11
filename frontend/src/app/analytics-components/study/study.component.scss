@@ -10,7 +10,7 @@
   top: 0;
   background-color: #3F4347;
   padding-left: 15vw;
-  overflow-x: hidden;
+  overflow: hidden;
 
 
   &__header {
@@ -233,12 +233,17 @@
     flex-wrap: wrap;
     flex-flow: wrap;
     margin: auto 60px;
-    overflow-x: auto;
+    max-height: 60vh;
+    overflow: auto;
   }
 
   td{
     white-space: nowrap;
     max-width: 60%;
+
+    a, a:visited{
+      color: #FFFFFF;
+    }
   }
 
   &--card {

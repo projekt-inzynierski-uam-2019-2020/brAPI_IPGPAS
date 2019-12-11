@@ -27,9 +27,7 @@
     </button>
     </div>
   </div>
-  <div *ngIf="isLoading" class="loading">
-    <img src="../../../assets/loader.gif" class="loading__loader" alt="Loading...">
-  </div>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <div *ngIf="!isLoading">
     <div *ngIf="optionalFiltersShow" class="optionalFilters">
       <h3 class="optionalFilters__label">Filter by Common Crop Name</h3>

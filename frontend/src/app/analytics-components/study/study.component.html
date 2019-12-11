@@ -69,10 +69,7 @@
         class="optionalFilters__filter">Filter</button>
     </div>
   </div>
-
-  <div *ngIf="isLoading" class="loading">
-    <img src="../../../assets/loader.gif" class="loading__loader" alt="Loading...">
-  </div>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <div  *ngIf="!isLoading" class="filters__counter">
     <h3>Results found:</h3>
     <h3>{{studyCheckboxes.length}}</h3>
@@ -115,7 +112,7 @@
         </td>
         <td>{{ studyCheckbox.study.studyName }}</td>
         <td>{{ studyCheckbox.study.locationName }}</td>
-        <td>{{ studyCheckbox.study.documentationURL }}</td>
+        <td><a href="{{ studyCheckbox.study.documentationURL }}">{{ studyCheckbox.study.documentationURL }}</a></td>
       </tr>
       </tbody>
     </table>

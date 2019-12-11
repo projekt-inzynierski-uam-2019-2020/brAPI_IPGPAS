@@ -20,9 +20,7 @@
       </button>
     </div>
   </div>
-  <div *ngIf="isLoading" class="loading">
-    <img src="../../../assets/loader.gif" class="loading__loader" alt="Loading...">
-  </div>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <div>
     <div *ngIf="!isLoading" class="germplasm">
       <table class="table table-striped table-dark table-responsive-lg">
