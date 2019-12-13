@@ -335,6 +335,42 @@
           white-space: nowrap;
         }
       }
+      .hasTooltip{
+        &__container{
+          position: relative;
+
+          .item{
+            max-width: 300px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+
+            &:hover{
+              cursor: pointer;
+            }
+          }
+
+          .tooltip{
+            width: auto;
+            visibility: hidden;
+            font-family: 'Roboto';
+            font-size: 16px;
+            color: #2C3034;
+            background-color: #fff;
+            padding: 20px;
+            -webkit-box-shadow: 0 0 50px 0 rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+          }
+
+          .item:hover + .tooltip {
+            visibility: visible;
+            transition: opacity 0.5s ease;
+            opacity: 1;
+            transition-delay: .5s;
+          }
+        }
+      }
     }
   }
 

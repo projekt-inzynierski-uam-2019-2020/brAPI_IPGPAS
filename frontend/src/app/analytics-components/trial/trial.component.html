@@ -90,9 +90,15 @@
               <span class="checkbox__box"></span>
             </label>
           </td>
-          <td>{{ trialCheckbox.trial.trialName }}</td>
+          <td class="hasTooltip">
+            <div class="hasTooltip__container">
+              <div class="item">{{ trialCheckbox.trial.trialName }}</div>
+              <div class="tooltip">{{ trialCheckbox.trial.trialName }}</div>
+            </div>
+          </td>
           <td>{{trialCheckbox.trial.commonCropName}}</td>
-          <td>{{ trialCheckbox.trial.programName }}</td>
+          <td *ngIf="trialCheckbox.trial.programName">{{ trialCheckbox.trial.programName }}</td>
+          <td *ngIf="!trialCheckbox.trial.programName">---</td>
         </tr>
         </tbody>
       </table>

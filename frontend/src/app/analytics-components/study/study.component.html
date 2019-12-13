@@ -110,8 +110,14 @@
             <span class="checkbox__box"></span>
           </label>
         </td>
-        <td>{{ studyCheckbox.study.studyName }}</td>
-        <td>{{ studyCheckbox.study.locationName }}</td>
+        <td class="hasTooltip">
+          <div class="hasTooltip__container">
+            <div class="item">{{ studyCheckbox.study.studyName }}</div>
+            <div class="tooltip">{{ studyCheckbox.study.studyName }}</div>
+          </div>
+        </td>
+        <td *ngIf="studyCheckbox.study.locationName">{{ studyCheckbox.study.locationName }}</td>
+        <td *ngIf="!studyCheckbox.study.locationName">---</td>
         <td><a href="{{ studyCheckbox.study.documentationURL }}">{{ studyCheckbox.study.documentationURL }}</a></td>
       </tr>
       </tbody>
