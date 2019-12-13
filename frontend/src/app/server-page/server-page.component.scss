@@ -121,7 +121,7 @@
 
   &__container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     flex-flow: wrap;
     margin: auto 60px;
@@ -155,6 +155,7 @@
       float: left;
       margin-bottom: 25px;
       padding: 0;
+      margin: 15px 5px;
 
       &-content {
         height: 150px;
@@ -218,10 +219,14 @@
             -webkit-box-shadow: 0 0 50px 0 rgba(0,0,0,0.3);
             opacity: 0;
             transition: opacity 0.5s ease;
+            margin-right: 30px;
+            margin-left: -30px;
+            z-index: 1;
           }
 
           .tooltip2{
             margin-top: 20px;
+            margin-right: -20px;
           }
 
           h3:hover + .tooltip, h5:hover + .tooltip, p:hover + .tooltip2 {
@@ -397,6 +402,10 @@
         justify-content: center;
         margin: auto;
 
+        .fa-check{
+          right: 50px !important;
+        }
+
         h3{
           font-size: 24px;
         }
@@ -404,6 +413,10 @@
         h5{
           font-size: 16px;
         }
+      }
+
+      .tooltip{
+
       }
     }
   }

@@ -44,15 +44,15 @@
           <td class="table__header"><p class="table__header--top">Study Name</p><p class="table__header--line"></p><p class="table__header--bottom">Gerplasm Name</p></td>
           <td class="hasTooltip" *ngFor="let studyColumn of this.studyColumns; let i = index">
             <div class="hasTooltip__container">
-              <div class="item">{{ studyColumn.study.studyName }}</div>
-              <div class="tooltip">{{ studyColumn.study.studyName }}</div>
+              <div class="item">{{ studyColumn.study.studyName ? studyColumn.study.studyName : '---' }}</div>
+              <div class="tooltip">{{ studyColumn.study.studyName ? studyColumn.study.studyName : '---' }}</div>
             </div>
           </td>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let germ of this.germplasm; let i = index">
-          <td>{{ germ.germplasmName }}</td>
+          <td>{{ germ.germplasmName ? germ.germplasmName : '---' }}</td>
           <td *ngFor="let studyColumn of this.studyColumns"><p *ngIf="checkGermplasmFunction(studyColumn, germ)"><i class="fas fa-check"></i></p>
           </td>
         </tr>

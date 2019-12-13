@@ -38,10 +38,12 @@ export class GermplasmComponent implements OnInit {
   }
 
   fetchGermplasmFromSelectedServerStudies() {
+    let loadingCounter = 0;
     this.globals.selectedServerStudies.map(selectedStudy => this.germplasmService.getGermplasmByStudyDbId(selectedStudy.serverUrl, selectedStudy.study.studyDbId)
       .subscribe(fetchedGermplasm => {
         this.setGermplasmCheckboxes(fetchedGermplasm, selectedStudy.study, selectedStudy.serverUrl) ;
-        if (selectedStudy === this.globals.selectedServerStudies[length]) {
+        loadingCounter = loadingCounter + 1;
+        if (loadingCounter === this.globals.selectedServerStudies.length) {
           this.isLoading = false;
         }
       }));
