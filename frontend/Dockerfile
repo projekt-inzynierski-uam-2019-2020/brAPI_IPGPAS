@@ -2,7 +2,7 @@ FROM node:10-alpine
 COPY . /root/brapi-frontend-app
 WORKDIR /root/brapi-frontend-app
 RUN npm install -g npm
-RUN npm install -g @angular/cli
+RUN npm install -g @angular/cli@v6-lts
 RUN npm install
 RUN ng build
 
