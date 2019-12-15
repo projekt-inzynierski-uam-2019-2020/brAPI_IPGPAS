@@ -145,7 +145,6 @@
   &__counter{
     display: flex;
     flex-direction: row;
-    width: 100%;
     margin: 20px 60px 30px;
     font-family: 'Roboto';
     font-weight: 300;
@@ -263,6 +262,10 @@
       align: right;
       float: right;
       right: 0;
+
+      td{
+        white-space: nowrap;
+      }
 
       thead{
         th{
@@ -499,6 +502,7 @@
 
     &__header {
       flex-direction: column;
+      margin: 20px;
 
       &--title {
         font-size: 25px;
@@ -516,14 +520,36 @@
       }
     }
 
+    &__counter{
+      margin: 20px;
+    }
+
+    .optionalFilters{
+      margin: 20px;
+    }
+
     &__container{
       margin: 0;
     }
 
     .trials{
-      max-height: 500px;
-      overflow-y: auto;
-      margin: auto 20px;
+      max-height: unset;
+      margin: 20px;
+      min-height: unset;
+      overflow-y: unset;
+
+      .table{
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 20px;
+
+        thead{
+          th{
+            position: unset;
+            background-color: #2C3034;
+          }
+        }
+      }
 
       .filters__container--card-content{
         width: 80vw;

@@ -118,7 +118,6 @@
   &__counter{
     display: flex;
     flex-direction: row;
-    width: 100%;
     margin: 20px 60px 30px;
     font-family: 'Roboto';
     font-weight: 300;
@@ -184,7 +183,6 @@
     }
 
     &__filter{
-      width: 100px;
       min-width: 70px;
       height: 50px;
       background-color: #139553;
@@ -526,6 +524,7 @@
 
     &__header {
       flex-direction: column;
+      margin: 20px;
 
       &--title {
         font-size: 25px;
@@ -543,14 +542,35 @@
       }
     }
 
+    &__counter{
+      margin: 20px;
+    }
+
+    .optionalFilters{
+      margin: 20px;
+    }
+
     &__container{
       margin: 0;
     }
 
     .study{
-      max-height: 500px;
-      overflow-y: auto;
-      margin: auto 20px;
+      max-height: unset;
+      overflow-y: unset;
+      margin: 20px;
+
+      .table{
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 20px;
+
+        thead{
+          th{
+            position: unset;
+            background-color: #2C3034;
+          }
+        }
+      }
 
       .filters__container--card-content{
         width: 80vw;

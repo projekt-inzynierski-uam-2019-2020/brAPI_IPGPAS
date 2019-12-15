@@ -49,6 +49,7 @@
   <div *ngIf="seasonFiltersShow" class="optionalFilters">
     <h3 class="optionalFilters__label">Filter by Season</h3>
     <div class="optionalFilters__container">
+      <div class="optionalFilters__container--content">
       <div class="optionalFilters__container--item" *ngFor="let studySeasonCheckbox of this.studySeasonCheckboxes; let i = index">
         <label class="checkbox" for="{{studySeasonCheckbox}}{{i}}{{i}}">
           <input
@@ -62,7 +63,7 @@
           <span class="checkbox__box"></span>
           {{studySeasonCheckbox.season.year}}
         </label>
-
+        </div>
       </div>
       <button
         (click)="setSeasonStudy()"
