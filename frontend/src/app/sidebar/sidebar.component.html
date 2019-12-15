@@ -15,16 +15,16 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <ul class="navbar-nav mr-auto flex-column">
         <li class="nav-item sidebar__navigation--item" (click)="open(logIn)" routerLinkActive="active" >
-          <a class="nav-link">Log in</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse">Log in</a>
         </li>
         <li class="nav-item sidebar__navigation--item" (click)="open(signUp)" routerLinkActive="active" >
-          <a class="nav-link">Sign up</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse">Sign up</a>
         </li>
         <li class="nav-item sidebar__navigation--item" routerLink="/servers" routerLinkActive="active" >
-          <a class="nav-link">Analytics</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse">Analytics</a>
         </li>
         <li class="nav-item sidebar__navigation--item" routerLink="/home" routerLinkActive="active" >
-          <a class="nav-link">Server status</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse">Server status</a>
         </li>
       </ul>
     </div>
