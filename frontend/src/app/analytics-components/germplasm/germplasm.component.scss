@@ -239,11 +239,29 @@
     overflow: auto;
 
     .table{
-      margin: 3rem auto 0 auto;
+      margin: auto;
       width: 100%;
       align: right;
       float: right;
       right: 0;
+
+      thead{
+        td{
+          position: sticky;
+          top: -1px;
+          background-color: #2C3034;
+          z-index: 1;
+        }
+
+        .table__header, .hasTooltip{
+          top: 47px;
+          border: none;
+        }
+      }
+
+      tbody{
+        margin-top: 50px;
+      }
 
       td{
         text-align: center;
