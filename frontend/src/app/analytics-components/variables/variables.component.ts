@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Globals} from '../../globals';
 import {GermplasmService} from '../../call-services/germplasm/germplasm-service';
+import {VariablesTable} from '../../call-models/response/VariablesTable';
 
 @Component({
   selector: 'app-variables',
@@ -37,7 +38,10 @@ export class VariablesComponent implements OnInit {
         });
         this.parsedCsv = csv;
         console.log(this.parsedCsv);
-      }));
-  }
+        console.log(this.parsedCsv[1][0]);
+        console.log(this.parsedCsv[1][0]);
+        const splitted = this.parsedCsv[1][0].split(',', this.parsedCsv[1][0].length);
+        console.log(splitted);
+        console.log(splitted[0]);
 
 }
