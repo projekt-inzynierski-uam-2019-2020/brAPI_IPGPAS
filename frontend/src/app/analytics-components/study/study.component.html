@@ -8,7 +8,7 @@
       <div class="filters__header--separator"></div>
       <h2 class="filters__header--title">Studies</h2>
     </div>
-    <div class="row">
+    <div class="row d-flex justify-content-center">
       <button href="#" (click)="locationFiltersShow = !locationFiltersShow" class="btn m-3 filters__header--filter">Location Filter</button>
       <button href="#" (click)="seasonFiltersShow = !seasonFiltersShow" class="btn m-3 filters__header--filter">Season Filter</button>
       <button
@@ -69,10 +69,7 @@
         class="optionalFilters__filter">Filter</button>
     </div>
   </div>
-
-  <div *ngIf="isLoading" class="loading">
-    <img src="../../../assets/loader.gif" class="loading__loader" alt="Loading...">
-  </div>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <div  *ngIf="!isLoading" class="filters__counter">
     <h3>Results found:</h3>
     <h3>{{studyCheckboxes.length}}</h3>
@@ -113,9 +110,16 @@
             <span class="checkbox__box"></span>
           </label>
         </td>
-        <td>{{ studyCheckbox.study.studyName }}</td>
-        <td>{{ studyCheckbox.study.locationName }}</td>
-        <td>{{ studyCheckbox.study.documentationURL }}</td>
+        <td class="hasTooltip">
+          <div class="hasTooltip__container">
+            <div class="item">{{ studyCheckbox.study.studyName ? studyCheckbox.study.studyName : '---' }}</div>
+            <div class="tooltip">{{ studyCheckbox.study.studyName ? studyCheckbox.study.studyName : '---' }}</div>
+          </div>
+        </td>
+        <td>{{ studyCheckbox.study.locationName ? studyCheckbox.study.locationName : '---' }}</td>
+        <td>
+          <a target="_blank" href="{{ studyCheckbox.study.documentationURL ? studyCheckbox.study.documentationURL : '#' }}">{{ studyCheckbox.study.documentationURL ? studyCheckbox.study.documentationURL : '---' }}</a>
+        </td>
       </tr>
       </tbody>
     </table>

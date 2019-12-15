@@ -9,7 +9,7 @@
   left: 0;
   top: 0;
   background-color: #3F4347;
-  overflow: hidden;
+  overflow-x: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -233,51 +233,63 @@
 
 
 @media (max-width: 768px) {
-  .homepage__box {
-    padding-left: 0;
-    flex-direction: column;
-    margin-top: 0rem;
+  .homepage {
+    margin-top: 80px;
+    height: auto;
 
-    &--left {
-      text-align: center;
+    .homepage__box {
+      padding-left: 0;
+      flex-direction: column;
+      align-items: flex-start;
 
-      h1 {
-        font-size: 20px;
+      &--left {
+        text-align: center;
+
+        h1 {
+          font-size: 20px;
+        }
+
+        .title {
+          font-size: 35px;
+        }
+
+        p {
+          margin: 0 auto;
+          font-size: 14px;
+        }
+
+        &-button {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .btn.sign-in {
+            width: 150px;
+            font-size: 12px;
+            margin-right: 0;
+          }
+
+          .btn.servers {
+            width: 150px;
+            font-size: 12px;
+          }
+        }
       }
 
-      .title {
-        font-size: 35px;
+      &--left {
+        margin-right: 0;
       }
 
-      p {
-        margin: 0 auto;
-        font-size: 12px;
-      }
-
-      &-button {
-        flex-direction: column;
+      &--right {
+        display: flex;
         align-items: center;
+        margin: auto;
+        margin-bottom: 50px;
 
-        .btn.sign-in {
-          width: 200px;
-          font-size: 15px;
-        }
-
-        .btn.servers {
-          width: 200px;
-          font-size: 15px;
+        img {
+          width: 60vw;
         }
       }
-    }
-
-    &--left{
-      margin-right: 0;
-    }
-
-    &--right{
-      display: flex;
-      align-items: center;
-      margin-left: 0;
     }
   }
 }
