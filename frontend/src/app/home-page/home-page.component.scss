@@ -12,7 +12,7 @@
   background-color: #3F4347;
   overflow-x: hidden;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 
   &__scene, #scene {
@@ -237,6 +237,7 @@
   .homepage {
     margin-top: 80px;
     height: auto;
+    align-items: flex-start;
 
     .homepage__box {
       padding-left: 0;
