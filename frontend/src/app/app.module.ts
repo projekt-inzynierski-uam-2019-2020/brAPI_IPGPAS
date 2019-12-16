@@ -32,6 +32,10 @@ import {StudyService} from './call-services/study/study-service';
 import { GermplasmComponent } from './analytics-components/germplasm/germplasm.component';
 import {GermplasmService} from './call-services/germplasm/germplasm-service';
 import { VariablesComponent } from './analytics-components/variables/variables.component';
+
+import { StatisticsComponent } from './analytics-components/statistics/statistics.component';
+import {ChartService} from './services/chart-service/chart-service';
+
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
@@ -51,6 +55,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     TrialComponent,
     GermplasmComponent,
     VariablesComponent,
+    StatisticsComponent,
     LoadingSpinnerComponent
   ],
   imports: [
@@ -67,6 +72,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
       {path: 'servers/study', component: StudyComponent},
       {path: 'servers/germplasm', component: GermplasmComponent},
       {path: 'servers/variables', component: VariablesComponent},
+      {path: 'servers/statistics', component: StatisticsComponent},
       {path: '', component: HomePageComponent},
 
       {path: '**', component: HomePageComponent}]),
@@ -78,7 +84,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     NgbModule,
   ],
   // tslint:disable-next-line:max-line-length
-  providers: [ServersFetchingService, Servers, ServerPageComponent, Globals, TrialService, ServersService, TrialsResolve, FetchBrapiResultService, TrialsResolve, StudyService, GermplasmService],
+  providers: [ServersFetchingService, Servers, ServerPageComponent, Globals, TrialService, ServersService, TrialsResolve, FetchBrapiResultService, TrialsResolve, StudyService, GermplasmService, ChartService],
   bootstrap: [AppComponent],
 
 })

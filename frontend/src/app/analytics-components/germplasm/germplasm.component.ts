@@ -50,9 +50,8 @@ export class GermplasmComponent implements OnInit {
   }
 
   setGermplasmCheckboxes(germplasms: Germplasm[], study: Study, serverUrl: string) {
-
     this.serverStudy.push({serverUrl: serverUrl, study: study});
-    this.studyColumns.push({germplasm: germplasms, study: study, selected: false});
+    this.studyColumns.push({germplasms: germplasms, study: study, selected: false});
 
     for (const germplasm of germplasms) {
       this.germplasmCheckboxes.push({germplasm: germplasm, selected: false, study: study});
@@ -64,20 +63,17 @@ export class GermplasmComponent implements OnInit {
   }
 
   checkGermplasmFunction(studyColumn: StudyColumn, germplasm: Germplasm) {
-    for (const germplasmFroStudy of studyColumn.germplasm) {
-      if (germplasm.germplasmName === germplasmFroStudy.germplasmName) {
+    for (const germplasmFromStudy of studyColumn.germplasms) {
+      if (germplasm.germplasmName === germplasmFromStudy.germplasmName) {
         this.studySelectedId.push({studyName: studyColumn.study.studyName, studyDbId: studyColumn.study.studyDbId});
         return true;
       }
     }
-
-
   }
 
   setSelectedGermplasms() {
     const selectedStudies = this.studyColumns.filter(studyColumns => studyColumns.selected).map(studyColumns => studyColumns.study);
-
-      this.globals.selectedGermplasms = this.serverStudy
+      this.globals.selectedStudiesDbId = this.serverStudy
         .filter(serverStudy => {
           for (const selectedStudy of selectedStudies) {
             if (Object.is(serverStudy.study, selectedStudy)) {

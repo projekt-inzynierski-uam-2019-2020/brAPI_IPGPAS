@@ -25,7 +25,7 @@ export class ChartService {
   }
 
 
-  columnChart(labels: any[], data: number[], text: string) {
+  columnChart(labels: any[], data: any[], text: string) {
     // @ts-ignore
     this.BarChart = new Chart('barChart', {
       type: 'bar',

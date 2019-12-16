@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import {ServerTrial} from './analytics-components/trial/serverTrial';
 import {ServerStudy} from './analytics-components/study/serverStudy';
+import {Variable} from './call-models/variable';
+import {ServerVariable} from './analytics-components/variables/serverVariable';
+import {VariableStudy} from './analytics-components/variables/variableStudy';
+import {VariableSelect} from './analytics-components/variables/variableSelect';
 
 @Injectable()
 export class Globals {
@@ -22,5 +26,7 @@ export class Globals {
   commonCropsArray = [];
   selectedServerTrials: ServerTrial[] = [];
   selectedServerStudies: ServerStudy[] = [];
-  selectedGermplasms: ServerStudy[] = [];
+  selectedStudiesDbId: ServerStudy[] = [];
+  selectedVariables: VariableSelect[] = [];
+  variables: Variable[] = [];
 }

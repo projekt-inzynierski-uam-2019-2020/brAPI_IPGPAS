@@ -3,7 +3,7 @@ import {Germplasm} from '../../call-models/germplasm';
 
 export class StudyColumn {
   study: Study;
-  germplasm: Germplasm[];
+  germplasms: Germplasm[];
   selected: boolean;
 }
 
