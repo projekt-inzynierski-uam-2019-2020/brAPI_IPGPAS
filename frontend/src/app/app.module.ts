@@ -32,8 +32,11 @@ import {StudyService} from './call-services/study/study-service';
 import { GermplasmComponent } from './analytics-components/germplasm/germplasm.component';
 import {GermplasmService} from './call-services/germplasm/germplasm-service';
 import { VariablesComponent } from './analytics-components/variables/variables.component';
+
 import { StatisticsComponent } from './analytics-components/statistics/statistics.component';
 import {ChartService} from './services/chart-service/chart-service';
+
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,8 @@ import {ChartService} from './services/chart-service/chart-service';
     TrialComponent,
     GermplasmComponent,
     VariablesComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     HttpClientModule,

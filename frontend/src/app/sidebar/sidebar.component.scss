@@ -34,11 +34,13 @@
   }
 
   &__navigation{
+    padding: 0;
+
     &--item{
       display: flex;
       align-items: center;
-      margin: auto -60px;
-      margin-right: -172px;
+      margin: auto -40px;
+      margin-right: -190px;
       height: 50px;
       border-left: 6px solid #2C3034;
       border-top: 2px solid #262B2E;
@@ -49,7 +51,7 @@
       }
 
       &:hover{
-        border-left: 6px solid #262B2E;
+        border-left: 6px solid #139553;
         background-color: #262B2E;
         cursor: pointer;
       }
@@ -61,7 +63,7 @@
       }
 
       a{
-        font-family: 'Saira';
+        font-family: 'Roboto';
         font-size: 20px;
         font-weight: 300;
         color: #ffffff;
@@ -92,7 +94,7 @@
   .sidebar {
     width: 100%;
     height: 80px;
-    position: relative;
+    position: fixed;
     padding: 10px 30px;
     display: flex;
     justify-content: space-between;
@@ -113,34 +115,52 @@
       }
     }
 
+    .navbar-toggler, .navbar-toggler:hover, .navbar-toggler:focus, .navbar-toggler:active{
+      outline: none;
+      border: none;
+      font-size: 30px;
+      display: flex;
+      margin-top: 10px;
+      flex-direction: row !important;
+    }
+
     &__navigation{
       display: flex;
       flex-direction: row;
       float: left;
       align-items: center;
+      margin-bottom: 25px;
 
-      ul{
-        flex-direction: row;
-        display: flex;
-        margin-bottom: 0;
-        margin-top: 22px;
-        margin-right: -55px !important;
+      .navbar-collapse{
+        overflow-x: hidden;
+        width: 150px;
+        margin-right: -30px;
 
-        .sidebar__navigation--item{
-          float: left;
-          margin-left: 0;
-          margin: auto 10px;
-          padding-right: 20px;
-          border-top: none;
-          border-bottom: 2px solid #2C3034;
-          background-color: #2C3034;
+        ul{
+          flex-direction: row;
+          display: flex;
+          margin-bottom: 0;
 
-          &:active, &:focus{
-            background-color: #262B2E;
-            outline: none;
+          .sidebar__navigation--item{
+            float: left;
+            margin: auto -30px;
+            padding-right: 20px;
             border-left: none;
-            border-bottom: 2px solid #139553;
+            border-top: none;
+            border-bottom: 2px solid #2C3034;
+            background-color: #2C3034;
 
+            &:first-child{
+              margin-top: 22px;
+            }
+
+            &:active, &:focus{
+              background-color: #262B2E;
+              outline: none;
+              border-left: none;
+              border-bottom: 2px solid #139553;
+
+            }
           }
         }
       }
@@ -229,6 +249,18 @@
       border: none;
       border-bottom: 1px solid #FFFFFF;
       box-shadow: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 400px){
+  .navbar-collapse{
+    width: 100px !important;
+  }
+
+  .sidebar__navigation--item{
+    .nav-link{
+      font-size: 15px;
     }
   }
 }

@@ -8,7 +8,7 @@
       <div class="filters__header--separator"></div>
       <h2 class="filters__header--title">Trials</h2>
     </div>
-    <div class="row">
+    <div class="row d-flex justify-content-center">
       <button
         href="#"
         class="btn filters__header--button-filter m-3"
@@ -27,9 +27,7 @@
     </button>
     </div>
   </div>
-  <div *ngIf="isLoading" class="loading">
-    <img src="../../../assets/loader.gif" class="loading__loader" alt="Loading...">
-  </div>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <div *ngIf="!isLoading">
     <div *ngIf="optionalFiltersShow" class="optionalFilters">
       <h3 class="optionalFilters__label">Filter by Common Crop Name</h3>
@@ -92,9 +90,14 @@
               <span class="checkbox__box"></span>
             </label>
           </td>
-          <td>{{ trialCheckbox.trial.trialName }}</td>
-          <td>{{trialCheckbox.trial.commonCropName}}</td>
-          <td>{{ trialCheckbox.trial.programName }}</td>
+          <td class="hasTooltip">
+            <div class="hasTooltip__container">
+              <div class="item">{{ trialCheckbox.trial.trialName ? trialCheckbox.trial.trialName : '---'}}</div>
+              <div class="tooltip">{{ trialCheckbox.trial.trialName ? trialCheckbox.trial.trialName : '---' }}</div>
+            </div>
+          </td>
+          <td>{{trialCheckbox.trial.commonCropName ? trialCheckbox.trial.commonCropName : '---'}}</td>
+          <td> {{trialCheckbox.trial.programName ? trialCheckbox.trial.programName : '---'}}</td>
         </tr>
         </tbody>
       </table>

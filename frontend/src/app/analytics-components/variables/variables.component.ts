@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Globals} from '../../globals';
 import {GermplasmService} from '../../call-services/germplasm/germplasm-service';
 import {Variable} from '../../call-models/variable';
 import {ServerStudyVariables} from './serverStudyVariables';
+import {Study} from '../../call-models/study';
+import {VariableCheckbox} from './VariableCheckbox';
+import {VariableRow} from './VariableRow';
+import {StudyColumn} from '../germplasm/StudyColumn';
+import {Germplasm} from '../../call-models/germplasm';
+import {VariableStudy} from './variableStudy';
+import {VariableSelect} from './variableSelect';
 
 @Component({
   selector: 'app-variables',
@@ -14,9 +21,13 @@ export class VariablesComponent implements OnInit {
   globals: Globals;
   germplasmService: GermplasmService;
   studiesCsv: string[] = [];
-  studiesCsvHeaders: string[] = [];
   variables: Variable[] = [];
+  variableStudy: VariableStudy[] = [];
+  variableUniqStudy: VariableStudy[] = [];
+  listOfVariablesIdsOnly: VariableSelect[] = [];
   serverStudyVariables: ServerStudyVariables[] = [];
+  variableChecboxes: VariableCheckbox[] = [];
+  i = 0;
 
 
   constructor(globals: Globals, germplasmService: GermplasmService) {
@@ -74,24 +85,60 @@ export class VariablesComponent implements OnInit {
           variable.X = splittedValueRow[13];
           variable.Y = splittedValueRow[14];
           variable.variableValues = [];
-          for (let i = 15; i < splittedValueRow.length; i++){
+          for (let i = 15; i < splittedValueRow.length; i++) {
             variable.variableValues.push(splittedValueRow[i]);
-            console.log(splittedValueRow[i]);
 
           }
           this.variables.push(variable);
+          this.variableStudy.push({study: selectedStudy.study, variable: variable, selected: false, serverUrl: selectedStudy.serverUrl});
         }
         this.globals.variables = this.variables;
-        this.variables.map( variable => this.serverStudyVariables.push({study: selectedStudy.study, serverUrl: selectedStudy.serverUrl, variable: variable}));
 
-        console.log(this.globals.variables);
+        this.setVariablesCheckboxes(selectedStudy.study, selectedStudy.serverUrl, this.variables);
+
       }));
 
   }
 
+  setVariablesCheckboxes(study: Study, serverUrl: string, variables: Variable[]) {
 
+    for (const studyV of this.variableStudy) {
+      if (!this.variableUniqStudy.some((item => item.study.studyName === studyV.study.studyName))){
+        this.variableUniqStudy.push({study: studyV.study, variable: studyV.variable, selected: false, serverUrl: serverUrl});
+      }
+    }
 
+    variables.map(variable => this.serverStudyVariables.push({study: study, serverUrl: serverUrl, variable: variable}));
 
+    for (const variable of variables) {
+      this.variableChecboxes.push({study: study, selected: false, variable: variable});
+
+      for (const id of variable.variableIds) {
+        if (!this.listOfVariablesIdsOnly.some((item => item.variableId === id))) {
+          this.listOfVariablesIdsOnly.push({variableId: id, selected: false, serverUrl: serverUrl});
+        }
+
+      }
+    }
+  }
+
+  checkVariableFunction(variableRow: VariableStudy, idOfVariable: string) {
+    for (const variable of variableRow.variable.variableIds) {
+        if (variable === idOfVariable) {
+          return  true;
+
+        }
+    }
+  }
+
+  setSelectedGermplasms() {
+    const selectedVariables = this.listOfVariablesIdsOnly.filter(studyColumns => studyColumns.selected).map(studyColumns => studyColumns);
+
+   this.globals.selectedVariables = selectedVariables;
+
+   console.log(this.globals.selectedVariables);
+
+   }
 
 
 }
