@@ -11,6 +11,7 @@
   background-color: #3F4347;
   padding-left: 15vw;
   overflow-x: hidden;
+  overflow-y: auto;
 
 
   &__header {
@@ -140,7 +141,6 @@
   &__counter{
     display: flex;
     flex-direction: row;
-    width: 100%;
     margin-left: 60px;
     margin-right: 60px;
     margin-top: 20px;
@@ -228,21 +228,35 @@
     }
   }
 
-  .germplasm{
+  .variables{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     flex-flow: wrap;
     margin: auto 60px;
     margin-bottom: 50px;
-    overflow-x: auto;
+    max-height: 60vh;
+    overflow: auto;
 
     .table{
-      margin: 3rem auto 0 auto;
+      margin: auto;
       width: 100%;
       align: right;
       float: right;
       right: 0;
+
+      thead{
+        td{
+          position: sticky;
+          top: -1px;
+          background-color: #2C3034;
+          z-index: 1;
+        }
+      }
+
+      tbody{
+        margin-top: 50px;
+      }
 
       td{
         text-align: center;
@@ -332,6 +346,42 @@
         &--bottom{
           padding-right: 100px;
           white-space: nowrap;
+        }
+      }
+      .hasTooltip{
+        &__container{
+          position: relative;
+
+          .item{
+            max-width: 300px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+
+            &:hover{
+              cursor: pointer;
+            }
+          }
+
+          .tooltip{
+            width: auto;
+            visibility: hidden;
+            font-family: 'Roboto';
+            font-size: 16px;
+            color: #2C3034;
+            background-color: #fff;
+            padding: 20px;
+            -webkit-box-shadow: 0 0 50px 0 rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+          }
+
+          .item:hover + .tooltip {
+            visibility: visible;
+            transition: opacity 0.5s ease;
+            opacity: 1;
+            transition-delay: .5s;
+          }
         }
       }
     }
@@ -496,9 +546,11 @@
   .filters {
     padding-left: 0;
     padding-top: 80px;
+    overflow-y: auto;
 
     &__header {
       flex-direction: column;
+      margin: 20px;
 
       &--title {
         font-size: 25px;
@@ -516,14 +568,44 @@
       }
     }
 
+    &__counter{
+      margin: 20px;
+    }
+
+    .optionalFilters{
+      margin: 20px;
+    }
+
     &__container{
       margin: 0;
     }
 
-    .trials{
+    .germplasm{
+      max-height: unset;
+      overflow-y: unset;
+      margin: 20px;
+
+      .table{
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 20px;
+
+        thead{
+          th{
+            position: unset;
+            background-color: #2C3034;
+          }
+        }
+      }
+
       .filters__container--card-content{
         width: 80vw;
       }
+    }
+
+    .tooltip{
+      margin-left: -20px;
+      margin-right: 10px;
     }
   }
 }
