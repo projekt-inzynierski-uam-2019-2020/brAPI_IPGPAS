@@ -1,0 +1,22 @@
+<section>
+  <button class="back" type="button" href="#" routerLink="/servers/data"><i class="fas fa-long-arrow-alt-left"></i>Back</button>
+  <div class="container">
+    <h1 class="title">Study</h1>
+    <div class="row">
+      <div class="item">
+      </div>
+    </div>
+    <div class="charts">
+      <table>
+        <td>
+          <canvas  style="margin-left: 20rem" id="pieChart" baseChart
+                  [data]="pieChartData"
+                  [labels]="pieChartLabels"
+                  [chartType]="pieChartType"></canvas>
+        </td>
+      </table>
+    </div>
+
+  </div>
+
+</section>

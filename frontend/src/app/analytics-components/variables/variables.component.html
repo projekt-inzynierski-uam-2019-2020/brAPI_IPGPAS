@@ -12,11 +12,43 @@
       <button
         href="#"
         class="btn m-3 filters__header--button"
-        routerLink="/servers/variables"
+        routerLink="/servers/statistics"
       >
         Next
-        <img src="../../assets/next.png" alt="Next">
+        <img src="../../assets/next.png" alt="Next" >
       </button>
     </div>
   </div>
 </div>
+  <!--  <div class="germplasm">
+      <table class="table table-striped table-dark table-responsive-lg">
+        <thead>
+        <tr>
+          <td></td>
+          <td *ngFor="let studyColumn of this.studyColumns; let i = index">
+            <label class="checkbox" for="{{i}}">
+              <input
+                type="checkbox"
+                id="{{i}}"
+                name="num"
+                [(ngModel)]="studyColumn.selected"
+                class="checkbox__input"
+              >
+              <span class="checkbox__box"></span>
+            </label>
+          </td>
+        </tr>
+        <tr class="table__study" >
+          <td class="table__header"><p class="table__header--top">Study Name</p><p class="table__header--line"></p><p class="table__header--bottom">Gerplasm Name</p></td>
+          <td *ngFor="let studyColumn of this.studyColumns; let i = index">{{ studyColumn.study.studyName }}</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let germ of this.germplasm; let i = index">
+          <td>{{ germ.germplasmName }}</td>
+          <td *ngFor="let studyColumn of this.studyColumns"><p *ngIf="checkGermplasmFunction(studyColumn, germ)"><i class="fas fa-check"></i></p>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div> -->
