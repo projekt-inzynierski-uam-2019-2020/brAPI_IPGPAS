@@ -5,11 +5,12 @@ import {Variable} from '../../call-models/variable';
 import {ServerStudyVariables} from './serverStudyVariables';
 import {Study} from '../../call-models/study';
 import {VariableCheckbox} from './VariableCheckbox';
-import {VariableRow} from './VariableRow';
-import {StudyColumn} from '../germplasm/StudyColumn';
-import {Germplasm} from '../../call-models/germplasm';
 import {VariableStudy} from './variableStudy';
 import {VariableSelect} from './variableSelect';
+import {injectTemplateRef} from '@angular/core/src/render3';
+import {ValuesStudy} from './valuesStudy';
+import {VariableIdSum} from './variableIdSum';
+import {VariableIdValues} from './variableIdValues';
 
 @Component({
   selector: 'app-variables',
@@ -24,9 +25,16 @@ export class VariablesComponent implements OnInit {
   variables: Variable[] = [];
   variableStudy: VariableStudy[] = [];
   variableUniqStudy: VariableStudy[] = [];
+  valuesSumVarStudy: VariableStudy[] = [];
+  variableIdSum: VariableIdSum[] = [];
+  varUniqArSum: VariableIdSum[] = [];
+  valuesStudy: ValuesStudy[] = [];
   listOfVariablesIdsOnly: VariableSelect[] = [];
   serverStudyVariables: ServerStudyVariables[] = [];
   variableChecboxes: VariableCheckbox[] = [];
+  countvalues: number[] = [];
+  variableIdValues: VariableIdValues[] = [];
+  variabeIdReadyValues: VariableIdValues[] = [];
   i = 0;
 
 
@@ -38,6 +46,7 @@ export class VariablesComponent implements OnInit {
 
   ngOnInit() {
     this.fetchVariablesBySelectedStudiesDbId();
+    this.globals.selectedVariablesValues = [];
   }
 
   fetchVariablesBySelectedStudiesDbId() {
@@ -48,7 +57,6 @@ export class VariablesComponent implements OnInit {
         const csvRows: string[] = studyCsv.split('\n');
         const headerColumns: string[] = csvRows[0].split(',');
         const valuesRows: string[] = [];
-
 
         const variableIds: string[] = [];
 
@@ -95,6 +103,7 @@ export class VariablesComponent implements OnInit {
         this.globals.variables = this.variables;
 
         this.setVariablesCheckboxes(selectedStudy.study, selectedStudy.serverUrl, this.variables);
+        console.log(this.variables);
 
       }));
 
@@ -103,42 +112,110 @@ export class VariablesComponent implements OnInit {
   setVariablesCheckboxes(study: Study, serverUrl: string, variables: Variable[]) {
 
     for (const studyV of this.variableStudy) {
-      if (!this.variableUniqStudy.some((item => item.study.studyName === studyV.study.studyName))){
+      if (!this.variableUniqStudy.some((item => item.study.studyName === studyV.study.studyName))) {
         this.variableUniqStudy.push({study: studyV.study, variable: studyV.variable, selected: false, serverUrl: serverUrl});
       }
     }
 
     variables.map(variable => this.serverStudyVariables.push({study: study, serverUrl: serverUrl, variable: variable}));
 
+    console.log(variables);
+
     for (const variable of variables) {
       this.variableChecboxes.push({study: study, selected: false, variable: variable});
 
-      for (const id of variable.variableIds) {
-        if (!this.listOfVariablesIdsOnly.some((item => item.variableId === id))) {
-          this.listOfVariablesIdsOnly.push({variableId: id, selected: false, serverUrl: serverUrl});
+      for (let i = 0; i < variable.variableIds.length; i++) {
+        if (!this.listOfVariablesIdsOnly.some((item => item.variableId === variable.variableIds[i]))) {
+          this.listOfVariablesIdsOnly.push({
+            variableId: variable.variableIds[i],
+            selected: false,
+            serverUrl: serverUrl,
+            variabelValue: variable.variableValues[i]
+          });
+
         }
+
+      }
+    }
+    for (const variab of variables) {
+      for (let i = 0; i < variab.variableIds.length; i++) {
+        if (this.listOfVariablesIdsOnly.some((item => item.variableId === variab.variableIds[i]))) {
+          if (variab.variableValues[i]) {
+            if (variab.variableValues[i] !== '""') {
+              if (!isNaN(Number(variab.variableValues[i].replace(/"/gi, '')))) {
+                if (!this.variableIdSum.some((item => item.variableId === variab.variableIds[i] && item.sumValue === (Number(variab.variableValues[i].replace(/"/gi, '')))))) {
+                  this.variableIdSum.push({
+                    variableId: variab.variableIds[i],
+                    sumValue: Number(variab.variableValues[i].replace(/"/gi, ''))
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    console.log(this.listOfVariablesIdsOnly);
+
+
+    for (let i = 0; i < this.listOfVariablesIdsOnly.length; i++) {
+      this.countvalues = [];
+      for (let j = 0; j < this.variableIdSum.length; j++) {
+        if (this.listOfVariablesIdsOnly[i].variableId === this.variableIdSum[j].variableId) {
+          this.countvalues.push(this.variableIdSum[j].sumValue);
+        }
+      }
+      this.variableIdValues.push({variableId: this.listOfVariablesIdsOnly[i].variableId, values: this.countvalues});
+    }
+
+    console.log(this.variableIdValues.length);
+    console.log(this.listOfVariablesIdsOnly.length);
+
+
+    console.log(this.variableIdSum);
+    console.log(this.variableIdValues);
+    console.log(this.variableIdSum.length);
+
+    for (let i = 0; i < this.variableIdSum.length; i++) {
+      if (!this.varUniqArSum.some((item => item.variableId === this.variableIdSum[i].variableId))) {
+        this.varUniqArSum.push({variableId: this.variableIdSum[i].variableId, sumValue: this.variableIdSum[i].sumValue});
+      }
+    }
+    console.log(this.varUniqArSum);
+  }
+
+  checkVariableFunction(variableRow: VariableStudy, idOfVariable: string) {
+    for (const variable of variableRow.variable.variableIds) {
+      if (variable === idOfVariable) {
+        return true;
 
       }
     }
   }
 
-  checkVariableFunction(variableRow: VariableStudy, idOfVariable: string) {
-    for (const variable of variableRow.variable.variableIds) {
-        if (variable === idOfVariable) {
-          return  true;
-
-        }
-    }
-  }
-
   setSelectedGermplasms() {
+
+    for (let i = this.variableIdValues.length - this.listOfVariablesIdsOnly.length; i < this.variableIdValues.length; i++) {
+      this.variabeIdReadyValues.push(this.variableIdValues[i]);
+    }
+    console.log(this.variabeIdReadyValues);
+
+
     const selectedVariables = this.listOfVariablesIdsOnly.filter(studyColumns => studyColumns.selected).map(studyColumns => studyColumns);
 
-   this.globals.selectedVariables = selectedVariables;
+    for (const variableReady of this.variabeIdReadyValues) {
+      for (const selectendVariable of selectedVariables) {
+        if (selectendVariable.variableId === variableReady.variableId) {
+          this.globals.selectedVariablesValues.push({variable: selectendVariable, values: variableReady.values});
+        }
+      }
+    }
 
-   console.log(this.globals.selectedVariables);
 
-   }
+    console.log(this.globals.selectedVariablesValues);
+
+  }
 
 
 }
