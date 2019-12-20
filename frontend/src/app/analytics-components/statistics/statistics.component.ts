@@ -26,13 +26,11 @@ export class StatisticsComponent implements OnInit {
     this.allValues = [];
     this.allVariablesIds = [];
     this.globals.variables.map(variable => this.pieChartLabels = variable.variableIds);
-    this.globals.variables.map(variable => this.pieChartData = [23, 12, 23, 1]);
     this.pieChartData = [10, 23, 45, 34];
     this.initStatistics();
   }
 
   initStatistics() {
-    console.log(this.globals.variables[1].year);
 
     for (const variable of this.globals.selectedVariablesValues) {
         this.allVariablesIds.push(variable.variable.variableId);
@@ -46,8 +44,6 @@ export class StatisticsComponent implements OnInit {
       this.allValues.push(average / variable.values.length);
     }
 
-    console.log(this.allValues);
-    console.log(this.allVariablesIds);
     this.chartService.chartColumnStyle(this.allVariablesIds);
     this.chartService.columnChart(this.allVariablesIds, this.allValues, 'Average of variables');
   }

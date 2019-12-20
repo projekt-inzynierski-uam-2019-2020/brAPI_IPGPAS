@@ -43,9 +43,7 @@ export class GermplasmComponent implements OnInit {
       .subscribe(fetchedGermplasm => {
         this.setGermplasmCheckboxes(fetchedGermplasm, selectedStudy.study, selectedStudy.serverUrl) ;
         loadingCounter = loadingCounter + 1;
-        if (loadingCounter === this.globals.selectedServerStudies.length) {
-          this.isLoading = false;
-        }
+        this.isLoading = false;
       }));
   }
 

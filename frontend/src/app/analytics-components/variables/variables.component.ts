@@ -7,7 +7,6 @@ import {Study} from '../../call-models/study';
 import {VariableCheckbox} from './VariableCheckbox';
 import {VariableStudy} from './variableStudy';
 import {VariableSelect} from './variableSelect';
-import {injectTemplateRef} from '@angular/core/src/render3';
 import {ValuesStudy} from './valuesStudy';
 import {VariableIdSum} from './variableIdSum';
 import {VariableIdValues} from './variableIdValues';
@@ -25,10 +24,8 @@ export class VariablesComponent implements OnInit {
   variables: Variable[] = [];
   variableStudy: VariableStudy[] = [];
   variableUniqStudy: VariableStudy[] = [];
-  valuesSumVarStudy: VariableStudy[] = [];
   variableIdSum: VariableIdSum[] = [];
   varUniqArSum: VariableIdSum[] = [];
-  valuesStudy: ValuesStudy[] = [];
   listOfVariablesIdsOnly: VariableSelect[] = [];
   serverStudyVariables: ServerStudyVariables[] = [];
   variableChecboxes: VariableCheckbox[] = [];
@@ -103,7 +100,6 @@ export class VariablesComponent implements OnInit {
         this.globals.variables = this.variables;
 
         this.setVariablesCheckboxes(selectedStudy.study, selectedStudy.serverUrl, this.variables);
-        console.log(this.variables);
 
       }));
 
@@ -119,7 +115,6 @@ export class VariablesComponent implements OnInit {
 
     variables.map(variable => this.serverStudyVariables.push({study: study, serverUrl: serverUrl, variable: variable}));
 
-    console.log(variables);
 
     for (const variable of variables) {
       this.variableChecboxes.push({study: study, selected: false, variable: variable});
@@ -156,8 +151,6 @@ export class VariablesComponent implements OnInit {
       }
     }
 
-    console.log(this.listOfVariablesIdsOnly);
-
 
     for (let i = 0; i < this.listOfVariablesIdsOnly.length; i++) {
       this.countvalues = [];
@@ -169,20 +162,12 @@ export class VariablesComponent implements OnInit {
       this.variableIdValues.push({variableId: this.listOfVariablesIdsOnly[i].variableId, values: this.countvalues});
     }
 
-    console.log(this.variableIdValues.length);
-    console.log(this.listOfVariablesIdsOnly.length);
-
-
-    console.log(this.variableIdSum);
-    console.log(this.variableIdValues);
-    console.log(this.variableIdSum.length);
 
     for (let i = 0; i < this.variableIdSum.length; i++) {
       if (!this.varUniqArSum.some((item => item.variableId === this.variableIdSum[i].variableId))) {
         this.varUniqArSum.push({variableId: this.variableIdSum[i].variableId, sumValue: this.variableIdSum[i].sumValue});
       }
     }
-    console.log(this.varUniqArSum);
   }
 
   checkVariableFunction(variableRow: VariableStudy, idOfVariable: string) {
@@ -196,10 +181,11 @@ export class VariablesComponent implements OnInit {
 
   setSelectedGermplasms() {
 
+    console.log(this.variableIdValues);
+
     for (let i = this.variableIdValues.length - this.listOfVariablesIdsOnly.length; i < this.variableIdValues.length; i++) {
       this.variabeIdReadyValues.push(this.variableIdValues[i]);
     }
-    console.log(this.variabeIdReadyValues);
 
 
     const selectedVariables = this.listOfVariablesIdsOnly.filter(studyColumns => studyColumns.selected).map(studyColumns => studyColumns);
