@@ -1,15 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Globals} from '../../globals';
 import {Study} from '../../call-models/study';
-import {StudyCheckbox} from './studyCheckbox';
+import {StudyRow} from './studyRow';
 import {StudyService} from '../../call-services/study/study-service';
 import {ServerStudy} from './serverStudy';
-import {LocationStudy} from './locationStudy';
-import {SeasonStudy} from './seasonStudy';
-import {StudyForSeasons} from './studyForSeasons';
-import {SeasonCheckbox} from './seasonCheckbox';
-import index from '@angular/cli/lib/cli';
 import {Router} from '@angular/router';
+import {Season} from './season';
+import {Location} from './location';
 
 @Component({
   selector: 'app-study',
@@ -18,27 +15,17 @@ import {Router} from '@angular/router';
 })
 export class StudyComponent implements OnInit {
   globals: Globals;
-  studyCheckboxes: StudyCheckbox[] = [];
-  studyLocationCheckboxes: StudyCheckbox[] = [];
-  studySeasonCheckboxes: SeasonCheckbox[] = [];
-  serverStudy: ServerStudy[] = [];
-  locationStudy: LocationStudy[] = [];
-  seasonStudy: SeasonStudy[] = [];
-  studyForSeasons = [];
-
   studyService: StudyService;
-  selectedLocationStudy: LocationStudy[] = [];
-  selectedSeasonStudy: SeasonStudy[] = [];
 
-  isShowAllStudies = true;
-  isLocationFilterShow = false;
-  isShowSeasons = false;
-
-  locationFiltersShow = false;
-  seasonFiltersShow = false;
+  studyRows: StudyRow[] = [];
+  filteredStudyRows: StudyRow[] = [];
+  seasons: Season[] = [];
+  locations: Location[] = [];
+  serverStudies: ServerStudy[] = [];
 
   isLoading = true;
-  isChecked = false;
+  locationFiltersShow = false;
+  seasonFiltersShow = false;
 
 
   constructor(globals: Globals, studyService: StudyService, private router: Router) {
@@ -54,9 +41,11 @@ export class StudyComponent implements OnInit {
     let loadingCounter = 0;
     this.globals.selectedServerTrials.map(selectedTrial => this.studyService.getStudyByTrialDbId(selectedTrial.serverUrl, selectedTrial.trial.trialDbId)
       .subscribe(fetchedStudies => {
-        this.setStudyCheckboxes(fetchedStudies);
+        this.setStudyRows(fetchedStudies);
         this.setServerStudies(selectedTrial.serverUrl, fetchedStudies);
-        loadingCounter =  loadingCounter + 1;
+        this.setFilterSeasons(fetchedStudies);
+        this.setFilterLocations(fetchedStudies);
+        loadingCounter = loadingCounter + 1;
         if (loadingCounter === this.globals.selectedServerTrials.length) {
           this.isLoading = false;
         }
@@ -64,117 +53,131 @@ export class StudyComponent implements OnInit {
 
   }
 
-  setStudyCheckboxes(studies: Study[]) {
-    studies.map(study => this.studyCheckboxes.push({study: study, selected: false}));
+  setStudyRows(studies: Study[]) {
+    studies.map(study => this.studyRows.push({study: study, selected: false}));
+    studies.map(study => this.filteredStudyRows.push({study: study, selected: false}));
   }
 
   setServerStudies(serverUrl: string, studies: Study[]) {
-    studies.map(study => this.serverStudy.push({serverUrl: serverUrl, study: study}));
-    studies.map(study => this.studyForSeasons.push({study: study}));
-
-    for (const study of this.serverStudy) {
-      if (!this.locationStudy.some((item) => item.study.locationName === study.study.locationName)) {
-        if (study.study.locationName) {
-          this.locationStudy.push({locationName: study.study.locationName, study: study.study, serverUrl: study.serverUrl});
-          this.studyLocationCheckboxes.push({study: study.study, selected: false});
-        }
-      }
-    }
-
-    for (const study of this.studyForSeasons) {
-      if (study.study.seasons) {
-        for (const season of study.study.seasons) {
-          if (!this.seasonStudy.some((item) => item.study === study)) {
-            this.seasonStudy.push({season: season, year: season.year, study: study, serverUrl: serverUrl});
-            if (!this.studySeasonCheckboxes.some((item) => item.season.year === season.year)) {
-              this.studySeasonCheckboxes.push({study: study, selected: false, season: season});
-            }
-          }
-        }
-      }
-    }
+    studies.map(study => this.serverStudies.push({serverUrl: serverUrl, study: study}));
 
   }
 
-  setSelectedServerStudies() {
-    const selectedStudies = this.studyCheckboxes.filter(studyCheckbox => studyCheckbox.selected).map(studyCheckbox => studyCheckbox.study);
-    this.globals.selectedServerStudies = this.serverStudy
-      .filter(serverStudy => {
-        for (const selectedStudy of selectedStudies) {
-          if (Object.is(serverStudy.study, selectedStudy)) {
-            return true;
+  setFilterSeasons(studies: Study[]) {
+    for (const study of studies) {
+      for (const season of study.seasons) {
+        if (!this.seasons.some(item => item.year === season.year)) {
+          if (season.year) {
+            this.seasons.push({year: season.year, selected: false});
           }
-        }
-      });
-
-    this.globals.selectedServerStudies.length > 0 ? this.router.navigate(['/servers/germplasm']) : alert('You have to select study first.');
-  }
-
-  setLocationStudy() {
-    this.isShowAllStudies = true;
-    this.isShowSeasons = false;
-    this.isLocationFilterShow = false;
-    this.studyCheckboxes = [];
-    const selectedLocation = this.studyLocationCheckboxes.filter(studyLocationCheckboxes => studyLocationCheckboxes.selected).map(studyLocationCheckboxes => studyLocationCheckboxes.study);
-
-    this.selectedLocationStudy = this.locationStudy
-      .filter(location => {
-        for (const locationStudyy of selectedLocation) {
-          if (Object.is(location.study, locationStudyy)) {
-            return true;
-          }
-        }
-      });
-
-    for (const study of this.serverStudy) {
-      if (this.selectedLocationStudy.some((item) => item.locationName === study.study.locationName)) {
-        if (!this.studyCheckboxes.some((item) => item.study === study.study)) {
-          this.studyCheckboxes.push({study: study.study, selected: false});
         }
       }
     }
   }
 
-
-  setSeasonStudy() {
-    this.isShowAllStudies = true;
-    this.isLocationFilterShow = false;
-    this.studyCheckboxes = [];
-    this.isShowSeasons = false;
-    const selectedLocation = this.studySeasonCheckboxes.filter(studySeasonCheckboxes => studySeasonCheckboxes.selected).map(studySeasonCheckboxes => studySeasonCheckboxes.study);
-
-    this.selectedSeasonStudy = this.seasonStudy
-      .filter(location => {
-        for (const locationStudyy of selectedLocation) {
-          if (Object.is(location.study, locationStudyy)) {
-            return true;
-          }
+  setFilterLocations(studies: Study[]) {
+    for (const study of studies) {
+      if (!this.locations.some(item => item.location === study.locationName)) {
+        if (study.locationName) {
+          this.locations.push({location: study.locationName, selected: false});
         }
-      });
-
-
-    for (const study of this.studyForSeasons) {
-      for (const season of study.study.seasons) {
-        if (this.selectedSeasonStudy.some((item) => item.season === season)) {
-            if (!this.studyCheckboxes.some((item) => item.study === study.study)) {
-              this.studyCheckboxes.push({study: study.study, selected: false});
-            }
-          }
-
       }
     }
   }
 
-  checkValue(event: any) {
-    if (event === 'checked') {
-      for (const trialBox of this.studyCheckboxes) {
-        trialBox.selected = true;
-      }
+  applyFilters() {
+    const selectedSeasons = this.seasons
+      .filter(seasonCheckbox => seasonCheckbox.selected)
+      .map(seasonCheckbox => seasonCheckbox.year);
+
+    const selectedLocations = this.locations
+      .filter(locationCheckbox => locationCheckbox.selected)
+      .map(locationCheckbox => locationCheckbox.location);
+
+    if (selectedSeasons.length === 0) {
+      this.filteredStudyRows = this.studyRows;
     } else {
-      for (const trialBox of this.studyCheckboxes) {
-        trialBox.selected = false;
-      }
+      this.filteredStudyRows = this.studyRows
+        .filter(studyRow => {
+          for (const season of selectedSeasons) {
+            for (const seasonRowSeason of studyRow.study.seasons) {
+              if (season === seasonRowSeason.year) {
+                return true;
+              }
+            }
+          }
+        });
     }
+
+    if (selectedLocations.length === 0) {
+      this.filteredStudyRows = this.studyRows;
+    } else {
+      this.filteredStudyRows = this.filteredStudyRows
+        .filter(studyRow => {
+          for (const location of selectedLocations) {
+            if (location === studyRow.study.locationName) {
+              return true;
+            }
+          }
+        });
+    }
+  }
+
+  filterStudyRowsBySeasons() {
+    const selectedSeasons = this.seasons
+      .filter(seasonCheckbox => seasonCheckbox.selected)
+      .map(seasonCheckbox => seasonCheckbox.year);
+
+    if (selectedSeasons.length === 0) {
+      this.filteredStudyRows = this.studyRows;
+    } else {
+      this.filteredStudyRows = this.studyRows
+        .filter(studyRow => {
+          for (const season of selectedSeasons) {
+            for (const seasonRowSeason of studyRow.study.seasons) {
+              if (season === seasonRowSeason.year) {
+                return true;
+              }
+            }
+          }
+        });
+    }
+  }
+
+  filterStudyRowsByLocations() {
+    const selectedLocations = this.locations
+      .filter(locationCheckbox => locationCheckbox.selected)
+      .map(locationCheckbox => locationCheckbox.location);
+
+    if (selectedLocations.length === 0) {
+      this.filteredStudyRows = this.studyRows;
+    } else {
+      this.filteredStudyRows = this.studyRows
+        .filter(studyRow => {
+          for (const location of selectedLocations) {
+            if (location === studyRow.study.locationName) {
+              return true;
+            }
+          }
+        });
+    }
+  }
+
+  setSelectedServerStudiesFromSelectedFilteredRows() {
+    const selectedStudyRows = this.filteredStudyRows
+      .filter(studyRow => studyRow.selected)
+      .map(studyRow => studyRow.study);
+
+
+    this.globals.selectedServerStudies = this.serverStudies
+      .filter(selectedStudy => {
+        for (const selectedStudyRow of selectedStudyRows) {
+          if (Object.is(selectedStudyRow, selectedStudy.study)) {
+            return true;
+          }
+        }
+      });
+    this.globals.selectedServerStudies.length > 0 ? this.router.navigate(['/servers/germplasm']) : alert('You have to select study first.');
   }
 
 
