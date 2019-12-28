@@ -1,3 +1,4 @@
+import csv
 import os
 import zipfile
 
@@ -13,6 +14,7 @@ def extract_zips():
 def convert():
     root_dir = os.getcwd()
     directories = [x for x in os.listdir() if os.path.isdir(x)]
+    files = []
 
     for dir_ in directories:
         os.chdir(dir_)
@@ -32,7 +34,11 @@ def convert():
             x for x in isatab_files if x.startswith('d_')
         ]
 
-        print(isatab_files_dict)
+        with open(isatab_files_dict['s_files'][0], encoding="utf8") as tsv_file:
+            reader = csv.DictReader(tsv_file, dialect='excel-tab')
+
+            for row in reader:
+                print(row['Characteristics[Organism]'], row['Sample Name']) 
 
         os.chdir(root_dir)
 
