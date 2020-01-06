@@ -1,4 +1,5 @@
 import csv
+import json
 import os
 import zipfile
 
@@ -62,27 +63,35 @@ def convert():
 
         for s_file in isatab_files_dict['s_files']:
             # print(s_file)
-            with open(s_file, encoding='utf8') as tsv_file:
+            with open(s_file, encoding='utf-8-sig') as tsv_file:
                 reader = csv.DictReader(tsv_file, dialect='excel-tab')
-                for row in reader:
+                for index, row in enumerate(reader):
                     isatab_json['Crop'].append(row['Characteristics[Organism]'])
                     isatab_json['Crop'] = list(set(isatab_json['Crop']))
                     try:
-                        # isatab_json['Samples'][row['Characteristics[Infraspecific name]']] = row['Sample Name']
-                        isatab_json['Samples'] = row['Sample Name'] # dict(zip(row['Sample Name'], row['Characteristics[Infraspecific name]']))
-                        
+                        if not row['Source Name'] in isatab_json['Samples']:
+                            isatab_json['Samples'][row['Source Name']] = []
+                        # isatab_json['Samples'][row['Source Name']].append(row['Characteristics[Infraspecific name]'])
+                        isatab_json['Samples'][row['Source Name']].append(row['Sample Name'])
+                        isatab_json['Samples'][row['Source Name']] = list(set(isatab_json['Samples'][row['Source Name']]))
                     except KeyError:
-                        pass
+                        print(f'KeyError in the following file: {s_file}')
+                        break
                     
-
-        pprint.pprint(isatab_json)
+        files.append(isatab_json)
 
         os.chdir(root_dir)
+
+    return files
+
+def save_to_file(dictionary):
+    with open('data.json', 'w') as outfile:
+        json.dump(dictionary, outfile)
 
 
 def main():
     extract_zips()
-    convert()
+    save_to_file(convert())
 
 
 if __name__ == "__main__":
