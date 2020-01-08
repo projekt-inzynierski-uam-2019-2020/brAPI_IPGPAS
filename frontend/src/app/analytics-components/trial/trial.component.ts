@@ -23,6 +23,7 @@ export class TrialComponent implements OnInit {
 
   optionalFiltersShow = false;
   isLoading = true;
+  isChecked = false;
 
   constructor(globals: Globals, trialService: TrialService, private router: Router) {
     this.globals = globals;
@@ -108,11 +109,11 @@ export class TrialComponent implements OnInit {
 
   checkValue(event: any) {
     if (event === 'checked') {
-      for (const trialBox of this.trialRows) {
+      for (const trialBox of this.filteredTrialRows) {
         trialBox.selected = true;
       }
     } else {
-      for (const trialBox of this.trialRows) {
+      for (const trialBox of this.filteredTrialRows) {
         trialBox.selected = false;
       }
     }
