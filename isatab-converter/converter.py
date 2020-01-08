@@ -47,7 +47,8 @@ def convert():
             'Investigation Title': '',
             'Study Title': '',
             'Crop': [],
-            'Samples': {}
+            'Samples': {},
+            'Assays': {}
         }
 
         with open(isatab_files_dict['i_files'][0], encoding='utf8') as i_file:
@@ -62,22 +63,44 @@ def convert():
                     continue
 
         for s_file in isatab_files_dict['s_files']:
-            # print(s_file)
             with open(s_file, encoding='utf-8-sig') as tsv_file:
                 reader = csv.DictReader(tsv_file, dialect='excel-tab')
-                for index, row in enumerate(reader):
+                for row in reader:
                     isatab_json['Crop'].append(row['Characteristics[Organism]'])
                     isatab_json['Crop'] = list(set(isatab_json['Crop']))
                     try:
-                        if not row['Source Name'] in isatab_json['Samples']:
-                            isatab_json['Samples'][row['Source Name']] = []
-                        # isatab_json['Samples'][row['Source Name']].append(row['Characteristics[Infraspecific name]'])
-                        isatab_json['Samples'][row['Source Name']].append(row['Sample Name'])
-                        isatab_json['Samples'][row['Source Name']] = list(set(isatab_json['Samples'][row['Source Name']]))
+                        if not row['Characteristics[Infraspecific name]'] in isatab_json['Samples']:
+                            isatab_json['Samples'][row['Characteristics[Infraspecific name]']] = []
+                        isatab_json['Samples'][row['Characteristics[Infraspecific name]']].append(row['Sample Name'])
+                        isatab_json['Samples'][row['Characteristics[Infraspecific name]']] = list(set(isatab_json['Samples'][row['Characteristics[Infraspecific name]']]))
                     except KeyError:
                         print(f'KeyError in the following file: {s_file}')
                         break
+
+        for a_file in isatab_files_dict['a_files']:
+            with open(a_file, encoding='utf-8-sig') as tsv_file:
+                reader = csv.DictReader(tsv_file, dialect='excel-tab')
+                try:
+                    for row in reader:
+                        for germplasm, samples in isatab_json['Samples'].items():
+                            if not germplasm in isatab_json['Assays']:
+                                isatab_json['Assays'][germplasm] = {}
+                            if not a_file in isatab_json['Assays'][germplasm]:
+                                isatab_json['Assays'][germplasm][a_file] = []
+                            for sample in samples:
+                                if sample == row['Sample Name']:
+                                        isatab_json['Assays'][germplasm][a_file].append(row['Assay Name'])
+                except KeyError:
+                    print(f'KeyError in the following file: {a_file}')
+                    break
+
+
+        for d_file in isatab_files_dict['d_files']:
+            with open(d_file, encoding='utf-8-sig') as tsv_file:
+                reader = csv.DictReader(tsv_file, dialect='excel-tab')
                     
+        # isatab_json.pop('Samples', None)
+        del isatab_json['Samples']
         files.append(isatab_json)
 
         os.chdir(root_dir)
