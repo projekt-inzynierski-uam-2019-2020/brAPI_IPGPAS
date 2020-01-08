@@ -26,6 +26,7 @@ export class StudyComponent implements OnInit {
   isLoading = true;
   locationFiltersShow = false;
   seasonFiltersShow = false;
+  isChecked = false;
 
 
   constructor(globals: Globals, studyService: StudyService, private router: Router) {
@@ -94,33 +95,53 @@ export class StudyComponent implements OnInit {
       .filter(locationCheckbox => locationCheckbox.selected)
       .map(locationCheckbox => locationCheckbox.location);
 
-    if (selectedSeasons.length === 0) {
+    if (selectedSeasons.length === 0 && selectedLocations.length === 0) {
       this.filteredStudyRows = this.studyRows;
     } else {
-      this.filteredStudyRows = this.studyRows
-        .filter(studyRow => {
-          for (const season of selectedSeasons) {
-            for (const seasonRowSeason of studyRow.study.seasons) {
-              if (season === seasonRowSeason.year) {
+      if (selectedSeasons.length === 0 && selectedLocations.length !== 0) {
+        this.filteredStudyRows = this.studyRows;
+        this.filteredStudyRows = this.filteredStudyRows
+          .filter(studyRow => {
+            for (const location of selectedLocations) {
+              if (location === studyRow.study.locationName) {
                 return true;
               }
             }
-          }
-        });
+          });
+      } else {
+        if (selectedSeasons.length !== 0 && selectedLocations.length === 0) {
+          this.filteredStudyRows = this.studyRows;
+          this.filteredStudyRows = this.studyRows
+            .filter(studyRow => {
+              for (const season of selectedSeasons) {
+                for (const seasonRowSeason of studyRow.study.seasons) {
+                  if (season === seasonRowSeason.year) {
+                    return true;
+                  }
+                }
+              }
+            });
+        } else {
+          this.filteredStudyRows = this.studyRows;
+          this.filteredStudyRows = this.studyRows
+            .filter(studyRow => {
+              for (const location of selectedLocations) {
+                if (location === studyRow.study.locationName) {
+                  for (const season of selectedSeasons) {
+                    for (const seasonRowSeason of studyRow.study.seasons) {
+                      if (season === seasonRowSeason.year) {
+                        return true;
+                      }
+                    }
+                }
+              }
+              }
+            });
+        }
+      }
     }
 
-    if (selectedLocations.length === 0) {
-      this.filteredStudyRows = this.studyRows;
-    } else {
-      this.filteredStudyRows = this.filteredStudyRows
-        .filter(studyRow => {
-          for (const location of selectedLocations) {
-            if (location === studyRow.study.locationName) {
-              return true;
-            }
-          }
-        });
-    }
+
   }
 
   filterStudyRowsBySeasons() {
@@ -144,25 +165,6 @@ export class StudyComponent implements OnInit {
     }
   }
 
-  filterStudyRowsByLocations() {
-    const selectedLocations = this.locations
-      .filter(locationCheckbox => locationCheckbox.selected)
-      .map(locationCheckbox => locationCheckbox.location);
-
-    if (selectedLocations.length === 0) {
-      this.filteredStudyRows = this.studyRows;
-    } else {
-      this.filteredStudyRows = this.studyRows
-        .filter(studyRow => {
-          for (const location of selectedLocations) {
-            if (location === studyRow.study.locationName) {
-              return true;
-            }
-          }
-        });
-    }
-  }
-
   setSelectedServerStudiesFromSelectedFilteredRows() {
     const selectedStudyRows = this.filteredStudyRows
       .filter(studyRow => studyRow.selected)
@@ -180,5 +182,16 @@ export class StudyComponent implements OnInit {
     this.globals.selectedServerStudies.length > 0 ? this.router.navigate(['/servers/germplasm']) : alert('You have to select study first.');
   }
 
+  checkValue(event: any) {
+    if (event === 'checked') {
+      for (const trialBox of this.filteredStudyRows) {
+        trialBox.selected = true;
+      }
+    } else {
+      for (const trialBox of this.filteredStudyRows) {
+        trialBox.selected = false;
+      }
+    }
+  }
 
 }

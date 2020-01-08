@@ -93,6 +93,7 @@
         </label></th>
         <th>Study Name</th>
         <th>Location Name</th>
+        <th>Year</th>
         <th>Documentation URL</th>
       </tr>
       </thead>
@@ -118,6 +119,9 @@
           </div>
         </td>
         <td>{{ filteredStudyRow.study.locationName ? filteredStudyRow.study.locationName : '---' }}</td>
+        <td>
+          <div  *ngFor="let season of filteredStudyRow.study.seasons">{{ season.year ? season.year : '---' }}</div></td>
+
         <td>
           <a target="_blank" href="{{ filteredStudyRow.study.documentationURL ? filteredStudyRow.study.documentationURL : '#' }}">{{ filteredStudyRow.study.documentationURL ? filteredStudyRow.study.documentationURL : '---' }}</a>
         </td>
