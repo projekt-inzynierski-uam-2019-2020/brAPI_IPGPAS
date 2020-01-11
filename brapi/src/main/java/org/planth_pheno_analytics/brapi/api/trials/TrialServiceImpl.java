@@ -1,5 +1,6 @@
 package org.planth_pheno_analytics.brapi.api.trials;
 
+import org.planth_pheno_analytics.brapi.api.criteria.SortCriteria;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,16 +14,18 @@ public class TrialServiceImpl implements TrialService {
     private final TrialProjectionResources trialProjectionResources;
     private final TrialMapper trialMapper;
     private final TrialFilter trialFilter;
+    private final TrialSorter trialSorter;
 
     public TrialServiceImpl(TrialProjectionResources trialProjectionResources, TrialMapper trialMapper,
-                            TrialFilter trialFilter) {
+                            TrialFilter trialFilter, TrialSorter trialSorter) {
         this.trialProjectionResources = trialProjectionResources;
         this.trialMapper = trialMapper;
         this.trialFilter = trialFilter;
+        this.trialSorter = trialSorter;
     }
 
     @Override
-    public List<Trial> getFilteredTrials(TrialCriteria trialCriteria) {
+    public List<Trial> getFilteredAndSortedTrials(TrialCriteria trialCriteria, SortCriteria sortCriteria) {
         Stream<Trial> trialStream = trialProjectionResources.getTrials().stream()
                 .map(trialMapper::mapToTrial);
 
@@ -43,6 +46,16 @@ public class TrialServiceImpl implements TrialService {
             trialStream = trialFilter.filterByActive(trialStream, active);
         }
 
-        return trialStream.collect(Collectors.toList());
+        List<Trial> trials = trialStream.collect(Collectors.toList());
+        String sortBy = sortCriteria.getSortBy();
+        if (isParameterPresent(sortBy)) {
+            trials = trialSorter.sortBy(trials, sortBy);
+        }
+        String sortOrder = sortCriteria.getSortOrder();
+        if (isParameterPresent(active)) {
+            trials = trialSorter.sortOrder(trials, sortOrder);
+        }
+
+        return trials;
     }
 }

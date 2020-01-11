@@ -3,35 +3,23 @@ package org.planth_pheno_analytics.brapi.api.response;
 import org.planth_pheno_analytics.brapi.api.BrAPIResponse;
 import org.planth_pheno_analytics.brapi.api.response.metadata.Metadata;
 import org.planth_pheno_analytics.brapi.api.response.metadata.Pagination;
-import org.planth_pheno_analytics.brapi.utils.ManualPaginationUtils;
 import org.springframework.data.domain.Page;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class BrAPIDetailResponse extends BrAPIResponse {
     private Map<String, List<?>> result = new HashMap<>();
 
-    public BrAPIDetailResponse(List<?> resultData, int page, int pageSize) {
+    public BrAPIDetailResponse(Pagination pagination, List<?> resultData) {
         super(new Metadata.Builder()
-                .withPagination(Pagination.of(
-                        page,
-                        pageSize,
-                        resultData.size(),
-                        ManualPaginationUtils.getTotalPages(resultData.size(), pageSize)))
+                .withPagination(pagination)
                 .build());
-        result.put("data", ManualPaginationUtils.paginateList(resultData, page, pageSize));
+        result.put("data", resultData);
     }
 
     public BrAPIDetailResponse(Page<?> page) {
         super(new Metadata.Builder()
-                .withPagination(Pagination.of(
-                        page.getNumber(),
-                        page.getSize(),
-                        page.getTotalElements(),
-                        page.getTotalPages()))
+                .withPagination(Pagination.of(page.getNumber(), page.getSize(), page.getTotalElements(), page.getTotalPages()))
                 .build());
         result.put("data", page.getContent());
     }

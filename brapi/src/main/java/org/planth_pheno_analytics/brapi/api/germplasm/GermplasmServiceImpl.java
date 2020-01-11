@@ -1,5 +1,7 @@
 package org.planth_pheno_analytics.brapi.api.germplasm;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
