@@ -218,6 +218,8 @@ def convert():
 
         if isatab_json['Crop'] != []:
             isatab_json['Crop'] = isatab_json['Crop'][0]
+        else:
+            isatab_json['Crop'] = ''
 
         # isatab_json.pop('Samples', None)
         del isatab_json['Samples']
