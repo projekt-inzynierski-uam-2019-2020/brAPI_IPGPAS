@@ -3,8 +3,6 @@ import json
 import os
 import zipfile
 
-import pprint
-
 
 def extract_zips():
     zips_in_directory = [x for x in os.listdir() if zipfile.is_zipfile(x)]
@@ -42,6 +40,10 @@ def convert():
             x for x in isatab_files if x.startswith('d_') or x.startswith('data_') or x.startswith('ghouse')
         ]
 
+        isatab_files_dict['tdf_file'] = [
+            x for x in isatab_files if x.startswith('tdf')
+        ]
+
         isatab_json = {
             'Investigation Identifier': '',
             'Investigation Title': '',
@@ -49,7 +51,9 @@ def convert():
             'Crop': [],
             'Samples': {},
             'Assays': {},
-            'Data': {}
+            'Data': {},
+            'FinalData': {},
+            'Variables': {}
         }
 
         with open(isatab_files_dict['i_files'][0], encoding='utf8') as i_file:
@@ -80,15 +84,18 @@ def convert():
                         isatab_json['Crop'].append(organism)
                         isatab_json['Crop'] = list(set(isatab_json['Crop']))
 
-                        if file_name not in isatab_json['Samples']:
-                            isatab_json['Samples'][file_name] = {}
+                        # if file_name not in isatab_json['Samples']:
+                        #     isatab_json['Samples'][file_name] = {}
 
-                        if germplasm not in isatab_json['Samples'][file_name]:
-                            isatab_json['Samples'][file_name][germplasm] = []
+                        # if germplasm not in isatab_json['Samples']:
+                        #     isatab_json['Samples'][germplasm] = []
 
-                        isatab_json['Samples'][file_name][germplasm].append(sample_name)
+                        # isatab_json['Samples'][germplasm].append(sample_name)
+
                         # isatab_json['Samples'][file_name][germplasm] = list(set(isatab_json['Samples'][germplasm][file_name]))
                 
+                        isatab_json['Samples'][sample_name] = germplasm
+
                 except KeyError as key_error:
                     
                     # print(f'KeyError in the following file: {s_file}, {key_error}')
@@ -115,6 +122,11 @@ def convert():
                             isatab_json['Assays'][data_file][sample_name] = ''
 
                         isatab_json['Assays'][data_file][sample_name] = assay_name
+
+                        # if assay_name not in isatab_json['Assays'][data_file]:
+                        #     isatab_json['Assays'][data_file][assay_name] = ''
+
+                        # isatab_json['Assays'][data_file][assay_name] = sample_name
                             
                 except KeyError as key_error:
                     # print(f'KeyError in the following file: {a_file}, {key_error}')
@@ -123,8 +135,6 @@ def convert():
         for d_file in isatab_files_dict['d_files']:
 
             file_name = d_file
-
-
 
             with open(d_file, encoding='utf-8-sig') as tsv_file:
                
@@ -166,9 +176,53 @@ def convert():
                     pass
 
 
+        for tdf_file in isatab_files_dict['tdf_file']:
+
+            with open(tdf_file, encoding='utf-8-sig') as tsv_file:
+               
+                reader = csv.DictReader(tsv_file, dialect='excel-tab')
+
+                for row in reader:
+
+                    isatab_json['Variables'][row['Variable ID']] = row['Trait']
+
+
+        for d_file in isatab_files_dict['d_files']:
+
+            try:
+
+                for key1, value in isatab_json['Assays'][d_file].items():
+                    for key2 in isatab_json['Data'][d_file]:
+                        if value == key2:
+                            # print(True)
+                            isatab_json['Assays'][d_file][key1] = isatab_json['Data'][d_file][key2]
+                            break
+
+            except KeyError:
+                pass
+
+        
+        for sample, germplasm in isatab_json['Samples'].items():
+
+            for d_file in isatab_json['Assays']:
+
+                for sample2, data in isatab_json['Assays'][d_file].items():
+
+                    if sample == sample2:
+
+                        if germplasm not in isatab_json['FinalData']:
+                            isatab_json['FinalData'][germplasm] = []
+
+                        isatab_json['FinalData'][germplasm].append(data)
+
+
+        if isatab_json['Crop'] != []:
+            isatab_json['Crop'] = isatab_json['Crop'][0]
+
         # isatab_json.pop('Samples', None)
-        # del isatab_json['Samples']
-        # del isatab_json['Assays']
+        del isatab_json['Samples']
+        del isatab_json['Assays']
+        del isatab_json['Data']
         files.append(isatab_json)
 
         os.chdir(root_dir)
