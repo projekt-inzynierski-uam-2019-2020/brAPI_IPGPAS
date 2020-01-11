@@ -124,6 +124,8 @@ def convert():
 
             file_name = d_file
 
+
+
             with open(d_file, encoding='utf-8-sig') as tsv_file:
                
                 reader = csv.DictReader(tsv_file, dialect='excel-tab')
@@ -134,6 +136,8 @@ def convert():
                                 
                 try:
                     
+                    assays = isatab_json['Assays'][file_name]   
+
                     for row in reader:
 
                         if row['Assay Name']:
@@ -148,6 +152,11 @@ def convert():
                         if assay_name not in isatab_json['Data'][file_name]:
                             isatab_json['Data'][file_name][assay_name] = {}
 
+                        for key, value in assays.items():
+                            if isatab_json['Data'][file_name][assay_name] == value:
+                                print(True)
+                            # print(key, value)
+
                         for header in headers:
                             isatab_json['Data'][file_name][assay_name][header] = row[header].replace(',', '.')
 
@@ -155,11 +164,8 @@ def convert():
                 except KeyError as key_error:
                     print(f'KeyError in the following file: {file_name}, {key_error}')
                     pass
-                    
 
-        for value in isatab_json['Assays']:
-            print(value)
-                    
+
         # isatab_json.pop('Samples', None)
         # del isatab_json['Samples']
         # del isatab_json['Assays']
