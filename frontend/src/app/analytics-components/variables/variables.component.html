@@ -26,29 +26,29 @@
       <tr>
         <td></td>
         <td></td>
-        <td class="hasTooltip" *ngFor="let variableStudy of this.variableUniqStudy; let i = index">
+        <td class="hasTooltip" *ngFor="let variableStudy of this.variableStudy; let i = index">
           <div class="hasTooltip__container">
-            <div class="item">{{ variableStudy.study.studyName ? variableStudy.study.studyName : '---' }}</div>
-            <div class="tooltip">{{ variableStudy.study.studyName ? variableStudy.study.studyName : '---' }}</div>
+            <div class="item">{{ variableStudy.study.studyDbId ? variableStudy.study.studyDbId : '---' }}</div>
+            <div class="tooltip">{{ variableStudy.study.studyDbId ? variableStudy.study.studyDbId : '---' }}</div>
           </div>
         </td>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let variableId of this.listOfVariablesIdsOnly; let i = index">
+      <tr *ngFor="let variableName of this.variable; let i = index">
         <td><label class="checkbox" for="{{i}}">
           <input
             type="checkbox"
             id="{{i}}"
             name="num"
-            [(ngModel)]="variableId.selected"
+            [(ngModel)]="variableName.selected"
             class="checkbox__input"
           >
           <span class="checkbox__box"></span>
         </label></td>
-        <td>{{ variableId.variableId}}</td>
-        <td *ngFor="let variableRow  of this.variableUniqStudy"><p *ngIf="checkVariableFunction(variableRow, variableId.variableId)">
-          <i class="fas fa-check"></i></p>
+        <td>{{ variableName.variableName}}</td>
+      <!--  <td *ngFor="let variableRow  of this.variableUniqStudy"><p *ngIf="checkVariableFunction(variableRow, variableName.variableName)">
+           <i class="fas fa-check"></i></p> -->
 
       </tr>
       </tbody>

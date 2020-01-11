@@ -179,6 +179,7 @@ export class StudyComponent implements OnInit {
           }
         }
       });
+    console.log(this.globals.selectedServerStudies);
     this.globals.selectedServerStudies.length > 0 ? this.router.navigate(['/servers/germplasm']) : alert('You have to select study first.');
   }
 

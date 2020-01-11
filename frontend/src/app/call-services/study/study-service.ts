@@ -25,7 +25,7 @@ export class StudyService {
   }
 
   getStudyByTrialDbId(brAPIServerUrl: string, trialDbId: string) {
-    return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies?trialDbId=' + trialDbId).pipe(map(result => result.data));
+    return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies-search?trialDbId=' + trialDbId).pipe(map(result => result.data));
   }
 
 }

@@ -33,7 +33,7 @@ export class StatisticsComponent implements OnInit {
   initStatistics() {
 
     for (const variable of this.globals.selectedVariablesValues) {
-        this.allVariablesIds.push(variable.variable.variableId);
+     //   this.allVariablesIds.push(variable.variable.variableId);
     }
 
     for (const variable of this.globals.selectedVariablesValues) {

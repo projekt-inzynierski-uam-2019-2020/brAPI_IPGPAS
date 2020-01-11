@@ -1,6 +1,5 @@
 export class VariableSelect {
   selected: boolean;
-  variableId: string;
+  variableName: string;
   serverUrl: string;
-  variabelValue: string;
 }
