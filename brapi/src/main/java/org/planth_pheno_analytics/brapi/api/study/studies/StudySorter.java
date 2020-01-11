@@ -44,7 +44,6 @@ public class StudySorter extends Sorter<Study> {
                 ));
                 break;
             case "seasonDbId":
-                //TODO
                 break;
             case "locationName":
                 studies.sort(Comparator.comparing(Study::getLocationName, Comparator.nullsLast(Comparator.naturalOrder())
@@ -58,3 +57,6 @@ public class StudySorter extends Sorter<Study> {
         return studies;
     }
 }
+
+
+

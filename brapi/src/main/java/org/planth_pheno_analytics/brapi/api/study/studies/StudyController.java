@@ -2,7 +2,9 @@ package org.planth_pheno_analytics.brapi.api.study.studies;
 
 import org.planth_pheno_analytics.brapi.annotation.BrAPIController;
 import org.planth_pheno_analytics.brapi.api.BrAPIResponse;
+import org.planth_pheno_analytics.brapi.utils.ResponseCreator;
 import org.planth_pheno_analytics.brapi.api.criteria.PaginationCriteria;
+import org.planth_pheno_analytics.brapi.api.criteria.SortCriteria;
 import org.planth_pheno_analytics.brapi.api.germplasm.Germplasm;
 import org.planth_pheno_analytics.brapi.api.response.BrAPIDetailResponse;
 import org.planth_pheno_analytics.brapi.api.response.BrAPIMasterDetailResponse;
@@ -25,10 +27,10 @@ public class StudyController {
 
     @GetMapping("/studies")
     @ResponseStatus(HttpStatus.OK)
-    public BrAPIResponse getBrAPIStudies(@Valid StudyCriteria studyCriteria,
-                                         @Valid PaginationCriteria paginationCriteria) {
-        final List<Study> filteredData = studyService.getFilteredStudies(studyCriteria);
-        return new BrAPIDetailResponse(filteredData, paginationCriteria.getPage(), paginationCriteria.getPageSize());
+    public BrAPIResponse getBrAPIStudies(@Valid StudyCriteria studyCriteria, @Valid PaginationCriteria paginationCriteria,
+                                         @Valid SortCriteria sortCriteria) {
+        final List<Study> filteredData = studyService.getFilteredAndSortedStudies(studyCriteria, sortCriteria);
+        return ResponseCreator.createBrAPIResponse(filteredData, paginationCriteria);
     }
 
     @GetMapping("/studies/{studyDbId}/germplasm")
@@ -41,21 +43,8 @@ public class StudyController {
     @GetMapping("/studies/{studyDbId}/table")
     @ResponseStatus(HttpStatus.OK)
     public BrAPIResponse getBrAPIStudiesTableByStudyDbId(@PathVariable("studyDbId") String studyDbId,
-                                                         @RequestParam("format") String format) {
-        final Map<String, List<?>> result = studyService.getStudiesTableResult(studyDbId, format);
+                                                         @RequestParam(name = "format", required = false) String format) {
+        final Map<String, List<?>> result = studyService.getStudiesTable(studyDbId, format);
         return new BrAPIMasterDetailResponse(result);
     }
-
-    /*
-    @GetMapping("/studies/{studyDbId}/observationvariables")
-    @ResponseStatus(HttpStatus.OK)
-    public BrAPIDetailResponse getBrAPIObservationvariablesByStudyDbId(
-            @RequestParam(value = "studyDbId") final String studyDbId,
-            @RequestParam(value = "page", defaultValue = "0")
-            @Min(value = 0, message = "'page' value is invalid.") final int page,
-            @RequestParam(value = "pageSize", defaultValue = "1000")
-            @Min(value = 1, message = "'pageSize' value is invalid.") final int pageSize) {
-        return studyPageService.createBrAPIResponse(studyDbId, page, pageSize);
-    }
-    */
 }

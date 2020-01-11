@@ -1,16 +1,16 @@
 package org.planth_pheno_analytics.brapi.api.study.studies;
 
+import org.planth_pheno_analytics.brapi.api.criteria.SortCriteria;
 import org.planth_pheno_analytics.brapi.api.germplasm.Germplasm;
 import org.planth_pheno_analytics.brapi.api.germplasm.GermplasmMapper;
-import org.planth_pheno_analytics.brapi.api.germplasm.GermplasmProjectionResources;
+import org.planth_pheno_analytics.data.file.FileTrial;
+import org.planth_pheno_analytics.data.file.DatabaseFile;
+import org.planth_pheno_analytics.data.file.DatabaseFileMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,21 +21,22 @@ public class StudyServiceImpl implements StudyService {
     private final StudyProjectionResources studyProjectionResources;
     private final StudyMapper studyMapper;
     private final StudyFilter studyFilter;
-    private final GermplasmProjectionResources germplasmProjectionResources;
+    private final StudySorter studySorter;
+    private final DatabaseFileMapper databaseFileMapper;
     private final GermplasmMapper germplasmMapper;
 
-    public StudyServiceImpl(StudyProjectionResources studyProjectionResources, StudyMapper studyMapper,
-                            StudyFilter studyFilter, GermplasmProjectionResources germplasmProjectionResources,
-                            GermplasmMapper germplasmMapper) {
+    public StudyServiceImpl(StudyProjectionResources studyProjectionResources, GermplasmMapper germplasmMapper, StudyMapper studyMapper,
+                            StudyFilter studyFilter, StudySorter studySorter, DatabaseFileMapper databaseFileMapper) {
         this.studyProjectionResources = studyProjectionResources;
+        this.germplasmMapper = germplasmMapper;
         this.studyMapper = studyMapper;
         this.studyFilter = studyFilter;
-        this.germplasmProjectionResources = germplasmProjectionResources;
-        this.germplasmMapper = germplasmMapper;
+        this.studySorter = studySorter;
+        this.databaseFileMapper = databaseFileMapper;
     }
 
     @Override
-    public List<Study> getFilteredStudies(StudyCriteria studyCriteria) {
+    public List<Study> getFilteredAndSortedStudies(StudyCriteria studyCriteria, SortCriteria sortCriteria) {
         Stream<Study> studyStream = studyProjectionResources.getStudies().stream()
                 .map(studyMapper::mapToStudy);
 
@@ -72,29 +73,130 @@ public class StudyServiceImpl implements StudyService {
             studyStream = studyFilter.filterByActive(studyStream, active);
         }
 
-        return studyStream.collect(Collectors.toList());
+        List<Study> studies = studyStream.collect(Collectors.toList());
+        String sortBy = sortCriteria.getSortBy();
+        if (isParameterPresent(sortBy)) {
+            studies = studySorter.sortBy(studies, sortBy);
+        }
+        String sortOrder = sortCriteria.getSortOrder();
+        if (isParameterPresent(active)) {
+            studies = studySorter.sortOrder(studies, sortOrder);
+        }
+
+        return studies;
+    }
+
+    @Override
+    public Map<String, List<?>> getStudiesTable(String studyDbId, String format) {
+        Map<String, List<?>> result = new HashMap<>();
+
+        Integer studyId = Integer.valueOf(studyDbId);
+        Study study = studyMapper.mapToStudy(
+                studyProjectionResources.getStudyByStudyDbId(studyId));
+
+        // get file db
+        DatabaseFile databaseFile = databaseFileMapper.mapToDbFile("text_data/data.json");
+        // find study trial
+        FileTrial trial = getStudyFileTrial(study, databaseFile).orElse(new FileTrial());
+
+        // set headers
+        List<String> headers = Arrays.asList(
+                "year",
+                "programDbId",
+                "programName",
+                "programDescription",
+                "studyDbId",
+                "studyName",
+                "studyDescription",
+                "studyDesign",
+                "plotWidth",
+                "plotLength",
+                "fieldSize",
+                "fieldTrialIsPlannedToBeGenotyped",
+                "fieldTrialIsPlannedToCross",
+                "plantingDate",
+                "harvestDate",
+                "locationDbId",
+                "locationName",
+                "germplasmDbId",
+                "germplasmName"
+        );
+        result.put("headers", headers);
+
+        // set varableIds
+        List<String> observationVariableIds = new ArrayList<>(trial.getVariables().keySet());
+        result.put("observationVariableIds", observationVariableIds);
+
+        // set varableNames
+        List<String> observationVariableNames = new ArrayList<>(trial.getVariables().values());
+        result.put("observationVariableNames", observationVariableNames);
+
+        // set data
+        List<List<String>> data = getData(study, trial);
+        result.put("data", data);
+        return result;
+    }
+
+    private Optional<FileTrial> getStudyFileTrial(Study study, DatabaseFile databaseFile) {
+        for (FileTrial fileTrial : databaseFile.getFileTrials()) {
+            if (fileTrial.getInvestigationTitle().equals(study.getTrialName())) {
+                return Optional.of(fileTrial);
+            }
+        }
+        return Optional.empty();
+    }
+
+    private List<List<String>> getData(Study study, FileTrial trial) {
+        List<List<String>> data = new ArrayList<>();
+        List<Germplasm> germplasms = getPagedStudiesGermplasmsByStudyDbId(study.getStudyDbId(), Pageable.unpaged()).getContent();
+        for (Germplasm germplasm : germplasms) {
+            for (String key : trial.getFinalData().keySet()) {
+                if (key.equals(germplasm.getGermplasmName())) {
+                    for (Map<String, String> germplasmMap : trial.getFinalData().get(key)) {
+                        List<String> tableRow = new ArrayList<>();
+                        if (study.getSeasons().size() > 0) {
+                            tableRow.add(study.getSeasons().get(0).getYear());
+                        } else {
+                            tableRow.add("");
+                        }
+                        tableRow.add(study.getProgramDbId());
+                        tableRow.add(study.getProgramName());
+                        tableRow.add("");
+                        tableRow.add(study.getStudyDbId());
+                        tableRow.add(study.getStudyName());
+                        StudyAdditionalInfo studyAdditionalInfo = (StudyAdditionalInfo) study.getAdditionalInfo();
+                        if (studyAdditionalInfo.getDescription() != null){
+                            tableRow.add(studyAdditionalInfo.getDescription());
+                        }
+                        else{
+                            tableRow.add("");
+                        }
+                        tableRow.add("");
+                        tableRow.add("");
+                        tableRow.add("");
+                        tableRow.add("");
+                        tableRow.add("");
+                        tableRow.add("");
+                        tableRow.add("");
+                        tableRow.add("");
+                        tableRow.add(study.getLocationDbId());
+                        tableRow.add(study.getLocationName());
+                        tableRow.add(germplasm.getGermplasmDbId());
+                        tableRow.add(germplasm.getGermplasmName());
+                        tableRow.addAll(germplasmMap.values());
+                        data.add(tableRow);
+                    }
+                }
+            }
+        }
+        return data;
     }
 
     @Override
     public Page<Germplasm> getPagedStudiesGermplasmsByStudyDbId(String studyDbId, Pageable pageable) {
         Integer parsedStudyDbId = Integer.parseInt(studyDbId);
-        return germplasmProjectionResources.getStudiesGermplasmsPageByStudyDbId(parsedStudyDbId, pageable)
+        return studyProjectionResources.getStudiesGermplasmsPageByStudyDbId(parsedStudyDbId, pageable)
                 .map(germplasmMapper::mapToGermplasm);
-    }
-
-    @Override
-    public Map<String, List<?>> getStudiesTableResult(String studyDbId, String format) {
-        List<List<String>> data = new ArrayList<>();
-        List<String> headerRow = new ArrayList<>();
-        List<String> observationVariableDbId = new ArrayList<>();
-        List<String> observationVariableNames = new ArrayList<>();
-
-        Map<String, List<?>> result = new HashMap<>();
-        result.put("data", data);
-        result.put("headerRow", headerRow);
-        result.put("observationVariableDbId", observationVariableDbId);
-        result.put("observationVariableNames", observationVariableNames);
-        return result;
     }
 
     @Override
