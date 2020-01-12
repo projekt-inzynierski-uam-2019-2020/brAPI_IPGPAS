@@ -11,10 +11,26 @@
     <div class="row">
     </div>
   </div>
-  <button class="btn m-3 filters__header--button" (click)="getVariablesFunction(studyName.studyName)" *ngFor="let studyName of this.globals.studyStatisticVariables">{{studyName.studyName}}</button>
-  <div class="charts">
-      <table style=" margin: auto;
-  width: 70%; color: white; height: 40rem">
+
+  <div class="buttonsList">
+    <h3 class="buttonsList__label">Studies</h3>
+    <div class="buttonsList__container">
+      <div class="buttonsList__container--content">
+        <button class="btn m-3 buttonsList__button" (click)="getVariablesFunction(studyName.studyName); this.isVariablesVisible = !this.isVariablesVisible" *ngFor="let studyName of this.globals.studyStatisticVariables">{{studyName.studyName}}</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="this.isVariablesVisible" class="buttonsList">
+    <h3 class="buttonsList__label">Variables</h3>
+    <div class="buttonsList__container">
+      <div class="buttonsList__container--content">
+        <button class="btn m-3 buttonsList__button" (click)="this.initStatistics(); this.isStatisticsVisible = true" *ngFor="let variable of this.variables">{{variable}}</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="this.isStatisticsVisible" class="charts">
+      <table style=" margin: auto; width: 70%; color: white; height: 40rem">
           <td>
             <canvas id="barChart"></canvas>
           </td>
@@ -26,5 +42,5 @@
                   [chartType]="pieChartType"></canvas> -->
         </td>
       </table>
-    </div>git
+    </div>
 </div>

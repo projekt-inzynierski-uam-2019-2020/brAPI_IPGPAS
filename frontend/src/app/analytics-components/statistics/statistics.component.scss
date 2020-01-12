@@ -512,6 +512,66 @@
       box-shadow: 0 0 4px #139553;
     }
   }
+
+  .buttonsList{
+    display: flex;
+    justify-content: space-between;
+    flex-flow: wrap;
+    margin: auto 60px;
+    margin-bottom: 40px;
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+    &__label{
+      color: #FFFFFF;
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 20px;
+      margin-left: 0;
+    }
+
+
+    &__container{
+      display: flex;
+      flex-wrap: nowrap;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      flex-direction: row;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+
+      &--content{
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        margin-right: 20px;
+        overflow-x: auto;
+      }
+    }
+
+    &__button{
+      height: 50px;
+      background-color: #139553;
+      color: #FFFFFF;
+      border-radius: 2px;
+      padding: 5px;
+      box-shadow: none;
+      outline: none;
+      border-width: 0;
+      white-space: nowrap;
+
+      &:active, &:focus{
+        box-shadow: none;
+        outline: none;
+        border-width: 0;
+      }
+
+      &:hover{
+        background-color: #126e3a;
+      }
+    }
+
+  }
 }
 
 @media (max-width: 1600px) {
