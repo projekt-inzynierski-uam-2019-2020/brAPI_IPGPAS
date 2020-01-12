@@ -1,4 +1,4 @@
 FROM python:3.7-alpine
-COPY . /opt/isabtab-data/
-WORKDIR /opt/isabtab-data/
+COPY . /opt/isatab-data/
+WORKDIR /opt/isatab-data/
 CMD python converter.py
