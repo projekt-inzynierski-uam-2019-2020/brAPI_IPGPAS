@@ -11,7 +11,7 @@
     <div class="row">
     </div>
   </div>
-  <button class="btn m-3 filters__header--button" *ngFor="let studyName of this.globals.studyStatisticVariables">{{studyName.studyName}}</button>
+  <button class="btn m-3 filters__header--button" (click)="getVariablesFunction(studyName.studyName)" *ngFor="let studyName of this.globals.studyStatisticVariables">{{studyName.studyName}}</button>
   <div class="charts">
       <table style=" margin: auto;
   width: 70%; color: white; height: 40rem">
@@ -26,5 +26,5 @@
                   [chartType]="pieChartType"></canvas> -->
         </td>
       </table>
-    </div>
+    </div>git
 </div>

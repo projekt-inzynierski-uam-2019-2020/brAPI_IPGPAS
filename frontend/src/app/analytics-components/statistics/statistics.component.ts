@@ -14,6 +14,7 @@ export class StatisticsComponent implements OnInit {
   public pieChartData: number[];
   allVariablesIds: string[] = [];
   allValues: number[] = [];
+  variables: string[] = [];
 
   constructor(private chartService: ChartService, globals: Globals) {
     this.globals = globals;
@@ -27,6 +28,7 @@ export class StatisticsComponent implements OnInit {
     this.pieChartData = [10, 23, 45, 34];
     this.initStatistics();
     console.log(this.globals.studyStatisticVariables);
+
   }
 
   initStatistics() {
@@ -45,6 +47,18 @@ export class StatisticsComponent implements OnInit {
 
     this.chartService.chartColumnStyle(this.allVariablesIds);
     this.chartService.columnChart(this.allVariablesIds, this.allValues, 'Average of variables');
+  }
+
+  getVariablesFunction(studyName: string){
+    this.variables = [];
+    for (const studyStaticsVariables of this.globals.studyStatisticVariables){
+      if (studyName === studyStaticsVariables.studyName) {
+        for (const variable of studyStaticsVariables.statisticVariables) {
+          this.variables.push(variable.variableName);
+        }
+      }
+    }
+    console.log(this.variables);
   }
 
 }
