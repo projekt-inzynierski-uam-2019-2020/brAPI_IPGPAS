@@ -10,12 +10,14 @@ before_install:
 - chmod 600 ./travis-ci-key
 - echo -e "Host teamprojectuam.tk\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./travis-ci-key
-- ssh -i ./travis-ci-key plantphenoadmin@teamprojectuam.tk pwd
 - touch database/brapi_db/PlantPhenoDB.psql
 
 script:
 - docker-compose up -d --build
 
 after_success:
-- docker ps
-- docker-compose down
+- ssh -i ./travis-ci-key plantphenoadmin@teamprojectuam.tk "
+        cd /opt/brAPI_IPGPAS
+        sudo git pull
+        docker-compose up -d --build
+    "
