@@ -1,22 +1,30 @@
-<section>
-  <button class="back" type="button" href="#" routerLink="/servers/data"><i class="fas fa-long-arrow-alt-left"></i>Back</button>
-  <div class="container">
-    <h1 class="title">Study</h1>
-    <div class="row">
-      <div class="item">
+<div class="filters">
+  <div class="filters__header">
+    <div class="filters__header--back">
+      <div class="info" routerLink="../variables">
+        <img src="../../assets/back.png" alt="Back">
+        <h4 class="back__title">Variables</h4>
       </div>
+      <div class="filters__header--separator"></div>
+      <h2 class="filters__header--title">Statistic</h2>
     </div>
-    <div class="charts">
-      <table>
-        <td>
-          <canvas  style="margin-left: 20rem" id="pieChart" baseChart
+    <div class="row">
+    </div>
+  </div>
+  <button class="btn m-3 filters__header--button" (click)="getVariablesFunction(studyName.studyName)" *ngFor="let studyName of this.globals.studyStatisticVariables">{{studyName.studyName}}</button>
+  <div class="charts">
+      <table style=" margin: auto;
+  width: 70%; color: white; height: 40rem">
+          <td>
+            <canvas id="barChart"></canvas>
+          </td>
+
+          <td>
+         <!-- <canvas  style="margin-left: 20rem" id="pieChart" baseChart
                   [data]="pieChartData"
                   [labels]="pieChartLabels"
-                  [chartType]="pieChartType"></canvas>
+                  [chartType]="pieChartType"></canvas> -->
         </td>
       </table>
-    </div>
-
-  </div>
-
-</section>
+    </div>git
+</div>

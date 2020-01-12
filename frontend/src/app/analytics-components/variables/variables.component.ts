@@ -1,15 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Globals} from '../../globals';
 import {GermplasmService} from '../../call-services/germplasm/germplasm-service';
-import {Variable} from '../../call-models/variable';
-import {ServerStudyVariables} from './serverStudyVariables';
-import {Study} from '../../call-models/study';
-import {VariableCheckbox} from './VariableCheckbox';
-import {VariableRow} from './VariableRow';
-import {StudyColumn} from '../germplasm/StudyColumn';
-import {Germplasm} from '../../call-models/germplasm';
 import {VariableStudy} from './variableStudy';
 import {VariableSelect} from './variableSelect';
+import {VariableSelectValues} from './VariableSelectValues';
+import {GermplasmTableData} from './studyIdVariableValues';
+import {StatisticVariable} from './statisticVariable';
+import {StudyStatisticVariables} from './studyStatisticVariables';
 
 @Component({
   selector: 'app-variables',
@@ -20,14 +17,16 @@ export class VariablesComponent implements OnInit {
 
   globals: Globals;
   germplasmService: GermplasmService;
-  studiesCsv: string[] = [];
-  variables: Variable[] = [];
-  variableStudy: VariableStudy[] = [];
-  variableUniqStudy: VariableStudy[] = [];
-  listOfVariablesIdsOnly: VariableSelect[] = [];
-  serverStudyVariables: ServerStudyVariables[] = [];
-  variableChecboxes: VariableCheckbox[] = [];
-  i = 0;
+
+  variable: VariableSelect[] = [];
+  variablesStudy: VariableStudy[] = [];
+  isLoading = true;
+  values: string[] = [];
+  variableNames: any[] = [];
+  statisticVariables: StatisticVariable[];
+  studiesStatisticVariables: StudyStatisticVariables[] = [];
+  selectedStudiesStatisticsVariables: StudyStatisticVariables[] = [];
+  selectedVariables: StatisticVariable[] = [];
 
 
   constructor(globals: Globals, germplasmService: GermplasmService) {
@@ -38,107 +37,95 @@ export class VariablesComponent implements OnInit {
 
   ngOnInit() {
     this.fetchVariablesBySelectedStudiesDbId();
+    this.globals.selectedVariablesValues = [];
   }
 
   fetchVariablesBySelectedStudiesDbId() {
+    let loadingCounter = 0;
+
     this.globals.selectedStudiesDbId.map(selectedStudy => this.germplasmService.getVariablesByStudyDbId(selectedStudy.serverUrl, selectedStudy.study.studyDbId)
-      .subscribe(studyCsv => {
-        this.studiesCsv.push(studyCsv);
+      .subscribe(variableJSON => {
 
-        const csvRows: string[] = studyCsv.split('\n');
-        const headerColumns: string[] = csvRows[0].split(',');
-        const valuesRows: string[] = [];
-
-
-        const variableIds: string[] = [];
-
-        for (let i = 15; i < headerColumns.length; i++) {
-          variableIds.push(headerColumns[i]);
-        }
-
-        for (let i = 1; i < csvRows.length; i++) {
-          valuesRows.push(csvRows[i]);
-        }
-
-
-        const splittedValuesRows: string[][] = [];
-        for (const valueRow of valuesRows) {
-          splittedValuesRows.push(valueRow.split(','));
-        }
-
-        for (const splittedValueRow of splittedValuesRows) {
-          const variable: Variable = new Variable();
-          variable.variableIds = variableIds;
-          variable.year = splittedValueRow[0];
-          variable.studyDbId = splittedValueRow[1];
-          variable.studyName = splittedValueRow[2];
-          variable.locationDbId = splittedValueRow[3];
-          variable.locationName = splittedValueRow[4];
-          variable.germplasmDbId = splittedValueRow[5];
-          variable.germplasmName = splittedValueRow[6];
-          variable.observationUnitDbId = splittedValueRow[7];
-          variable.plotNumber = splittedValueRow[8];
-          variable.replicate = splittedValueRow[9];
-          variable.blockNumber = splittedValueRow[10];
-          variable.observationTimestamp = splittedValueRow[11];
-          variable.entryType = splittedValueRow[12];
-          variable.X = splittedValueRow[13];
-          variable.Y = splittedValueRow[14];
-          variable.variableValues = [];
-          for (let i = 15; i < splittedValueRow.length; i++) {
-            variable.variableValues.push(splittedValueRow[i]);
+        for (const variable of variableJSON.observationVariableNames) {
+          if (!this.variable.some((item => item.variableName === variable))) {
+            this.variable.push({serverUrl: selectedStudy.serverUrl, variableName: variable, selected: false, study: selectedStudy.study});
 
           }
-          this.variables.push(variable);
-          this.variableStudy.push({study: selectedStudy.study, variable: variable, selected: false, serverUrl: selectedStudy.serverUrl});
         }
-        this.globals.variables = this.variables;
+        this.statisticVariables = [];
+        const studyStatisticVariables: StudyStatisticVariables = new StudyStatisticVariables();
 
-        this.setVariablesCheckboxes(selectedStudy.study, selectedStudy.serverUrl, this.variables);
+        for (const observationVariable of variableJSON.observationVariableNames) {
+          const statisticVariable: StatisticVariable = new StatisticVariable();
+          statisticVariable.variableName = observationVariable;
+          this.statisticVariables.push(statisticVariable);
+        }
 
+        for (let i = 1; i < variableJSON.data.length; i++) {
+          this.values = [];
+          this.variableNames = [];
+
+          for (let j = variableJSON.data[0].length - variableJSON.observationVariableNames.length; j < variableJSON.data[0].length; j++) {
+            this.statisticVariables[j - variableJSON.data[0].length + variableJSON.observationVariableNames.length].data.push(variableJSON.data[i][j]);
+            this.statisticVariables[j - variableJSON.data[0].length + variableJSON.observationVariableNames.length].germplasms.push(variableJSON.data[i][17]);
+            this.statisticVariables[j - variableJSON.data[0].length + variableJSON.observationVariableNames.length].selected = false;
+
+          }
+          studyStatisticVariables.studyId = variableJSON.data[i][4];
+          studyStatisticVariables.studyName = variableJSON.data[i][5];
+          studyStatisticVariables.statisticVariables = this.statisticVariables;
+        }
+        this.studiesStatisticVariables.push(studyStatisticVariables);
+        console.log(this.studiesStatisticVariables);
+
+        this.variablesStudy.push({
+          variable: variableJSON.observationVariableNames,
+          study: selectedStudy.study,
+          serverUrl: selectedStudy.serverUrl,
+          selected: false
+        });
+
+        loadingCounter = loadingCounter + 1;
+        if (loadingCounter === this.globals.selectedStudiesDbId.length) {
+          this.isLoading = false;
+        }
       }));
-
   }
 
-  setVariablesCheckboxes(study: Study, serverUrl: string, variables: Variable[]) {
+  checkVariableFunction(variableStudy: VariableStudy, variableName: string) {
 
-    for (const studyV of this.variableStudy) {
-      if (!this.variableUniqStudy.some((item => item.study.studyName === studyV.study.studyName))){
-        this.variableUniqStudy.push({study: studyV.study, variable: studyV.variable, selected: false, serverUrl: serverUrl});
-      }
-    }
-
-    variables.map(variable => this.serverStudyVariables.push({study: study, serverUrl: serverUrl, variable: variable}));
-
-    for (const variable of variables) {
-      this.variableChecboxes.push({study: study, selected: false, variable: variable});
-
-      for (const id of variable.variableIds) {
-        if (!this.listOfVariablesIdsOnly.some((item => item.variableId === id))) {
-          this.listOfVariablesIdsOnly.push({variableId: id, selected: false, serverUrl: serverUrl});
-        }
-
+    for (const variable of variableStudy.variable) {
+      if (variable === variableName) {
+        return true;
       }
     }
   }
 
-  checkVariableFunction(variableRow: VariableStudy, idOfVariable: string) {
-    for (const variable of variableRow.variable.variableIds) {
-        if (variable === idOfVariable) {
-          return  true;
+  setSelectedVariables() {
+    const selectedVariables = this.variable.filter(studyColumns => studyColumns.selected).map(studyColumns => studyColumns);
 
+    for (const studyStatisticVariable of this.studiesStatisticVariables){
+      for (const selectedVariable of selectedVariables){
+        console.log(selectedVariable.study.studyDbId);
+        if (studyStatisticVariable.studyId.toString() === selectedVariable.study.studyDbId.toString()) {
+          for (const variableName of studyStatisticVariable.statisticVariables) {
+            if (selectedVariable.variableName === variableName.variableName){
+              this.selectedVariables.push(variableName);
+            }
+          }
+          if (!this.selectedStudiesStatisticsVariables.some((item => item.studyId === studyStatisticVariable.studyId))) {
+            this.selectedStudiesStatisticsVariables.push({
+              studyId: studyStatisticVariable.studyId,
+              statisticVariables: this.selectedVariables,
+              studyName: studyStatisticVariable.studyName,
+            });
+          }
         }
+      }
     }
+    this.globals.studyStatisticVariables = this.selectedStudiesStatisticsVariables;
+    console.log(this.selectedStudiesStatisticsVariables);
   }
-
-  setSelectedGermplasms() {
-    const selectedVariables = this.listOfVariablesIdsOnly.filter(studyColumns => studyColumns.selected).map(studyColumns => studyColumns);
-
-   this.globals.selectedVariables = selectedVariables;
-
-   console.log(this.globals.selectedVariables);
-
-   }
 
 
 }

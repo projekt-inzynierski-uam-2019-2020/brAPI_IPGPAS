@@ -14,8 +14,8 @@
       <button
         href="#"
         class="btn m-3 filters__header--button"
-        (click)="setSelectedServerStudies()"
-        [disabled]="isLoading || !this.studyCheckboxes.length > 0"
+        (click)="setSelectedServerStudiesFromSelectedFilteredRows()"
+        [disabled]="isLoading || !this.filteredStudyRows.length > 0"
       >
         Accept
         <img src="../../assets/next.png" alt="Next">
@@ -26,23 +26,23 @@
     <h3 class="optionalFilters__label">Filter by Location</h3>
     <div class="optionalFilters__container">
       <div class="optionalFilters__container--content">
-        <div class="optionalFilters__container--item" *ngFor="let studyLocationCheckbox of this.studyLocationCheckboxes; let i = index">
-          <label class="checkbox" for="{{studyLocationCheckbox}}{{i}}">
+        <div class="optionalFilters__container--item" *ngFor="let location of this.locations; let i = index">
+          <label class="checkbox" for="{{location}}{{i}}">
             <input
-              [(ngModel)]="studyLocationCheckbox.selected"
+              [(ngModel)]="location.selected"
               type="checkbox"
-              id="{{studyLocationCheckbox}}{{i}}"
+              id="{{location}}{{i}}"
               name="num"
               checked = "checked"
               class="checkbox__input"
             >
               <span class="checkbox__box"></span>
-            {{studyLocationCheckbox.study.locationName}}
+            {{location.location}}
           </label>
         </div>
       </div>
       <button
-        (click)="setLocationStudy()"
+        (click)="applyFilters()"
         class="optionalFilters__filter">Filter</button>
     </div>
   </div>
@@ -50,34 +50,34 @@
     <h3 class="optionalFilters__label">Filter by Season</h3>
     <div class="optionalFilters__container">
       <div class="optionalFilters__container--content">
-      <div class="optionalFilters__container--item" *ngFor="let studySeasonCheckbox of this.studySeasonCheckboxes; let i = index">
-        <label class="checkbox" for="{{studySeasonCheckbox}}{{i}}{{i}}">
+      <div class="optionalFilters__container--item" *ngFor="let season of this.seasons; let i = index">
+        <label class="checkbox" for="{{season}}{{i}}{{i}}">
           <input
-            [(ngModel)]="studySeasonCheckbox.selected"
+            [(ngModel)]="season.selected"
             type="checkbox"
-            id="{{studySeasonCheckbox}}{{i}}{{i}}"
+            id="{{season}}{{i}}{{i}}"
             name="num"
             checked="checked"
             class="checkbox__input"
           >
           <span class="checkbox__box"></span>
-          {{studySeasonCheckbox.season.year}}
+          {{season.year}}
         </label>
         </div>
       </div>
       <button
-        (click)="setSeasonStudy()"
+        (click)="applyFilters()"
         class="optionalFilters__filter">Filter</button>
     </div>
   </div>
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <div  *ngIf="!isLoading" class="filters__counter">
     <h3>Results found:</h3>
-    <h3>{{studyCheckboxes.length}}</h3>
+    <h3>{{filteredStudyRows.length}}</h3>
   </div>
 
 
-  <div *ngIf="isShowAllStudies && !isLoading" class="study">
+  <div *ngIf="!isLoading" class="study">
     <table class="table table-striped table-dark" >
       <thead>
       <tr>
@@ -93,15 +93,16 @@
         </label></th>
         <th>Study Name</th>
         <th>Location Name</th>
+        <th>Year</th>
         <th>Documentation URL</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let studyCheckbox of this.studyCheckboxes; let i = index">
+      <tr *ngFor="let filteredStudyRow of this.filteredStudyRows; let i = index">
         <td>
           <label class="checkbox" for="{{i}}">
             <input
-              [(ngModel)]="studyCheckbox.selected"
+              [(ngModel)]="filteredStudyRow.selected"
               type="checkbox"
               id="{{i}}"
               name="num"
@@ -113,13 +114,16 @@
         </td>
         <td class="hasTooltip">
           <div class="hasTooltip__container">
-            <div class="item">{{ studyCheckbox.study.studyName ? studyCheckbox.study.studyName : '---' }}</div>
-            <div class="tooltip">{{ studyCheckbox.study.studyName ? studyCheckbox.study.studyName : '---' }}</div>
+            <div class="item">{{ filteredStudyRow.study.name ? filteredStudyRow.study.name : '---' }}</div>
+            <div class="tooltip">{{ filteredStudyRow.study.name ? filteredStudyRow.study.name : '---' }}</div>
           </div>
         </td>
-        <td>{{ studyCheckbox.study.locationName ? studyCheckbox.study.locationName : '---' }}</td>
+        <td>{{ filteredStudyRow.study.locationName ? filteredStudyRow.study.locationName : '---' }}</td>
         <td>
-          <a target="_blank" href="{{ studyCheckbox.study.documentationURL ? studyCheckbox.study.documentationURL : '#' }}">{{ studyCheckbox.study.documentationURL ? studyCheckbox.study.documentationURL : '---' }}</a>
+          <div  *ngFor="let season of filteredStudyRow.study.seasons">{{ season.year ? season.year : '---' }}</div></td>
+
+        <td>
+          <a target="_blank" href="{{ filteredStudyRow.study.documentationURL ? filteredStudyRow.study.documentationURL : '#' }}">{{ filteredStudyRow.study.documentationURL ? filteredStudyRow.study.documentationURL : '---' }}</a>
         </td>
       </tr>
       </tbody>

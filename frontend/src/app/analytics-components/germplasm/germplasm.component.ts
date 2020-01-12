@@ -53,6 +53,8 @@ export class GermplasmComponent implements OnInit {
     this.serverStudy.push({serverUrl: serverUrl, study: study});
     this.studyColumns.push({germplasms: germplasms, study: study, selected: false});
 
+    console.log(this.studyColumns);
+
     for (const germplasm of germplasms) {
       this.germplasmCheckboxes.push({germplasm: germplasm, selected: false, study: study});
 

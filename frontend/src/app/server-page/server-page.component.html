@@ -3,7 +3,7 @@
     <div class="servers__header--back">
       <div class="info" routerLink="../">
         <img src="../../assets/back.png" alt="Back">
-        <h4 class="back__title" (click)="isDisplay= false">Homepage</h4>
+        <h4 class="back__title">Homepage</h4>
       </div>
       <div class="servers__header--separator"></div>
       <h2 class="servers__header--title">Choose server</h2>
@@ -11,7 +11,7 @@
     <button
       href="#"
       class="btn servers__header--button"
-      (click)="getSelected()"
+      (click)="setSelectedCheckboxes()"
       type="button"
       [disabled]="isLoading || !this.servers.length > 0"
     >
@@ -27,14 +27,14 @@
     <div class="servers__container&#45;&#45;card col-xl-larger col-lg-6" *ngFor="let server of servers;let i = index ">
       <input
         class="servers__container&#45;&#45;card-checkbox"
-        [(ngModel)]="checkboxes[i].selected"
+        [(ngModel)]="serverCheckboxes[i].selected"
         type="checkbox"
-        id="{{ checkboxes[i].value }}"
+        id="{{ serverCheckboxes[i].value }}"
         name="num"
         checked="checked"
       />
       <div class="servers__container&#45;&#45;card-content">
-        <label for="{{ checkboxes[i].value }}">
+        <label for="{{ serverCheckboxes[i].value }}">
           <div class="row m-0 pl-3 pr-3 justify-content-between">
             <h3>{{server.name}}</h3>
             <h3 class="tooltip">{{server.name}}</h3>
