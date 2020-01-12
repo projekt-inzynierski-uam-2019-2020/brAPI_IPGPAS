@@ -44,8 +44,8 @@
           <td class="table__header"><p class="table__header--top">Study Name</p><p class="table__header--line"></p><p class="table__header--bottom">Gerplasm Name</p></td>
           <td class="hasTooltip" *ngFor="let studyColumn of this.studyColumns; let i = index">
             <div class="hasTooltip__container">
-              <div class="item">{{ studyColumn.study.studyName ? studyColumn.study.studyName : '---' }}</div>
-              <div class="tooltip">{{ studyColumn.study.studyName ? studyColumn.study.studyName : '---' }}</div>
+              <div class="item">{{ studyColumn.study.name ? studyColumn.study.name : '---' }}</div>
+              <div class="tooltip">{{ studyColumn.study.name ? studyColumn.study.name : '---' }}</div>
             </div>
           </td>
         </tr>

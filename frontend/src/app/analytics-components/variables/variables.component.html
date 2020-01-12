@@ -13,23 +13,24 @@
         href="#"
         class="btn m-3 filters__header--button"
         routerLink="/servers/statistics"
-        (click)="setSelectedGermplasms()"
+        (click)="setSelectedVariables()"
       >
         Next
         <img src="../../assets/next.png" alt="Next">
       </button>
     </div>
   </div>
-  <div class="variables">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <div class="variables" *ngIf="!isLoading">
     <table class="table table-striped table-dark">
       <thead>
       <tr>
         <td></td>
         <td></td>
-        <td class="hasTooltip" *ngFor="let variableStudy of this.variableStudy; let i = index">
+        <td class="hasTooltip" *ngFor="let variableStudy of this.variablesStudy; let i = index">
           <div class="hasTooltip__container">
-            <div class="item">{{ variableStudy.study.studyDbId ? variableStudy.study.studyDbId : '---' }}</div>
-            <div class="tooltip">{{ variableStudy.study.studyDbId ? variableStudy.study.studyDbId : '---' }}</div>
+            <div class="item">{{ variableStudy.study.name ? variableStudy.study.name : '---' }}</div>
+            <div class="tooltip">{{ variableStudy.study.name ? variableStudy.study.name : '---' }}</div>
           </div>
         </td>
       </tr>
@@ -47,8 +48,8 @@
           <span class="checkbox__box"></span>
         </label></td>
         <td>{{ variableName.variableName}}</td>
-      <!--  <td *ngFor="let variableRow  of this.variableUniqStudy"><p *ngIf="checkVariableFunction(variableRow, variableName.variableName)">
-           <i class="fas fa-check"></i></p> -->
+         <td *ngFor="let variableStudy  of this.variablesStudy"><p *ngIf="checkVariableFunction(variableStudy, variableName.variableName)">
+           <i class="fas fa-check"></i></p>
 
       </tr>
       </tbody>

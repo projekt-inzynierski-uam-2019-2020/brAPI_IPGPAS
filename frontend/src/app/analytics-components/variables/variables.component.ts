@@ -1,15 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Globals} from '../../globals';
 import {GermplasmService} from '../../call-services/germplasm/germplasm-service';
-import {Variable} from '../../call-models/variable';
-import {ServerStudyVariables} from './serverStudyVariables';
-import {Study} from '../../call-models/study';
-import {VariableCheckbox} from './VariableCheckbox';
 import {VariableStudy} from './variableStudy';
 import {VariableSelect} from './variableSelect';
-import {VariableIdSum} from './variableIdSum';
-import {VariableIdValues} from './variableIdValues';
-import {StudyColumns} from './studyColumns';
+import {visitRootRenderNodes} from '@angular/core/src/view/util';
 
 @Component({
   selector: 'app-variables',
@@ -24,6 +18,9 @@ export class VariablesComponent implements OnInit {
   variable: VariableSelect[] = [];
   variableStudy: VariableStudy[] = [];
   variableUniqStudy: VariableStudy[] = [];
+  variablesStudy: VariableStudy[] = [];
+  isLoading = true;
+
 
 
   constructor(globals: Globals, germplasmService: GermplasmService) {
@@ -38,15 +35,26 @@ export class VariablesComponent implements OnInit {
   }
 
   fetchVariablesBySelectedStudiesDbId() {
+    let loadingCounter = 0;
+
     this.globals.selectedStudiesDbId.map(selectedStudy => this.germplasmService.getVariablesByStudyDbId(selectedStudy.serverUrl, selectedStudy.study.studyDbId)
       .subscribe(variableJSON => {
 
         for (const variable of variableJSON.observationVariableNames) {
           if (!this.variable.some((item => item.variableName === variable))) {
             this.variable.push({serverUrl: selectedStudy.serverUrl, variableName: variable, selected: false});
-            this.variableStudy.push({serverUrl: selectedStudy.serverUrl, variable: variable, study: selectedStudy.study, selected: false});
+
           }
         }
+
+        for ( let j = 1; j < variableJSON.data.length; j++) {
+          for ( let i = variableJSON.data[0].length - variableJSON.observationVariableNames.length; i < variableJSON.data[0].length; i++ ) {
+            console.log(variableJSON.data[j][i]);
+          }
+
+        }
+
+        this.variablesStudy.push({variable: variableJSON.observationVariableNames, study: selectedStudy.study, serverUrl: selectedStudy.serverUrl, selected: false});
 
         for (const studyV of this.variableStudy) {
           if (!this.variableUniqStudy.some((item => item.study.studyName === studyV.study.studyName))) {
@@ -59,22 +67,25 @@ export class VariablesComponent implements OnInit {
           }
         }
 
-        console.log(this.variableUniqStudy);
-        console.log(this.variableStudy);
-        console.log(this.variable);
-        console.log(variableJSON.observationVariableNames);
-        console.log(variableJSON.observationVariableNames.length);
-        console.log(variableJSON.data);
-
+        loadingCounter = loadingCounter + 1;
+        if (loadingCounter === this.globals.selectedStudiesDbId.length) {
+          this.isLoading = false;
+        }
       }));
   }
 
-  checkVariableFunction(variableRow: VariableStudy, idOfVariable: string) {
-    for (const variable of variableRow.variable.variableIds) {
-      if (variable === idOfVariable) {
+  checkVariableFunction(variableStudy: VariableStudy, variableName: string) {
+
+    for (const variable of variableStudy.variable) {
+      if (variable === variableName) {
         return true;
       }
     }
+  }
+
+  setSelectedVariables() {
+    const selectedStudies = this.variable.filter(studyColumns => studyColumns.selected).map(studyColumns => studyColumns);
+    console.log(selectedStudies);
   }
 
 

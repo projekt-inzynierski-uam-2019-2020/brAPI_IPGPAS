@@ -59,7 +59,7 @@ export class AdminMainPageComponent implements OnInit {
   }
 
   deleteUser(server: Server): void {
-    this.serverService.deleteUser(server._id)
+    this.serverService.deleteServer(server._id)
       .subscribe( data => {
         this.servers = this.servers.filter(u => u !== server);
       });

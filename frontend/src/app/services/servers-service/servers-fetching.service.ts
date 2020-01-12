@@ -26,7 +26,7 @@ export class ServersFetchingService {
     return this.http.put<Server>(this.serversUrl + '/' + serverId + '/update', server, httpOptions);
   }
 
-  public deleteUser(user) {
-    return this.http.delete(this.serversUrl + '/' + user + '/delete');
+  public deleteServer(server) {
+    return this.http.delete(this.serversUrl + '/' + server + '/delete');
   }
 }
