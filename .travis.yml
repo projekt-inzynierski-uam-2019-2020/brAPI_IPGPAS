@@ -17,9 +17,4 @@ script:
 
 after_success:
 - docker ps 
-
-deploy:
-    provider: script
-    script: ./deploy-script.sh
-    on:
-        branch: dev
+- ssh -i travis-ci-key plantphenoadmin@teamprojectuam.tk "cd /opt/brAPI_IPGPAS && sudo git checkout dev && sudo git pull && docker-compose up -d --build" 
