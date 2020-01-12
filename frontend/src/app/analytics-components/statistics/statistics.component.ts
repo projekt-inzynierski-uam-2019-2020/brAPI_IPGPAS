@@ -29,7 +29,6 @@ export class StatisticsComponent implements OnInit {
     this.globals.variables.map(variable => this.pieChartLabels = variable.variableIds);
     this.pieChartData = [10, 23, 45, 34];
     console.log(this.globals.studyStatisticVariables);
-
   }
 
   initStatistics() {

@@ -24,12 +24,13 @@
     <h3 class="buttonsList__label">Variables</h3>
     <div class="buttonsList__container">
       <div class="buttonsList__container--content">
-        <button class="btn m-3 buttonsList__button" (click)="this.initStatistics(); this.isStatisticsVisible = true" *ngFor="let variable of this.variables">{{variable}}</button>
+        <button class="btn m-3 buttonsList__button" (click)="this.isStatisticsVisible = true" *ngFor="let variable of this.variables">{{variable}}</button>
       </div>
     </div>
   </div>
 
   <div *ngIf="this.isStatisticsVisible" class="charts">
+      {{this.initStatistics()}}
       <table style=" margin: auto; width: 70%; color: white; height: 40rem">
           <td>
             <canvas id="barChart"></canvas>
