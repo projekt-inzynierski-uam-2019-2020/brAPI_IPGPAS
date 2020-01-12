@@ -7,4 +7,5 @@ FROM openjdk:8-jre-alpine3.9
 EXPOSE 8080
 WORKDIR /opt/brapi-app
 COPY --from=0 /root/brapi-app-build/target/brapi_igpas-0.0.1-SNAPSHOT.jar .
+COPY ./data.json .
 CMD java -jar brapi_igpas-0.0.1-SNAPSHOT.jar

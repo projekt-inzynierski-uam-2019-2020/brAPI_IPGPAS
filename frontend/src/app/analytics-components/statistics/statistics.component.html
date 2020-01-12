@@ -11,15 +11,29 @@
     <div class="row">
     </div>
   </div>
-  <button class="btn m-3 filters__header--button" (click)="getVariablesFunction(studyName.studyName)" *ngFor="let studyName of this.globals.studyStatisticVariables">{{studyName.studyName}}</button>
-  <div class="charts">
 
-            <canvas id="barChart" style=" margin: auto;
-  width: 70%; color: white; height: 40rem" *ngIf="barCharVisibility" ></canvas>
-
-         <!-- <canvas  style="margin-left: 20rem" id="pieChart" baseChart
-                  [data]="pieChartData"
-                  [labels]="pieChartLabels"
-      -->
+  <div class="buttonsList">
+    <h3 class="buttonsList__label">Studies</h3>
+    <div class="buttonsList__container">
+      <div class="buttonsList__container--content">
+        <button class="btn m-3 buttonsList__button" (click)="getVariablesFunction(studyName.studyName); this.isVariablesVisible = !this.isVariablesVisible" *ngFor="let studyName of this.globals.studyStatisticVariables">{{studyName.studyName}}</button>
+      </div>
     </div>
+  </div>
+  <div *ngIf="this.isVariablesVisible" class="buttonsList">
+    <h3 class="buttonsList__label">Variables</h3>
+    <div class="buttonsList__container">
+      <div class="buttonsList__container--content">
+        <button class="btn m-3 buttonsList__button" (click)="this.isStatisticsVisible = true; this.initAverageStatistics(); getOneVariable(variable) " *ngFor="let variable of this.variables">{{variable}}</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="this.isStatisticsVisible && this.isVariablesVisible" class="charts" style="overflow-x: auto">
+    <canvas style=" margin: auto; width: 20%; color: white; height: 30rem; overflow-x: auto" id="lineChart"></canvas>
+  </div>
+  <div *ngIf="this.isStatisticsVisible && this.isVariablesVisible" class="charts">
+        <canvas style=" margin: auto; width: 20%; color: white; height: 30rem" id="barChart"></canvas>
+  </div>
+
 </div>

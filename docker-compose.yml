@@ -1,36 +1,49 @@
 version: '3.7'
+
 services:
+
+  isaconverter:
+    build: ./isatab-converter
+    volumes: 
+      - "./isatab-converter/:/opt/isatab-data/"
+
   admindb:
     build: ./database/admin_db
     ports: 
       - "27017:27017"
     volumes: 
       - "mongodata:/data/db"
+
   brapidb:
     build: ./database/brapi_db
     ports: 
       - "5432:5432"
     volumes: 
       - "postgresdata:/var/lib/postgresql/data/"
+
   brapiapp:
     build: ./brapi
     ports:
       - "8080:8080"
     links:
       - brapidb:db.brapi.local
+
   adminapp:
     build: ./adminapi
     ports:
       - "3000:3000"
     links:
       - admindb:db.admin.local
+
   frontend:
     build: ./frontend
     ports:
       - "81:80"
     links:
       - adminapp:api.admin.local
+
 volumes: 
+
   postgresdata:
   mongodata:
   

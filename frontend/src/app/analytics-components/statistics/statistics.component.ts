@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ChartService} from '../../services/chart-service/chart-service';
 import {Globals} from '../../globals';
 import {VariableAverageValue} from './VariableAverageValue';
+import {GermplasmValues} from './germplasmValues';
 
 @Component({
   selector: 'app-statistics',
@@ -16,14 +17,24 @@ export class StatisticsComponent implements OnInit {
   allVariablesIds: string[] = [];
   allValues: number[] = [];
   variables: string[] = [];
+
   values: number[] = [];
   value: number;
+
+  germplasm: string[] = [];
+  valuesGermplasm: number[] = [];
+  studyName: string;
 
   barCharVisibility = false;
 
   variableAverageValue: VariableAverageValue[] = [];
 
   showAverageStats: false;
+
+  isVariablesVisible = false;
+  isStatisticsVisible = false;
+  variableStudy: string[] = [];
+  germplasms: GermplasmValues[] = [];
 
   constructor(private chartService: ChartService, globals: Globals) {
     this.globals = globals;
@@ -35,32 +46,16 @@ export class StatisticsComponent implements OnInit {
     this.allVariablesIds = [];
     this.globals.variables.map(variable => this.pieChartLabels = variable.variableIds);
     this.pieChartData = [10, 23, 45, 34];
-    console.log(this.globals.studyStatisticVariables);
 
   }
 
-  initStatistics() {
 
-    for (const variable of this.globals.selectedVariablesValues) {
-     //   this.allVariablesIds.push(variable.variable.variableId);
-    }
-
-    for (const variable of this.globals.selectedVariablesValues) {
-      let average = 0;
-      for (let i = 0; i < variable.values.length; i ++) {
-        average = average + variable.values[i];
-      }
-      this.allValues.push(average / variable.values.length);
-    }
-
-    this.chartService.chartColumnStyle(this.allVariablesIds);
-    this.chartService.columnChart(this.allVariablesIds, this.allValues, 'Average of variables');
-  }
-
-  getVariablesFunction(studyName: string){
+  getVariablesFunction(studyName: string) {
     this.variables = [];
-    for (const studyStaticsVariables of this.globals.studyStatisticVariables){
+    this.variableAverageValue = [];
+    for (const studyStaticsVariables of this.globals.studyStatisticVariables) {
       if (studyName === studyStaticsVariables.studyName) {
+        this.studyName = studyName;
         for (const variable of studyStaticsVariables.statisticVariables) {
           this.variables.push(variable.variableName);
           this.value = 0;
@@ -68,23 +63,43 @@ export class StatisticsComponent implements OnInit {
             if (valueVariable !== null) {
               this.value = this.value + parseFloat(valueVariable);
             }
-            console.log(this.value);
           }
           this.values.push(this.value / variable.data.length);
           this.variableAverageValue.push({variables: this.variables, averageValue: this.values});
         }
       }
     }
-    this.initAverageStatistics();
-    this.barCharVisibility = true;
-
-    console.log(this.variableAverageValue);
   }
 
-  initAverageStatistics(){
+  getOneVariable(variable: string){
+    this.germplasm = [];
+    this.valuesGermplasm = [];
+    for (const studyStaticsVariables of this.globals.studyStatisticVariables) {
+      if (this.studyName === studyStaticsVariables.studyName) {
+        for (const variableGerm of studyStaticsVariables.statisticVariables) {
+          if (variableGerm.variableName === variable){
+            for (let i = 0; i < variableGerm.germplasms.length; i++){
+              if (variableGerm.data[i] !== null){
+                this.germplasm.push(variableGerm.germplasms[i]);
+                this.valuesGermplasm.push(parseFloat(variableGerm.data[i]));
+              }
+            }
+          }
+        }
+      }
+    }
+    this.germplasms.push({values: this.valuesGermplasm, germplasms: this.germplasm});
 
+  }
+
+
+  initAverageStatistics() {
+    console.log(this.germplasms);
+    console.log(this.valuesGermplasm);
     this.chartService.chartColumnStyle(this.variableAverageValue[0].variables);
     this.chartService.columnChart(this.variableAverageValue[0].variables, this.variableAverageValue[0].averageValue, 'Average of variables');
+    this.chartService.lineChart(this.germplasm, this.valuesGermplasm, 'Values of Germplasms');
+
   }
 
 }

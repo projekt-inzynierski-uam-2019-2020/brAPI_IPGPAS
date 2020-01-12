@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface StudyProjectionResources extends JpaRepository<StudyEntity, Integer> {
@@ -21,7 +22,7 @@ public interface StudyProjectionResources extends JpaRepository<StudyEntity, Int
     @Query(value = "select s.id, s.title, s.description, s.investigation_id, i.title as trialName\n" +
             "from studies s join investigations i on s.investigation_id = i.id where s.id=(:studyDbId)",
             nativeQuery = true)
-    StudyProjection getStudyByStudyDbId(@Param("studyDbId") Integer studyDbId);
+    Optional<StudyProjection> getStudyByStudyDbId(@Param("studyDbId") Integer studyDbId);
 
     @Query(value = "select distinct on (v.value) value\n" +
             "from values v join attributes a on v.attribute_Id = a.id\n" +
