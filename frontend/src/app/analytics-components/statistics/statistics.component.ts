@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ChartService} from '../../services/chart-service/chart-service';
 import {Globals} from '../../globals';
+import {VariableAverageValue} from './VariableAverageValue';
 
 @Component({
   selector: 'app-statistics',
@@ -15,6 +16,14 @@ export class StatisticsComponent implements OnInit {
   allVariablesIds: string[] = [];
   allValues: number[] = [];
   variables: string[] = [];
+  values: number[] = [];
+  value: number;
+
+  barCharVisibility = false;
+
+  variableAverageValue: VariableAverageValue[] = [];
+
+  showAverageStats: false;
 
   constructor(private chartService: ChartService, globals: Globals) {
     this.globals = globals;
@@ -26,7 +35,6 @@ export class StatisticsComponent implements OnInit {
     this.allVariablesIds = [];
     this.globals.variables.map(variable => this.pieChartLabels = variable.variableIds);
     this.pieChartData = [10, 23, 45, 34];
-    this.initStatistics();
     console.log(this.globals.studyStatisticVariables);
 
   }
@@ -55,10 +63,28 @@ export class StatisticsComponent implements OnInit {
       if (studyName === studyStaticsVariables.studyName) {
         for (const variable of studyStaticsVariables.statisticVariables) {
           this.variables.push(variable.variableName);
+          this.value = 0;
+          for (const valueVariable of variable.data) {
+            if (valueVariable !== null) {
+              this.value = this.value + parseFloat(valueVariable);
+            }
+            console.log(this.value);
+          }
+          this.values.push(this.value / variable.data.length);
+          this.variableAverageValue.push({variables: this.variables, averageValue: this.values});
         }
       }
     }
-    console.log(this.variables);
+    this.initAverageStatistics();
+    this.barCharVisibility = true;
+
+    console.log(this.variableAverageValue);
+  }
+
+  initAverageStatistics(){
+
+    this.chartService.chartColumnStyle(this.variableAverageValue[0].variables);
+    this.chartService.columnChart(this.variableAverageValue[0].variables, this.variableAverageValue[0].averageValue, 'Average of variables');
   }
 
 }

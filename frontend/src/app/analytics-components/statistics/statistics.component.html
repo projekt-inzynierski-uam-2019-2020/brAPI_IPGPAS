@@ -13,18 +13,13 @@
   </div>
   <button class="btn m-3 filters__header--button" (click)="getVariablesFunction(studyName.studyName)" *ngFor="let studyName of this.globals.studyStatisticVariables">{{studyName.studyName}}</button>
   <div class="charts">
-      <table style=" margin: auto;
-  width: 70%; color: white; height: 40rem">
-          <td>
-            <canvas id="barChart"></canvas>
-          </td>
 
-          <td>
+            <canvas id="barChart" style=" margin: auto;
+  width: 70%; color: white; height: 40rem" *ngIf="barCharVisibility" ></canvas>
+
          <!-- <canvas  style="margin-left: 20rem" id="pieChart" baseChart
                   [data]="pieChartData"
                   [labels]="pieChartLabels"
-                  [chartType]="pieChartType"></canvas> -->
-        </td>
-      </table>
-    </div>git
+      -->
+    </div>
 </div>
