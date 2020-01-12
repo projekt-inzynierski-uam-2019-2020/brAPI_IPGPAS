@@ -30,8 +30,10 @@ public class TrialMapper {
                 .map(this::mapToTrialStudy)
                 .collect(Collectors.toList()));
 
-        String commonCropName = studiesWithTrialDbId.get(0).getCommonCropName();
-        trial.setCommonCropName(commonCropName);
+        if (studiesWithTrialDbId.get(0) != null) {
+            String commonCropName = studiesWithTrialDbId.get(0).getCommonCropName();
+            trial.setCommonCropName(commonCropName);
+        }
 
         return trial;
     }

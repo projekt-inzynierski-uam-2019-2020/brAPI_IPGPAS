@@ -29,7 +29,6 @@ public class TrialSorter extends Sorter<Trial> {
                 ));
                 break;
             case "locationDbId":
-                //TODO
                 break;
             case "programName":
                 trials.sort(Comparator.comparing(Trial::getProgramName, Comparator.nullsLast(Comparator.naturalOrder())

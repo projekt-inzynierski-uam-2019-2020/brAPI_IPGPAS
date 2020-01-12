@@ -1,14 +1,17 @@
-# TODO Add volumes to database containers
 version: '3.7'
 services:
   admindb:
     build: ./database/admin_db
     ports: 
       - "27017:27017"
+    volumes: 
+      - "mongodata:/data/db"
   brapidb:
     build: ./database/brapi_db
     ports: 
       - "5432:5432"
+    volumes: 
+      - "postgresdata:/var/lib/postgresql/data/"
   brapiapp:
     build: ./brapi
     ports:
@@ -27,4 +30,7 @@ services:
       - "81:80"
     links:
       - adminapp:api.admin.local
+volumes: 
+  postgresdata:
+  mongodata:
   

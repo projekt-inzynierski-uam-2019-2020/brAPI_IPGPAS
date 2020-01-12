@@ -12,10 +12,8 @@ export class StatisticsComponent implements OnInit {
   globals: Globals;
   public pieChartLabels: string[];
   public pieChartData: number[];
-  public pieChartType = 'pie';
   allVariablesIds: string[] = [];
   allValues: number[] = [];
-  test = [1, 2, 3, 4];
 
   constructor(private chartService: ChartService, globals: Globals) {
     this.globals = globals;
@@ -28,6 +26,7 @@ export class StatisticsComponent implements OnInit {
     this.globals.variables.map(variable => this.pieChartLabels = variable.variableIds);
     this.pieChartData = [10, 23, 45, 34];
     this.initStatistics();
+    console.log(this.globals.studyStatisticVariables);
   }
 
   initStatistics() {
