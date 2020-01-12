@@ -91,11 +91,18 @@ public class StudyServiceImpl implements StudyService {
         Map<String, List<?>> result = new HashMap<>();
 
         Integer studyId = Integer.valueOf(studyDbId);
-        Study study = studyMapper.mapToStudy(
-                studyProjectionResources.getStudyByStudyDbId(studyId));
+
+        Study study;
+        Optional<StudyProjection> studyProjection = studyProjectionResources.getStudyByStudyDbId(studyId);
+        if (studyProjection.isPresent()){
+            study = studyMapper.mapToStudy(studyProjection.get());
+        }
+        else {
+            return result;
+        }
 
         // get file db
-        DatabaseFile databaseFile = databaseFileMapper.mapToDbFile("text_data/data.json");
+        DatabaseFile databaseFile = databaseFileMapper.mapToDbFile("data.json");
         // find study trial
         FileTrial trial = getStudyFileTrial(study, databaseFile).orElse(new FileTrial());
 
