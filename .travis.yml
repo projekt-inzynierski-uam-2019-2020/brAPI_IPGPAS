@@ -16,8 +16,10 @@ script:
 - docker-compose up -d --build
 
 after_success:
-- ssh -i ./travis-ci-key plantphenoadmin@teamprojectuam.tk "
-        cd /opt/brAPI_IPGPAS
-        sudo git pull
-        docker-compose up -d --build
-    "
+- docker ps 
+
+deploy:
+    provider: script
+    script: ./deploy-script.sh
+    on:
+        branch: dev
