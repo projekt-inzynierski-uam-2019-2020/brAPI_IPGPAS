@@ -3,11 +3,13 @@ import {ChartService} from '../../services/chart-service/chart-service';
 import {Globals} from '../../globals';
 import {VariableAverageValue} from './VariableAverageValue';
 import {GermplasmValues} from './germplasmValues';
+import {PdfService} from '../../services/pdf-service/pdf-service';
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.scss']
+  styleUrls: ['./statistics.component.scss'],
+  providers: [PdfService]
 })
 export class StatisticsComponent implements OnInit {
 
@@ -30,13 +32,14 @@ export class StatisticsComponent implements OnInit {
   variableAverageValue: VariableAverageValue[] = [];
 
   showAverageStats: false;
+  public pieChartType = 'pie';
 
   isVariablesVisible = false;
   isStatisticsVisible = false;
   variableStudy: string[] = [];
   germplasms: GermplasmValues[] = [];
 
-  constructor(private chartService: ChartService, globals: Globals) {
+  constructor(private chartService: ChartService, globals: Globals,  private pdfService: PdfService) {
     this.globals = globals;
 
   }
@@ -53,6 +56,7 @@ export class StatisticsComponent implements OnInit {
   getVariablesFunction(studyName: string) {
     this.variables = [];
     this.variableAverageValue = [];
+
     for (const studyStaticsVariables of this.globals.studyStatisticVariables) {
       if (studyName === studyStaticsVariables.studyName) {
         this.studyName = studyName;
@@ -78,9 +82,9 @@ export class StatisticsComponent implements OnInit {
       if (this.studyName === studyStaticsVariables.studyName) {
         for (const variableGerm of studyStaticsVariables.statisticVariables) {
           if (variableGerm.variableName === variable){
-            for (let i = 0; i < variableGerm.germplasms.length; i++){
+            for (let i = 0; i < variableGerm.germplasmName.length; i++){
               if (variableGerm.data[i] !== null){
-                this.germplasm.push(variableGerm.germplasms[i]);
+                this.germplasm.push(variableGerm.germplasmName[i]);
                 this.valuesGermplasm.push(parseFloat(variableGerm.data[i]));
               }
             }
@@ -99,7 +103,12 @@ export class StatisticsComponent implements OnInit {
     this.chartService.chartColumnStyle(this.variableAverageValue[0].variables);
     this.chartService.columnChart(this.variableAverageValue[0].variables, this.variableAverageValue[0].averageValue, 'Average of variables');
     this.chartService.lineChart(this.germplasm, this.valuesGermplasm, 'Values of Germplasms');
+    this.pieChartData = this.variableAverageValue[0].averageValue;
+    this.pieChartLabels = this.variableAverageValue[0].variables;
+  }
 
+  saveToPDF(elementId: string){
+    this.pdfService.donloadPDF(elementId);
   }
 
 }

@@ -109,7 +109,13 @@ export class ChartService {
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
+              fontColor: '#c7c7c7'
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              fontColor: '#c7c7c7'
             }
           }]
         },

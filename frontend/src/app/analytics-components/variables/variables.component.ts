@@ -68,6 +68,9 @@ export class VariablesComponent implements OnInit {
           for (let j = variableJSON.data[0].length - variableJSON.observationVariableNames.length; j < variableJSON.data[0].length; j++) {
             this.statisticVariables[j - variableJSON.data[0].length + variableJSON.observationVariableNames.length].data.push(variableJSON.data[i][j]);
             this.statisticVariables[j - variableJSON.data[0].length + variableJSON.observationVariableNames.length].germplasms.push(variableJSON.data[i][17]);
+            this.statisticVariables[j - variableJSON.data[0].length + variableJSON.observationVariableNames.length].germplasmName.push(variableJSON.data[i][18]);
+            this.statisticVariables[j - variableJSON.data[0].length + variableJSON.observationVariableNames.length].studyName.push(variableJSON.data[i][5]);
+
             this.statisticVariables[j - variableJSON.data[0].length + variableJSON.observationVariableNames.length].selected = false;
 
           }
@@ -103,10 +106,8 @@ export class VariablesComponent implements OnInit {
 
   setSelectedVariables() {
     const selectedVariables = this.variable.filter(studyColumns => studyColumns.selected).map(studyColumns => studyColumns);
-
     for (const studyStatisticVariable of this.studiesStatisticVariables){
       for (const selectedVariable of selectedVariables){
-        console.log(selectedVariable.study.studyDbId);
         if (studyStatisticVariable.studyId.toString() === selectedVariable.study.studyDbId.toString()) {
           for (const variableName of studyStatisticVariable.statisticVariables) {
             if (selectedVariable.variableName === variableName.variableName){
