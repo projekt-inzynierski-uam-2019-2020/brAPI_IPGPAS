@@ -25,12 +25,15 @@ export class StudyService {
   }
 
   getStudyByStudyDbId(brAPIServerUrl: string, studyDbId: string) {
-    if (brAPIServerUrl === 'https://teamprojectuam.tk')
     return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies?studyDbId=' + studyDbId).pipe(map(result => result.data));
   }
 
   getStudyByTrialDbId(brAPIServerUrl: string, trialDbId: string) {
-    return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies-search?trialDbId=' + trialDbId).pipe(map(result => result.data));
+    if (brAPIServerUrl === 'https://teamprojectuam.tk') {
+      return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies?trialDbId=' + trialDbId).pipe(map(result => result.data));
+    } else {
+      return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies-search?trialDbId=' + trialDbId).pipe(map(result => result.data));
+    }
   }
 
 }
