@@ -11,6 +11,7 @@ import {StudyNameStaticVariable} from './studyNameStaticVariable';
 import {StatisticStudyVariable} from './statisticStudyVariable';
 import {StatisticsStudyVariables} from './statisticsStudyVariables';
 import {StudyVariables} from './studyVariables';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-variables',
@@ -44,7 +45,7 @@ export class VariablesComponent implements OnInit {
 
 
 
-  constructor(globals: Globals, germplasmService: GermplasmService) {
+  constructor(globals: Globals, germplasmService: GermplasmService, private router: Router) {
     this.globals = globals;
     this.germplasmService = germplasmService;
   }
@@ -166,6 +167,7 @@ export class VariablesComponent implements OnInit {
     this.globals.studyVariables = this.studyVariables;
 
     console.log(this.globals.studyVariables);
+    this.globals.studyVariables.length > 0 ? this.router.navigate(['/servers/statistics']) : alert('You have to select variable first.');
   }
 
 

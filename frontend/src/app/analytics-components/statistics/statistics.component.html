@@ -16,7 +16,7 @@
     <h3 class="buttonsList__label">Studies</h3>
     <div class="buttonsList__container">
       <div class="buttonsList__container--content">
-        <button class="btn m-3 buttonsList__button" (click)=" this.isVariablesVisible = true; getVariablesFunction(studyName.studyName); " *ngFor="let studyName of this.globals.studyVariables">{{studyName.studyName}}</button>
+        <button class="btn m-3 buttonsList__button" id="{{studyName.studyName}}" (click)=" this.isVariablesVisible = true; getVariablesFunction(studyName.studyName);" *ngFor="let studyName of this.globals.studyVariables">{{studyName.studyName}}</button>
       </div>
     </div>
   </div>
@@ -42,21 +42,21 @@
 
   <div *ngIf="this.isLineChartVisible">
     <h3 class="btn  buttonsList__button" style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('lineChart')">Download PDF</h3>
-    <div style="margin-top: 1rem"  class="charts" style="overflow-x: auto">
+    <div style="margin-top: 1rem"  class="charts" style="overflow-x: auto; margin: auto 20px">
       <canvas  style=" margin: auto; width: 20%; color: white; height: 30rem; overflow-x: auto" id="lineChart"></canvas>
     </div>
   </div>
 
   <div *ngIf="this.isColumn2ChartVisible">
     <h3 class="btn buttonsList__button"   style="margin-top: 3rem"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('barChart2')">Download PDF</h3>
-    <div class="charts">
+    <div class="charts" style="margin: auto 20px">
       <canvas style=" margin: auto; width: 20%; color: white; height: 30rem" id="barChart2"></canvas>
     </div>
   </div>
 
   <div *ngIf="this.isColumnChartVisible">
     <h3 class="btn buttonsList__button"   style="margin-top: 3rem"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('barChart')">Download PDF</h3>
-    <div class="charts">
+    <div class="charts" style="margin: auto 20px">
       <canvas  style=" margin: auto; width: 20%; color: white; height: 30rem" id="barChart"></canvas>
     </div>
   </div>

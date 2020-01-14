@@ -8,6 +8,7 @@ import {StudyColumn} from './StudyColumn';
 import {StudyCheckboxes} from './studyCheckboxes';
 import {StudySelected} from './studySelected';
 import {ServerStudy} from './serverStudy';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-germplasm',
@@ -28,7 +29,7 @@ export class GermplasmComponent implements OnInit {
 
   isLoading = true;
 
-  constructor(globals: Globals, germplasmService: GermplasmService) {
+  constructor(globals: Globals, germplasmService: GermplasmService, private router: Router) {
     this.globals = globals;
     this.germplasmService = germplasmService;
   }
@@ -81,9 +82,9 @@ export class GermplasmComponent implements OnInit {
             if (Object.is(serverStudy.study, selectedStudy)) {
               return true;
             }
-        }
-    });
-
+          }
+        });
+      this.globals.selectedStudiesDbId.length > 0 ? this.router.navigate(['/servers/variables']) : alert('You have to select gerplasm first.');
   }
 
 
