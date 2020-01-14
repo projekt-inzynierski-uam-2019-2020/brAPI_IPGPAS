@@ -3,7 +3,7 @@ import {Chart} from 'chart.js';
 
 @Injectable()
 export class ChartService {
-  BarChart = [];
+  BuubbleChart = [];
   backgroundChartColor = [];
   backgroundBorderChartColor = [];
   arrayOfRgba: string[] = [];
@@ -32,26 +32,40 @@ export class ChartService {
       data: {
         labels: labels,
         datasets: [{
-          label: '# of Items',
+          label: 'average of variable',
           data: data,
           backgroundColor: this.backgroundChartColor,
           borderColor: this.backgroundBorderChartColor,
-          borderWidth: 1
+          borderWidth: 1,
         }]
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          labels: {
+            // This more specific font property overrides the global property
+            fontColor: '#c7c7c7'
+          }
+        },
         title: {
           text: text,
           fontFamily: 'Verdana',
-          fontSize: 15,
+          fontSize: 18,
           fontStyle: 'normal',
+          fontColor: '#c7c7c7',
           display: true
         },
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
+              fontColor: '#c7c7c7'
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              fontColor: '#c7c7c7'
             }
           }]
         }
@@ -60,35 +74,51 @@ export class ChartService {
   }
 
   lineChart(labels: any[], data: number[], text: string) {
-  // @ts-ignore
+
+    // @ts-ignore
     this.LineChart = new Chart('lineChart', {
       type: 'line',
       data: {
         labels: labels,
         datasets: [{
-          label: '# of Items',
+          label: 'Germplasm-Value',
           data: data,
           fill: false,
           lineTension: 0.2,
-          borderColor: 'red',
+          borderColor: 'white',
           borderWidth: 1
         }]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          labels: {
+            // This more specific font property overrides the global property
+            fontColor: '#c7c7c7'
+          }
+        },
         title: {
           text: text,
           fontFamily: 'Verdana',
-          fontSize: 15,
+          fontSize: 18,
           fontStyle: 'normal',
+          fontColor: '#c7c7c7',
           display: true
         },
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
+              fontColor: '#c7c7c7'
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              fontColor: '#c7c7c7'
             }
           }]
-        }
+        },
       }
     });
   }

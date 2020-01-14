@@ -3,12 +3,16 @@ import {FetchBrapiResultService} from '../../fetch-services/fetch-brapi-result-s
 import {Globals} from '../../globals';
 import {DetailResult} from '../../call-models/response/detailResult';
 import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {Config} from 'protractor';
+import {HttpResponse} from '@angular/common/http';
 
 @Injectable()
 export class StudyService {
 
   fetchBrApiResponseService: FetchBrapiResultService;
   globals: Globals;
+
 
   /* services */
   constructor(fetchBrApiResponseService: FetchBrapiResultService, globals: Globals) {
@@ -25,7 +29,11 @@ export class StudyService {
   }
 
   getStudyByTrialDbId(brAPIServerUrl: string, trialDbId: string) {
-    return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies?trialDbId=' + trialDbId).pipe(map(result => result.data));
+    if (brAPIServerUrl === 'https://teamprojectuam.tk') {
+      return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies?trialDbId=' + trialDbId).pipe(map(result => result.data));
+    } else {
+      return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies-search?trialDbId=' + trialDbId).pipe(map(result => result.data));
+    }
   }
 
 }

@@ -1,6 +1,6 @@
 import {Study} from '../../call-models/study';
 
-export class StudyCheckbox {
+export class StudyRow {
   selected: boolean;
   study: Study;
 }

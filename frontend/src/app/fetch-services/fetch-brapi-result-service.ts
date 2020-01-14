@@ -24,7 +24,8 @@ export class FetchBrapiResultService {
   }
 
   public getBrAPIDetailResult(brApiUrl: string) {
-    return this.http.get<BrAPIDetailResponse>(brApiUrl).pipe(map((response) => response.result));
+    return this.http.get<BrAPIDetailResponse>(brApiUrl)
+      .pipe(map((response) => response.result));
   }
 
   public getBrApiDetailTest(url: string) {

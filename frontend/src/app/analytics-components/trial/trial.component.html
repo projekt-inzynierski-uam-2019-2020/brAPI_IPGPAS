@@ -19,8 +19,8 @@
       <button
       href="#"
       class="btn filters__header--button-next m-3"
-      (click)="setSelectedServerTrials()"
-      [disabled]="isLoading || !this.trialCheckboxes.length > 0"
+      (click)="setSelectedServerTrialsFromSelectedFilteredRows()"
+      [disabled]="isLoading || !this.filteredTrialRows.length > 0"
     >
       Accept
       <img src="../../assets/next.png" alt="Next">
@@ -33,31 +33,31 @@
       <h3 class="optionalFilters__label">Filter by Common Crop Name</h3>
       <div class="optionalFilters__container">
         <div class="optionalFilters__container--content">
-          <div class="optionalFilters__container--item" *ngFor="let trialCommonCropCheckbox of this.trialCommonCropCheckboxes; let i = index">
-            <label class="checkbox" for="{{trialCommonCropCheckbox}}{{i}}">
+          <div class="optionalFilters__container--item" *ngFor="let commonCropName of this.commonCropNames; let i = index">
+            <label class="checkbox" for="{{commonCropName}}{{i}}">
               <input
-                [(ngModel)]="trialCommonCropCheckbox.selected"
+                [(ngModel)]="commonCropName.selected"
                 type="checkbox"
-                id="{{trialCommonCropCheckbox}}{{i}}"
+                id="{{commonCropName}}{{i}}"
                 name="num"
                 checked="checked"
                 class="checkbox__input"
               >
               <span class="checkbox__box"></span>
-              {{trialCommonCropCheckbox.trial.commonCropName}}
+              {{commonCropName.commonCropName}}
             </label>
           </div>
         </div>
         <button
-          (click)="setSelectedCrops()"
+          (click)="filterTrialRowsByCommonCropNames()"
           class="optionalFilters__filter">Filter</button>
       </div>
     </div>
     <div class="filters__counter">
       <h3>Results found:</h3>
-      <h3>{{trialCheckboxes.length}}</h3>
+      <h3>{{filteredTrialRows.length}}</h3>
     </div>
-    <div *ngIf="isShowStudies" class="trials">
+    <div class="trials">
       <table class="table table-striped table-dark" >
         <thead>
         <tr>
@@ -77,11 +77,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let trialCheckbox of this.trialCheckboxes; let i = index">
+        <tr *ngFor="let trialRow of this.filteredTrialRows; let i = index">
           <td>
             <label class="checkbox" for="{{i}}">
               <input
-                [(ngModel)]="trialCheckbox.selected"
+                [(ngModel)]="trialRow.selected"
                 type="checkbox"
                 id="{{i}}"
                 name="num"
@@ -92,12 +92,12 @@
           </td>
           <td class="hasTooltip">
             <div class="hasTooltip__container">
-              <div class="item">{{ trialCheckbox.trial.trialName ? trialCheckbox.trial.trialName : '---'}}</div>
-              <div class="tooltip">{{ trialCheckbox.trial.trialName ? trialCheckbox.trial.trialName : '---' }}</div>
+              <div class="item">{{ trialRow.trial.trialName ? trialRow.trial.trialName : '---'}}</div>
+              <div class="tooltip">{{ trialRow.trial.trialName ? trialRow.trial.trialName : '---' }}</div>
             </div>
           </td>
-          <td>{{trialCheckbox.trial.commonCropName ? trialCheckbox.trial.commonCropName : '---'}}</td>
-          <td> {{trialCheckbox.trial.programName ? trialCheckbox.trial.programName : '---'}}</td>
+          <td>{{trialRow.trial.commonCropName ? trialRow.trial.commonCropName : '---'}}</td>
+          <td> {{trialRow.trial.programName ? trialRow.trial.programName : '---'}}</td>
         </tr>
         </tbody>
       </table>
