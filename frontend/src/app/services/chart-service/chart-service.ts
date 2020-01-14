@@ -26,6 +26,7 @@ export class ChartService {
   }
 
 
+
   columnChart(labels: any[], data: any[], text: string) {
    // this.BarChart.destroy();
     // @ts-ignore

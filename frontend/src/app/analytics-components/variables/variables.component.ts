@@ -146,7 +146,7 @@ export class VariablesComponent implements OnInit {
 
         if (j === 1) {
           if (this.statisticStudyVariable[i].studyName === this.statisticStudyVariable[j - 1].studyName) {
-            this.statisticStudyVariables.push(this.statisticStudyVariable[j]);
+            this.statisticStudyVariables.push(this.statisticStudyVariable[j-1]);
           }
         }
         if (this.statisticStudyVariable[i].studyName === this.statisticStudyVariable[j].studyName) {
@@ -156,6 +156,7 @@ export class VariablesComponent implements OnInit {
       if (!this.studyVariables.some((item => item.studyName === this.statisticStudyVariable[i].studyName))) {
         this.studyVariables.push({studyName: this.statisticStudyVariable[i].studyName, variables: this.statisticStudyVariables});
       }
+
       this.statisticStudyVariables = [];
 
     }

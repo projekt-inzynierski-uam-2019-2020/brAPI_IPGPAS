@@ -511,6 +511,8 @@
 
 @media (max-width: 1600px) {
   .filters{
+    overflow-y: auto;
+    
     &__container {
       justify-content: center;
       text-align: center;
