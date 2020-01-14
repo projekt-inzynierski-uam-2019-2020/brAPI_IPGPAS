@@ -546,6 +546,15 @@
         overflow-x: auto;
         overflow-x: auto;
       }
+
+      &--contentChart{
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        margin-right: 20px;
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
     }
 
     &__button{
@@ -571,15 +580,6 @@
       }
     }
 
-    &--contentChart{
-      display: flex;
-      flex-direction: row;
-      overflow-x: auto;
-      margin-right: 20px;
-      overflow-x: auto;
-      overflow-y: hidden;
-    }
-
     &__buttonChart{
       height: 50px;
       color: #FFFFFF;
@@ -601,7 +601,7 @@
       }
 
       &:hover{
-        transform: scale(1.2);
+        transform: scale(1.1);
         transition: transform .5s;
       }
     }
