@@ -29,23 +29,24 @@
     </div>
   </div>
 
-  <h3 class="btn  buttonsList__button"    *ngIf="this.isStatisticsVisible && this.isVariablesVisible"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('lineChart')">Download PDF</h3>
-  <div style="margin-top: 1rem"  class="charts" style="overflow-x: auto">
-    <canvas style=" margin: auto; width: 20%; color: white; height: 30rem; overflow-x: auto" id="lineChart"></canvas>
-  </div>
-
   <h3 class="btn buttonsList__button"   style="margin-top: 3rem"  *ngIf="this.isStatisticsVisible && this.isVariablesVisible"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('barChart')">Download PDF</h3>
   <div class="charts">
-        <canvas style=" margin: auto; width: 20%; color: white; height: 30rem" id="barChart"></canvas>
+    <canvas style=" margin: auto; width: 20%; color: white; height: 30rem" id="barChart"></canvas>
   </div>
+
+  <h3 class="btn buttonsList__button"   style="margin-top: 3rem"  *ngIf="this.isStatisticsVisible && this.isVariablesVisible"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('barChart2')">Download PDF</h3>
+  <div class="charts">
+    <canvas style=" margin: auto; width: 20%; color: white; height: 30rem" id="barChart2"></canvas>
+  </div>
+
+  <h3 class="btn  buttonsList__button"    *ngIf="this.isStatisticsVisible && this.isVariablesVisible"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('lineChart')">Download PDF</h3>
+  <div style="margin-top: 1rem"  class="charts" style="overflow-x: auto">
+    <canvas style=" margin: auto; width: 20%; color: white; height: 30rem; overflow-x: auto" id="lineChart" #myCanvas></canvas>
+  </div>
+
+
 
   <h3 class="btn buttonsList__button"    style="margin-top: 2rem" *ngIf="this.isStatisticsVisible && this.isVariablesVisible"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('pieChart')">Download PDF</h3>
 
-  <div  class="charts">
-  <canvas  id="pieChart" baseChart
-           [data]="pieChartData"
-           [labels]="pieChartLabels"
-           [chartType]="pieChartType"></canvas>
-  </div>
 
 </div>
