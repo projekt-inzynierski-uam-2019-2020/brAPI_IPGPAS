@@ -52,7 +52,7 @@
         type="button"
         class="btn btn-success"
         [disabled]="!server.name || !server.ipAddress || !server.description"
-        (click)="modal.close('Save click') || this.createServer() || changeSuccessMessage()"
+        (click)="modal.close('Save click') || this.createServer() || changeSuccessMessage()  "
       >
         Add server
       </button>
@@ -131,7 +131,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let server of servers">
+      <tr *ngFor="let server of this.servers">
         <td>{{server.name}}</td>
         <td>{{server.ipAddress}}</td>
         <td>{{server.description}}</td>

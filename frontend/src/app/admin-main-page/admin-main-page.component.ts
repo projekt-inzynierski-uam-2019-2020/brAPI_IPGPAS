@@ -4,6 +4,7 @@ import {debounceTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {ServersFetchingService} from '../services/servers-service/servers-fetching.service';
 import {Server} from '../services/servers-service/servers';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class AdminMainPageComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     setTimeout(() => this.staticAlertClosed = true, 20000);
     this._success.subscribe((message) => this.successMessage = message);
     this._success.pipe(
@@ -45,6 +47,13 @@ export class AdminMainPageComponent implements OnInit {
         this.getServers();
       });
 
+    setTimeout( () => {
+      this.refresh();
+    }, 500);
+  }
+
+  refresh(): void {
+    window.location.reload();
   }
 
   updateServer(server: Server): void {
@@ -52,11 +61,14 @@ export class AdminMainPageComponent implements OnInit {
       .subscribe(data => {
         this.servers = this.servers.filter(u => u !== server);
       });
-
+    setTimeout( () => {
+      this.refresh();
+    }, 500);
   }
 
   updateInfo(server: Server)  {
     this.id = server._id;
+
   }
 
   deleteUser(server: Server): void {
@@ -64,6 +76,9 @@ export class AdminMainPageComponent implements OnInit {
       .subscribe( data => {
         this.servers = this.servers.filter(u => u !== server);
       });
+    setTimeout( () => {
+      this.refresh();
+    }, 500);
   }
 
   public changeSuccessMessage() {
@@ -71,6 +86,7 @@ export class AdminMainPageComponent implements OnInit {
   }
 
   constructor(private modalService: NgbModal, private serverService: ServersFetchingService) {
+
   }
 
   open(content) {
@@ -80,6 +96,7 @@ export class AdminMainPageComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
 
 
 

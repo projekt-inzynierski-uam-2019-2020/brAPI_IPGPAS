@@ -49,7 +49,6 @@ export class StatisticsComponent implements OnInit {
   LineChart: Chart;
 
   @ViewChild('myCanvas') myCanvas: ElementRef;
-  public context: CanvasRenderingContext2D;
 
   constructor(private chartService: ChartService, globals: Globals, private pdfService: PdfService) {
     this.globals = globals;
@@ -75,12 +74,16 @@ export class StatisticsComponent implements OnInit {
         for (const variable of studyStatics.variables) {
           this.variables.push(variable.variableName);
           this.value = 0;
+          let counter = 0;
           for (const valueVariable of variable.data) {
-            if (valueVariable !== null) {
-              this.value = this.value + parseFloat(valueVariable);
+            if (valueVariable !== null && valueVariable !== '') {
+              if (!isNaN(parseFloat(valueVariable))) {
+                this.value = this.value + parseFloat(valueVariable);
+                counter = counter + 1;
+              }
             }
           }
-          this.values.push(this.value / variable.data.length);
+          this.values.push(this.value / counter);
           this.variableAverageValue.push({variables: this.variables, averageValue: this.values});
 
         }
@@ -116,63 +119,68 @@ export class StatisticsComponent implements OnInit {
       if (this.studyName === studyVariables.studyName) {
         for (const variableG of studyVariables.variables) {
           this.dataValues = [];
-          this.numberofValues = [0, 0, 0, 0, 0 , 0];
+          this.numberofValues = [0, 0, 0, 0, 0, 0];
           this.stringLimits = [];
           let max = 0;
           if (variableG.variableName === variable) {
             this.dataValues.push(0);
             for (let i = 0; i < variableG.data.length; i++) {
-              if (parseFloat(variableG.data[i]) > max) {
-                max = parseFloat(variableG.data[i]);
+              if (!isNaN(parseFloat(variableG.data[i]))) {
+                if (parseFloat(variableG.data[i]) > max) {
+                  max = parseFloat(variableG.data[i]);
+                }
               }
             }
             this.dataValues.push(max / 5);
             this.dataValues.push((max / 5) + (max / 5));
-            this.dataValues.push((max / 5) + (max / 5) +  (max / 5));
+            this.dataValues.push((max / 5) + (max / 5) + (max / 5));
             this.dataValues.push((max / 5) + (max / 5) + (max / 5) + (max / 5));
             this.dataValues.push(max);
 
 
-
-
-            this.stringLimits.push('0');
-            this.stringLimits.push('0 -' +  String((max / 5).toFixed(1)) );
-            this.stringLimits.push(String((max / 5).toFixed(1)) + ' - ' + String(((max / 5) + (max / 5)).toFixed(1)));
-            this.stringLimits.push( String(((max / 5) + (max / 5)).toFixed(1))  + ' - ' + String(((max / 5) + (max / 5)  + (max / 5)).toFixed(1)));
-            this.stringLimits.push( String(((max / 5) + (max / 5)  + (max / 5)).toFixed(1))  + ' - ' + String(((max / 5) + (max / 5)  + (max / 5) + (max / 5)).toFixed(1)));
-            this.stringLimits.push( String(((max / 5) + (max / 5)  + (max / 5) + (max / 5)).toFixed(1))  + ' - ' + String(max));
+            if (max !== 0) {
+              this.stringLimits.push('0');
+              this.stringLimits.push('0 -' + String((max / 5).toFixed(1)));
+              this.stringLimits.push(String((max / 5).toFixed(1)) + ' - ' + String(((max / 5) + (max / 5)).toFixed(1)));
+              this.stringLimits.push(String(((max / 5) + (max / 5)).toFixed(1)) + ' - ' + String(((max / 5) + (max / 5) + (max / 5)).toFixed(1)));
+              this.stringLimits.push(String(((max / 5) + (max / 5) + (max / 5)).toFixed(1)) + ' - ' + String(((max / 5) + (max / 5) + (max / 5) + (max / 5)).toFixed(1)));
+              this.stringLimits.push(String(((max / 5) + (max / 5) + (max / 5) + (max / 5)).toFixed(1)) + ' - ' + String(max));
+            } else {
+              this.stringLimits.push('0');
+            }
 
 
 
             for (let i = 0; i < variableG.data.length; i++) {
-              if(parseFloat(variableG.data[i]) === 0) {
-                this.numberofValues[0] = this.numberofValues[0] + 1;
-              } else {
+              if (!isNaN(parseFloat(variableG.data[i]))) {
+                if (parseFloat(variableG.data[i]) === 0) {
+                  this.numberofValues[0] = this.numberofValues[0] + 1;
+                }  else {
                 if (parseFloat(variableG.data[i]) < max / 5) {
                   this.numberofValues[1] = this.numberofValues[1] + 1;
                 } else {
                   if (parseFloat(variableG.data[i]) < ((max / 5) + (max / 5))) {
                     this.numberofValues[2] = this.numberofValues[2] + 1;
                   } else {
-                    if (parseFloat(variableG.data[i]) < ((max / 5) + (max / 5) +  (max / 5))) {
+                    if (parseFloat(variableG.data[i]) < ((max / 5) + (max / 5) + (max / 5))) {
                       this.numberofValues[3] = this.numberofValues[3] + 1;
                     } else {
-                      if (parseFloat(variableG.data[i]) < ((max / 5) + (max / 5) +  (max / 5) ) +  (max / 5)) {
+                      if (parseFloat(variableG.data[i]) < ((max / 5) + (max / 5) + (max / 5)) + (max / 5)) {
                         this.numberofValues[4] = this.numberofValues[4] + 1;
                       } else {
-                        if (parseFloat(variableG.data[i]) <= ((max / 5) + (max / 5) +  (max / 5) ) +  (max / 5) + (max / 5)) {
+                        if (parseFloat(variableG.data[i]) <= ((max / 5) + (max / 5) + (max / 5)) + (max / 5) + (max / 5)) {
                           this.numberofValues[5] = this.numberofValues[5] + 1;
 
                         }
-                        }
                       }
+                    }
                   }
-              }
+                }
+                }
 
 
               }
             }
-
 
 
           }
@@ -180,7 +188,6 @@ export class StatisticsComponent implements OnInit {
       }
     }
   }
-
 
 
   columnChart(labels: any[], data: any[], text: string) {
@@ -334,15 +341,22 @@ export class StatisticsComponent implements OnInit {
 
   initAverageStatistics() {
     setTimeout(() => {
-    if (this.BarChart) { this.BarChart.destroy(); }
-    if (this.BarChart2) { this.BarChart2.destroy(); }
-    if (this.LineChart) { this.LineChart.destroy(); }
-    this.chartService.chartColumnStyle(this.variableAverageValue[0].variables);
-    this.columnChart(this.variableAverageValue[0].variables, this.variableAverageValue[0].averageValue, 'Average of variables');
-    this.lineChart(this.germplasm, this.valuesGermplasm, 'Values of Germplasms');
-    this.pieChartData = this.variableAverageValue[0].averageValue;
-    this.pieChartLabels = this.variableAverageValue[0].variables;
-    this.columnChart2(this.stringLimits, this.numberofValues, 'Count of values in Variable');
+      if (this.BarChart) {
+        this.BarChart.destroy();
+      }
+      if (this.BarChart2) {
+        this.BarChart2.destroy();
+      }
+      if (this.LineChart) {
+        this.LineChart.destroy();
+      }
+      this.chartService.chartColumnStyle(this.variableAverageValue[0].variables);
+      console.log(this.variableAverageValue[0].averageValue);
+      this.columnChart(this.variableAverageValue[0].variables, this.variableAverageValue[0].averageValue, 'Average of variables');
+      this.lineChart(this.germplasm, this.valuesGermplasm, 'Values of Germplasms');
+      this.pieChartData = this.variableAverageValue[0].averageValue;
+      this.pieChartLabels = this.variableAverageValue[0].variables;
+      this.columnChart2(this.stringLimits, this.numberofValues, 'Count of values in Variable');
     }, 100);
   }
 
