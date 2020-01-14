@@ -6,6 +6,7 @@ export class ChartService {
   BuubbleChart = [];
   backgroundChartColor = [];
   backgroundBorderChartColor = [];
+  BarChart: Chart;
   arrayOfRgba: string[] = [];
   arrayOfRgbaBorder: string[] = [];
 
@@ -26,7 +27,7 @@ export class ChartService {
 
 
   columnChart(labels: any[], data: any[], text: string) {
-
+   // this.BarChart.destroy();
     // @ts-ignore
     this.BarChart = new Chart('barChart', {
       type: 'bar',
@@ -76,6 +77,7 @@ export class ChartService {
 
   columnChart2(labels: any[], data: any[], text: string) {
 
+    this.BarChart.update();
     // @ts-ignore
     this.BarChart = new Chart('barChart2', {
       type: 'bar',

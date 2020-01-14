@@ -178,12 +178,14 @@ export class StatisticsComponent implements OnInit {
 
   initAverageStatistics() {
 
-    this.chartService.chartColumnStyle(this.variableAverageValue[0].variables);
-    this.chartService.columnChart(this.variableAverageValue[0].variables, this.variableAverageValue[0].averageValue, 'Average of variables');
-    this.chartService.lineChart(this.germplasm, this.valuesGermplasm, 'Values of Germplasms');
-    this.pieChartData = this.variableAverageValue[0].averageValue;
-    this.pieChartLabels = this.variableAverageValue[0].variables;
-    this.chartService.columnChart2(this.stringLimits, this.numberofValues, 'Count of values in Variable');
+    setTimeout(() => {
+      this.chartService.chartColumnStyle(this.variableAverageValue[0].variables);
+      this.chartService.columnChart(this.variableAverageValue[0].variables, this.variableAverageValue[0].averageValue, 'Average of variables');
+      this.chartService.lineChart(this.germplasm, this.valuesGermplasm, 'Values of Germplasms');
+      this.pieChartData = this.variableAverageValue[0].averageValue;
+      this.pieChartLabels = this.variableAverageValue[0].variables;
+      this.chartService.columnChart2(this.stringLimits, this.numberofValues, 'Count of values in Variable');
+    }, 1000);
   }
 
   saveToPDF(elementId: string) {
