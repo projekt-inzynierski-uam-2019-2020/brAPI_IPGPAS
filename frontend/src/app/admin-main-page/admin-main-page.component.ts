@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, VERSION} from '@angular/core';
+import {Component, Inject, OnInit, VERSION, ViewChild} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {debounceTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
@@ -19,6 +19,7 @@ export class AdminMainPageComponent implements OnInit {
   servers: Server[];
   server: Server = new Server();
   id: string;
+
 
 
   ngOnInit(): void {
@@ -79,6 +80,7 @@ export class AdminMainPageComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+
 
 
   private getDismissReason(reason: any): string {

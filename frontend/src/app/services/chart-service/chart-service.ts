@@ -3,7 +3,6 @@ import {Chart} from 'chart.js';
 
 @Injectable()
 export class ChartService {
-  BarChart = [];
   BuubbleChart = [];
   backgroundChartColor = [];
   backgroundBorderChartColor = [];
@@ -27,6 +26,7 @@ export class ChartService {
 
 
   columnChart(labels: any[], data: any[], text: string) {
+
     // @ts-ignore
     this.BarChart = new Chart('barChart', {
       type: 'bar',
@@ -74,8 +74,58 @@ export class ChartService {
     });
   }
 
+  columnChart2(labels: any[], data: any[], text: string) {
+
+    // @ts-ignore
+    this.BarChart = new Chart('barChart2', {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'average of variable',
+          data: data,
+          backgroundColor: this.backgroundChartColor,
+          borderColor: this.backgroundBorderChartColor,
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          labels: {
+            // This more specific font property overrides the global property
+            fontColor: '#c7c7c7'
+          }
+        },
+        title: {
+          text: text,
+          fontFamily: 'Verdana',
+          fontSize: 18,
+          fontStyle: 'normal',
+          fontColor: '#c7c7c7',
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              fontColor: '#c7c7c7'
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              fontColor: '#c7c7c7'
+            }
+          }]
+        }
+      }
+    });
+  }
+
   lineChart(labels: any[], data: number[], text: string) {
-  // @ts-ignore
+
+    // @ts-ignore
     this.LineChart = new Chart('lineChart', {
       type: 'line',
       data: {
@@ -85,7 +135,8 @@ export class ChartService {
           data: data,
           fill: false,
           lineTension: 0.2,
-          borderColor: 'white',
+          borderColor: 'transparent',
+          pointBackgroundColor: 'white',
           borderWidth: 1
         }]
       },

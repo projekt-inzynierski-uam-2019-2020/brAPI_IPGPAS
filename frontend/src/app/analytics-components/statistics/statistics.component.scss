@@ -563,6 +563,7 @@
         box-shadow: none;
         outline: none;
         border-width: 0;
+        background-color: #126e3a;
       }
 
       &:hover{
@@ -604,7 +605,10 @@
         transition: transform .5s;
       }
     }
+  }
 
+  .active{
+    background-color: #126e3a;
   }
 }
 
