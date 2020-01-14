@@ -17,13 +17,13 @@
         <li class="nav-item sidebar__navigation--item" (click)="open(logIn)" routerLinkActive="active" >
           <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse">Log in</a>
         </li>
-        <li class="nav-item sidebar__navigation--item" (click)="open(signUp)" routerLinkActive="active" >
+        <!--<li class="nav-item sidebar__navigation&#45;&#45;item" (click)="open(signUp)" routerLinkActive="active" >
           <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse">Sign up</a>
-        </li>
+        </li>-->
         <li class="nav-item sidebar__navigation--item" routerLink="/servers" routerLinkActive="active" >
           <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse">Analytics</a>
         </li>
-        <li class="nav-item sidebar__navigation--item" routerLink="/home" routerLinkActive="active" >
+        <li class="nav-item sidebar__navigation--item"  >
           <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse">Server status</a>
         </li>
       </ul>
@@ -55,7 +55,7 @@
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Log in</button>
+      <button type="button" class="btn btn-outline-dark" routerLink="/admin/page" (click)="modal.close('Save click')">Log in</button>
     </div>
   </ng-template>
 

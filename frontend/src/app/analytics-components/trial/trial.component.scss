@@ -463,6 +463,7 @@
 
 @media (max-width: 1600px) {
   .filters{
+    overflow-y: auto;
     &__container {
       justify-content: center;
       text-align: center;
@@ -537,6 +538,7 @@
       margin: 20px;
       min-height: unset;
       overflow-y: unset;
+      overflow-x: auto;
 
       .table{
         overflow-x: auto;

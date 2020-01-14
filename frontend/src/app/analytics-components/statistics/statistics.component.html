@@ -16,7 +16,7 @@
     <h3 class="buttonsList__label">Studies</h3>
     <div class="buttonsList__container">
       <div class="buttonsList__container--content">
-        <button class="btn m-3 buttonsList__button" (click)=" this.isVariablesVisible = !this.isVariablesVisible; getVariablesFunction(studyName.studyName); " *ngFor="let studyName of this.globals.studyVariables">{{studyName.studyName}}</button>
+        <button class="btn m-3 buttonsList__button" id="{{studyName.studyName}}" (click)=" this.isVariablesVisible = true; getVariablesFunction(studyName.studyName);" *ngFor="let studyName of this.globals.studyVariables">{{studyName.studyName}}</button>
       </div>
     </div>
   </div>
@@ -24,28 +24,41 @@
     <h3 class="buttonsList__label">Variables</h3>
     <div class="buttonsList__container">
       <div class="buttonsList__container--content">
-        <button class="btn m-3 buttonsList__button" (click)="getOneVariable(variable); this.initAverageStatistics();  this.isStatisticsVisible = true; " *ngFor="let variable of this.variables">{{variable}}</button>
+        <button class="btn m-3 buttonsList__button" (click)="getOneVariable(variable); this.isChartsVisible = true" *ngFor="let variable of this.variables">{{variable}}</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="this.isChartsVisible" class="buttonsList">
+    <h3 class="buttonsList__label">Charts</h3>
+    <div class="buttonsList__container">
+      <div class="buttonsList__container--contentChart">
+        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isLineChartVisible = true; this.isColumnChartVisible = false; this.isColumn2ChartVisible = false; this.initAverageStatistics()">Values of Variables</button>
+        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isColumnChartVisible = true; this.isLineChartVisible = false; this.isColumn2ChartVisible = false; this.initAverageStatistics(); ">Average of variables</button>
+        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isColumn2ChartVisible = true; this.isColumnChartVisible = false; this.isLineChartVisible = false; this.initAverageStatistics(); ">Sum values of Variables</button>
       </div>
     </div>
   </div>
 
-  <h3 class="btn  buttonsList__button"    *ngIf="this.isStatisticsVisible && this.isVariablesVisible"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('lineChart')">Download PDF</h3>
-  <div style="margin-top: 1rem"  class="charts" style="overflow-x: auto">
-    <canvas style=" margin: auto; width: 20%; color: white; height: 30rem; overflow-x: auto" id="lineChart"></canvas>
+
+  <div *ngIf="this.isLineChartVisible">
+    <h3 class="btn  buttonsList__button" style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('lineChart')">Download PDF</h3>
+    <div style="margin-top: 1rem"  class="charts" style="overflow-x: auto; margin: auto 20px">
+      <canvas  style=" margin: auto; width: 20%; color: white; height: 30rem; overflow-x: auto" id="lineChart"></canvas>
+    </div>
   </div>
 
-  <h3 class="btn buttonsList__button"   style="margin-top: 3rem"  *ngIf="this.isStatisticsVisible && this.isVariablesVisible"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('barChart')">Download PDF</h3>
-  <div class="charts">
-        <canvas style=" margin: auto; width: 20%; color: white; height: 30rem" id="barChart"></canvas>
+  <div *ngIf="this.isColumn2ChartVisible">
+    <h3 class="btn buttonsList__button"   style="margin-top: 3rem"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('barChart2')">Download PDF</h3>
+    <div class="charts" style="margin: auto 20px">
+      <canvas style=" margin: auto; width: 20%; color: white; height: 30rem" id="barChart2"></canvas>
+    </div>
   </div>
 
-  <h3 class="btn buttonsList__button"    style="margin-top: 2rem" *ngIf="this.isStatisticsVisible && this.isVariablesVisible"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('pieChart')">Download PDF</h3>
-
-  <div  class="charts">
-  <canvas  id="pieChart" baseChart
-           [data]="pieChartData"
-           [labels]="pieChartLabels"
-           [chartType]="pieChartType"></canvas>
+  <div *ngIf="this.isColumnChartVisible">
+    <h3 class="btn buttonsList__button"   style="margin-top: 3rem"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('barChart')">Download PDF</h3>
+    <div class="charts" style="margin: auto 20px">
+      <canvas  style=" margin: auto; width: 20%; color: white; height: 30rem" id="barChart"></canvas>
+    </div>
   </div>
 
 </div>

@@ -230,6 +230,7 @@
     margin: auto 60px;
     max-height: 60vh;
     overflow: auto;
+    margin-bottom: 50px;
   }
 
   td{
@@ -485,6 +486,8 @@
 
 @media (max-width: 1600px) {
   .filters{
+    overflow-y: auto;
+
     &__container {
       justify-content: center;
       text-align: center;
