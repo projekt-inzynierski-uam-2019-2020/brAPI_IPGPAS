@@ -39,7 +39,7 @@ export class StatisticsComponent implements OnInit {
   variableStudy: string[] = [];
   germplasms: GermplasmValues[] = [];
 
-  constructor(private chartService: ChartService, globals: Globals,  private pdfService: PdfService) {
+  constructor(private chartService: ChartService, globals: Globals, private pdfService: PdfService) {
     this.globals = globals;
 
   }
@@ -50,6 +50,7 @@ export class StatisticsComponent implements OnInit {
     this.globals.variables.map(variable => this.pieChartLabels = variable.variableIds);
     this.pieChartData = [10, 23, 45, 34];
 
+
   }
 
 
@@ -57,10 +58,10 @@ export class StatisticsComponent implements OnInit {
     this.variables = [];
     this.variableAverageValue = [];
 
-    for (const studyStaticsVariables of this.globals.studyStatisticVariables) {
-      if (studyName === studyStaticsVariables.studyName) {
+    for (const studyStatics of this.globals.studyVariables) {
+      if (studyName === studyStatics.studyName) {
         this.studyName = studyName;
-        for (const variable of studyStaticsVariables.statisticVariables) {
+        for (const variable of studyStatics.variables) {
           this.variables.push(variable.variableName);
           this.value = 0;
           for (const valueVariable of variable.data) {
@@ -72,34 +73,34 @@ export class StatisticsComponent implements OnInit {
           this.variableAverageValue.push({variables: this.variables, averageValue: this.values});
         }
       }
+
     }
   }
 
-  getOneVariable(variable: string){
+  getOneVariable(variable: string) {
     this.germplasm = [];
     this.valuesGermplasm = [];
-    for (const studyStaticsVariables of this.globals.studyStatisticVariables) {
-      if (this.studyName === studyStaticsVariables.studyName) {
-        for (const variableGerm of studyStaticsVariables.statisticVariables) {
-          if (variableGerm.variableName === variable){
-            for (let i = 0; i < variableGerm.germplasmName.length; i++){
-              if (variableGerm.data[i] !== null){
-                this.germplasm.push(variableGerm.germplasmName[i]);
-                this.valuesGermplasm.push(parseFloat(variableGerm.data[i]));
-              }
+
+    for (const studyVariables of this.globals.studyVariables) {
+      if (this.studyName === studyVariables.studyName) {
+        for (const variableG of studyVariables.variables) {
+          if (variableG.variableName === variable) {
+            for (let i = 0; i < variableG.germplasmName.length; i++) {
+              this.germplasm.push(variableG.germplasmName[i]);
+              this.valuesGermplasm.push(parseFloat(variableG.data[i]));
             }
           }
         }
       }
+      this.germplasms.push({values: this.valuesGermplasm, germplasms: this.germplasm});
+
     }
-    this.germplasms.push({values: this.valuesGermplasm, germplasms: this.germplasm});
+
 
   }
 
 
   initAverageStatistics() {
-    console.log(this.germplasms);
-    console.log(this.valuesGermplasm);
     this.chartService.chartColumnStyle(this.variableAverageValue[0].variables);
     this.chartService.columnChart(this.variableAverageValue[0].variables, this.variableAverageValue[0].averageValue, 'Average of variables');
     this.chartService.lineChart(this.germplasm, this.valuesGermplasm, 'Values of Germplasms');
@@ -107,7 +108,7 @@ export class StatisticsComponent implements OnInit {
     this.pieChartLabels = this.variableAverageValue[0].variables;
   }
 
-  saveToPDF(elementId: string){
+  saveToPDF(elementId: string) {
     this.pdfService.donloadPDF(elementId);
   }
 

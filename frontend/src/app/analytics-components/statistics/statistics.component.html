@@ -16,7 +16,7 @@
     <h3 class="buttonsList__label">Studies</h3>
     <div class="buttonsList__container">
       <div class="buttonsList__container--content">
-        <button class="btn m-3 buttonsList__button" (click)="getVariablesFunction(studyName.studyName); this.isVariablesVisible = !this.isVariablesVisible" *ngFor="let studyName of this.globals.studyStatisticVariables">{{studyName.studyName}}</button>
+        <button class="btn m-3 buttonsList__button" (click)=" this.isVariablesVisible = !this.isVariablesVisible; getVariablesFunction(studyName.studyName); " *ngFor="let studyName of this.globals.studyVariables">{{studyName.studyName}}</button>
       </div>
     </div>
   </div>
@@ -24,24 +24,24 @@
     <h3 class="buttonsList__label">Variables</h3>
     <div class="buttonsList__container">
       <div class="buttonsList__container--content">
-        <button class="btn m-3 buttonsList__button" (click)="this.isStatisticsVisible = true; this.initAverageStatistics(); getOneVariable(variable) " *ngFor="let variable of this.variables">{{variable}}</button>
+        <button class="btn m-3 buttonsList__button" (click)="getOneVariable(variable); this.initAverageStatistics();  this.isStatisticsVisible = true; " *ngFor="let variable of this.variables">{{variable}}</button>
       </div>
     </div>
   </div>
 
   <h3 class="btn  buttonsList__button"    *ngIf="this.isStatisticsVisible && this.isVariablesVisible"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('lineChart')">Download PDF</h3>
-  <div style="margin-top: 1rem"  *ngIf="this.isStatisticsVisible && this.isVariablesVisible" class="charts" style="overflow-x: auto">
+  <div style="margin-top: 1rem"  class="charts" style="overflow-x: auto">
     <canvas style=" margin: auto; width: 20%; color: white; height: 30rem; overflow-x: auto" id="lineChart"></canvas>
   </div>
 
   <h3 class="btn buttonsList__button"   style="margin-top: 3rem"  *ngIf="this.isStatisticsVisible && this.isVariablesVisible"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('barChart')">Download PDF</h3>
-  <div *ngIf="this.isStatisticsVisible && this.isVariablesVisible" class="charts">
+  <div class="charts">
         <canvas style=" margin: auto; width: 20%; color: white; height: 30rem" id="barChart"></canvas>
   </div>
 
-  <h3 class="btn buttonsList__button"    style="margin-top: 3rem" *ngIf="this.isStatisticsVisible && this.isVariablesVisible"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('pieChart')">Download PDF</h3>
+  <h3 class="btn buttonsList__button"    style="margin-top: 2rem" *ngIf="this.isStatisticsVisible && this.isVariablesVisible"  style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('pieChart')">Download PDF</h3>
 
-  <div  *ngIf="this.isStatisticsVisible && this.isVariablesVisible" class="charts">
+  <div  class="charts">
   <canvas  id="pieChart" baseChart
            [data]="pieChartData"
            [labels]="pieChartLabels"

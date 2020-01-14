@@ -17,7 +17,8 @@ export class TrialService {
   }
 
   getAllTrials(brAPIServerUrl: string) {
-    return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/trials').pipe(map(result => result.data));
+    return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/trials')
+      .pipe(map(result => result.data));
   }
 
   getTrialsByCommonCropName(brAPIServerUrl: string, commonCropName: string) {

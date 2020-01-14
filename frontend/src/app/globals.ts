@@ -4,6 +4,7 @@ import {ServerStudy} from './analytics-components/study/serverStudy';
 import {Variable} from './call-models/variable';
 import {VariableValuesSelect} from './analytics-components/variables/VariableValuesSelect';
 import {StudyStatisticVariables} from './analytics-components/variables/studyStatisticVariables';
+import {StudyVariables} from './analytics-components/variables/studyVariables';
 
 @Injectable()
 export class Globals {
@@ -26,4 +27,5 @@ export class Globals {
   selectedVariablesValues: VariableValuesSelect[] = [];
   variables: Variable[] = [];
   studyStatisticVariables: StudyStatisticVariables[] = [];
+  studyVariables: StudyVariables[] = [];
 }

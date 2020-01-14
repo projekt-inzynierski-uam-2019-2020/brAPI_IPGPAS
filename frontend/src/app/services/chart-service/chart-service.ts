@@ -3,7 +3,6 @@ import {Chart} from 'chart.js';
 
 @Injectable()
 export class ChartService {
-  BarChart = [];
   BuubbleChart = [];
   backgroundChartColor = [];
   backgroundBorderChartColor = [];
@@ -75,7 +74,8 @@ export class ChartService {
   }
 
   lineChart(labels: any[], data: number[], text: string) {
-  // @ts-ignore
+
+    // @ts-ignore
     this.LineChart = new Chart('lineChart', {
       type: 'line',
       data: {

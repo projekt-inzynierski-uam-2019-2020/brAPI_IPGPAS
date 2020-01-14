@@ -7,6 +7,10 @@ import {VariableSelectValues} from './VariableSelectValues';
 import {GermplasmTableData} from './studyIdVariableValues';
 import {StatisticVariable} from './statisticVariable';
 import {StudyStatisticVariables} from './studyStatisticVariables';
+import {StudyNameStaticVariable} from './studyNameStaticVariable';
+import {StatisticStudyVariable} from './statisticStudyVariable';
+import {StatisticsStudyVariables} from './statisticsStudyVariables';
+import {StudyVariables} from './studyVariables';
 
 @Component({
   selector: 'app-variables',
@@ -26,7 +30,18 @@ export class VariablesComponent implements OnInit {
   statisticVariables: StatisticVariable[];
   studiesStatisticVariables: StudyStatisticVariables[] = [];
   selectedStudiesStatisticsVariables: StudyStatisticVariables[] = [];
+  selectedStudiesStatisticsVariables2: StudyStatisticVariables[] = [];
   selectedVariables: StatisticVariable[] = [];
+  studyNameStaticVariable: StudyNameStaticVariable[] = [];
+  studyStatisticVariablesFinal: StudyStatisticVariables[] = [];
+  statisticStudyVariable: StatisticStudyVariable[] = [];
+  statisticStudyVariable2: StatisticStudyVariable[] = [];
+  statisticStudyVariables: StatisticStudyVariable[] = [];
+
+  variablesStat: string[];
+  studyVariables: StudyVariables[] = [];
+  uniqStudies: string[];
+
 
 
   constructor(globals: Globals, germplasmService: GermplasmService) {
@@ -79,7 +94,6 @@ export class VariablesComponent implements OnInit {
           studyStatisticVariables.statisticVariables = this.statisticVariables;
         }
         this.studiesStatisticVariables.push(studyStatisticVariables);
-        console.log(this.studiesStatisticVariables);
 
         this.variablesStudy.push({
           variable: variableJSON.observationVariableNames,
@@ -106,26 +120,51 @@ export class VariablesComponent implements OnInit {
 
   setSelectedVariables() {
     const selectedVariables = this.variable.filter(studyColumns => studyColumns.selected).map(studyColumns => studyColumns);
-    for (const studyStatisticVariable of this.studiesStatisticVariables){
-      for (const selectedVariable of selectedVariables){
-        if (studyStatisticVariable.studyId.toString() === selectedVariable.study.studyDbId.toString()) {
-          for (const variableName of studyStatisticVariable.statisticVariables) {
-            if (selectedVariable.variableName === variableName.variableName){
-              this.selectedVariables.push(variableName);
+
+
+    for (const studyVar of this.studiesStatisticVariables) {
+      for (const data of studyVar.statisticVariables) {
+        for (const selectedVariable of selectedVariables) {
+          if (data.variableName === selectedVariable.variableName) {
+            if (!this.statisticStudyVariable.some((item => item.variableName === data.variableName && item.studyName === studyVar.studyName))) {
+              this.statisticStudyVariable.push({
+                studyName: studyVar.studyName,
+                data: data.data,
+                germplasms: data.germplasms,
+                selected: false,
+                variableName: data.variableName,
+                germplasmName: data.germplasmName
+              });
             }
-          }
-          if (!this.selectedStudiesStatisticsVariables.some((item => item.studyId === studyStatisticVariable.studyId))) {
-            this.selectedStudiesStatisticsVariables.push({
-              studyId: studyStatisticVariable.studyId,
-              statisticVariables: this.selectedVariables,
-              studyName: studyStatisticVariable.studyName,
-            });
           }
         }
       }
     }
+
+    for (let i = 0; i < this.statisticStudyVariable.length; i++) {
+      for (let j = 1; j < this.statisticStudyVariable.length; j++) {
+
+        if (j === 1) {
+          if (this.statisticStudyVariable[i].studyName === this.statisticStudyVariable[j - 1].studyName) {
+            this.statisticStudyVariables.push(this.statisticStudyVariable[j]);
+          }
+        }
+        if (this.statisticStudyVariable[i].studyName === this.statisticStudyVariable[j].studyName) {
+          this.statisticStudyVariables.push(this.statisticStudyVariable[j]);
+        }
+      }
+      if (!this.studyVariables.some((item => item.studyName === this.statisticStudyVariable[i].studyName))) {
+        this.studyVariables.push({studyName: this.statisticStudyVariable[i].studyName, variables: this.statisticStudyVariables});
+      }
+      this.statisticStudyVariables = [];
+
+    }
+
+
     this.globals.studyStatisticVariables = this.selectedStudiesStatisticsVariables;
-    console.log(this.selectedStudiesStatisticsVariables);
+    this.globals.studyVariables = this.studyVariables;
+
+    console.log(this.globals.studyVariables);
   }
 
 
