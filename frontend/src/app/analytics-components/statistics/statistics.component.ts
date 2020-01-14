@@ -35,7 +35,9 @@ export class StatisticsComponent implements OnInit {
   public pieChartType = 'pie';
 
   isVariablesVisible = false;
-  isStatisticsVisible = false;
+  isChartsVisible = false;
+  isLineChartVisible = false;
+  isColumnChartVisible = false;
   variableStudy: string[] = [];
   germplasms: GermplasmValues[] = [];
 
@@ -49,6 +51,7 @@ export class StatisticsComponent implements OnInit {
     this.allVariablesIds = [];
     this.globals.variables.map(variable => this.pieChartLabels = variable.variableIds);
     this.pieChartData = [10, 23, 45, 34];
+    this.initAverageStatistics();
 
   }
 
@@ -98,17 +101,18 @@ export class StatisticsComponent implements OnInit {
 
 
   initAverageStatistics() {
-    console.log(this.germplasms);
-    console.log(this.valuesGermplasm);
-    this.chartService.chartColumnStyle(this.variableAverageValue[0].variables);
-    this.chartService.columnChart(this.variableAverageValue[0].variables, this.variableAverageValue[0].averageValue, 'Average of variables');
-    this.chartService.lineChart(this.germplasm, this.valuesGermplasm, 'Values of Germplasms');
-    this.pieChartData = this.variableAverageValue[0].averageValue;
-    this.pieChartLabels = this.variableAverageValue[0].variables;
+    setTimeout(() => {
+      console.log(this.germplasms);
+      console.log(this.valuesGermplasm);
+      this.chartService.chartColumnStyle(this.variableAverageValue[0].variables);
+      this.chartService.columnChart(this.variableAverageValue[0].variables, this.variableAverageValue[0].averageValue, 'Average of variables');
+      this.chartService.lineChart(this.germplasm, this.valuesGermplasm, 'Values of Germplasms');
+      this.pieChartData = this.variableAverageValue[0].averageValue;
+      this.pieChartLabels = this.variableAverageValue[0].variables;
+    }, 100);
   }
 
   saveToPDF(elementId: string){
     this.pdfService.donloadPDF(elementId);
   }
-
 }
