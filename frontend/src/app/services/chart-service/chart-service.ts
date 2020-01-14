@@ -6,6 +6,7 @@ export class ChartService {
   BuubbleChart = [];
   backgroundChartColor = [];
   backgroundBorderChartColor = [];
+  BarChart: Chart;
   arrayOfRgba: string[] = [];
   arrayOfRgbaBorder: string[] = [];
 
@@ -23,4 +24,157 @@ export class ChartService {
       }
     }
   }
+
+
+
+  columnChart(labels: any[], data: any[], text: string) {
+   // this.BarChart.destroy();
+    // @ts-ignore
+    this.BarChart = new Chart('barChart', {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'average of variable',
+          data: data,
+          backgroundColor: this.backgroundChartColor,
+          borderColor: this.backgroundBorderChartColor,
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          labels: {
+            // This more specific font property overrides the global property
+            fontColor: '#c7c7c7'
+          }
+        },
+        title: {
+          text: text,
+          fontFamily: 'Verdana',
+          fontSize: 18,
+          fontStyle: 'normal',
+          fontColor: '#c7c7c7',
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              fontColor: '#c7c7c7'
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              fontColor: '#c7c7c7'
+            }
+          }]
+        }
+      }
+    });
+  }
+
+  columnChart2(labels: any[], data: any[], text: string) {
+
+    this.BarChart.update();
+    // @ts-ignore
+    this.BarChart = new Chart('barChart2', {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'average of variable',
+          data: data,
+          backgroundColor: this.backgroundChartColor,
+          borderColor: this.backgroundBorderChartColor,
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          labels: {
+            // This more specific font property overrides the global property
+            fontColor: '#c7c7c7'
+          }
+        },
+        title: {
+          text: text,
+          fontFamily: 'Verdana',
+          fontSize: 18,
+          fontStyle: 'normal',
+          fontColor: '#c7c7c7',
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              fontColor: '#c7c7c7'
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              fontColor: '#c7c7c7'
+            }
+          }]
+        }
+      }
+    });
+  }
+
+  lineChart(labels: any[], data: number[], text: string) {
+
+    // @ts-ignore
+    this.LineChart = new Chart('lineChart', {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Germplasm-Value',
+          data: data,
+          fill: false,
+          lineTension: 0.2,
+          borderColor: 'transparent',
+          pointBackgroundColor: 'white',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          labels: {
+            // This more specific font property overrides the global property
+            fontColor: '#c7c7c7'
+          }
+        },
+        title: {
+          text: text,
+          fontFamily: 'Verdana',
+          fontSize: 18,
+          fontStyle: 'normal',
+          fontColor: '#c7c7c7',
+          display: true
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              fontColor: '#c7c7c7'
+            }
+          }],
+          xAxes: [{
+            ticks: {
+              fontColor: '#c7c7c7'
+            }
+          }]
+        },
+      }
+    });
+  }
+
 }

@@ -184,6 +184,7 @@ export class StatisticsComponent implements OnInit {
   }
 
 
+
   columnChart(labels: any[], data: any[], text: string) {
 
     // @ts-ignore
