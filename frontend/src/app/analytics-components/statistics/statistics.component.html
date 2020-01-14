@@ -16,7 +16,7 @@
     <h3 class="buttonsList__label">Studies</h3>
     <div class="buttonsList__container">
       <div class="buttonsList__container--content">
-        <button class="btn m-3 buttonsList__button" (click)=" this.isVariablesVisible = true; getVariablesFunction(studyName.studyName); " *ngFor="let studyName of this.globals.studyVariables">{{studyName.studyName}}</button>
+        <button class="btn m-3 buttonsList__button" id="{{studyName.studyName}}" (click)=" this.isVariablesVisible = true; getVariablesFunction(studyName.studyName);" *ngFor="let studyName of this.globals.studyVariables">{{studyName.studyName}}</button>
       </div>
     </div>
   </div>

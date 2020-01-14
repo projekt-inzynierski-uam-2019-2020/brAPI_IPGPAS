@@ -38,6 +38,8 @@ export class StatisticsComponent implements OnInit {
   variableStudy: string[] = [];
   isStatisticsVisible = false;
   germplasms: GermplasmValues[] = [];
+  selectedStudy = null;
+
 
   numberofValues = [0, 0, 0, 0, 0, 0];
 
