@@ -252,6 +252,10 @@
           background-color: #2C3034;
           z-index: 1;
         }
+
+        .hasTooltip{
+          padding-top: 25px;
+        }
       }
 
       tbody{
@@ -332,7 +336,7 @@
         justify-content: center;
 
         &--top{
-          padding-left: 100px;
+          padding-left: 130px;
           white-space: nowrap;
         }
 
@@ -341,6 +345,7 @@
           width: 100px;
           transform: rotate(30deg);
           margin: auto;
+          margin-left: 70px;
         }
 
         &--bottom{
@@ -349,6 +354,8 @@
         }
       }
       .hasTooltip{
+        top: 47px;
+
         &__container{
           position: relative;
 
@@ -512,7 +519,7 @@
 @media (max-width: 1600px) {
   .filters{
     overflow-y: auto;
-    
+
     &__container {
       justify-content: center;
       text-align: center;

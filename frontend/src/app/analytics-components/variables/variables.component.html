@@ -25,9 +25,9 @@
       <thead>
       <tr>
         <td></td>
-        <td></td>
+        <td style="text-align: left !important;" class="table__header"><p class="table__header--top">Study Name</p><p class="table__header--line"></p><p class="table__header--bottom">Variable Name</p></td>
         <td class="hasTooltip" *ngFor="let variableStudy of this.variablesStudy; let i = index">
-          <div class="hasTooltip__container">
+          <div style="text-align: center !important; text-align: -webkit-center !important; text-align: -moz-center !important;" class="hasTooltip__container">
             <div class="item">{{ variableStudy.study.name ? variableStudy.study.name : '---' }}</div>
             <div class="tooltip">{{ variableStudy.study.name ? variableStudy.study.name : '---' }}</div>
           </div>
@@ -46,7 +46,12 @@
           >
           <span class="checkbox__box"></span>
         </label></td>
-        <td>{{ variableName.variableName}}</td>
+        <td class="hasTooltip" style="text-align: left !important;">
+          <div class="hasTooltip__container">
+            <div class="item">{{ variableName.variableName}}</div>
+            <div class="tooltip">{{ variableName.variableName}}</div>
+          </div>
+        </td>
          <td *ngFor="let variableStudy  of this.variablesStudy"><p *ngIf="checkVariableFunction(variableStudy, variableName.variableName)">
            <i class="fas fa-check"></i></p>
 

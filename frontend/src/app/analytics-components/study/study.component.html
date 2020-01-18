@@ -118,8 +118,8 @@
         </td>
         <td>{{ filteredStudyRow.study.locationName ? filteredStudyRow.study.locationName : '---' }}</td>
         <td>
-          <div  *ngFor="let season of filteredStudyRow.study.seasons">{{ season.year ? season.year : '---' }}</div></td>
-
+          <div  *ngFor="let season of filteredStudyRow.study.seasons">{{ season.year ? season.year : '---' }}</div>
+        </td>
         <td>
           <a target="_blank" href="{{ filteredStudyRow.study.documentationURL ? filteredStudyRow.study.documentationURL : '#' }}">{{ filteredStudyRow.study.documentationURL ? filteredStudyRow.study.documentationURL : '---' }}</a>
         </td>

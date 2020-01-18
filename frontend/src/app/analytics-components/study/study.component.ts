@@ -73,6 +73,7 @@ export class StudyComponent implements OnInit {
         }
       }
     }
+    console.log(this.seasons);
   }
 
   setFilterLocations(studies: Study[]) {
