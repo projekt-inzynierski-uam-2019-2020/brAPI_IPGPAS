@@ -530,6 +530,23 @@
       margin-left: 0;
     }
 
+    .dropdown-menu{
+      background-color: #139553;
+    }
+
+    .dropdown-item{
+      border-bottom: 1px solid #126e3a;
+
+      &:last-child{
+        border-bottom: none;
+      }
+
+      &:hover, &:active, &:focus{
+        background-color: #139553;
+      }
+    }
+
+
 
     &__container{
       display: flex;
@@ -663,6 +680,12 @@
         margin-bottom: 20px;
       }
     }
+
+    .dropdown-item{
+      font-size: 15px;
+      height: auto;
+      white-space: pre-wrap;
+    }
   }
 }
 
@@ -675,6 +698,3 @@
   color: #c7c7c7;
 }
 
-.filters__header--button {
-
-}

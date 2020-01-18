@@ -15,18 +15,12 @@
   <div class="buttonsList">
     <h3 class="buttonsList__label">Studies</h3>
     <div class="buttonsList__container">
-      <div class="buttonsList__container--content">
-        <button class="btn m-3 buttonsList__button" id="{{studyName.studyName}}" (click)=" this.isVariablesVisible = true; getVariablesFunction(studyName.studyName);" *ngFor="let studyName of this.globals.studyVariables">{{studyName.studyName}}</button>
+      <div class="dropdown">
+        <button class="btn m-3 dropdown-toggle buttonsList__button" id="id" (click)=" this.isVariablesVisible = true; getVariablesFunction(studyName.studyName);" *ngFor="let studyName of this.globals.studyVariables" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{studyName.studyName}}</button>
+        <div class="dropdown-menu" *ngFor="let studyName of this.globals.studyVariables" aria-labelledby="id">
+          <button class="btn buttonsList__button dropdown-item" (click)="getOneVariable(variable); this.isChartsVisible = true" *ngFor="let variable of this.variables">{{variable}}</button>
+        </div>
       </div>
-    </div>
-  </div>
-  <div *ngIf="this.isVariablesVisible" class="buttonsList">
-    <h3 class="buttonsList__label">Variables</h3>
-    <div class="buttonsList__container">
-      <div class="buttonsList__container--content">
-        <button class="btn m-3 buttonsList__button" (click)="getOneVariable(variable); this.isChartsVisible = true" *ngFor="let variable of this.variables">{{variable}}</button>
-      </div>
-    </div>
   </div>
   <div *ngIf="this.isChartsVisible" class="buttonsList">
     <h3 class="buttonsList__label">Charts</h3>
