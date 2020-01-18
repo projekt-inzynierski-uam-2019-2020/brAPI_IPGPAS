@@ -482,6 +482,17 @@
     }
   }
 
+  .no-items{
+    margin: auto 20px;
+    color: #FFFFFF;
+    font-family: 'Roboto';
+    font-size: 15px;
+  }
+
+  .no-items:not(:first-child){
+    display: none;
+  }
+
 }
 
 @media (max-width: 1600px) {

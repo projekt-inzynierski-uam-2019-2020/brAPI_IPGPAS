@@ -24,8 +24,7 @@ export class StudyComponent implements OnInit {
   serverStudies: ServerStudy[] = [];
 
   isLoading = true;
-  locationFiltersShow = false;
-  seasonFiltersShow = false;
+  filtersShow = false;
   isChecked = false;
 
 
