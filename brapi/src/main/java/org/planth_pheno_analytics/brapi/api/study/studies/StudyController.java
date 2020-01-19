@@ -2,7 +2,7 @@ package org.planth_pheno_analytics.brapi.api.study.studies;
 
 import org.planth_pheno_analytics.brapi.annotation.BrAPIController;
 import org.planth_pheno_analytics.brapi.api.BrAPIResponse;
-import org.planth_pheno_analytics.brapi.utils.ResponseCreator;
+import org.planth_pheno_analytics.brapi.api.ResponseCreator;
 import org.planth_pheno_analytics.brapi.api.criteria.PaginationCriteria;
 import org.planth_pheno_analytics.brapi.api.criteria.SortCriteria;
 import org.planth_pheno_analytics.brapi.api.germplasm.Germplasm;
@@ -20,9 +20,11 @@ import java.util.Map;
 @BrAPIController
 public class StudyController {
     private final StudyService studyService;
+    private final ResponseCreator responseCreator;
 
-    public StudyController(StudyService studyService) {
+    public StudyController(StudyService studyService, ResponseCreator responseCreator) {
         this.studyService = studyService;
+        this.responseCreator = responseCreator;
     }
 
     @GetMapping("/studies")
@@ -30,7 +32,7 @@ public class StudyController {
     public BrAPIResponse getBrAPIStudies(@Valid StudyCriteria studyCriteria, @Valid PaginationCriteria paginationCriteria,
                                          @Valid SortCriteria sortCriteria) {
         final List<Study> filteredData = studyService.getFilteredAndSortedStudies(studyCriteria, sortCriteria);
-        return ResponseCreator.createBrAPIResponse(filteredData, paginationCriteria);
+        return responseCreator.createPaginatedBrAPIResponse(filteredData, paginationCriteria.getPage(), paginationCriteria.getPageSize());
     }
 
     @GetMapping("/studies/{studyDbId}/germplasm")

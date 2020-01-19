@@ -3,14 +3,14 @@ package org.planth_pheno_analytics.brapi.utils;
 import java.util.Collections;
 import java.util.List;
 
-class ManualPaginationUtils {
+public class ManualPaginationUtils {
 
-    static int getTotalPages(int elementsSize, int pageSize) {
+    public static int getTotalPages(int elementsSize, int pageSize) {
         final int remainderPage = 1;
         return elementsSize / pageSize + ((elementsSize % pageSize == 0) ? 0 : remainderPage);
     }
 
-    static <T> List<T> paginateList(List<T> list, int page, int pageSize) {
+    public static <T> List<T> paginateList(List<T> list, int page, int pageSize) {
         int fromIndex = page * pageSize;
         int elementsSize = list.size();
 

@@ -139,7 +139,7 @@ public class StudyServiceImpl implements StudyService {
         result.put("observationVariableNames", observationVariableNames);
 
         // set data
-        List<List<String>> data = getData(study, trial);
+        List<List<String>> data = getData(study, trial, observationVariableIds);
         result.put("data", data);
         return result;
     }
@@ -153,7 +153,7 @@ public class StudyServiceImpl implements StudyService {
         return Optional.empty();
     }
 
-    private List<List<String>> getData(Study study, FileTrial trial) {
+    private List<List<String>> getData(Study study, FileTrial trial, List<String> observationVariablesIds) {
         List<List<String>> data = new ArrayList<>();
         List<Germplasm> germplasms = getPagedStudiesGermplasmsByStudyDbId(study.getStudyDbId(), Pageable.unpaged()).getContent();
         for (Germplasm germplasm : germplasms) {
@@ -190,7 +190,9 @@ public class StudyServiceImpl implements StudyService {
                         tableRow.add(study.getLocationName());
                         tableRow.add(germplasm.getGermplasmDbId());
                         tableRow.add(germplasm.getGermplasmName());
-                        tableRow.addAll(germplasmMap.values());
+                        for (String observationVariableId: observationVariablesIds){
+                            tableRow.add(germplasmMap.getOrDefault(observationVariableId, ""));
+                        }
                         data.add(tableRow);
                     }
                 }

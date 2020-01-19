@@ -2,7 +2,7 @@ package org.planth_pheno_analytics.brapi.api.trials;
 
 import org.planth_pheno_analytics.brapi.annotation.BrAPIController;
 import org.planth_pheno_analytics.brapi.api.BrAPIResponse;
-import org.planth_pheno_analytics.brapi.utils.ResponseCreator;
+import org.planth_pheno_analytics.brapi.api.ResponseCreator;
 import org.planth_pheno_analytics.brapi.api.criteria.PaginationCriteria;
 import org.planth_pheno_analytics.brapi.api.criteria.SortCriteria;
 import org.springframework.http.HttpStatus;
@@ -15,9 +15,11 @@ import java.util.List;
 @BrAPIController
 public class TrialController {
     private final TrialService trialService;
+    private final ResponseCreator responseCreator;
 
-    public TrialController(TrialService trialService) {
+    public TrialController(TrialService trialService, ResponseCreator responseCreator) {
         this.trialService = trialService;
+        this.responseCreator = responseCreator;
     }
 
     @GetMapping("/trials")
@@ -25,6 +27,6 @@ public class TrialController {
     public BrAPIResponse getBrAPITrials(@Valid TrialCriteria trialCriteria, @Valid PaginationCriteria paginationCriteria,
                                         @Valid SortCriteria sortCriteria) {
         final List<Trial> filteredData = trialService.getFilteredAndSortedTrials(trialCriteria, sortCriteria);
-        return ResponseCreator.createBrAPIResponse(filteredData, paginationCriteria);
+        return responseCreator.createPaginatedBrAPIResponse(filteredData, paginationCriteria.getPage(), paginationCriteria.getPageSize());
     }
 }
