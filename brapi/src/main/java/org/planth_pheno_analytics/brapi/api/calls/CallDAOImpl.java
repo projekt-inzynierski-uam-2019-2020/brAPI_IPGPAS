@@ -47,6 +47,12 @@ public class CallDAOImpl implements CallDAO {
                 .withVersionOneThree()
                 .build());
 
+        CALLS.add(new Call.Builder("studies/{studyDbId}/table")
+                .withDataTypeJson()
+                .withMethodGet()
+                .withVersionOneThree()
+                .build());
+
         CALLS.add(new Call.Builder("trials")
                 .withDataTypeJson()
                 .withMethodGet()
