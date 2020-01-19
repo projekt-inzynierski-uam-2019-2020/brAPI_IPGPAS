@@ -448,6 +448,70 @@ export class StatisticsComponent implements OnInit {
       }
     });
   }
+
+
+  lineChart4(labels: any[], data: number[], data2: number[], text: string) {
+
+
+    // @ts-ignore
+    this.LineChart = new Chart('lineChart4', {
+      type: 'line',
+      data: {
+
+        labels: labels,
+        datasets: this.chartData,
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        legend: {
+          position: 'top',
+          labels: {
+            // This more specific font property overrides the global property
+            fontColor: '#c7c7c7'
+          }
+        },
+        hover: {
+          mode: 'index'
+        },
+
+        scales: {
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Germplasm'
+            },
+            ticks: {
+              beginAtZero: true,
+              fontColor: '#c7c7c7'
+            }
+          }],
+          yAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Value'
+            },
+            ticks: {
+              beginAtZero: true,
+              fontColor: '#c7c7c7'
+            }
+          }]
+        },
+        title: {
+          display: true,
+          text: text,
+          fontFamily: 'Verdana',
+          fontSize: 18,
+          fontStyle: 'normal',
+          fontColor: '#c7c7c7',
+        }
+      }
+    });
+  }
+
   chartColumnStyle(nameObject: any[]) {
     this.arrayOfRgba = [];
     this.backgroundBorderChartColor = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235,1)', 'rgba(255, 206, 86, 1)', 'rgba(29, 255, 140, 1)', 'rgba(215, 117, 44, 1)', 'rgba(7, 19, 157, 1)', 'rgba(239, 5, 0, 1)', 'rgba(243, 216, 31, 1)', 'rgba(200, 145, 31, 1)', 'rgba(215, 117, 44, 1)'];
