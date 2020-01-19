@@ -24,8 +24,7 @@ export class StudyComponent implements OnInit {
   serverStudies: ServerStudy[] = [];
 
   isLoading = true;
-  locationFiltersShow = false;
-  seasonFiltersShow = false;
+  filtersShow = false;
   isChecked = false;
 
 
@@ -74,6 +73,7 @@ export class StudyComponent implements OnInit {
         }
       }
     }
+    console.log(this.seasons);
   }
 
   setFilterLocations(studies: Study[]) {

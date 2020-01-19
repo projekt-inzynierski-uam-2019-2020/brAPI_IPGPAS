@@ -256,6 +256,7 @@
         .table__header, .hasTooltip{
           top: 47px;
           border: none;
+          text-align: center;
         }
       }
 
@@ -337,7 +338,7 @@
         justify-content: center;
 
         &--top{
-          padding-left: 100px;
+          padding-left: 130px;
           white-space: nowrap;
         }
 
@@ -346,6 +347,7 @@
           width: 100px;
           transform: rotate(30deg);
           margin: auto;
+          margin-left: 70px;
         }
 
         &--bottom{
