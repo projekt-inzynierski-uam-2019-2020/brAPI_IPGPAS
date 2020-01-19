@@ -4,7 +4,6 @@ const servers = require("./routes/servers");
 const users = require("./routes/users");
 const bodyParser = require("body-parser");
 const mongoose = require("./config/database");
-const cors = require("cors");
 var jwt = require("jsonwebtoken");
 const app = express();
 
@@ -15,9 +14,7 @@ mongoose.connection.on(
   console.error.bind(console, "MongoDB connection error:")
 );
 
-app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
 
 app.get("/", function(req, res) {
   res.send("PlantPheno Analytics Admin API");
