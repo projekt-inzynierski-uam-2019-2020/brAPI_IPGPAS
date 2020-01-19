@@ -7,17 +7,35 @@ module.exports = {
       if (err) {
         next(err);
       } else {
-        res.send(serverInfo);
+        res.json({
+          status: "Success",
+          message: "Server found.",
+          data: { servers: serverInfo }
+        });
       }
     });
   },
 
   getAll: function(req, res, next) {
-    serverModel.find({}, function(err, serverList) {
+    let serversList = [];
+
+    serverModel.find({}, function(err, servers) {
       if (err) {
         next(err);
       } else {
-        res.send(serverList);
+        for (let server of servers) {
+          serversList.push({
+            id: server._id,
+            name: server.name,
+            ipAddress: server.ipAddress,
+            description: server.description
+          });
+        }
+        res.json({
+          status: "Success",
+          message: "Server list found.",
+          data: { servers: serversList }
+        });
       }
     });
   },
@@ -25,12 +43,19 @@ module.exports = {
   updateById: function(req, res, next) {
     serverModel.findByIdAndUpdate(
       req.params.id,
-      { name: req.body.name },
+      {
+        name: req.body.name,
+        ipAddress: req.body.ipAddress,
+        description: req.body.description
+      },
       function(err, serverInfo) {
-        if (err) {
-          next(err);
-        } else {
-          res.status(200);
+        if (err) next(err);
+        else {
+          res.json({
+            status: "Success",
+            message: "Server updated successfully.",
+            data: null
+          });
         }
       }
     );
@@ -38,10 +63,13 @@ module.exports = {
 
   deleteById: function(req, res, next) {
     serverModel.findByIdAndRemove(req.params.id, function(err, serverInfo) {
-      if (err) {
-        next(err);
-      } else {
-        res.status(200);
+      if (err) next(err);
+      else {
+        res.json({
+          status: "Success",
+          message: "Server deleted successfully.",
+          data: null
+        });
       }
     });
   },
@@ -54,11 +82,13 @@ module.exports = {
         description: req.body.description
       },
       function(err, result) {
-        if (err) {
-          next(err);
-        } else {
-          res.status(200);
-        }
+        if (err) next(err);
+        else
+          res.json({
+            status: "Success",
+            message: "Server added successfully.",
+            data: null
+          });
       }
     );
   }
