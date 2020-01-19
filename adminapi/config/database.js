@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const mongoDB = "mongodb://admin:admin@localhost:27017/adminapi-db";
+const mongoDB = "mongodb://admin:admin@db.admin.local:27017/adminapi-db";
 mongoose.connect(mongoDB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

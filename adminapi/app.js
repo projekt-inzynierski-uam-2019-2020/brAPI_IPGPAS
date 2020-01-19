@@ -4,6 +4,7 @@ const servers = require("./routes/servers");
 const users = require("./routes/users");
 const bodyParser = require("body-parser");
 const mongoose = require("./config/database");
+const cors = require("cors");
 var jwt = require("jsonwebtoken");
 const app = express();
 
