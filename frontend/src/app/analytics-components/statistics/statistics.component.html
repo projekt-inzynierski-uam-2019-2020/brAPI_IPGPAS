@@ -32,15 +32,24 @@
     <h3 class="buttonsList__label">Charts</h3>
     <div class="buttonsList__container">
       <div class="buttonsList__container--contentChart">
-        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isLineChartVisible = true; this.isColumnChartVisible = false; this.isColumn2ChartVisible = false; this.initAverageStatistics()">Values of Variables</button>
-        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isColumnChartVisible = true; this.isLineChartVisible = false; this.isColumn2ChartVisible = false; this.initAverageStatistics(); ">Average of variables</button>
-        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isColumn2ChartVisible = true; this.isColumnChartVisible = false; this.isLineChartVisible = false; this.initAverageStatistics(); ">Sum values of Variables</button>
+        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isLineChartVisible = true; this.isColumnChartVisible = false; this.isColumn2ChartVisible = false; this.isLine2ChartVisible = false; this.initAverageStatistics()">Values of all Variables</button>
+        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isLine2ChartVisible = true; this.isLineChartVisible = false; this.isColumnChartVisible = false; this.initAverageStatistics()">Values of one Variable</button>
+
+        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isColumnChartVisible = true; this.isLineChartVisible = false; this.isColumn2ChartVisible = false; this.isLine2ChartVisible = false; this.initAverageStatistics(); ">Average of variables</button>
+        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isColumn2ChartVisible = true; this.isColumnChartVisible = false; this.isLineChartVisible = false; this.isLine2ChartVisible = false; this.initAverageStatistics(); ">Sum values of Variables</button>
       </div>
     </div>
   </div>
 
 
   <div *ngIf="this.isLineChartVisible">
+    <h3 class="btn  buttonsList__button" style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('lineChart3')">Download PDF</h3>
+    <div style="margin-top: 1rem"  class="charts" style="overflow-x: auto; margin: auto 20px">
+      <canvas  style=" margin: auto; width: 20%; color: white; height: 30rem; overflow-x: auto" id="lineChart3"></canvas>
+    </div>
+  </div>
+
+  <div *ngIf="this.isLine2ChartVisible">
     <h3 class="btn  buttonsList__button" style="margin: 0 auto; display: block; height: 2.2rem; width: 9rem" (click)="saveToPDF('lineChart')">Download PDF</h3>
     <div style="margin-top: 1rem"  class="charts" style="overflow-x: auto; margin: auto 20px">
       <canvas  style=" margin: auto; width: 20%; color: white; height: 30rem; overflow-x: auto" id="lineChart"></canvas>

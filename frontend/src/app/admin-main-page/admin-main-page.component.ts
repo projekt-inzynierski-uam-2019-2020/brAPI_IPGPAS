@@ -34,7 +34,6 @@ export class AdminMainPageComponent implements OnInit {
 
   }
 
-
   getServers() {
     this.serverService.getAllServers()
       .subscribe(data => {
