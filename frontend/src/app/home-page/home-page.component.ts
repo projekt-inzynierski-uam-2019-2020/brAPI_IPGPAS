@@ -4,7 +4,7 @@ import {Globals} from '../globals';
 import {TrialService} from '../call-services/trial/trial-service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
-import {AuthService} from '../servers-services/auth.service';
+import {AuthService} from '../services/auth/auth.service';
 import {first} from 'rxjs/operators';
 
 @Component({
@@ -16,9 +16,11 @@ export class HomePageComponent implements OnInit {
   closeResult: string;
   globals: Globals;
  test = false;
+ result = false;
   public email: string;
   public password: string;
   public error: string;
+
 
 
   constructor(public globalss: Globals, public trialService: TrialService, private modalService: NgbModal, private  router: Router, private auth: AuthService) { }
@@ -33,21 +35,27 @@ export class HomePageComponent implements OnInit {
 
   }
 
+  public submit() {
+    this.auth.login(this.email, this.password)
+      .pipe(first())
+      .subscribe(
+
+        result => { this.router.navigate(['admin/page']), this.result = true} ,
+        err => this.error = 'Could not authenticate'
+      );
+    setTimeout(() => {
+    if (this.result === true) {
+     this.test = true;
+    }
+  }, 100);
+  }
+
   open(content) {
     this.modalService.open(content, { centered: true }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-  }
-
-  public submit() {
-    this.auth.login(this.email, this.password)
-      .pipe(first())
-      .subscribe(
-        result => this.router.navigate(['admin/page']),
-        err => this.error = 'Could not authenticate'
-      );
   }
 
   private getDismissReason(reason: any): string {

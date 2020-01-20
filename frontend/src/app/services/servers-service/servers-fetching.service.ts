@@ -9,17 +9,33 @@ const httpOptions = {
 
 @Injectable()
 export class ServersFetchingService {
-  private serversUrl = 'https://teamprojectuam.tk/api/servers';
+  private serversUrl = 'http://localhost:3000/servers';
+
+  private token = localStorage.getItem('access_token');
+
+  private headers_object = new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'x-access-token': this.token
+  });
+
+  private httpOptions = {
+    headers: this.headers_object
+  };
 
   constructor(private http: HttpClient) {
   }
 
   getAllServers(): Observable<Server[]> {
-    return this.http.get<Server[]>(this.serversUrl);
+      return this.http.get<Server[]>(this.serversUrl + '/', this.httpOptions);
   }
 
   createServer(server: Server) {
-    return this.http.post<Server>(this.serversUrl + '/create', server);
+    if (localStorage.getItem('access_token')) {
+      return this.http.post<Server>(this.serversUrl + '/', server, {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      });
+    }
   }
 
   updateServer(server: Server, serverId) {

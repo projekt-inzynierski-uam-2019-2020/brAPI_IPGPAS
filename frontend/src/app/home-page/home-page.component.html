@@ -19,32 +19,36 @@
   </div>
 
 
-    <form  (ngSubmit)="submit()">
+
+  <ng-template #logIn let-modal>
+    <form (ngSubmit)="submit()">
     <div class="modal-header">
       <h4 class="modal-title" id="logInTitle">Log in</h4>
-
-
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
+
     <div class="modal-body">
       <form>
         <div class="form-group">
-          <label for="email1">Login:</label>
+          <label for="email">Login:</label>
           <div class="input-group">
-            <input type="email" class="form-control" id="email1" aria-describedby="emailHelp" placeholder="Enter login" #Login name="email" [(ngModel)]="email">
+            <input type="email" class="form-control"  id="email" name="email" class="form-control" [(ngModel)]="email"  aria-describedby="emailHelp" placeholder="Enter email" #Login>
           </div>
         </div>
         <div class="form-group">
-          <label for="password1">Password:</label>
+          <label for="password">Password:</label>
           <div class="input-group">
-            <input type="password" class="form-control" id="password1" aria-describedby="emailHelp" placeholder="Enter password"  #Password name="password" [(ngModel)]="password">
+            <input type="password" class="form-control" id="password" aria-describedby="emailHelp" placeholder="Enter password" id="password" name="password" class="form-control" [(ngModel)]="password" #Password>
           </div>
         </div>
       </form>
     </div>
     <div class="modal-footer">
-
-      <button type="submit" class="btn btn-outline-dark" >Log in</button>
+      <button type="submit" class="btn btn-outline-dark">Log in</button>
     </div>
     </form>
-
+    <div *ngIf="test" >{{ modal.close('Save click')}}</div>
+  </ng-template>
 </div>
