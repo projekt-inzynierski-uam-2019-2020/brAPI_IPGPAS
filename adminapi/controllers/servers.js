@@ -7,11 +7,7 @@ module.exports = {
       if (err) {
         next(err);
       } else {
-        res.json({
-          status: "Success",
-          message: "Server found.",
-          data: { servers: serverInfo }
-        });
+        res.send(serverInfo)
       }
     });
   },
@@ -34,7 +30,7 @@ module.exports = {
         res.json({
           status: "Success",
           message: "Server list found.",
-          data: { servers: serversList }
+          servers: serversList 
         });
       }
     });
