@@ -41,20 +41,16 @@ function validateUser(req, res, next) {
   });
 }
 
-app.use(function(req, res, next) {
-  let err = new Error("Not Found");
-  err.status = 404;
-  next(err);
-});
+// app.use(function(req, res, next) {
+//   let err = new Error("Not Found");
+//   err.status = 404;
+//   next(err);
+// });
 
-app.use(function(err, req, res, next) {
-  console.log(err);
-  if (err.status === 404) {
-    res.status(404);
-  } else {
-    res.status(500);
-  }
-});
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 
 app.listen(3000, function() {
   console.log("Node server listening on port 3000.");
