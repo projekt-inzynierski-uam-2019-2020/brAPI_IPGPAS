@@ -59,6 +59,8 @@ export class StatisticsComponent implements OnInit {
   correlationData2: number[] = [];
   namesOfCorData: string[] = [];
 
+  barData: ChartData[] = [];
+
   numberofValues = [0, 0, 0, 0, 0, 0];
   backgroundBorderChartColor = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235,1)', 'rgba(128, 114, 254, 1)', 'rgba(29, 255, 140, 1)', 'rgba(215, 117, 44, 1)', 'rgba(7, 19, 157, 1)', 'rgba(239, 5, 0, 1)', 'rgba(243, 216, 31, 1)', 'rgba(200, 145, 31, 1)', 'rgba(49, 152, 42, 1)', 'rgba(21, 10, 10, 1)', 'rgba(133, 130, 155, 1)'];
   arrayOfRgba: string[] = [];
@@ -301,6 +303,8 @@ export class StatisticsComponent implements OnInit {
 
 
   columnChart(labels: any[], data: any[], text: string) {
+
+    console.log(data);
 
     // @ts-ignore
     this.BarChart = new Chart('barChart', {
