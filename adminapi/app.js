@@ -2,6 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const servers = require("./routes/servers");
 const users = require("./routes/users");
+const serverStatus = require('./routes/serverStatus')
 const bodyParser = require("body-parser");
 const mongoose = require("./config/database");
 const cors = require('cors')
@@ -24,6 +25,7 @@ app.get("/", function(req, res) {
 
 app.use("/users", users);
 app.use("/servers", validateUser, servers);
+app.use("/status", serverStatus);
 
 function validateUser(req, res, next) {
   jwt.verify(req.headers["x-access-token"], req.app.get("secretKey"), function(
