@@ -9,8 +9,7 @@
       <h2 class="filters__header--title">Studies</h2>
     </div>
     <div class="row d-flex justify-content-center">
-      <button href="#" (click)="locationFiltersShow = !locationFiltersShow" class="btn m-3 filters__header--filter">Location Filter</button>
-      <button href="#" (click)="seasonFiltersShow = !seasonFiltersShow" class="btn m-3 filters__header--filter">Season Filter</button>
+      <button href="#" (click)="filtersShow = !filtersShow" class="btn m-3 filters__header--filter">Filters</button>
       <button
         href="#"
         class="btn m-3 filters__header--button"
@@ -22,7 +21,7 @@
       </button>
     </div>
   </div>
-  <div *ngIf="locationFiltersShow" class="optionalFilters">
+  <div *ngIf="filtersShow" class="optionalFilters">
     <h3 class="optionalFilters__label">Filter by Location</h3>
     <div class="optionalFilters__container">
       <div class="optionalFilters__container--content">
@@ -40,13 +39,11 @@
             {{location.location}}
           </label>
         </div>
+        <div class="no-items">There is no locations</div>
       </div>
-      <button
-        (click)="applyFilters()"
-        class="optionalFilters__filter">Filter</button>
     </div>
   </div>
-  <div *ngIf="seasonFiltersShow" class="optionalFilters">
+  <div *ngIf="filtersShow" class="optionalFilters">
     <h3 class="optionalFilters__label">Filter by Season</h3>
     <div class="optionalFilters__container">
       <div class="optionalFilters__container--content">
@@ -64,6 +61,7 @@
           {{season.year}}
         </label>
         </div>
+        <div class="no-items">There is no seasons</div>
       </div>
       <button
         (click)="applyFilters()"
@@ -120,8 +118,8 @@
         </td>
         <td>{{ filteredStudyRow.study.locationName ? filteredStudyRow.study.locationName : '---' }}</td>
         <td>
-          <div  *ngFor="let season of filteredStudyRow.study.seasons">{{ season.year ? season.year : '---' }}</div></td>
-
+          <div  *ngFor="let season of filteredStudyRow.study.seasons">{{ season.year ? season.year : '---' }}</div>
+        </td>
         <td>
           <a target="_blank" href="{{ filteredStudyRow.study.documentationURL ? filteredStudyRow.study.documentationURL : '#' }}">{{ filteredStudyRow.study.documentationURL ? filteredStudyRow.study.documentationURL : '---' }}</a>
         </td>

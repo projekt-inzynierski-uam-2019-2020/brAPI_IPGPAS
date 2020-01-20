@@ -40,9 +40,9 @@
           </td>
         </tr>
         <tr class="table__study" >
-          <td class="table__header"><p class="table__header--top">Study Name</p><p class="table__header--line"></p><p class="table__header--bottom">Gerplasm Name</p></td>
+          <td style="text-align: left !important;" class="table__header"><p class="table__header--top">Study Name</p><p class="table__header--line"></p><p class="table__header--bottom">Gerplasm Name</p></td>
           <td class="hasTooltip" *ngFor="let studyColumn of this.studyColumns; let i = index">
-            <div class="hasTooltip__container">
+            <div style="text-align: center !important; text-align: -webkit-center !important; text-align: -moz-center !important;" class="hasTooltip__container">
               <div class="item">{{ studyColumn.study.name ? studyColumn.study.name : '---' }}</div>
               <div class="tooltip">{{ studyColumn.study.name ? studyColumn.study.name : '---' }}</div>
             </div>
@@ -51,7 +51,12 @@
         </thead>
         <tbody>
         <tr *ngFor="let germ of this.germplasm; let i = index">
-          <td>{{ germ.germplasmName ? germ.germplasmName : '---' }}</td>
+          <td style="text-align: left !important; margin-left: 50px" class="hasTooltip">
+            <div class="hasTooltip__container">
+              <div style="margin-left: 50px !important;" class="item">{{ germ.germplasmName ? germ.germplasmName : '---' }}</div>
+              <div style="margin-left: 50px !important;" class="tooltip">{{ germ.germplasmName ? germ.germplasmName : '---' }}</div>
+            </div>
+          </td>
           <td *ngFor="let studyColumn of this.studyColumns"><p *ngIf="checkGermplasmFunction(studyColumn, germ)"><i class="fas fa-check"></i></p>
           </td>
         </tr>
