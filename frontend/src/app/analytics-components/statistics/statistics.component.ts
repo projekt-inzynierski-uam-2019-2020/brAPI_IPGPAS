@@ -47,6 +47,10 @@ export class StatisticsComponent implements OnInit {
   germplasms: GermplasmValues[] = [];
   currentStudy: string;
   currentVariable: string;
+  isColumnChartEmpty: boolean;
+  isLineChartEmpty: boolean;
+  isColumnChart2Empty: boolean;
+  isLineChart3Empty: boolean;
 
   numberofValues = [0, 0, 0, 0, 0, 0];
   backgroundBorderChartColor = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235,1)', 'rgba(128, 114, 254, 1)', 'rgba(29, 255, 140, 1)', 'rgba(215, 117, 44, 1)', 'rgba(7, 19, 157, 1)', 'rgba(239, 5, 0, 1)', 'rgba(243, 216, 31, 1)', 'rgba(200, 145, 31, 1)', 'rgba(49, 152, 42, 1)', 'rgba(21, 10, 10, 1)', 'rgba(133, 130, 155, 1)'];
@@ -85,7 +89,6 @@ export class StatisticsComponent implements OnInit {
       if (studyName === studyStatics.studyName) {
         this.studyName = studyName;
         for (const variable of studyStatics.variables) {
-          console.log(studyStatics.variables);
           this.variables.push(variable.variableName);
           this.value = 0;
           let counter = 0;
@@ -97,11 +100,8 @@ export class StatisticsComponent implements OnInit {
               }
             }
           }
-          console.log(this.values);
-          console.log(this.variables);
           this.values.push(this.value / counter);
           this.variableAverageValue.push({variables: this.variables, averageValue: this.values});
-          console.log(this.variableAverageValue);
         }
       }
 
@@ -145,6 +145,46 @@ export class StatisticsComponent implements OnInit {
     }
     this.getHistogramVariable(variable);
 
+
+    const valuesGerplasm = [];
+    for ( let i = 0; i < this.valuesGermplasm.length; i++ ) {
+      if ( !isNaN(parseFloat(this.valuesGermplasm[i])) ) {
+        valuesGerplasm.push(isNaN(parseFloat(this.valuesGermplasm[i])));
+      }
+    }
+    if ( valuesGerplasm.length > 0 ) { this.isLineChartEmpty = false; } else { this.isLineChartEmpty = true; }
+    console.log(this.valuesGermplasm);
+
+    const averageValues = [];
+    for ( let i = 0; i < this.variableAverageValue[0].averageValue.length; i++ ) {
+      if ( !isNaN(parseFloat(this.variableAverageValue[0].averageValue[i])) ) {
+        averageValues.push(isNaN(parseFloat(this.variableAverageValue[0].averageValue[i])));
+      }
+    }
+    if ( averageValues.length > 0 ) { this.isColumnChartEmpty = false; } else { this.isColumnChartEmpty = true; }
+    console.log(this.variableAverageValue[0].averageValue);
+
+    const chartData = [];
+    for ( let i = 0; i < this.chartData.length; i++ ) {
+      console.log(this.chartData[i]);
+      for ( let j = 0; j < this.chartData[i].data.length; j++) {
+        if ( !isNaN(parseFloat(this.chartData[i].data[j])) ) {
+          chartData.push(isNaN(parseFloat(this.numberofValues[i])));
+          console.log(this.chartData[i].data[j]);
+        }
+      }
+    }
+    if ( chartData.length > 0 ) { this.isLineChart3Empty = false; } else { this.isLineChart3Empty = true; }
+
+    const numberOfValues = [];
+    for ( let i = 0; i < this.numberofValues.length; i++ ) {
+      if ( !isNaN(parseFloat(this.numberofValues[i])) ) {
+        numberOfValues.push(isNaN(parseFloat(this.numberofValues[i])));
+      }
+    }
+    if ( numberOfValues.length > 0 ) { this.isColumnChart2Empty = false; } else { this.isColumnChart2Empty = true; }
+    console.log(this.numberofValues);
+
   }
 
   getHistogramVariable(variable: string) {
@@ -154,7 +194,6 @@ export class StatisticsComponent implements OnInit {
     for (const studyVariables of this.globals.studyVariables) {
       if (this.studyName === studyVariables.studyName) {
         for (const variableG of studyVariables.variables) {
-          console.log(variableG);
           if (variableG.variableName === variable) {
             for (let i = 0; i < variableG.data.length; i++) {
               if (!isNaN(parseFloat(variableG.data[i]))) {
@@ -215,7 +254,6 @@ export class StatisticsComponent implements OnInit {
 
 
   initAverageStatistics() {
-    console.log(this.chartData[0]);
     setTimeout(() => {
       if (this.BarChart) {
         this.BarChart.destroy();
@@ -226,6 +264,7 @@ export class StatisticsComponent implements OnInit {
       if (this.LineChart) {
         this.LineChart.destroy();
       }
+
       this.chartService.chartColumnStyle(this.variableAverageValue[0].variables);
       this.columnChart(this.variableAverageValue[0].variables, this.variableAverageValue[0].averageValue, 'Average of variables');
       this.lineChart(this.germplasm, this.valuesGermplasm, 'Values of Germplasms');

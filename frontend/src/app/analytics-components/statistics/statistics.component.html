@@ -18,7 +18,7 @@
       <div class="dropdown">
         <button class="btn m-3 dropdown-toggle buttonsList__button" id="id" (click)=" this.isVariablesVisible = true; getVariablesFunction(studyName.studyName);" *ngFor="let studyName of this.globals.studyVariables" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{studyName.studyName}}</button>
         <div class="dropdown-menu" *ngFor="let studyName of this.globals.studyVariables" aria-labelledby="id">
-          <button class="btn buttonsList__button dropdown-item" (click)="getOneVariable(variable); this.isChartsVisible = true" *ngFor="let variable of this.variables">{{variable}}</button>
+          <button class="btn buttonsList__button dropdown-item" (click)="getOneVariable(variable); this.isChartsVisible = true; this.isLineChartVisible = false; this.isColumnChartVisible = false; this.isLine2ChartVisible = false; this.isColumn2ChartVisible = false" *ngFor="let variable of this.variables">{{variable}}</button>
         </div>
       </div>
     </div>
@@ -27,8 +27,8 @@
     <h3 class="buttonsList__label">Study statistics ( {{this.currentStudy}} )</h3>
     <div class="buttonsList__container">
       <div class="buttonsList__container--contentChart">
-        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isLineChartVisible = !this.isLineChartVisible; this.isColumnChartVisible = false; this.initAverageStatistics()">Values of all Variables</button>
-        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isColumnChartVisible = !this.isColumnChartVisible; this.isLineChartVisible = false; this.initAverageStatistics(); ">Average of variables</button>
+        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isLineChartVisible = !this.isLineChartVisible; this.isColumnChartVisible = false; this.initAverageStatistics()" [disabled]="this.isLineChartEmpty" >Values of all Variables</button>
+        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isColumnChartVisible = !this.isColumnChartVisible; this.isLineChartVisible = false; this.initAverageStatistics()" [disabled]="this.isColumnChartEmpty">Average of variables</button>
       </div>
     </div>
   </div>
@@ -51,8 +51,8 @@
     <h3 class="buttonsList__label">Variable statistics ( {{this.currentVariable}} )</h3>
     <div class="buttonsList__container">
       <div class="buttonsList__container--contentChart">
-        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isLine2ChartVisible = !this.isLine2ChartVisible; this.isColumn2ChartVisible = false; this.initAverageStatistics()">Values of one Variable</button>
-        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isColumn2ChartVisible = !this.isColumn2ChartVisible; this.isLine2ChartVisible = false; this.initAverageStatistics(); ">Sum values of Variables</button>
+        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isLine2ChartVisible = !this.isLine2ChartVisible; this.isColumn2ChartVisible = false; this.initAverageStatistics()" [disabled]="this.isLineChart3Empty" >Values of one Variable</button>
+        <button class="btn m-3 buttonsList__buttonChart" (click)="this.isColumn2ChartVisible = !this.isColumn2ChartVisible; this.isLine2ChartVisible = false; this.initAverageStatistics()" [disabled]="this.isColumnChart2Empty" >Sum values of Variables</button>
       </div>
     </div>
   </div>
