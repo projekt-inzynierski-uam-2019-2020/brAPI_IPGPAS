@@ -4,6 +4,8 @@ import {Globals} from '../globals';
 import {TrialService} from '../call-services/trial/trial-service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
+import {AuthService} from '../servers-services/auth.service';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-page',
@@ -14,9 +16,12 @@ export class HomePageComponent implements OnInit {
   closeResult: string;
   globals: Globals;
  test = false;
+  public email: string;
+  public password: string;
+  public error: string;
 
 
-  constructor(public globalss: Globals, public trialService: TrialService, private modalService: NgbModal, private  router: Router) { }
+  constructor(public globalss: Globals, public trialService: TrialService, private modalService: NgbModal, private  router: Router, private auth: AuthService) { }
 
   ngOnInit() {
     this.globals = this.globalss;
@@ -34,6 +39,15 @@ export class HomePageComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  public submit() {
+    this.auth.login(this.email, this.password)
+      .pipe(first())
+      .subscribe(
+        result => this.router.navigate(['admin/page']),
+        err => this.error = 'Could not authenticate'
+      );
   }
 
   private getDismissReason(reason: any): string {

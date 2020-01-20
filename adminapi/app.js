@@ -1,30 +1,57 @@
 const express = require("express");
+const logger = require("morgan");
+const servers = require("./routes/servers");
+const users = require("./routes/users");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const cors = require("cors");
-
-const server = require("./routes/serverRoute");
-
-let port = 3000;
-let mongoUrl = "mongodb://admin:admin@db.admin.local:27017/adminapi-db";
-
+const mongoose = require("./config/database");
+var jwt = require("jsonwebtoken");
 const app = express();
 
-mongoose.connect(mongoUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
+app.set("secretKey", "nodeRestApi");
+
+mongoose.connection.on(
+  "error",
+  console.error.bind(console, "MongoDB connection error:")
+);
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.get("/", function(req, res) {
+  res.send("PlantPheno Analytics Admin API");
 });
 
-mongoose.Promise = global.Promise;
+app.use("/users", users);
+app.use("/servers", validateUser, servers);
 
-let db = mongoose.connection;
+function validateUser(req, res, next) {
+  jwt.verify(req.headers["x-access-token"], req.app.get("secretKey"), function(
+    err,
+    decoded
+  ) {
+    if (err) {
+      res.json({ status: "error", message: err.message, data: null });
+    } else {
+      req.body.userId = decoded.id;
+      next();
+    }
+  });
+}
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
-app.use("/servers", server);
+app.use(function(req, res, next) {
+  let err = new Error("Not Found");
+  err.status = 404;
+  next(err);
+});
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.use(function(err, req, res, next) {
+  console.log(err);
+  if (err.status === 404) {
+    res.status(404);
+  } else {
+    res.status(500);
+  }
+});
+
+app.listen(3000, function() {
+  console.log("Node server listening on port 3000.");
 });

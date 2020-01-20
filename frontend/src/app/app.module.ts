@@ -27,11 +27,20 @@ import {StudyService} from './call-services/study/study-service';
 import {GermplasmComponent} from './analytics-components/germplasm/germplasm.component';
 import {GermplasmService} from './call-services/germplasm/germplasm-service';
 import {VariablesComponent} from './analytics-components/variables/variables.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import {StatisticsComponent} from './analytics-components/statistics/statistics.component';
 import {ChartService} from './services/chart-service/chart-service';
 
 import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.component';
+import {AuthGuard} from './servers-services/auth.guard';
+import {AuthService} from './servers-services/auth.service';
+
+
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
@@ -55,13 +64,14 @@ import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.compone
     RouterModule.forRoot([{path: 'home', component: HomePageComponent},
       {path: 'servers', component: ServerPageComponent},
       {path: 'databases', component: DatabasesPageComponent},
-      {path: 'admin/page', component: AdminMainPageComponent},
+      {path: 'admin/page', component: AdminMainPageComponent, canActivate: [AuthGuard]},
       {path: 'servers/trial', component: TrialComponent, resolve: TrialsResolve},
       {path: 'servers/study', component: StudyComponent},
       {path: 'servers/germplasm', component: GermplasmComponent},
       {path: 'servers/variables', component: VariablesComponent},
       {path: 'servers/statistics', component: StatisticsComponent},
       {path: '', component: HomePageComponent},
+
 
       {path: '**', component: HomePageComponent}]),
     BrowserModule,
@@ -70,9 +80,18 @@ import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.compone
     FormsModule,
     BrowserAnimationsModule,
     NgbModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:3000'],
+        blacklistedRoutes: ['localhost:3000/users/authenticate']
+      }
+    })
   ],
 
   providers: [
+    AuthService,
+    AuthGuard,
     ServersFetchingService,
     ServerPageComponent,
     Globals,

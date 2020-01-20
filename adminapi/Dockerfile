@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:10-buster-slim
 EXPOSE 3000
 COPY . /opt/adminapi
 WORKDIR /opt/adminapi
