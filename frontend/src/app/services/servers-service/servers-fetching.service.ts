@@ -9,7 +9,7 @@ const httpOptions = {
 
 @Injectable()
 export class ServersFetchingService {
-  private serversUrl = 'http://localhost:3000/servers';
+  private serversUrl = 'http://localhost:3000';
 
   private token = localStorage.getItem('access_token');
 
@@ -26,7 +26,7 @@ export class ServersFetchingService {
   }
 
   getAllServers(): Observable<Server[]> {
-      return this.http.get<Server[]>(this.serversUrl + '/', this.httpOptions);
+      return this.http.get<Server[]>(this.serversUrl + '/get_servers');
   }
 
   createServer(server: Server) {

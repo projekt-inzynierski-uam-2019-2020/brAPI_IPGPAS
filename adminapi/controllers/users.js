@@ -22,6 +22,19 @@ module.exports = {
     );
   },
 
+  deleteById: function(req, res, next) {
+    userModel.findByIdAndRemove(req.params.id, function(err, userInfo) {
+      if (err) next(err);
+      else {
+        res.json({
+          status: "Success",
+          message: "User deleted successfully.",
+          data: null
+        });
+      }
+    });
+  },
+
   authenticate: function(req, res, next) {
     userModel.findOne({ email: req.body.email }, function(err, userInfo) {
       if (err) {
