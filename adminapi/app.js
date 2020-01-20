@@ -1,11 +1,12 @@
 const express = require("express");
 const logger = require("morgan");
 const servers = require("./routes/servers");
+const serversNoAuth = require("./routes/serversNoAuth");
 const users = require("./routes/users");
-const serverStatus = require('./routes/serverStatus')
+const serverStatus = require("./routes/serverStatus");
 const bodyParser = require("body-parser");
 const mongoose = require("./config/database");
-const cors = require('cors')
+const cors = require("cors");
 var jwt = require("jsonwebtoken");
 const app = express();
 
@@ -25,6 +26,7 @@ app.get("/", function(req, res) {
 
 app.use("/users", users);
 app.use("/servers", validateUser, servers);
+app.use("/get_servers/", serversNoAuth);
 app.use("/status", serverStatus);
 
 function validateUser(req, res, next) {
@@ -47,10 +49,10 @@ function validateUser(req, res, next) {
 //   next(err);
 // });
 
-app.use(function (err, req, res, next) {
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
-})
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
 app.listen(3000, function() {
   console.log("Node server listening on port 3000.");
