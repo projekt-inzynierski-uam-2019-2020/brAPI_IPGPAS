@@ -53,6 +53,8 @@ public class StudySorter extends Sorter<Study> {
                 studies.sort(Comparator.comparing(Study::getProgramName, Comparator.nullsLast(Comparator.naturalOrder())
                 ));
                 break;
+            default:
+                return studies;
         }
         return studies;
     }

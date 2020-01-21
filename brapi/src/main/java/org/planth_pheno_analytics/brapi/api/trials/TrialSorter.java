@@ -42,6 +42,8 @@ public class TrialSorter extends Sorter<Trial> {
                 trials.sort(Comparator.comparing(Trial::getEndDate, Comparator.nullsLast(Comparator.naturalOrder())
                 ));
                 break;
+            default:
+                return trials;
         }
         return trials;
     }

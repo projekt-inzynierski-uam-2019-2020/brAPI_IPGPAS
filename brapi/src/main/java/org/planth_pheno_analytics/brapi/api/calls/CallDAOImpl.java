@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public class CallDAOImpl implements CallDAO {
 
-    private static final List<Call> CALLS = new ArrayList<>();
+    private final List<Call> CALLS = new ArrayList<>();
 
     public CallDAOImpl() {
         CALLS.add(new Call.Builder("calls")
