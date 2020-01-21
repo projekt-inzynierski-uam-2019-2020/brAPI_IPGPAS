@@ -24,7 +24,7 @@
       <h3>Results found:</h3>
       <h3>{{servers.length}}</h3>
     </div>
-    <div class="servers__container&#45;&#45;card col-xl-larger col-lg-6" *ngFor="let server of servers.servers;let i = index ">
+    <div class="servers__container&#45;&#45;card col-xl-larger col-lg-6" *ngFor="let server of servers;let i = index ">
       <input
         class="servers__container&#45;&#45;card-checkbox"
         [(ngModel)]="serverCheckboxes[i].selected"

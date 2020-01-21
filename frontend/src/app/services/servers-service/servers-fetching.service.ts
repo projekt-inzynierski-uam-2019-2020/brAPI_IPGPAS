@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Server} from './servers';
 import {Injectable} from '@angular/core';
@@ -18,6 +18,7 @@ export class ServersFetchingService {
     'x-access-token': this.token
   });
 
+
   private httpOptions = {
     headers: this.headers_object
   };
@@ -30,19 +31,22 @@ export class ServersFetchingService {
   }
 
   createServer(server: Server) {
-    if (localStorage.getItem('access_token')) {
-      return this.http.post<Server>(this.serversUrl + '/', server, {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/x-www-form-urlencoded')
-      });
-    }
+    const payload = new HttpParams()
+      .set('name', server.name)
+      .set('ipAddress', server.ipAddress)
+      .set('description', server.description);
+      return this.http.post<Server>(this.serversUrl + '/servers/', payload, this.httpOptions);
   }
 
   updateServer(server: Server, serverId) {
-    return this.http.put<Server>(this.serversUrl + '/' + serverId + '/update', server, httpOptions);
+    const payload = new HttpParams()
+      .set('name', server.name)
+      .set('ipAddress', server.ipAddress)
+      .set('description', server.description);
+    return this.http.put<Server>(this.serversUrl + '/servers/' + serverId, payload, this.httpOptions);
   }
 
   public deleteServer(server) {
-    return this.http.delete(this.serversUrl + '/' + server + '/delete');
+    return this.http.delete(this.serversUrl + '/servers/' + server, this.httpOptions);
   }
 }

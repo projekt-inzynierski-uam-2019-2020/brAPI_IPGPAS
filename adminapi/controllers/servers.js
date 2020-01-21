@@ -19,19 +19,7 @@ module.exports = {
       if (err) {
         next(err);
       } else {
-        for (let server of servers) {
-          serversList.push({
-            id: server._id,
-            name: server.name,
-            ipAddress: server.ipAddress,
-            description: server.description
-          });
-        }
-        res.json({
-          status: "Success",
-          message: "Server list found.",
-          servers: serversList 
-        });
+        res.send(servers)
       }
     });
   },

@@ -46,7 +46,6 @@ export class AdminMainPageComponent implements OnInit {
       .subscribe(data => {
         this.getServers();
       });
-
     setTimeout( () => {
       this.refresh();
     }, 500);
@@ -79,6 +78,7 @@ export class AdminMainPageComponent implements OnInit {
     setTimeout( () => {
       this.refresh();
     }, 500);
+
   }
 
   public changeSuccessMessage() {
