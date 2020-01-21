@@ -9,7 +9,7 @@ const httpOptions = {
 
 @Injectable()
 export class ServersFetchingService {
-  private serversUrl = 'http://teamprojectuam.tk/api';
+  private serversUrl = 'https://teamprojectuam.tk/api';
 
   private token = localStorage.getItem('access_token');
 
