@@ -7,7 +7,7 @@ module.exports = {
       if (err) {
         next(err);
       } else {
-        res.send(serverInfo)
+        res.send(serverInfo);
       }
     });
   },
@@ -19,7 +19,7 @@ module.exports = {
       if (err) {
         next(err);
       } else {
-        res.send(servers)
+        res.send(servers);
       }
     });
   },

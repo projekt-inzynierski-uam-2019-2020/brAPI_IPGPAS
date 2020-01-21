@@ -65,6 +65,7 @@ import { ServerStatusPageComponent } from './server-status-page/server-status-pa
       {path: 'servers/germplasm', component: GermplasmComponent},
       {path: 'servers/variables', component: VariablesComponent},
       {path: 'servers/statistics', component: StatisticsComponent},
+      {path: 'servers/status', component: ServerStatusPageComponent},
       {path: '', component: HomePageComponent},
 
       {path: '**', component: HomePageComponent}]),
