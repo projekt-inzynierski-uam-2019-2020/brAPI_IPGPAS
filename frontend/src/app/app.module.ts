@@ -34,6 +34,7 @@ import {ChartService} from './services/chart-service/chart-service';
 import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.component';
 import {AuthGuard} from './services/auth/auth.guard';
 import {AuthService} from './services/auth/auth.service';
+import { ServerStatusPageComponent } from './server-status-page/server-status-page.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {AuthService} from './services/auth/auth.service';
     GermplasmComponent,
     VariablesComponent,
     StatisticsComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    ServerStatusPageComponent
   ],
   imports: [
     HttpClientModule,

@@ -14,7 +14,7 @@ export class AuthService {
     const payload = new HttpParams()
       .set('email', email)
       .set('password', password);
-    return this.http.post<{data: UserToken}>('http://localhost:3000/users/authenticate', payload)
+    return this.http.post<{data: UserToken}>('https://teamprojectuam.tk/api/users/authenticate', payload)
       .pipe(
         map(result => {
           localStorage.setItem('access_token', result.data.token);
