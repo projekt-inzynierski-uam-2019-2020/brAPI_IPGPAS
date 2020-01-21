@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ServerStatusComponent } from './server-status.component';
+import { ServerStatusPageComponent } from './server-status-page.component';
 
-describe('ServerStatusComponent', () => {
-  let component: ServerStatusComponent;
-  let fixture: ComponentFixture<ServerStatusComponent>;
+describe('ServerStatusPageComponent', () => {
+  let component: ServerStatusPageComponent;
+  let fixture: ComponentFixture<ServerStatusPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ServerStatusComponent ]
+      declarations: [ ServerStatusPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ServerStatusComponent);
+    fixture = TestBed.createComponent(ServerStatusPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,7 +1,6 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Server} from './servers';
-import {Status} from './status';
 import {Injectable} from '@angular/core';
 
 const httpOptions = {
@@ -10,29 +9,46 @@ const httpOptions = {
 
 @Injectable()
 export class ServersFetchingService {
-  private serversUrl = 'https://teamprojectuam.tk/api/servers';
-  private serverStatus = 'https://teamprojectuam.tk/api/status';
+
+  private serversUrl = 'https://teamprojectuam.tk/api';
+
+  private token = localStorage.getItem('access_token');
+
+  private headers_object = new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'x-access-token': this.token
+  });
+
+
+  private httpOptions = {
+    headers: this.headers_object
+  };
+
 
   constructor(private http: HttpClient) {
   }
 
   getAllServers(): Observable<Server[]> {
-    return this.http.get<Server[]>(this.serversUrl);
-  }
-
-  getAllServersStatus(): Observable<Status[]> {
-    return this.http.get<Status[]>(this.serverStatus);
+      return this.http.get<Server[]>(this.serversUrl + '/get_servers');
   }
 
   createServer(server: Server) {
-    return this.http.post<Server>(this.serversUrl + '/create', server);
+    const payload = new HttpParams()
+      .set('name', server.name)
+      .set('ipAddress', server.ipAddress)
+      .set('description', server.description);
+      return this.http.post<Server>(this.serversUrl + '/servers/', payload, this.httpOptions);
   }
 
   updateServer(server: Server, serverId) {
-    return this.http.put<Server>(this.serversUrl + '/' + serverId + '/update', server, httpOptions);
+    const payload = new HttpParams()
+      .set('name', server.name)
+      .set('ipAddress', server.ipAddress)
+      .set('description', server.description);
+    return this.http.put<Server>(this.serversUrl + '/servers/' + serverId, payload, this.httpOptions);
   }
 
   public deleteServer(server) {
-    return this.http.delete(this.serversUrl + '/' + server + '/delete');
+    return this.http.delete(this.serversUrl + '/servers/' + server, this.httpOptions);
   }
 }

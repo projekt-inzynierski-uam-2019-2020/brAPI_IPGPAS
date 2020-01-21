@@ -9,6 +9,7 @@ import {StudyCheckboxes} from './studyCheckboxes';
 import {StudySelected} from './studySelected';
 import {ServerStudy} from './serverStudy';
 import {Router} from '@angular/router';
+import {assertLessThan} from '@angular/core/src/render3/assert';
 
 @Component({
   selector: 'app-germplasm',
@@ -42,8 +43,17 @@ export class GermplasmComponent implements OnInit {
     let loadingCounter = 0;
     this.globals.selectedServerStudies.map(selectedStudy => this.germplasmService.getGermplasmByStudyDbId(selectedStudy.serverUrl, selectedStudy.study.studyDbId)
       .subscribe(fetchedGermplasm => {
-        this.setGermplasmCheckboxes(fetchedGermplasm, selectedStudy.study, selectedStudy.serverUrl) ;
-        loadingCounter = loadingCounter + 1;
+        if (fetchedGermplasm === null) {
+          alert(selectedStudy.serverUrl + ' not respond');
+          loadingCounter = loadingCounter + 1;
+        } else {
+          if (fetchedGermplasm === undefined) {
+            loadingCounter = loadingCounter + 1;
+          } else {
+            this.setGermplasmCheckboxes(fetchedGermplasm, selectedStudy.study, selectedStudy.serverUrl);
+            loadingCounter = loadingCounter + 1;
+          }
+          }
         if (loadingCounter === this.globals.selectedServerStudies.length) {
           this.isLoading = false;
         }

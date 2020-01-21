@@ -23,7 +23,7 @@ public class StudyMapper {
         study.setActive("false");
         study.setStudyDbId(projection.getStudyDbId());
         study.setTrialDbId(projection.getTrialDbId());
-        study.setDocumentationURL("http://cropnet.pl/plantphenodb/index.php?id=" + study.getStudyDbId());
+        study.setDocumentationURL("http://cropnet.pl/plantphenodb/index.php?id=" + study.getTrialDbId());
         study.setName(projection.getName());
         study.setStudyName(projection.getStudyName());
         study.setTrialName(projection.getTrialName());

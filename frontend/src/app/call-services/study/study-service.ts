@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {FetchBrapiResultService} from '../../fetch-services/fetch-brapi-result-service';
 import {Globals} from '../../globals';
 import {DetailResult} from '../../call-models/response/detailResult';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
 import {Config} from 'protractor';
 import {HttpResponse} from '@angular/common/http';
 
@@ -25,14 +25,20 @@ export class StudyService {
   }
 
   getStudyByStudyDbId(brAPIServerUrl: string, studyDbId: string) {
-    return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies?studyDbId=' + studyDbId).pipe(map(result => result.data));
+    return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies?studyDbId=' + studyDbId).pipe(map(result => result.data), catchError( error => {
+      return of(null);
+    }));
   }
 
   getStudyByTrialDbId(brAPIServerUrl: string, trialDbId: string) {
     if (brAPIServerUrl === 'https://teamprojectuam.tk') {
-      return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies?trialDbId=' + trialDbId).pipe(map(result => result.data));
+      return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies?trialDbId=' + trialDbId).pipe(map(result => result.data), catchError( error => {
+        return of(null);
+      }));
     } else {
-      return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies-search?trialDbId=' + trialDbId).pipe(map(result => result.data));
+      return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/studies-search?trialDbId=' + trialDbId).pipe(map(result => result.data), catchError( error => {
+        return of(null);
+      }));
     }
   }
 

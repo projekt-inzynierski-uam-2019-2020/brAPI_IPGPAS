@@ -78,10 +78,10 @@
     <div class="dropdown btn m-3 buttonsList__buttonChart">
       <button class="btn dropdown-toggle variableDropdown" id="idC" type="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false"
-              (click)="this.isVariablesVisible = true;  this.isChartsVisible = true">Сhoose correlation variable
+              (click)="this.isVariablesVisible = true;  this.isChartsVisible = true" [disabled]="this.isLineChart3Empty">Сhoose correlation variable
       </button>
       <div class="dropdown-menu variableMenu" aria-labelledby="idC">
-        <button class="btn buttonsList__button dropdown-item variableItem" [disabled]="this.isLineChart4Empty"
+        <button class="btn buttonsList__button dropdown-item variableItem"
                 (click)="getCorrelation(variable); this.isLine4ChartVisible = true; this.isColumn2ChartVisible = false; this.initAverageStatistics();  this.isLine2ChartVisible = false;"
                 *ngFor="let variable of this.correlationVariables">{{variable}}</button>
       </div>

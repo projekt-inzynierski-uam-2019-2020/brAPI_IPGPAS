@@ -8,8 +8,7 @@ public class TrialStudy {
     private String studyDbId;
     private String studyName;
 
-    TrialStudy() {
-    }
+    TrialStudy() {}
 
     public String getLocationDbId() {
         return locationDbId;

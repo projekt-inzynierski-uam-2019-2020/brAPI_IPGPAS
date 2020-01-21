@@ -4,7 +4,7 @@ WORKDIR /root/brapi-frontend-app
 RUN npm install -g npm
 RUN npm install -g @angular/cli@v6-lts
 RUN npm install
-RUN ng build
+RUN ng build --verbose
 
 FROM httpd:2.4
 COPY --from=0 /root/brapi-frontend-app/dist/frontend/. /usr/local/apache2/htdocs

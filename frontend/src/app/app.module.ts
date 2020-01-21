@@ -32,6 +32,9 @@ import {StatisticsComponent} from './analytics-components/statistics/statistics.
 import {ChartService} from './services/chart-service/chart-service';
 
 import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.component';
+import {AuthGuard} from './services/auth/auth.guard';
+import {AuthService} from './services/auth/auth.service';
+import { ServerStatusPageComponent } from './server-status-page/server-status-page.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.compone
     VariablesComponent,
     StatisticsComponent,
     LoadingSpinnerComponent,
+    ServerStatusPageComponent
   ],
   imports: [
     HttpClientModule,
@@ -55,7 +59,7 @@ import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.compone
     RouterModule.forRoot([{path: 'home', component: HomePageComponent},
       {path: 'servers', component: ServerPageComponent},
       {path: 'databases', component: DatabasesPageComponent},
-      {path: 'admin/page', component: AdminMainPageComponent},
+      {path: 'admin/page', component: AdminMainPageComponent, canActivate: [AuthGuard]},
       {path: 'servers/trial', component: TrialComponent, resolve: TrialsResolve},
       {path: 'servers/study', component: StudyComponent},
       {path: 'servers/germplasm', component: GermplasmComponent},
@@ -83,6 +87,8 @@ import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.compone
     TrialsResolve,
     StudyService,
     GermplasmService,
+    AuthGuard,
+    AuthService,
     ChartService],
 
   bootstrap: [AppComponent],
