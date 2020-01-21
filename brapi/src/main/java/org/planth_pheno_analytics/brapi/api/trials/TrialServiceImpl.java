@@ -52,7 +52,7 @@ public class TrialServiceImpl implements TrialService {
             trials = trialSorter.sortBy(trials, sortBy);
         }
         String sortOrder = sortCriteria.getSortOrder();
-        if (isParameterPresent(active)) {
+        if (isParameterPresent(sortOrder)) {
             trials = trialSorter.sortOrder(trials, sortOrder);
         }
 

@@ -79,7 +79,7 @@ public class StudyServiceImpl implements StudyService {
             studies = studySorter.sortBy(studies, sortBy);
         }
         String sortOrder = sortCriteria.getSortOrder();
-        if (isParameterPresent(active)) {
+        if (isParameterPresent(sortOrder)) {
             studies = studySorter.sortOrder(studies, sortOrder);
         }
 
@@ -166,8 +166,8 @@ public class StudyServiceImpl implements StudyService {
                         } else {
                             tableRow.add("");
                         }
-                        tableRow.add(study.getProgramDbId());
-                        tableRow.add(study.getProgramName());
+                        tableRow.add(study.getProgramDbId() == null ? "" : study.getProgramDbId());
+                        tableRow.add(study.getProgramName() == null ? "" : study.getProgramDbId());
                         tableRow.add("");
                         tableRow.add(study.getStudyDbId());
                         tableRow.add(study.getStudyName());
