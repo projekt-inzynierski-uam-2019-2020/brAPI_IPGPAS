@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ServersFetchingService} from '../services/servers-service/servers-fetching.service';
-import {Server} from '../services/servers-service/servers';
+import {Status} from '../services/servers-service/status';
 import {Globals} from '../globals';
 import {Router} from '@angular/router';
 
@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 export class ServerStatusComponent implements OnInit {
   globals: Globals;
 
-  servers: Server[];
+  status: Status[];
   serverService: ServersFetchingService;
   serverCheckboxes = [];
 
@@ -20,14 +20,14 @@ export class ServerStatusComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.serverService.getAllServersStatus()
-    //   .subscribe(data => {
-    //     this.servers = data;
-    //     for (const server of this.servers) {
-    //       this.serverCheckboxes.push({value: server.ipAddress, selected: false});
-    //     }
-    //     this.isLoading = false;
-    //   });
+    this.serverService.getAllServersStatus()
+      .subscribe(data => {
+        this.status = data;
+        for (const server of this.status) {
+          this.serverCheckboxes.push({value: server.ipAddress, selected: false});
+        }
+        this.isLoading = false;
+      });
   }
 
   constructor(serverService: ServersFetchingService, globals: Globals, private router: Router) {

@@ -11,7 +11,18 @@ const httpOptions = {
 @Injectable()
 export class ServersFetchingService {
   private serversUrl = 'https://teamprojectuam.tk/api/servers';
-  private serverStatus = 'https://teamprojectuam.tk/api/status';
+  private serverStatus = 'http://localhost:4200';
+
+  private token = localStorage.getItem('access_token');
+
+  private headers_object = new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'x-access-token': this.token
+  });
+
+  private httpOptions = {
+    headers: this.headers_object
+  };
 
   constructor(private http: HttpClient) {
   }
@@ -21,7 +32,7 @@ export class ServersFetchingService {
   }
 
   getAllServersStatus(): Observable<Status[]> {
-    return this.http.get<Status[]>(this.serverStatus);
+    return this.http.get<Status[]>(this.serverStatus + '/api/status');
   }
 
   createServer(server: Server) {
