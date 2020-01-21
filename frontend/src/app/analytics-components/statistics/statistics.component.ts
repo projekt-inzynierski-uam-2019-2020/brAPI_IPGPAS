@@ -35,7 +35,6 @@ export class StatisticsComponent implements OnInit {
   xy: Data[] = [];
 
   chartData: ChartData[] = [];
-  chartVariablesData: ChartData[] = [];
   chartDataData: ChartData[] = [];
   dataForChart: number[];
 
@@ -53,6 +52,11 @@ export class StatisticsComponent implements OnInit {
   germplasms: GermplasmValues[] = [];
   currentStudy: string;
   currentVariable: string;
+  isColumnChartEmpty: boolean;
+  isLineChartEmpty: boolean;
+  isColumnChart2Empty: boolean;
+  isLineChart3Empty: boolean;
+  isLineChart4Empty: boolean;
   currentCorrelationVar: string;
 
   correlationData1: number[] = [];
@@ -78,6 +82,8 @@ export class StatisticsComponent implements OnInit {
   sortedData1Co: number[] = [];
   sortedData2Co: number[] = [];
   correlationVariables: string[] = [];
+
+  valuesGerplasms: number [] = [];
 
   @ViewChild('myCanvas') myCanvas: ElementRef;
 
@@ -106,7 +112,6 @@ export class StatisticsComponent implements OnInit {
       if (studyName === studyStatics.studyName) {
         this.studyName = studyName;
         for (const variable of studyStatics.variables) {
-          console.log(studyStatics.variables);
           this.variables.push(variable.variableName);
           this.value = 0;
           let counter = 0;
@@ -118,11 +123,8 @@ export class StatisticsComponent implements OnInit {
               }
             }
           }
-          console.log(this.values);
-          console.log(this.variables);
           this.values.push(this.value / counter);
           this.variableAverageValue.push({variables: this.variables, averageValue: this.values});
-          console.log(this.variableAverageValue);
         }
       }
 
@@ -133,6 +135,9 @@ export class StatisticsComponent implements OnInit {
     this.germplasm = [];
     this.valuesGermplasm = [];
     this.chartData = [];
+    this.valuesGerplasms = [];
+
+
 
     this.correlationVariables = [];
     this.currentVariable = variable;
@@ -147,6 +152,9 @@ export class StatisticsComponent implements OnInit {
           this.dataForChart = [];
           for (let i = 0; i < variableG.germplasmName.length; i++) {
             this.dataForChart.push(parseFloat(variableG.data[i]));
+            if (!isNaN(parseFloat(variableG.data[i]))){
+              this.valuesGerplasms.push(parseFloat(variableG.data[i]));
+            }
           }
           this.chartData.push({
             label: variableG.variableName,
@@ -173,11 +181,44 @@ export class StatisticsComponent implements OnInit {
         }
       }
 
-      console.log(this.correlationVariables)
+
       this.germplasms.push({values: this.valuesGermplasm, germplasms: this.germplasm});
 
     }
     this.getHistogramVariable(variable);
+
+
+
+
+    if ( this.valuesGerplasms.length > 0 ) { this.isLineChartEmpty = false; } else { this.isLineChartEmpty = true; }
+
+    const averageValues = [];
+    for ( let i = 0; i < this.variableAverageValue[0].averageValue.length; i++ ) {
+      if ( !isNaN(this.variableAverageValue[0].averageValue[i]) ) {
+        averageValues.push(this.variableAverageValue[0].averageValue[i]);
+      }
+    }
+    if ( averageValues.length > 0 ) { this.isColumnChartEmpty = false; } else { this.isColumnChartEmpty = true; }
+
+    const chartData = [];
+    for ( let i = 0; i < this.chartData.length; i++ ) {
+      for ( let j = 0; j < this.chartData[i].data.length; j++) {
+        if ( !isNaN(this.chartData[i].data[j]) ) {
+          chartData.push(this.numberofValues[i]);
+        }
+      }
+    }
+    if ( chartData.length > 0 ) { this.isLineChart3Empty = false; } else { this.isLineChart3Empty = true; }
+
+    const numberOfValues = [];
+    for ( let i = 0; i < this.numberofValues.length; i++ ) {
+      if ( !isNaN(this.numberofValues[i]) && this.numberofValues[i] !== 0) {
+        numberOfValues.push(this.numberofValues[i]);
+      }
+    }
+    if ( numberOfValues.length > 0 ) { this.isColumnChart2Empty = false; } else { this.isColumnChart2Empty = true; }
+    if ( numberOfValues.length > 0 ) { this.isLineChart3Empty = false; } else { this.isLineChart3Empty = true; }
+
 
   }
 
@@ -189,7 +230,6 @@ export class StatisticsComponent implements OnInit {
     for (const studyVariables of this.globals.studyVariables) {
       if (this.studyName === studyVariables.studyName) {
         for (const variableG of studyVariables.variables) {
-          console.log(variableG);
           if (variableG.variableName === variable) {
             for (let i = 0; i < variableG.data.length; i++) {
               if (!isNaN(parseFloat(variableG.data[i]))) {
@@ -271,11 +311,25 @@ export class StatisticsComponent implements OnInit {
         }
       }
     }
+
+    const corelationData1 = [];
+    for ( let i = 0; i < this.correlationData1.length; i++ ) {
+      if ( !isNaN(this.correlationData1[i]) ) {
+        corelationData1.push(this.correlationData1[i]);
+      }
+    }
+    const corelationData2 = [];
+    for ( let i = 0; i < this.correlationData2.length; i++ ) {
+      if ( !isNaN(this.correlationData2[i]) ) {
+        corelationData2.push(this.correlationData2[i]);
+      }
+    }
+    if ( corelationData1.length > 0 && corelationData2.length > 0) { this.isLineChart4Empty = false; } else { this.isLineChart4Empty = true; }
+
   }
 
 
   initAverageStatistics() {
-    console.log(this.chartData[0]);
     setTimeout(() => {
       if (this.BarChart) {
         this.BarChart.destroy();
@@ -286,6 +340,7 @@ export class StatisticsComponent implements OnInit {
       if (this.LineChart) {
         this.LineChart.destroy();
       }
+
       this.chartService.chartColumnStyle(this.variableAverageValue[0].variables);
       this.columnChart(this.variableAverageValue[0].variables, this.variableAverageValue[0].averageValue, 'Variables average');
       this.lineChart(this.germplasm, this.valuesGermplasm, 'Variable values');
@@ -304,7 +359,6 @@ export class StatisticsComponent implements OnInit {
 
   columnChart(labels: any[], data: any[], text: string) {
 
-    console.log(data);
 
     // @ts-ignore
     this.BarChart = new Chart('barChart', {
@@ -539,7 +593,6 @@ export class StatisticsComponent implements OnInit {
 
     this.xy.push({x: this.data1Co, y: this.data2Co});
 
-    console.log(this.xy);
 
 
 
@@ -554,11 +607,6 @@ export class StatisticsComponent implements OnInit {
           this.sortedData2Co[i] = this.data2Co[i];
         }
     }
-
-    console.log(this.sortedData1Co);
-    console.log(this.sortedData2Co);
-    console.log(this.stringData);
-
 
 
 

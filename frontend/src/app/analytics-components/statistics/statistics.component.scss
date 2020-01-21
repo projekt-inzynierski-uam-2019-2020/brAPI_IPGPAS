@@ -612,6 +612,10 @@
       transform: scale(1);
       transition: transform .5s;
 
+      &:disabled:hover{
+        transform: scale(1);
+      }
+
       &:active, &:focus{
         box-shadow: none;
         outline: none;
@@ -623,6 +627,31 @@
         transition: transform .5s;
       }
     }
+
+    .variableDropdown {
+      color: #FFFFFF;
+      font-size: 20px;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 0px;
+
+    }
+      .variableMenu{
+        background-color: #139553;
+      }
+
+      .variableItem {
+        background-color: #139553;
+        border-bottom: 1px solid #126e3a;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:hover, &:active, &:focus {
+          background-color: #126e3a;
+        }
+      }
   }
 
   .active{
@@ -686,6 +715,22 @@
       font-size: 15px;
       height: auto;
       white-space: pre-wrap;
+    }
+
+    .buttonsList{
+      margin: auto 20px;
+      &__label{
+        font-size: 15px;
+      }
+
+      &__buttonChart{
+        font-size: 15px;
+      }
+
+      .variableDropdown{
+        font-size: 15px;
+        padding-top: 5px;
+      }
     }
   }
 }

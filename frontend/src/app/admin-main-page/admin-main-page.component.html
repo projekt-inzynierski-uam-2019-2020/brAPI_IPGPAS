@@ -3,7 +3,7 @@
     <div class="admin__header--back">
       <h2 class="admin__header--title">Welcome to admin panel!</h2>
     </div>
-    <button class="btn btn-outline-dark" (click)="open(content) ">
+    <button class="btn btn-outline-dark" (click)="open(content)">
       Add new server
     </button>
   </div>
@@ -27,7 +27,8 @@
             type="text"
             placeholder="Enter Server name:"
             autocomplete="off"
-            name="something"
+            name="name"
+            #name
             [(ngModel)]="server.name"
           />
           <input
@@ -46,7 +47,6 @@
         </div>
       </form>
     </div>
-
     <div class="modal-footer" style="width: 100%">
       <button
         type="button"
@@ -103,6 +103,7 @@
           type="button"
           class="btn btn-success"
           [disabled]="!server.name || !server.ipAddress || !server.description"
+
           (click)="modal.close('Save click') || this.updateServer(server) || changeSuccessMessage()"
         >
           UPDATE
@@ -110,12 +111,6 @@
       </div>
     </ng-template>
 
-    <ngb-alert
-      *ngIf="successMessage"
-      type="success"
-      (close)="successMessage = null"
-      >{{ successMessage }}</ngb-alert
-    >
   </div>
 
   <div class="admin__container">

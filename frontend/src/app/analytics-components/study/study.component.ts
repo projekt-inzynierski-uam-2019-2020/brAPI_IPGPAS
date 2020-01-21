@@ -41,11 +41,20 @@ export class StudyComponent implements OnInit {
     let loadingCounter = 0;
     this.globals.selectedServerTrials.map(selectedTrial => this.studyService.getStudyByTrialDbId(selectedTrial.serverUrl, selectedTrial.trial.trialDbId)
       .subscribe(fetchedStudies => {
-        this.setStudyRows(fetchedStudies);
-        this.setServerStudies(selectedTrial.serverUrl, fetchedStudies);
-        this.setFilterSeasons(fetchedStudies);
-        this.setFilterLocations(fetchedStudies);
-        loadingCounter = loadingCounter + 1;
+        if (fetchedStudies === null) {
+          alert('Server ' + selectedTrial.serverUrl + 'not respond')
+          loadingCounter = loadingCounter + 1;
+        } else {
+          if (fetchedStudies === undefined) {
+            loadingCounter = loadingCounter + 1;
+          } else {
+            this.setStudyRows(fetchedStudies);
+            this.setServerStudies(selectedTrial.serverUrl, fetchedStudies);
+            this.setFilterSeasons(fetchedStudies);
+            this.setFilterLocations(fetchedStudies);
+            loadingCounter = loadingCounter + 1;
+          }
+        }
         if (loadingCounter === this.globals.selectedServerTrials.length) {
           this.isLoading = false;
         }

@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {FetchBrapiResultService} from '../../fetch-services/fetch-brapi-result-service';
 import {Globals} from '../../globals';
 import {DetailResult} from '../../call-models/response/detailResult';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
+import {of, throwError} from 'rxjs';
 
 @Injectable()
 export class TrialService {
@@ -18,7 +19,9 @@ export class TrialService {
 
   getAllTrials(brAPIServerUrl: string) {
     return this.fetchBrApiResponseService.getBrAPIDetailResult(brAPIServerUrl + '/brapi/v1/trials')
-      .pipe(map(result => result.data));
+      .pipe(map(result => result.data),  catchError( error => {
+        return of(null);
+      }));
   }
 
   getTrialsByCommonCropName(brAPIServerUrl: string, commonCropName: string) {

@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BrAPIDetailResponse} from '../call-models/response/brAPIDetailResponse';
-import {delay, map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import {DetailResult} from '../call-models/response/detailResult';
+import {catchError, delay, map, timeout} from 'rxjs/operators';
+import {Observable, of, throwError} from 'rxjs';
 import {IPost} from './Ipost';
-
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +11,6 @@ import {IPost} from './Ipost';
 export class FetchBrapiResultService {
 
   private url = 'http://jsonplaceholder.typicode.com/posts';
-  private headers = new HttpHeaders({'Content-Type': 'application/csv; charset=utf-8'}, );
-
 
    public getTableVariables(brApiUrl: string) {
      return this.http.get(brApiUrl,  {responseType: 'text'});
@@ -23,9 +19,12 @@ export class FetchBrapiResultService {
   constructor(private http: HttpClient) {
   }
 
-  public getBrAPIDetailResult(brApiUrl: string) {
-    return this.http.get<BrAPIDetailResponse>(brApiUrl)
-      .pipe(map((response) => response.result));
+  public getBrAPIDetailResult(brApiUrl: string)  {
+     return this.http.get<BrAPIDetailResponse>(brApiUrl)
+       .pipe(timeout(200000), map((response) => response.result),  catchError( error => {
+         return of(null);
+       }));
+
   }
 
   public getBrApiDetailTest(url: string) {

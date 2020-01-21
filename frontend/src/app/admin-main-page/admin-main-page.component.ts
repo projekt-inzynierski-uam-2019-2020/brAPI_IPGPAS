@@ -1,10 +1,12 @@
 import {Component, Inject, OnInit, VERSION, ViewChild} from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {debounceTime} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {catchError, debounceTime} from 'rxjs/operators';
+import {of, Subject} from 'rxjs';
 import {ServersFetchingService} from '../services/servers-service/servers-fetching.service';
 import {Server} from '../services/servers-service/servers';
 import {Router} from '@angular/router';
+import * as http from 'http';
+import {HttpClient} from '@angular/common/http';
 
 
 @Component({
@@ -24,8 +26,19 @@ export class AdminMainPageComponent implements OnInit {
   ipAddress: string;
   description: string;
   personalEmail: 'SDF';
+  existServer = false;
+  errors = '';
+  createServerr = false;
 
+  private headerDict = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
 
+  private requestOptions = {
+    headers: new Headers(this.headerDict),
+  };
 
   ngOnInit(): void {
 
@@ -35,6 +48,7 @@ export class AdminMainPageComponent implements OnInit {
       debounceTime(5000)
     ).subscribe(() => this.successMessage = null);
     this.getServers();
+
 
   }
 
@@ -46,13 +60,23 @@ export class AdminMainPageComponent implements OnInit {
   }
 
   createServer(): void {
-    this.serverService.createServer(this.server)
-      .subscribe(data => {
-        this.getServers();
-      });
-    setTimeout( () => {
-      this.refresh();
-    }, 500);
+    this.http.get(`${this.server.ipAddress + '/brapi/v1/trials'}`, {observe: 'response'})
+      .subscribe(response => {
+          if (response.status === 200) {
+            this.serverService.createServer(this.server)
+              .subscribe(data => {
+                this.getServers();
+                this.createServerr = true;
+                setTimeout(() => {
+                  this.refresh();
+                }, 1000);
+              });
+          }
+        },
+        error => {
+          this.errors = error;
+          alert('Wrong server');
+        });
   }
 
   refresh(): void {
@@ -60,16 +84,25 @@ export class AdminMainPageComponent implements OnInit {
   }
 
   updateServer(server: Server): void {
-    this.serverService.updateServer(this.server, this.id)
-      .subscribe(data => {
-        this.servers = this.servers.filter(u => u !== server);
+    this.http.get(`${this.server.ipAddress + '/brapi/v1/trials'}`, {observe: 'response'})
+      .subscribe(response => {
+        if (response.status === 200) {
+          this.serverService.updateServer(this.server, this.id)
+            .subscribe(data => {
+              this.servers = this.servers.filter(u => u !== server);
+              setTimeout(() => {
+                this.refresh();
+              }, 1000);
+            });
+        }
+      }, error => {
+        this.errors = error;
+        alert('Wrong server');
       });
-    setTimeout( () => {
-      this.refresh();
-    }, 500);
   }
 
-  updateInfo(server: Server)  {
+
+  updateInfo(server: Server) {
     this.id = server._id;
     this.name = server.name;
     this.ipAddress = server.ipAddress;
@@ -83,12 +116,12 @@ export class AdminMainPageComponent implements OnInit {
 
   deleteUser(server: Server): void {
     this.serverService.deleteServer(server._id)
-      .subscribe( data => {
+      .subscribe(data => {
         this.servers = this.servers.filter(u => u !== server);
       });
-    setTimeout( () => {
+    setTimeout(() => {
       this.refresh();
-    }, 500);
+    }, 1000);
 
   }
 
@@ -96,7 +129,7 @@ export class AdminMainPageComponent implements OnInit {
     this._success.next(`${new Date()} - The server has been added`);
   }
 
-  constructor(private modalService: NgbModal, private serverService: ServersFetchingService) {
+  constructor(private modalService: NgbModal, private serverService: ServersFetchingService, private http: HttpClient) {
 
   }
 
@@ -107,8 +140,6 @@ export class AdminMainPageComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
-
-
 
 
   private getDismissReason(reason: any): string {
