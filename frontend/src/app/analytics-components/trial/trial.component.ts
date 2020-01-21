@@ -38,10 +38,19 @@ export class TrialComponent implements OnInit {
     let loadingCounter = 0;
     this.globals.selectedServers.map(serverUrl => this.trialService.getAllTrials(serverUrl)
       .subscribe(fetchedTrials => {
-        this.setTrialRows(fetchedTrials);
-        this.setServerTrials(serverUrl, fetchedTrials);
-        this.setFilterCommonCropNames(fetchedTrials);
-        loadingCounter = loadingCounter + 1;
+        if (fetchedTrials === null) {
+          loadingCounter = loadingCounter + 1;
+          alert('Server ' + serverUrl + ' not respond');
+        } else {
+          if (fetchedTrials === undefined) {
+            loadingCounter = loadingCounter + 1;
+          } else {
+            this.setTrialRows(fetchedTrials);
+            this.setServerTrials(serverUrl, fetchedTrials);
+            this.setFilterCommonCropNames(fetchedTrials);
+            loadingCounter = loadingCounter + 1;
+          }
+        }
         if (loadingCounter === this.globals.selectedServers.length) {
           this.isLoading = false;
         }

@@ -23,6 +23,7 @@ export class ServerPageComponent implements OnInit {
     this.serverService.getAllServers()
       .subscribe(data => {
         this.servers = data;
+        console.log(this.servers);
         for (const server of this.servers) {
           this.serverCheckboxes.push({value: server.ipAddress, selected: false});
         }

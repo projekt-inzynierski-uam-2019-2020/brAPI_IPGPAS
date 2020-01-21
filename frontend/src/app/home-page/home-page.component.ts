@@ -4,6 +4,8 @@ import {Globals} from '../globals';
 import {TrialService} from '../call-services/trial/trial-service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
+import {AuthService} from '../services/auth/auth.service';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-page',
@@ -14,9 +16,14 @@ export class HomePageComponent implements OnInit {
   closeResult: string;
   globals: Globals;
  test = false;
+ result = false;
+  public email: string;
+  public password: string;
+  public error: string;
 
 
-  constructor(public globalss: Globals, public trialService: TrialService, private modalService: NgbModal, private  router: Router) { }
+
+  constructor(public globalss: Globals, public trialService: TrialService, private modalService: NgbModal, private  router: Router, private auth: AuthService) { }
 
   ngOnInit() {
     this.globals = this.globalss;
@@ -26,6 +33,21 @@ export class HomePageComponent implements OnInit {
       relativeInput: true,
     });
 
+  }
+
+  public submit() {
+    this.auth.login(this.email, this.password)
+      .pipe(first())
+      .subscribe(
+
+        result => { this.router.navigate(['admin/page']), this.result = true} ,
+        err => this.error = 'Could not authenticate'
+      );
+    setTimeout(() => {
+    if (this.result === true) {
+     this.test = true;
+    }
+  }, 100);
   }
 
   open(content) {

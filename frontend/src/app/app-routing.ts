@@ -6,6 +6,7 @@ import {AdminMainPageComponent} from './admin-main-page/admin-main-page.componen
 import {TrialComponent} from './analytics-components/trial/trial.component';
 import {TrialsResolve} from './call-services/trial/trials-resolve.service';
 import {VariablesComponent} from './analytics-components/variables/variables.component';
+import {AuthGuard} from './services/auth/auth.guard';
 
 
 
@@ -13,7 +14,7 @@ const routes: Routes = [
   {path: 'home', component: HomePageComponent},
   {path: 'servers', component: ServerPageComponent},
   {path: 'databases', component: DatabasesPageComponent},
-  {path: 'admin/page', component: AdminMainPageComponent},
+  {path: 'admin/page', component: AdminMainPageComponent, canActivate: [AuthGuard]},
   {path: 'servers/trial', component: TrialComponent, resolve: {dataResolve: TrialsResolve}},
   {path: 'servers/variable', component: VariablesComponent},
   {path: '', component: HomePageComponent},
