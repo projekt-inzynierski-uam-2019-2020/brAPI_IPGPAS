@@ -78,10 +78,8 @@
           <div style="" class="form-group">
             <input
               type="text"
-              placeholder="Enter Server name:"
-              autocomplete="off"
-              name="something"
-              [(ngModel)]="server.name"
+              name="df"
+              [ngModel]="personalEmail" (ngModelChange)="server.name = $event"
             />
             <input
               type="text"

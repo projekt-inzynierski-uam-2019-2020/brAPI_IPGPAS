@@ -20,6 +20,10 @@ export class AdminMainPageComponent implements OnInit {
   servers: Server[];
   server: Server = new Server();
   id: string;
+  name: string;
+  ipAddress: string;
+  description: string;
+  personalEmail: 'SDF';
 
 
 
@@ -67,7 +71,14 @@ export class AdminMainPageComponent implements OnInit {
 
   updateInfo(server: Server)  {
     this.id = server._id;
+    this.name = server.name;
+    this.ipAddress = server.ipAddress;
+    this.description = server.description;
 
+  }
+
+  changeVanityId(event) {
+    this.server._id = event;
   }
 
   deleteUser(server: Server): void {
