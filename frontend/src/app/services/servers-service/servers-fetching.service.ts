@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Server} from './servers';
+import {Status} from './status';
 import {Injectable} from '@angular/core';
 
 const httpOptions = {
@@ -10,12 +11,17 @@ const httpOptions = {
 @Injectable()
 export class ServersFetchingService {
   private serversUrl = 'https://teamprojectuam.tk/api/servers';
+  private serverStatus = 'https://teamprojectuam.tk/api/status';
 
   constructor(private http: HttpClient) {
   }
 
   getAllServers(): Observable<Server[]> {
     return this.http.get<Server[]>(this.serversUrl);
+  }
+
+  getAllServersStatus(): Observable<Status[]> {
+    return this.http.get<Status[]>(this.serverStatus);
   }
 
   createServer(server: Server) {

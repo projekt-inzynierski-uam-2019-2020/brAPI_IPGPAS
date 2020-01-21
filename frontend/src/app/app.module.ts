@@ -32,6 +32,7 @@ import {StatisticsComponent} from './analytics-components/statistics/statistics.
 import {ChartService} from './services/chart-service/chart-service';
 
 import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.component';
+import { ServerStatusComponent } from './server-status/server-status.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.compone
     GermplasmComponent,
     VariablesComponent,
     StatisticsComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    ServerStatusComponent
   ],
   imports: [
     HttpClientModule,
@@ -61,6 +63,7 @@ import {LoadingSpinnerComponent} from './loading-spinner/loading-spinner.compone
       {path: 'servers/germplasm', component: GermplasmComponent},
       {path: 'servers/variables', component: VariablesComponent},
       {path: 'servers/statistics', component: StatisticsComponent},
+      {path: 'status', component: ServerStatusComponent},
       {path: '', component: HomePageComponent},
 
       {path: '**', component: HomePageComponent}]),

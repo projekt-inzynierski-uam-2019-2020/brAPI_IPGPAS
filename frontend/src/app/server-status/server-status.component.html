@@ -1,0 +1,48 @@
+<div class="servers">
+  <div class="servers__header">
+    <div class="servers__header--back">
+      <div class="info" routerLink="../">
+        <img src="../../assets/back.png" alt="Back">
+        <h4 class="back__title">Homepage</h4>
+      </div>
+      <div class="servers__header--separator"></div>
+      <h2 class="servers__header--title">Choose server</h2>
+    </div>
+  </div>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <div *ngIf="!isLoading" class="servers__container">
+    <div class="servers__container--counter">
+      <h3>Results found:</h3>
+      <h3>{{servers.length}}</h3>
+    </div>
+    <div class="servers__container--card col-xl-larger col-lg-6">
+      <div class="servers__container--card col-xl-larger col-lg-6" *ngFor="let server of servers;let i = index ">
+        <input
+          class="servers__container--card-checkbox"
+          type="checkbox"
+          id="{{ serverCheckboxes[i].value }}"
+          name="num"
+          checked="checked"
+        />
+        <div class="servers__container--card-content">
+          <label for="{{ serverCheckboxes[i].value }}">
+            <div class="row m-0 pl-3 pr-3 justify-content-between">
+              <h3>{{server.name}}</h3>
+              <h3 class="tooltip">{{status.name}}</h3>
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="separator"></div>
+            <div class="row m-0 pl-3 pr-3">
+              <h5>{{server.ipAddress}}</h5>
+              <h5 class="tooltip">{{status.ipAddress}}</h5>
+            </div>
+            <div class="row m-0 pl-3 pr-3">
+              <p>{{server.description}}</p>
+              <p class="tooltip2">{{status.status}}</p>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
