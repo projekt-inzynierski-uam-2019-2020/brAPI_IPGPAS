@@ -9,7 +9,6 @@ import {VariablesComponent} from './analytics-components/variables/variables.com
 import {AuthGuard} from './services/auth/auth.guard';
 
 
-
 const routes: Routes = [
   {path: 'home', component: HomePageComponent},
   {path: 'servers', component: ServerPageComponent},
