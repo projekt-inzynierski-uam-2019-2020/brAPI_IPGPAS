@@ -42,7 +42,7 @@ export class HomePageComponent implements OnInit {
         Validators.required
       ]),
       'password': new FormControl(this.password, [
-        Validators.required,
+        Validators.required
       ])
     });
   }
@@ -52,15 +52,16 @@ export class HomePageComponent implements OnInit {
       .pipe(first())
       .subscribe(
 
-        result => { this.router.navigate(['admin/page']), this.result = true} ,
-        err => this.error = 'Could not authenticate'
+        result => { this.router.navigate(['admin/page']), this.result = true;} ,
+        err => document.getElementById('incorrectPassword').innerHTML = 'Email or password <br> is incorrect.'
       );
     setTimeout(() => {
     if (this.result === true) {
      this.test = true;
     }
-  }, 100);
+  }, 10);
   }
+
 
   open(content) {
     this.modalService.open(content, { centered: true }).result.then((result) => {

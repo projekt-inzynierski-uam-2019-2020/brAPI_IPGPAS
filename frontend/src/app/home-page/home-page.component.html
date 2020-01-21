@@ -34,7 +34,7 @@
         <div class="form-group">
           <label for="email">Email:</label>
           <div class="input-group">
-            <input formControlName="email" type="email" class="form-control"  id="email" name="email" required class="form-control" [(ngModel)]="email" aria-describedby="emailHelp" placeholder="Enter email" #Login>
+            <input formControlName="email" type="email" class="form-control" id="email" name="email" required class="form-control" [(ngModel)]="email" aria-describedby="emailHelp" placeholder="Enter email" #Login>
           </div>
           <div *ngIf="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)" class="alert alert-danger">
             <div *ngIf="form.controls.email.errors.required">Email is required.</div>
@@ -48,7 +48,7 @@
           <div *ngIf="form.controls.password.invalid && (form.controls.password.dirty || form.controls.password.touched)" class="alert alert-danger">
             <div *ngIf="form.controls.password.errors.required">Password is required.</div>
           </div>
-          <div *ngIf="!this?.result && (form.controls.password.dirty || form.controls.password.touched)" class="alert alert-danger">Password is incorrect.</div>
+          <div id="incorrectPassword" class="alert alert-danger incorrect"></div>
         </div>
       </form>
     </div>
@@ -56,6 +56,6 @@
       <button type="submit" class="btn btn-outline-dark">Log in</button>
     </div>
     </form>
-    <div *ngIf="test" >{{ modal.close('Save click')}}</div>
+    <div *ngIf="result" >{{ modal.close('Save click')}}</div>
   </ng-template>
 </div>

@@ -23,14 +23,13 @@
       <h3>Results found:</h3>
       <h3>{{servers.length}}</h3>
     </div>
-    <div class="servers__container&#45;&#45;card col-xl-larger col-lg-6" *ngFor="let server of servers;let i = index ">
+    <div class="servers__container&#45;&#45;card" *ngFor="let server of servers;let i = index ">
 
       <div class="servers__container&#45;&#45;card-content">
         <label >
           <div class="row m-0 pl-3 pr-3 justify-content-between">
             <h3>{{server.name}}</h3>
             <h3 class="tooltip">{{server.name}}</h3>
-            <i class="fas fa-check"></i>
           </div>
           <div class="separator"></div>
           <div class="row m-0 pl-3 pr-3">
@@ -38,12 +37,12 @@
             <h5 class="tooltip">{{server.ipAddress}}</h5>
           </div>
           <div class="row m-0 pl-3 pr-3">
-            <p>{{server.description}}</p>
-            <p class="tooltip2">{{server.description}}</p>
-          </div>
-          <div class="row m-0 pl-3 pr-3">
-            <p>{{server.status}}</p>
-            <p class="tooltip2">{{server.status}}</p>
+            <ng-template [ngIf]="server.status === 200" [ngIfElse]="offline">
+              <p class="online">Server is online<i class="fas fa-check"></i></p>
+            </ng-template>
+            <ng-template #offline>
+              <p class="offline">Server is offline<i class="fas fa-times"></i></p>
+            </ng-template>
           </div>
         </label>
       </div>
