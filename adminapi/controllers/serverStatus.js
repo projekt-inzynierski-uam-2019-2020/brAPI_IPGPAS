@@ -45,9 +45,7 @@ module.exports = {
         }
       }
 
-      res.json({
-        status: statusList
-      });
+      res.send(statusList);
     });
   }
 };
