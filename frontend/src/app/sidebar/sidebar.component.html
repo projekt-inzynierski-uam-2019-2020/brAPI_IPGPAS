@@ -14,9 +14,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <ul class="navbar-nav mr-auto flex-column">
-        <li class="nav-item sidebar__navigation--item" (click)="open(logIn)" routerLinkActive="active" >
-          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse">Admin</a>
-        </li>
+        <!--   <li class="nav-item sidebar__navigation--item" (click)="open(logIn)" routerLinkActive="active" >
+             <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse">Log in</a>
+           </li> -->
         <!--<li class="nav-item sidebar__navigation&#45;&#45;item" (click)="open(signUp)" routerLinkActive="active" >
           <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse">Sign up</a>
         </li>-->
@@ -32,42 +32,31 @@
 
 
   <ng-template #logIn let-modal>
-    <form (ngSubmit)="submit()">
-      <div class="modal-header">
-        <h4 class="modal-title" id="logInTitle">Log in</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <form name="form" [formGroup]="form" >
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <div class="input-group">
-              <input formControlName="email" type="email" class="form-control" id="email" name="email" required class="form-control" [(ngModel)]="email" aria-describedby="emailHelp" placeholder="Enter email" #Login>
-            </div>
-            <div *ngIf="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)" class="alert alert-danger">
-              <div *ngIf="form.controls.email.errors.required">Email is required.</div>
-            </div>
+    <div class="modal-header">
+      <h4 class="modal-title" id="logInTitle">Log in</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="email1">Email:</label>
+          <div class="input-group">
+            <input type="email" class="form-control" id="email1" aria-describedby="emailHelp" placeholder="Enter email">
           </div>
-          <div class="form-group">
-            <label for="password">Password:</label>
-            <div class="input-group">
-              <input formControlName="password" type="password" class="form-control" id="password" name="password" required aria-describedby="emailHelp" placeholder="Enter password" [(ngModel)]="password" #Password>
-            </div>
-            <div *ngIf="form.controls.password.invalid && (form.controls.password.dirty || form.controls.password.touched)" class="alert alert-danger">
-              <div *ngIf="form.controls.password.errors.required">Password is required.</div>
-            </div>
-            <div id="incorrectPassword" class="alert alert-danger incorrect"></div>
+        </div>
+        <div class="form-group">
+          <label for="password1">Password:</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="password1" aria-describedby="emailHelp" placeholder="Enter password">
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-dark">Log in</button>
-      </div>
-    </form>
-    <div *ngIf="result" >{{ modal.close('Save click')}}</div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" routerLink="/admin/page" (click)="modal.close('Save click')">Log in</button>
+    </div>
   </ng-template>
 
 
