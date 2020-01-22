@@ -7,6 +7,7 @@ import {Server} from '../services/servers-service/servers';
 import {Router} from '@angular/router';
 import * as http from 'http';
 import {HttpClient} from '@angular/common/http';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class AdminMainPageComponent implements OnInit {
   existServer = false;
   errors = '';
   createServerr = false;
+  form2: FormGroup;
 
   private headerDict = {
     'Content-Type': 'application/json',
@@ -49,7 +51,17 @@ export class AdminMainPageComponent implements OnInit {
     ).subscribe(() => this.successMessage = null);
     this.getServers();
 
-
+    this.form2 = new FormGroup({
+      'name': new FormControl(this.name, [
+        Validators.required
+      ]),
+      'ipAddress': new FormControl(this.ipAddress, [
+        Validators.required
+      ]),
+      'description': new FormControl(this.description, [
+        Validators.required
+      ])
+    });
   }
 
   getServers() {
@@ -75,7 +87,7 @@ export class AdminMainPageComponent implements OnInit {
         },
         error => {
           this.errors = error;
-          alert('Wrong server');
+          document.getElementById('incorrectAddress').innerHTML = 'Server link is incorrect.';
         });
   }
 
@@ -97,7 +109,7 @@ export class AdminMainPageComponent implements OnInit {
         }
       }, error => {
         this.errors = error;
-        alert('Wrong server');
+        document.getElementById('incorrectAddress2').innerHTML = 'Server link is incorrect.';
       });
   }
 

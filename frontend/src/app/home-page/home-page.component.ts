@@ -6,6 +6,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth/auth.service';
 import {first} from 'rxjs/operators';
+import { FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-home-page',
@@ -20,10 +21,13 @@ export class HomePageComponent implements OnInit {
   public email: string;
   public password: string;
   public error: string;
+  form: FormGroup;
 
 
 
-  constructor(public globalss: Globals, public trialService: TrialService, private modalService: NgbModal, private  router: Router, private auth: AuthService) { }
+  constructor(public globalss: Globals, public trialService: TrialService, private modalService: NgbModal, private  router: Router, private auth: AuthService) {
+
+  }
 
   ngOnInit() {
     this.globals = this.globalss;
@@ -33,6 +37,14 @@ export class HomePageComponent implements OnInit {
       relativeInput: true,
     });
 
+    this.form = new FormGroup({
+      'email': new FormControl(this.email, [
+        Validators.required
+      ]),
+      'password': new FormControl(this.password, [
+        Validators.required
+      ])
+    });
   }
 
   public submit() {
@@ -40,15 +52,16 @@ export class HomePageComponent implements OnInit {
       .pipe(first())
       .subscribe(
 
-        result => { this.router.navigate(['admin/page']), this.result = true} ,
-        err => this.error = 'Could not authenticate'
+        result => { this.router.navigate(['admin/page']), this.result = true;} ,
+        err => document.getElementById('incorrectPassword').innerHTML = 'Email or password <br> is incorrect.'
       );
     setTimeout(() => {
     if (this.result === true) {
      this.test = true;
     }
-  }, 100);
+  }, 10);
   }
+
 
   open(content) {
     this.modalService.open(content, { centered: true }).result.then((result) => {

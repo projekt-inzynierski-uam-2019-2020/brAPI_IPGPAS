@@ -42,7 +42,7 @@ export class StudyComponent implements OnInit {
     this.globals.selectedServerTrials.map(selectedTrial => this.studyService.getStudyByTrialDbId(selectedTrial.serverUrl, selectedTrial.trial.trialDbId)
       .subscribe(fetchedStudies => {
         if (fetchedStudies === null) {
-          alert('Server ' + selectedTrial.serverUrl + 'not respond')
+          alert('Server ' + selectedTrial.serverUrl + 'not respond');
           loadingCounter = loadingCounter + 1;
         } else {
           if (fetchedStudies === undefined) {
@@ -142,8 +142,8 @@ export class StudyComponent implements OnInit {
                         return true;
                       }
                     }
+                  }
                 }
-              }
               }
             });
         }
@@ -179,17 +179,31 @@ export class StudyComponent implements OnInit {
       .filter(studyRow => studyRow.selected)
       .map(studyRow => studyRow.study);
 
+    if (selectedStudyRows.length > 10) {
 
-    this.globals.selectedServerStudies = this.serverStudies
-      .filter(selectedStudy => {
-        for (const selectedStudyRow of selectedStudyRows) {
-          if (Object.is(selectedStudyRow, selectedStudy.study)) {
-            return true;
+      if (window.confirm('Recommended value of selected studies is fewer than 10. Data could load slower than always. Are sure you want continue ?')) {
+        this.globals.selectedServerStudies = this.serverStudies
+          .filter(selectedStudy => {
+            for (const selectedStudyRow of selectedStudyRows) {
+              if (Object.is(selectedStudyRow, selectedStudy.study)) {
+                return true;
+              }
+            }
+          });
+        this.globals.selectedServerStudies.length > 0 ? this.router.navigate(['/servers/germplasm']) : alert('You have to select study first.');
+      }
+    }  else {
+      this.globals.selectedServerStudies = this.serverStudies
+        .filter(selectedStudy => {
+          for (const selectedStudyRow of selectedStudyRows) {
+            if (Object.is(selectedStudyRow, selectedStudy.study)) {
+              return true;
+            }
           }
-        }
-      });
-    console.log(this.globals.selectedServerStudies);
-    this.globals.selectedServerStudies.length > 0 ? this.router.navigate(['/servers/germplasm']) : alert('You have to select study first.');
+        });
+      this.globals.selectedServerStudies.length > 0 ? this.router.navigate(['/servers/germplasm']) : alert('You have to select study first.');
+
+    }
   }
 
   checkValue(event: any) {

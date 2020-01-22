@@ -416,7 +416,6 @@ export class StatisticsComponent implements OnInit {
       data: {
         labels: labels,
         datasets: [{
-          label: 'average of variable',
           data: data,
           backgroundColor: this.chartService.backgroundChartColor,
           borderColor: this.chartService.backgroundBorderChartColor,
@@ -470,7 +469,7 @@ export class StatisticsComponent implements OnInit {
           fill: false,
           lineTension: 0.2,
           borderColor: 'transparent',
-          pointBackgroundColor: 'white',
+          pointBackgroundColor: 'rgba(29, 255, 140, 1)',
           borderWidth: 1
         }]
       },
