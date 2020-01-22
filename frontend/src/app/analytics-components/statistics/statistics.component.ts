@@ -23,6 +23,7 @@ export class StatisticsComponent implements OnInit {
   allValues: number[] = [];
   variables: string[] = [];
 
+
   values: number[] = [];
   value: number;
 
