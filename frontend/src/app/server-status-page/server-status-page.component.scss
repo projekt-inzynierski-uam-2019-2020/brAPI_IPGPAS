@@ -151,6 +151,7 @@
     }
 
     &--card {
+      width: 100%;
       position: relative;
       float: left;
       margin-bottom: 25px;
@@ -158,6 +159,7 @@
       margin: 15px 5px;
 
       &-content {
+        display: flex;
         height: 150px;
         background-color: #34373A;
         width: 100%;
@@ -239,14 +241,6 @@
             transition-delay: .5s;
           }
 
-          .fa-check{
-            position: absolute;
-            right: 15px;
-            opacity: 0;
-            color: #139553;
-            font-size: 25px;
-            transition: opacity .3s ease-in;
-          }
         }
 
         .separator{
@@ -292,23 +286,6 @@
           }
 
         }
-        &:checked ~ .servers__container--card-content {
-
-          border: 2px solid #139553;
-
-          .fa-check{
-            opacity: 1;
-            color: #139553;
-            font-size: 25px;
-            transition: opacity .3s ease-in;
-          }
-
-          h3{
-            transition: all 500ms ease-out;
-          }
-          background-color: #242729;
-        }
-
       }
     }
   }
@@ -316,6 +293,20 @@
   .col-xl-larger {
     position: relative;
     min-height: 1px;
+  }
+
+  .online{
+    color: #139553 !important;
+  }
+
+  .offline{
+    color: #b14242 !important;
+  }
+
+  .fas{
+    font-size: 20px;
+    margin-left: 10px;
+    color: #139553;
   }
 }
 /*

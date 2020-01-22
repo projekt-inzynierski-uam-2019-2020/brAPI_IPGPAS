@@ -21,29 +21,49 @@
       </button>
     </div>
     <div class="modal-body">
-      <form>
+      <form [formGroup]="form2">
         <div style="" class="form-group">
           <input
+            required
+            formControlName="name"
             type="text"
             placeholder="Enter Server name:"
             autocomplete="off"
             name="name"
+            id="name"
             #name
             [(ngModel)]="server.name"
           />
+          <div *ngIf="form2.controls.name.invalid && (form2.controls.name.dirty || form2.controls.name.touched)" class="alert alert-danger">
+            <div *ngIf="form2.controls.name.errors.required">Name is required.</div>
+          </div>
           <input
+            required
+            formControlName="ipAddress"
             type="text"
             placeholder="Enter Server link:"
-            name="something"
+            name="ipAddress"
+            id="ipAddress"
             [(ngModel)]="server.ipAddress"
-            #check
+            #ipAddress
           />
+          <div *ngIf="form2.controls.ipAddress.invalid && (form2.controls.ipAddress.dirty || form2.controls.ipAddress.touched)" class="alert alert-danger">
+            <div *ngIf="form2.controls.ipAddress.errors.required">Ip address is required.</div>
+          </div>
           <input
+            required
+            formControlName="description"
             type="text"
             placeholder="Enter Server description:"
-            name="something"
+            name="description"
+            id="description"
             [(ngModel)]="server.description"
+            #description
           />
+          <div *ngIf="form2.controls.description.invalid && (form2.controls.description.dirty || form2.controls.description.touched)" class="alert alert-danger">
+            <div *ngIf="form2.controls.description.errors.required">Description is required.</div>
+          </div>
+          <div id="incorrectAddress" class="alert alert-danger incorrect"></div>
         </div>
       </form>
     </div>
@@ -52,10 +72,11 @@
         type="button"
         class="btn btn-success"
         [disabled]="!server.name || !server.ipAddress || !server.description"
-        (click)="modal.close('Save click') || this.createServer() || changeSuccessMessage()  "
+        (click)="this.createServer() || changeSuccessMessage()"
       >
         Add server
       </button>
+      <div *ngIf="createServerr" >{{ modal.close('Save click')}}</div>
     </div>
   </ng-template>
 
@@ -74,26 +95,47 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="form2">
           <div style="" class="form-group">
             <input
+              required
+              formControlName="name"
               type="text"
-              name="df"
+              placeholder="Enter Server name:"
+              autocomplete="off"
+              name="name"
+              id="name"
               [ngModel]="personalEmail" (ngModelChange)="server.name = $event"
             />
+            <div *ngIf="form2.controls.name.invalid && (form2.controls.name.dirty || form2.controls.name.touched)" class="alert alert-danger">
+              <div *ngIf="form2.controls.name.errors.required">Name is required.</div>
+            </div>
             <input
+              required
+              formControlName="ipAddress"
               type="text"
               placeholder="Enter Server link:"
-              name="something"
+              name="ipAddress"
+              id="ipAddress"
               [(ngModel)]="server.ipAddress"
               #check
             />
+              <div *ngIf="form2.controls.ipAddress.invalid && (form2.controls.ipAddress.dirty || form2.controls.ipAddress.touched)" class="alert alert-danger">
+                <div *ngIf="form2.controls.ipAddress.errors.required">Ip address is required.</div>
+              </div>
             <input
+              required
+              formControlName="description"
               type="text"
               placeholder="Enter Server description:"
-              name="something"
+              name="description"
+              id="description"
               [(ngModel)]="server.description"
             />
+            <div *ngIf="form2.controls.description.invalid && (form2.controls.description.dirty || form2.controls.description.touched)" class="alert alert-danger">
+              <div *ngIf="form2.controls.description.errors.required">Description is required.</div>
+            </div>
+            <div id="incorrectAddress2" class="alert alert-danger incorrect"></div>
           </div>
         </form>
       </div>
@@ -104,10 +146,11 @@
           class="btn btn-success"
           [disabled]="!server.name || !server.ipAddress || !server.description"
 
-          (click)="modal.close('Save click') || this.updateServer(server) || changeSuccessMessage()"
+          (click)="this.updateServer(server) || changeSuccessMessage()"
         >
           UPDATE
         </button>
+        <div *ngIf="createServerr" >{{ modal.close('Save click')}}</div>
       </div>
     </ng-template>
 
