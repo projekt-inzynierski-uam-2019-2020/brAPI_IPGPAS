@@ -30,7 +30,7 @@
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <div *ngIf="!isLoading">
     <div *ngIf="optionalFiltersShow" class="optionalFilters">
-      <h3 class="optionalFilters__label">Filter by Common Crop Name</h3>
+      <h3 class="optionalFilters__label">Filter by Examined Crop</h3>
       <div class="optionalFilters__container">
         <div class="optionalFilters__container--content">
           <div class="optionalFilters__container--item" *ngFor="let commonCropName of this.commonCropNames; let i = index">

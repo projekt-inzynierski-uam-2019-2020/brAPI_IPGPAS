@@ -23,6 +23,7 @@ export class StatisticsComponent implements OnInit {
   allValues: number[] = [];
   variables: string[] = [];
 
+
   values: number[] = [];
   value: number;
 
@@ -420,6 +421,7 @@ export class StatisticsComponent implements OnInit {
           backgroundColor: this.chartService.backgroundChartColor,
           borderColor: this.chartService.backgroundBorderChartColor,
           borderWidth: 1,
+          label: 'Variable values'
         }]
       },
       options: {
