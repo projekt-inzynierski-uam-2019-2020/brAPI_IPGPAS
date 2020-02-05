@@ -19,4 +19,4 @@ This project consists of three main components:
 
 Information on how to install Docker and Docker Compose on your system can be found [here](https://docs.docker.com/install/) and [here](https://docs.docker.com/compose/install/) respectively.
 ## License
-TBD
+MIT
